@@ -1,4 +1,4 @@
-name: Update Adblock Module
+name: Update Plugins
 
 on:
   schedule:
@@ -23,14 +23,14 @@ jobs:
 
     - name: Run Python script
       run: |
-        python cmd.py
+        python main.py
 
     - name: Commit and push changes
       uses: EndBug/add-and-commit@v9
       with:
         author_name: 'GitHub Actions'
-        author_email: 'ddgksf2013@github.com'
-        message: 'Update Adblock.sgmodule'
+        author_email: '152701112+usklsvg@users.noreply.github.com'
+        message: 'Update Plugins'
         push: true  # Ensure this is set to true to enable pushing
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

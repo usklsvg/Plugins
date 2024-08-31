@@ -1,1 +1,1 @@
-### 今天也要吸猫猫、吃果果吖
+# Extracting Scripts as Separate Plugins
