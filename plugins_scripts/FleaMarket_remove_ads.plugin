@@ -1,0 +1,21 @@
+#!name = 闲鱼去广告
+#!desc = 移除开屏广告、商品信息流广告、搜索栏填充词、我的页面推广横幅。
+#!openUrl = https://apps.apple.com/app/id510909506
+#!author = 可莉🅥[https://gitlab.com/lodepuly/vpn_tool/-/blob/master/README.md], ZenMoFiShi[https://github.com/ZenmoFeiShi]
+#!tag = 去广告
+#!system =
+#!system_version =
+#!loon_version = 3.2.1(745)
+#!homepage = https://gitlab.com/lodepuly/vpn_tool/-/blob/master/README.md
+#!icon = https://gitlab.com/lodepuly/iconlibrary/-/raw/main/App_icon/120px/FleaMarket.png
+#!date = 2024-08-12 02:08:10
+
+[Script]
+# 商品信息流广告
+http-response ^https:\/\/(g-)?acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlehome\.home\.nextfresh\/ script-path = https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/FleaMarket/FleaMarket_remove_ads.js, requires-body = true, tag = 移除宝贝信息流广告
+
+# 首页标签图片
+http-response ^https:\/\/(g-)?acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlehome\.home\.circle\.list\/ script-path = https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/FleaMarket/FleaMarket_remove_ads.js, requires-body = true, tag = 移除首页标签图片
+
+[Mitm]
+hostname = acs.m.goofish.com, g-acs.m.goofish.com, dinamicx.alibabausercontent.com

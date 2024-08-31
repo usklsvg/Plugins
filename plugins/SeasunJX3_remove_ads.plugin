@@ -1,0 +1,21 @@
+#!name = 剑网三无界去广告
+#!desc = 移除热门推送活动，并解决无法在Loon运行时更新和登录的问题。
+#!openUrl = https://apps.apple.com/app/id1002355194
+#!author = 可莉🅥[https://gitlab.com/lodepuly/vpn_tool/-/blob/master/README.md]
+#!tag = 去广告
+#!system = iOS, iPadOS, macOS
+#!system_version =
+#!loon_version = 3.2.1(745)
+#!homepage = https://gitlab.com/lodepuly/vpn_tool/-/blob/master/README.md
+#!icon = https://gitlab.com/lodepuly/iconlibrary/-/raw/main/App_icon/120px/SeasunJX3.png
+#!date = 2024-08-30 22:46:48
+
+[General]
+real-ip = jx3v*-update.xoyocdn.com
+
+[Rewrite]
+# 热点推送
+^https:\/\/jx3comm\.xoyocdn\.com\/jx3gc\/zhcn\/login_ad\/WebCareer\/WebCareerTab\.txt reject
+
+[Mitm]
+hostname = jx3comm.xoyocdn.com

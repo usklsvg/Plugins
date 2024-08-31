@@ -1,0 +1,20 @@
+#!name = 拼多多去广告
+#!desc = 移除开屏广告、底栏多多视频、会场入口、聊天页面精选推荐及推广、精简我的页面。
+#!openUrl = https://apps.apple.com/app/id1044283059
+#!author = ZenmoFeiShi[https://github.com/ZenmoFeiShi], 可莉🅥[https://gitlab.com/lodepuly/vpn_tool/-/blob/master/README.md]
+#!tag = 去广告
+#!system =
+#!system_version =
+#!loon_version = 3.2.1(745)
+#!homepage = https://gitlab.com/lodepuly/vpn_tool/-/blob/master/README.md
+#!icon = https://gitlab.com/lodepuly/iconlibrary/-/raw/main/App_icon/120px/PinDuoDuo.png
+#!date = 2024-08-14 21:05:32
+
+[Script]
+http-response ^https:\/\/api\.pinduoduo\.com\/api\/philo\/personal\/hub script-path = https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/PinDuoDuo/PinDuoDuo_remove_ads.js, requires-body = true, tag = 拼多多去广告
+http-response ^https:\/\/api\.pinduoduo\.com\/api\/alexa\/homepage\/hub script-path = https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/PinDuoDuo/PinDuoDuo_remove_ads.js, requires-body = true, tag = 精简首页
+http-response ^https:\/\/api\.pinduoduo\.com\/api\/oak\/integration\/render script-path = https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/PinDuoDuo/PinDuoDuo_remove_ads.js, requires-body = true, tag = 拼多多去广告
+http-response ^https:\/\/api\.pinduoduo\.com\/search script-path = https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/PinDuoDuo/PinDuoDuo_remove_ads.js, requires-body = true, tag = 移除搜索结果推广
+
+[Mitm]
+hostname = api.pinduoduo.com, api.yangkeduo.com

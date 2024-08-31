@@ -1,0 +1,26 @@
+#!name = 小红书去广告
+#!desc = 过滤信息流推广，移除图片及视频水印，如有异常，请先清除缓存再尝试。
+#!openUrl = https://apps.apple.com/app/id741292507
+#!author = RuCu6[https://github.com/RuCu6], fmz200[https://github.com/fmz200]
+#!tag = 去广告
+#!system =
+#!system_version =
+#!loon_version = 3.2.1(745)
+#!homepage = https://gitlab.com/lodepuly/vpn_tool/-/blob/master/README.md
+#!icon = https://gitlab.com/lodepuly/iconlibrary/-/raw/main/App_icon/120px/RedPaper.png
+#!date = 2024-04-13 14:20:28
+
+[Rule]
+AND, ((PROTOCOL, QUIC), (DOMAIN-SUFFIX, xiaohongshu.com)), REJECT
+
+[Rewrite]
+# 惊喜弹窗
+^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/surprisebox\/(get_style|open|submit_action) reject-dict
+^https:\/\/www\.xiaohongshu\.com\/api\/marketing\/box\/trigger\? reject-dict
+
+# 信息流
+^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/note\/guide\? reject-dict
+^https:\/\/www\.xiaohongshu\.com\/api\/sns\/v\d+\/(ads\/resource|hey\/\w+\/hey_gallery) reject-dict
+
+[Mitm]
+hostname = edith.xiaohongshu.com, www.xiaohongshu.com

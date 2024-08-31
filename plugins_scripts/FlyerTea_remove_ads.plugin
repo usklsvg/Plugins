@@ -1,0 +1,22 @@
+#!name = 飞客去广告
+#!desc = 移除开屏广告、首页广告、板块广告、帖内广告和我的页面广告。
+#!openUrl = https://apps.apple.com/app/id547560608
+#!author = 可莉🅥[https://gitlab.com/lodepuly/vpn_tool/-/blob/master/README.md]
+#!tag = 去广告
+#!system =
+#!system_version =
+#!loon_version = 3.2.1(745)
+#!homepage = https://gitlab.com/lodepuly/vpn_tool/-/blob/master/README.md
+#!icon = https://gitlab.com/lodepuly/iconlibrary/-/raw/main/App_icon/120px/FlyerTea.png
+#!date = 2024-07-10 10:53:35
+
+[Script]
+# 板块广告
+http-response ^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?version=5 script-path = https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/FlyerTea/FlyerTea_remove_ads.js, requires-body = true, tag = 移除板块广告
+# 我的页面 - 新用户推广横幅
+# http-response ^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?module=basicdata&type=app_onoff script-path = https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/FlyerTea/FlyerTea_remove_ads.js, requires-body = true, tag = 清理我的页面
+# 签到弹窗广告
+http-response ^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?module=plugin&id=k_misign:sign script-path = https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/FlyerTea/FlyerTea_remove_ads.js, requires-body = true, tag = 移除签到弹窗广告
+
+[Mitm]
+hostname = www.flyert.com.cn, ptf.flyertrip.com
