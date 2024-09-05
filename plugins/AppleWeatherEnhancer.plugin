@@ -20,5 +20,5 @@ API.ColorfulClouds.Token = input, "123456789123456789abcdefghijklmnopqrstuv", ta
 [Rule]
 DOMAIN, weather-analytics-events.apple.com, REJECT-DROP
 
-[MITM]
+[MitM]
 hostname = weatherkit.apple.com

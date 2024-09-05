@@ -13,5 +13,5 @@
 [Rewrite]
 ^https:\/\/api\.coolapk\.com\/v6\/search\?.*type=hotSearch reject-dict
 
-[Mitm]
+[MitM]
 hostname = api.coolapk.com

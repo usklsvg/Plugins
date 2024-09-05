@@ -89,5 +89,5 @@ DOMAIN, plbslog.umeng.com, REJECT
 # 我的页面 - 邀请好友、客栈魔法屋
 ^https:\/\/base\.mkzcdn\.com\/advert\/app\/user\/slide\d\/v\d\/ reject-dict
 
-[Mitm]
+[MitM]
 hostname = base.mkzcdn.com

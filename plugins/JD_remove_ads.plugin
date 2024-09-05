@@ -19,5 +19,5 @@ IP-CIDR6, 2402:db40:5100:1011::5/128, REJECT, no-resolve
 [Rewrite]
 ^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=(searchBoxWord|stationPullService|uniformRecommend[06]) reject-dict
 
-[Mitm]
+[MitM]
 hostname = api.m.jd.com

@@ -13,5 +13,5 @@
 [Rewrite]
 ^https:\/\/api\.pipix\.com\/api\/ad\/splash\/ reject-dict
 
-[Mitm]
+[MitM]
 hostname = *.pipix.com, api.pipix.com

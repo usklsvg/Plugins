@@ -15,5 +15,5 @@
 DOMAIN, sub-store.vercel.app, PROXY
 DOMAIN, ip-api.com, PROXY
 
-[Mitm]
+[MitM]
 hostname = sub.store

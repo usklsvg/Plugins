@@ -24,5 +24,5 @@
 # 日志
 ^https:\/\/mime\.baidu\.com\/v5\/(fb\/st\?logtype|(notiv3|cellloc_noti|noti_cloudswitch_noti)\/info) reject-dict
 
-[Mitm]
+[MitM]
 hostname = imeres.baidu.com, mbd.baidu.com, mime.baidu.com

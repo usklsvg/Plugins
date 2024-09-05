@@ -20,5 +20,5 @@
 # 发帖 - 横幅广告
 ^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?module=getdata reject-dict
 
-[Mitm]
+[MitM]
 hostname = www.flyert.com.cn, ptf.flyertrip.com

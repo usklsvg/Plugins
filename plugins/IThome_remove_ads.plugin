@@ -17,5 +17,5 @@
 ^https?:\/\/api\.zuihuimai\.com\/static\/.*\/hongbao reject
 ^https?:\/\/dat\.ruanmei\.com\/ithome\/money\/acd\.json$ reject
 
-[Mitm]
+[MitM]
 hostname = napi.ithome.com, api.zuihuimai.com, dat.ruanmei.com

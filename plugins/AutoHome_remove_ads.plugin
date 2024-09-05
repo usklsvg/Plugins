@@ -75,5 +75,5 @@ DOMAIN, adproxy.autohome.com.cn, REJECT
 # ^https:\/\/dealer\.m\.autohome\.com\.cn\/handler\/other\/getdata\?__action=dealerlq\.getpics&picType=195 reject-dict
 
 
-[Mitm]
+[MitM]
 hostname = a.athm.cn, adproxy.autohome.com.cn, apiautoappusc.che168.com, autoapi.autohome.com.cn, cars.app.autohome.com.cn, clientlive.api.autohome.com.cn, club.app.autohome.com.cn, dealer.m.autohome.com.cn, maam.pingan.com.cn, mobile.app.autohome.com.cn, news.app.autohome.com.cn, pcmx.autohome.com.cn

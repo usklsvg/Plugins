@@ -117,5 +117,5 @@ DOMAIN-KEYWORD, ttlivecdn.com., PROXY
 # 域名解析
 ^https:\/\/tnc16-platform-useast1a\.tiktokv\.com\/get_domains\/ reject
 
-[Mitm]
+[MitM]
 hostname = *.byteoversea.com, *.tik-tokapi.com, *.tiktokv.com, *.tiktokcdn.com

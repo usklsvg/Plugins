@@ -1,0 +1,16 @@
+#!name = 快手去广告
+#!desc = 移除开屏广告、应用内悬浮窗，精简我的页面。
+#!openUrl = https://apps.apple.com/app/id440948110
+#!author = 可莉🅥[https://gitlab.com/lodepuly/vpn_tool/-/blob/master/README.md]
+#!tag = 去广告
+#!system =
+#!system_version =
+#!loon_version = 3.2.1(745)
+#!homepage = https://gitlab.com/lodepuly/vpn_tool/-/blob/master/README.md
+#!icon = https://gitlab.com/lodepuly/iconlibrary/-/raw/main/App_icon/120px/KuaiShou.png
+#!date = 2024-09-05 18:39:23
+
+[Rewrite]
+
+[MitM]
+hostname = az?-api.ksapisrv.com, az?-api-idc.ksapisrv.com

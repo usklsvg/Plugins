@@ -46,6 +46,6 @@ DOMAIN-SUFFIX, biz.weibo.com, REJECT
 ^https:\/\/card\.weibo\.com\/article\/m\/aj\/(reward|uvead)\? reject-dict
 ^https:\/\/weibo\.com\/ttarticle\/x\/m\/aj\/(reward|uvead)\? reject-dict
 
-[Mitm]
+[MitM]
 # hostname = *.weibo.cn, *.weibo.com, sinaurl.cn, t.cn, weibo.cn
 hostname = *.weibo.cn, *.weibo.com, weibo.com

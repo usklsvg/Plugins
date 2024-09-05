@@ -76,5 +76,5 @@ DOMAIN, et.tanx.com, REJECT
 # 首页 - 横幅推广
 ^https:\/\/api-shoulei-ssl\.xunlei\.com\/flowhub\/v1\/slots:batchGet$ reject-dict
 
-[Mitm]
+[MitM]
 hostname = api-shoulei-ssl.xunlei.com, conf-m-ssl.xunlei.com

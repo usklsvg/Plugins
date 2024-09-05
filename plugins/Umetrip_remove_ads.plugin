@@ -13,5 +13,5 @@
 [Rule]
 URL-REGEX, ^http?:\/\/(discardrp|startup)\.umetrip\.com\/gateway\/api\/umetrip\/native, REJECT
 
-[Mitm]
+[MitM]
 hostname = 114.115.217.129, home.umetrip.com

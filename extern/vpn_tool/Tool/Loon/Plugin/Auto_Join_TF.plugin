@@ -26,5 +26,5 @@ http-request ^https://testflight.apple.com/join/(.*) script-path = https://gitla
 
 cron {TimingParameters} script-path = https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/TestFlight/Auto_join_TF.js, tag = 自动加入TF, timeout = 180
 
-[Mitm]
+[MitM]
 hostname = testflight.apple.com

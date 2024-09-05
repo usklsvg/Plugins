@@ -15,5 +15,5 @@
 ^https:\/\/huichuan\.sm\.cn\/nativead$ reject
 ^https:\/\/stars\.shuqireader\.com\/kkios\/render\/load\/resource\/appConfig$ reject-dict
 
-[Mitm]
+[MitM]
 hostname = huichuan.sm.cn, stars.shuqireader.com, open-cms-api.quark.cn

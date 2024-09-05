@@ -16,5 +16,5 @@ DOMAIN, fastraw.ixnic.net, DIRECT
 DOMAIN, hub.incept.pw, DIRECT
 DOMAIN, raw.kkgithub.com, DIRECT
 
-[Mitm]
+[MitM]
 hostname = raw.githubusercontent.com

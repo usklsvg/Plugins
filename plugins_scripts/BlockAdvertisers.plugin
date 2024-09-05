@@ -12,5 +12,5 @@
 
 [Script]
 
-[Mitm]
+[MitM]
 hostname = ether-pack.pangolin-sdk-toutiao.com, video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com, api-access.pangolin-sdk-toutiao?.com, sf*-fe-tos.pglstatp-toutiao.com

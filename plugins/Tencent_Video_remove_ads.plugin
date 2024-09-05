@@ -31,5 +31,5 @@ URL-REGEX, ^http:\/\/apd-\w+\.v\.smtcdns\.com\/(defaultts|omts|vmind\.qqvideo)\.
 [Rewrite]
 ^https?:\/\/vv\.video\.qq\.com\/(diff|get)vmind reject-dict
 
-[Mitm]
+[MitM]
 hostname = vv.video.qq.com

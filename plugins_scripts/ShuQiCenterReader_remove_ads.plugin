@@ -14,5 +14,5 @@
 # 书城横幅和阅读广告
 http-response ^https:\/\/ocean\.shuqireader\.com\/sqios\/render\/render\/page\/bookstore$ script-path = https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/ShuQiCenterReader/ShuQiCenterReader_remove_ads.js, requires-body = true, tag = 移除书城横幅和阅读广告
 
-[Mitm]
+[MitM]
 hostname = ocean.shuqireader.com, huichuan.sm.cn

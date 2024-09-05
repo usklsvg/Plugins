@@ -40,5 +40,5 @@ DOMAIN, th.pinduoduo.com, REJECT
 ^https:\/\/api\.pinduoduo\.com\/api\/caterham\/v3\/query\/likes reject-dict
 ^https:\/\/api\.pinduoduo\.com\/api\/caterham\/v3\/query\/order_express_group reject-dict
 
-[Mitm]
+[MitM]
 hostname = api.pinduoduo.com, api.yangkeduo.com

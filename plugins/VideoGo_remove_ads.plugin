@@ -83,5 +83,5 @@ DOMAIN-SUFFIX, pos.baidu.com, REJECT
 ^https:\/\/lf\d?-analytics\.bytescm\.com\/obj\/adjssdk\/ reject
 ^https:\/\/sf\d?-fe-tos\.pglstatp-toutiao\.com\/obj\/ad-pattern\/ reject
 
-[Mitm]
+[MitM]
 hostname = api.ys7.com, i.ys7.com

@@ -27,5 +27,5 @@ DOMAIN, rtlog5-applog.fqnovel.com, REJECT
 ^https:\/\/sf3-fe-tos\.pglstatp-toutiao\.com\/obj\/ad-pattern\/ reject
 ^https:\/\/lf\d?-cdn-tos\.bytescm\.com\/obj\/static\/ad\/ reject
 
-[Mitm]
+[MitM]
 hostname = sf3-fe-tos.pglstatp-toutiao.com, tnc3-alisc1.zijieapi.com, api-access.pangolin-sdk-toutiao*.com, lf?-cdn-tos.bytescm.com, is.snssdk.com

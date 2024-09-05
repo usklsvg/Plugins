@@ -78,5 +78,5 @@ URL-REGEX, ^http:\/\/log\.stat\.kugou\.com\/mobile\/ad\.html, REJECT
 # 唱片店 - 文字广告
 ^https:\/\/ep\.kugou\.com\/v\d\/album_shop\/get_entrance_info reject-dict
 
-[Mitm]
+[MitM]
 hostname = gateway.kugou.com, fx.service.kugou.com, hwstore.kugou.com, ep.kugou.com, gatewayretry.kugou.com, gzacshow.kugou.com, m1fxgroup.kugou.com

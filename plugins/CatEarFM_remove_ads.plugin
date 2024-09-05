@@ -35,5 +35,5 @@
 # 青少年模式
 ^https:\/\/app\.missevan\.com\/site\/config$ response-body-json-del info.teenager_popup_mode
 
-[Mitm]
+[MitM]
 hostname = app.missevan.com, fm.missevan.com

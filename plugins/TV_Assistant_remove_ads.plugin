@@ -78,5 +78,5 @@ DOMAIN, utoken.umeng.com, REJECT
 # 我的页面 - 横幅推广
 ^https:\/\/saas\.hpplay\.cn\/api\/lebo-desk\/endpoint\/app-resource\/app-user-banner reject-dict
 
-[Mitm]
+[MitM]
 hostname = saas.hpplay.cn

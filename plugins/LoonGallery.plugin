@@ -14,5 +14,5 @@
 DOMAIN, loon-plugin.vercel.app, PROXY
 DOMAIN, raw.githubusercontent.com, PROXY
 
-[Mitm]
+[MitM]
 hostname = xn--ck8h.com

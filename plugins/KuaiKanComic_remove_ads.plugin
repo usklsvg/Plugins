@@ -145,5 +145,5 @@ DOMAIN-SUFFIX, jpush.io, REJECT
 # 福利中心、悬浮部件
 ^https:\/\/(cdn-)?api\.kkmh\.com\/v\d\/checkin\/task_center\/get_by_task_type reject-dict
 
-[Mitm]
+[MitM]
 hostname = api.kkmh.com, cdn-api.kkmh.com, social.kkmh.com, cdn-social.kkmh.com, h5.kuaikanmanhua.com, cdn-h5.kuaikanmanhua.com, pay.kkmh.com, cdn-pay.kkmh.com, shop.kkmh.com, cdn-shop.kkmh.com, topic.kkmh.com, cdn-topic.kkmh.com

@@ -20,5 +20,5 @@ IP-CIDR, 180.76.76.200/32, REJECT, no-resolve
 ^https:\/\/tiebac\.baidu\.com\/c\/f\/search\/discover reject-dict
 ^https:\/\/tiebac\.baidu\.com\/c\/f\/forum\/forumGuide reject-dict
 
-[Mitm]
+[MitM]
 hostname = tiebac.baidu.com, tieba.baidu.com

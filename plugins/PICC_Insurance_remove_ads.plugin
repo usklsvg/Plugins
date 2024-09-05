@@ -18,5 +18,5 @@
 # 猜你喜欢
 ^https:\/\/zgrb\.epicc\.com\.cn\/G-HAPP\/a\/config\/guessYouLike\/v3 reject-dict
 
-[Mitm]
+[MitM]
 hostname = zgrb.epicc.com.cn

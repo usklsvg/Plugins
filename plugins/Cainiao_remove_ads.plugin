@@ -45,5 +45,5 @@ DOMAIN, ykad-data.youku.com, REJECT
 # 支付宝 - 菜鸟小程序
 ^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.cainiao\.adx\.flyad\.getad reject-dict
 
-[Mitm]
+[MitM]
 hostname = cn-acs.m.cainiao.com, guide-acs.m.taobao.com

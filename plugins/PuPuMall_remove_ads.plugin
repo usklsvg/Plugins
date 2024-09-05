@@ -25,5 +25,5 @@ URL-REGEX, ^http:\/\/139\.196\.12\.179:8053\/httpdns\/, REJECT
 # 旧版应用的主页实惠卡
 # ^https:\/\/j1\.pupuapi\.com\/client\/member_card\/index\/my reject
 
-[Mitm]
+[MitM]
 hostname = j1.pupuapi.com

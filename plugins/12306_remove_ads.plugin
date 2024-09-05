@@ -14,5 +14,5 @@
 # 放行规则
 DOMAIN, ad.12306.cn, DIRECT
 
-[Mitm]
+[MitM]
 hostname = ad.12306.cn, mobile.12306.cn

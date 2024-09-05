@@ -20,5 +20,5 @@ IP-CIDR, 203.107.1.1/24, REJECT, no-resolve
 ^https:\/\/api\.alipan\.com\/adrive\/v1\/file\/getTopFolders reject-dict
 
 
-[Mitm]
+[MitM]
 hostname = api.alipan.com, member.alipan.com, bizapi.alipan.com

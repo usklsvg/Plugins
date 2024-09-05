@@ -15,5 +15,5 @@
 DOMAIN-SUFFIX, gitlab.com, DIRECT
 DOMAIN-SUFFIX, bitbucket.org, DIRECT
 
-[Mitm]
+[MitM]
 hostname = gitlab.com, raw.githubusercontent.com, bitbucket.org

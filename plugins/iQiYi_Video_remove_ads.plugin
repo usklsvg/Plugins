@@ -27,5 +27,5 @@ DOMAIN, api.iqiyi.com, REJECT
 # 青少年弹窗
 ^https:\/\/iface2\.iqiyi\.com\/views_pop\/3\.0\/pop_control\? reject-dict
 
-[Mitm]
+[MitM]
 hostname = -i.vip.iqiyi.com, *.iqiyi.com

@@ -19,5 +19,5 @@ force-http-engine-hosts = script.hub, *.script.hub
 [Rule]
 DOMAIN, scripthub.vercel.app, PROXY
 
-[Mitm]
+[MitM]
 hostname = script.hub, *.script.hub

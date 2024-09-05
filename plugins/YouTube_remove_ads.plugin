@@ -23,5 +23,5 @@ AND, ((DOMAIN-SUFFIX, youtubei.googleapis.com),  (PROTOCOL, QUIC)), REJECT
 # 使用reject-dict方法以减少开销
 ^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad reject-dict
 
-[Mitm]
+[MitM]
 hostname = *.googlevideo.com, youtubei.googleapis.com

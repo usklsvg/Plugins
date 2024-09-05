@@ -19,5 +19,5 @@ TimingParameters = input, "*/1 * * * * *", tag = 定时参数, desc = 这里需�
 [Rule]
 DOMAIN, testflight.apple.com, PROXY
 
-[Mitm]
+[MitM]
 hostname = testflight.apple.com

@@ -19,5 +19,5 @@ DOMAIN, tysdk.95516.com, REJECT
 [Rewrite]
 ^https:\/\/wallet\.95516\.com(:10533)?\/s\/wl\/icon\/large\/1 reject
 
-[Mitm]
+[MitM]
 hostname = account.95516.com, base.95516.com, content.95516.com

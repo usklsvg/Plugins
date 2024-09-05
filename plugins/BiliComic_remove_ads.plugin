@@ -38,5 +38,5 @@ URL-REGEX, ^http:\/\/119\.29\.29\.29\/d, REJECT
 # 开屏广告
 ^https:\/\/manga\.bilibili\.com\/twirp\/comic\.v\d\.Comic\/ListFlash reject-dict
 
-[Mitm]
+[MitM]
 hostname = manga.bilibili.com

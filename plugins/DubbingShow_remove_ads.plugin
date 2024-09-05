@@ -42,5 +42,5 @@ DOMAIN, tmeadcomm.y.qq.com, REJECT
 # 消息 - 群聊推荐
 ^https:\/\/iosapi\.peiyinxiu\.com\/api\/Union\/HomeData response-body-json-del obj.data
 
-[Mitm]
+[MitM]
 hostname = iosapi.peiyinxiu.com

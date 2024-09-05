@@ -41,5 +41,5 @@
 # 开屏广告
 ^https:\/\/qxb-minicode-pic-osscache\.qixin\.com\/web\/ reject
 
-[Mitm]
+[MitM]
 hostname = appc.qixin.com, appc-v6.qixin.com, qxb-minicode-pic-osscache.qixin.com

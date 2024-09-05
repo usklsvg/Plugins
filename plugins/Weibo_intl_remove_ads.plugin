@@ -15,5 +15,5 @@
 ^https?:\/\/api\.weibo\.cn\/\d\/(cardlist\?v_f=\d|ad\/weibointl\?) reject-dict
 ^https?:\/\/weibointl\.api\.weibo\.cn\/portal\.php\?a=hot_search_users reject-dict
 
-[Mitm]
+[MitM]
 hostname = *api.weibo.cn, sdkapp.uve.weibo.com

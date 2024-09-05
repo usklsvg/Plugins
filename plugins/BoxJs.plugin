@@ -13,5 +13,5 @@
 [Rule]
 DOMAIN-SUFFIX, jsdelivr.net, PROXY
 
-[Mitm]
+[MitM]
 hostname = boxjs.com, boxjs.net, *.boxjs.com, *.boxjs.net

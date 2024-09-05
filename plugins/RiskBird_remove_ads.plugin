@@ -17,5 +17,5 @@
 # 首页 - 热门企业
 ^https:\/\/m\.riskbird\.com\/prod-qbb-api\/searchHotEnt reject-dict
 
-[Mitm]
+[MitM]
 hostname = m.riskbird.com

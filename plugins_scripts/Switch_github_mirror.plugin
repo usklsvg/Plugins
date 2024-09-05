@@ -14,5 +14,5 @@
 [Script]
 http-request ^https:\/\/raw\.githubusercontent\.com\/ script-path = https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/GitHub/Switch_github_mirror.js, tag = GitHub加速
 
-[Mitm]
+[MitM]
 hostname = raw.githubusercontent.com

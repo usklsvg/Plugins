@@ -20,5 +20,5 @@
 # 我的页面 - 精选好货
 ^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzinfoshow\/getchoicegoodsinfos reject-dict
 
-[Mitm]
+[MitM]
 hostname = app.zhuanzhuan.com

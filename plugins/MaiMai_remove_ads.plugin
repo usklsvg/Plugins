@@ -23,5 +23,5 @@
 # 帖子末尾 - 看过此贴的用户也在看
 ^https:\/\/(h3\.)?open\.taou\.com\/maimai\/feed\/v6\/detail_recommend_feeds\? response-body-json-del feeds
 
-[Mitm]
+[MitM]
 hostname = open.taou.com, h3.open.taou.com

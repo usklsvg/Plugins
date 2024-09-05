@@ -41,5 +41,5 @@ DOMAIN, youku-acs.m.taobao.com, REJECT
 # 播放页弹窗动图
 ^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.(pisp\.scripts\.get|xspace\.play\.position\.preload\.query|xspace\.poplayer\.position\.query) url reject-dict
 
-[Mitm]
+[MitM]
 hostname = acs.youku.com, push.m.youku.com, un-acs.youku.com

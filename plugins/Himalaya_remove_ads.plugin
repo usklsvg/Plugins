@@ -48,5 +48,5 @@
 # 屏蔽ting广告
 ^https?:\/\/.*\.xima.*\.com\/ting\/(loading|feed|home)? reject
 
-[Mitm]
+[MitM]
 hostname = *.xima*.*, *.xmcdn.*
