@@ -1,5 +1,5 @@
 #!name = Keep去广告
-#!desc = 移除应用内广告、精简底栏。
+#!desc = 移除开屏广告、应用内广告和弹窗广告。移除首页活动标签、关注推荐、文章相关推荐。修改首页默认标签为推荐页面。
 #!openUrl = https://apps.apple.com/app/id952694580
 #!author = 可莉🅥[https://gitlab.com/lodepuly/vpn_tool/-/blob/master/README.md]
 #!tag = 去广告
@@ -8,12 +8,11 @@
 #!loon_version = 3.2.1(745)
 #!homepage = https://gitlab.com/lodepuly/vpn_tool/-/blob/master/README.md
 #!icon = https://gitlab.com/lodepuly/iconlibrary/-/raw/main/App_icon/120px/Keep.png
-#!date = 2024-06-30 00:52:59
+#!date = 2024-09-06 21:02:25
 
 [Script]
-# 移除悬浮窗
-http-response ^https:\/\/app\.Keep\.com\/zz\/v2\/zzinfoshow\/getfeedflowinfo script-path = https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/Keep/Keep_remove_ads.js, requires-body = true, tag = 移除悬浮窗
-
+# 首页 - 活动标签
+http-response ^https:\/\/api\.gotokeep\.com\/config\/v3\/basic script-path = https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/Keep/Keep_remove_ads.js, requires-body = true, tag = 移除首页活动标签
 
 [MitM]
 hostname = api.gotokeep.com, kad.gotokeep.com
