@@ -1,0 +1,28 @@
+#!name = YY去广告
+#!desc = 移除开屏广告、应用内弹窗，精简底栏和我的页面。
+#!openUrl = https://apps.apple.com/app/id1002355194
+#!author = 可莉🅥[https://gitlab.com/lodepuly/vpn_tool/-/blob/master/README.md]
+#!tag = 去广告
+#!system =
+#!system_version =
+#!loon_version = 3.2.1(745)
+#!homepage = https://gitlab.com/lodepuly/vpn_tool/-/blob/master/README.md
+#!icon = https://gitlab.com/lodepuly/iconlibrary/-/raw/main/App_icon/120px/ZhuanZhuan.png
+#!date = 2024-06-30 00:52:59
+
+[Rule]
+DOMAIN, splash.yy.com, REJECT
+
+[Rewrite]
+# 主播邀请弹窗
+^https:\/\/yyapp-fastnet\.yy\.com\/dispatch\? reject-dict
+
+# 底栏
+https://tab.yy.com/tabs?
+
+# 我的页面
+https://personal-center.yy.com/personalCenter/list?
+
+
+[MitM]
+hostname = yyapp-fastnet.yy.com, personal-center.yy.com, tab.yy.com
