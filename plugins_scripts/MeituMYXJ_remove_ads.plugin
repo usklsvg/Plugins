@@ -15,4 +15,4 @@
 http-response ^https:\/\/api\.meiyan\.com\/operation\/home\.json\? script-path = https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/MeituMYXJ/MeituMYXJ_remove_ads.js, requires-body = true, tag = 精简首页功能栏目并移除美颜推荐
 
 [MitM]
-hostname = api.meiyan.com, ether-pack.pangolin-sdk-toutiao.com, api-access.pangolin-sdk-toutiao?.com, sf*-fe-tos.pglstatp-toutiao.com, video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com
+hostname = api.meiyan.com, video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com
