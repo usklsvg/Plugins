@@ -1,14 +1,14 @@
 #!name = 网易云音乐去广告
 #!desc = 过滤网易云音乐广告，并允许自定义界面。
 #!openUrl = https://apps.apple.com/app/id590338362
-#!author = Keywos[https://github.com/Keywos], RuCu6[https://github.com/RuCu6]
+#!author = RuCu6[https://github.com/RuCu6], Keywos[https://github.com/Keywos]
 #!tag = 去广告
 #!system =
 #!system_version =
 #!loon_version = 3.2.1(749)
 #!homepage = https://gitlab.com/lodepuly/vpn_tool/-/blob/master/README.md
 #!icon = https://gitlab.com/lodepuly/iconlibrary/-/raw/main/App_icon/120px/NeteaseCloudMusic.png
-#!date = 2024-10-10 08:15:01
+#!date = 2024-10-11 07:22:12
 #!select = 隐藏漫游标签, 是, 否
 #!select = 隐藏动态标签, 是, 否
 #!select = 隐藏推荐标签, 是, 否
