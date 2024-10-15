@@ -8,15 +8,13 @@
 #!loon_version = 3.2.1(749)
 #!homepage = https://gitlab.com/lodepuly/vpn_tool/-/blob/master/README.md
 #!icon = https://gitlab.com/lodepuly/iconlibrary/-/raw/main/App_icon/120px/RedPaper.png
-#!date = 2024-04-13 14:20:28
+#!date = 2024-10-15 10:55:06
 
 [Script]
 # 详情页小部件、关注页感兴趣的人
 http-response ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/(note\/widgets|user\/followings\/followfeed) script-path = https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body = true, tag = 移除详情页小部件
 
 # 搜索页
-http-response ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/search\/(banner|hot)_list script-path = https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body = true, tag = 移除搜索页广告
-http-response ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/search\/(hint|trending)\? script-path = https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body = true, tag = 移除搜索页广告
 http-response ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/search\/notes\? script-path = https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body = true, tag = 移除搜索页广告
 
 # 开屏广告

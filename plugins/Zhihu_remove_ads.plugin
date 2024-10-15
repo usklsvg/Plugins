@@ -8,7 +8,7 @@
 #!loon_version = 3.2.1(749)
 #!homepage = https://gitlab.com/lodepuly/vpn_tool/-/blob/master/README.md
 #!icon = https://gitlab.com/lodepuly/iconlibrary/-/raw/main/App_icon/120px/Zhihu.png
-#!date = 2024-10-07 21:05:14
+#!date = 2024-10-15 10:56:31
 
 [Rule]
 # 知乎
@@ -31,6 +31,7 @@ IP-CIDR6, 2402:4e00:1200:ed00:0:9089:6dac:96b6/128, REJECT, no-resolve
 
 # 会员页面 - 弹窗、悬浮动图
 ^https:\/\/api\.zhihu\.com\/(bazaar\/float_window|market\/popovers_v2) reject-dict
+^https:\/\/api\.zhihu\.com\/bazaar\/vip_tab\/header\? response-body-json-del activity_banner activity_window vip_tip
 
 # 我的页面 - 项目列表、会员卡片
 ^https:\/\/api\.zhihu\.com\/me\/guides reject-dict
