@@ -1,0 +1,19 @@
+#!name = 夸克去广告
+#!desc = 移除阅读广告，精简我的页面。
+#!openUrl = https://apps.apple.com/app/id1160172628
+#!author = 可莉🅥[https://gitlab.com/lodepuly/vpn_tool/-/blob/master/README.md]
+#!tag = 去广告
+#!system =
+#!system_version =
+#!loon_version = 3.2.1(749)
+#!homepage = https://gitlab.com/lodepuly/vpn_tool/-/blob/master/README.md
+#!icon = https://gitlab.com/lodepuly/iconlibrary/-/raw/main/App_icon/120px/QuarkBrowser.png
+#!date = 2024-07-14 22:55:24
+
+[Rewrite]
+# 小说底部文案广告
+^https:\/\/huichuan\.sm\.cn\/nativead$ reject
+^https:\/\/stars\.shuqireader\.com\/kkios\/render\/load\/resource\/appConfig$ reject-dict
+
+[MitM]
+hostname = huichuan.sm.cn, stars.shuqireader.com, open-cms-api.quark.cn

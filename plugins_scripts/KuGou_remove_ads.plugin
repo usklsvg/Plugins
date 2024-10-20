@@ -1,0 +1,18 @@
+#!name = 酷狗音乐去广告
+#!desc = 移除开屏广告、应用各类弹窗、各类横幅广告、评论区广告和播放器界面广告。
+#!openUrl = https://apps.apple.com/app/id472208016
+#!author = 可莉🅥[https://gitlab.com/lodepuly/vpn_tool/-/blob/master/README.md]
+#!tag = 去广告
+#!system =
+#!system_version =
+#!loon_version = 3.2.1(749)
+#!homepage = https://gitlab.com/lodepuly/vpn_tool/-/blob/master/README.md
+#!icon = https://gitlab.com/lodepuly/iconlibrary/-/raw/main/App_icon/120px/KuGou.png
+#!date = 2024-07-25 00:46:39
+
+[Script]
+# 精简顶部标签
+http-response ^https:\/\/gateway(retry)?\.kugou\.com\/ocean\/v\d\/tab\/list_v\d script-path = https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/KuGou/KuGou_remove_ads.js, requires-body = true, tag = 精简顶部标签
+
+[MitM]
+hostname = gateway.kugou.com, fx.service.kugou.com, hwstore.kugou.com, ep.kugou.com, gatewayretry.kugou.com, gzacshow.kugou.com, m1fxgroup.kugou.com
