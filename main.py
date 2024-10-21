@@ -2,17 +2,107 @@ import os
 import shutil
 import requests
 import zipfile
+import time
+import random
 
 
-def save_content(content, filename):
+current_dir = os.path.dirname(os.path.abspath(__file__))
+extern_dir = os.path.join(current_dir, "extern", "ProxyResource")
+extern_plugin_dir = os.path.join(extern_dir, "plugin")
+extern_script_dir = os.path.join(extern_dir, "script")
+
+
+def sleep_ms(milliseconds: float):
+    start = time.perf_counter()
+    end = start + milliseconds / 1000.0
+    while time.perf_counter() < end:
+        pass
+
+
+def get_url_text_content(url: str):
+    content = None
     try:
+        response = requests.get(url, stream=True)
+        content = response.text
+        sleep_ms(50 + random.random() * 100)
+    except requests.exceptions.RequestException as e:
+        print(f"error : {e}")
+    return content
+
+
+def recreate_path(pathname: str):
+    try:
+        if os.path.exists(pathname):
+            shutil.rmtree(pathname)
+        os.makedirs(pathname)
+    except Exception as e:
+        print(f"error when recreate path '{pathname}'.")
+        exit(1)
+
+
+def save_content(content: str, filename: str):
+    try:
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
         with open(filename, mode="w", encoding="utf-8") as f:
             f.write(content)
     except IOError as e:
         print(f"Error when saving content to {filename}: {e}")
 
 
-def extract(content: str):
+def colllect_files():
+    readme = get_url_text_content(
+        "https://raw.githubusercontent.com/luestr/ProxyResource/refs/heads/main/README.md"
+    )
+    save_content(readme, os.path.join(extern_dir, "README"))
+
+    filenames = []
+    recreate_path(extern_plugin_dir)
+    for item in readme.split('"'):
+        if not item.endswith(".plugin"):
+            continue
+
+        plugin_url = item[46:]
+        plugin_content = get_url_text_content(plugin_url)
+        if plugin_content == None:
+            continue
+
+        plugin_filename = os.path.join(extern_plugin_dir, item.split("/")[-1])
+        save_content(plugin_content, plugin_filename)
+        filenames.append(plugin_filename)
+
+    return filenames
+
+
+def save_plugin_scripts(plugin_name: str, data: list[str]):
+    local_dir = os.path.join(extern_script_dir, plugin_name)
+    recreate_path(local_dir)
+
+    for line in data:
+        if line[0] == "[" or line[0] == "#" or line[0] == ";" or line[0] == "\n":
+            continue
+        item = line.split(",")[0]
+        pos = item.find("script-path")
+        if pos == -1:
+            continue
+        script_url = item.split("=")[-1].strip()
+        script_content = get_url_text_content(script_url)
+        if script_content == None:
+            continue
+
+        script_filename = os.path.join(local_dir, script_url.split("/")[-1])
+        save_content(script_content, script_filename)
+
+        sleep_ms(50 + random.random() * 100)
+
+    if not os.listdir(local_dir):
+        try:
+            shutil.rmtree(local_dir)
+        except Exception as e:
+            print(f"error when remove path '{local_dir}'.")
+            exit(1)
+
+
+def extract_components(plugin_name: str, content: str):
     lines = []
     for line in content:
         lines.append(line.strip())
@@ -58,6 +148,15 @@ def extract(content: str):
     for key in empty_keys:
         del data[key]
 
+    script_key = ""
+    has_script = False
+    for key in data:
+        if str(key).lower() == "[script]":
+            has_script = True
+            script_key = key
+    if has_script:
+        save_plugin_scripts(plugin_name, data[script_key])
+
     ret = {}
     for key in data:
         ret[key] = ""
@@ -78,7 +177,7 @@ def process_file(file_path: str):
     filename = file_path.split("/")[-1]
     filename = filename.split("\\")[-1]
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    data = extract(content)
+    data = extract_components(filename.split(".")[0], content)
 
     has_content = False
     content_without_script = data["title"]
@@ -89,7 +188,9 @@ def process_file(file_path: str):
             has_content = True
         content_without_script += f"{key}\n{data[key]}"
     if has_content:
-        output_filename_without_scripts = os.path.join(current_dir, "plugins", filename)
+        output_filename_without_scripts = os.path.join(
+            current_dir, "plugin_without_script", filename
+        )
         save_content(content_without_script, output_filename_without_scripts)
 
     has_script = False
@@ -101,72 +202,20 @@ def process_file(file_path: str):
         elif str(key).lower() == "[argument]" or str(key).lower() == "[mitm]":
             content_scripts += f"{key}\n{data[key]}"
     if has_script:
-        output_filename_scripts = os.path.join(current_dir, "plugins_scripts", filename)
+        output_filename_scripts = os.path.join(
+            current_dir, "plugin_with_script", filename
+        )
         save_content(content_scripts, output_filename_scripts)
 
 
-def download_repo():
-    repo_url = (
-        "https://gitlab.com/lodepuly/vpn_tool/-/archive/master/vpn_tool-master.zip"
-    )
-    try:
-        response = requests.get(repo_url, stream=True)
-        response.raise_for_status()
-    except requests.exceptions.RequestException as e:
-        print(f"error : {e}")
-        exit(1)
-
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    zip_dir = os.path.join(current_dir, "vpn_tool-master.zip")
-    try:
-        with open(zip_dir, "wb") as f:
-            for chunk in response.iter_content(chunk_size=8192):
-                if chunk:
-                    f.write(chunk)
-    except Exception as e:
-        print(f"error when saving content to zip file : {e}")
-        exit(1)
-
-    target_path = os.path.join(current_dir, "extern")
-    try:
-        repo_dir = os.path.join(current_dir, "extern")
-        if os.path.exists(repo_dir):
-            shutil.rmtree(repo_dir)
-        os.makedirs(repo_dir)
-
-        with zipfile.ZipFile(zip_dir, "r") as zip_ref:
-            zip_ref.extractall(target_path)
-
-        os.remove(zip_dir)
-        os.rename(
-            os.path.join(target_path, "vpn_tool-master"),
-            os.path.join(target_path, "vpn_tool"),
-        )
-    except Exception as e:
-        print(f"error when extracting file: {e}")
-
-
 if __name__ == "__main__":
-    download_repo()
+    random.seed(time.time())
 
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    try:
-        output_dir_without_scripts = os.path.join(current_dir, "plugins")
-        if os.path.exists(output_dir_without_scripts):
-            shutil.rmtree(output_dir_without_scripts)
-        os.makedirs(output_dir_without_scripts)
+    filenames = colllect_files()
 
-        output_dir_scripts = os.path.join(current_dir, "plugins_scripts")
-        if os.path.exists(output_dir_scripts):
-            shutil.rmtree(output_dir_scripts)
-        os.makedirs(output_dir_scripts)
-    except Exception as e:
-        print(f"error when processing files")
-        exit(1)
+    recreate_path(extern_script_dir)
+    recreate_path(os.path.join(current_dir, "plugin_without_script"))
+    recreate_path(os.path.join(current_dir, "plugin_with_script"))
 
-    plugins_path = os.path.join(
-        current_dir, "extern", "vpn_tool", "Tool", "Loon", "Plugin"
-    )
-    for filename in os.listdir(plugins_path):
-        if filename.lower().endswith(".plugin"):
-            process_file(os.path.join(plugins_path, filename))
+    for filename in filenames:
+        process_file(filename)
