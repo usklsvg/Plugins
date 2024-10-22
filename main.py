@@ -179,9 +179,9 @@ def process_file(file_path: str):
     has_content = False
     content_without_script = data["title"]
     for key in data:
-        if key == "title" or str(key).lower() == "[script]":
+        if str(key).lower() == "[script]":
             continue
-        if str(key).lower() != "[mitm]":
+        elif str(key).lower() != "[argument]" and str(key).lower() != "[mitm]":
             has_content = True
         content_without_script += f"{key}\n{data[key]}"
     if has_content:
