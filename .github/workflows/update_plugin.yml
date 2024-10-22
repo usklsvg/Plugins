@@ -1,0 +1,36 @@
+name: Update Plugin
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'  
+  workflow_dispatch:  # 允许手动触发
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install requests
+
+    - name: Run Python script
+      run: |
+        python main.py
+
+    - name: Commit and push changes
+      uses: EndBug/add-and-commit@v9
+      with:
+        author_name: 'GitHub Actions'
+        author_email: '152701112+usklsvg@users.noreply.github.com'
+        message: 'Update Plugins'
+        push: true  # Ensure this is set to true to enable pushing
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
