@@ -10,19 +10,6 @@
 #!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/SodaMusic.png
 #!date = 2024-09-23 02:43:41
 
-title
-#!name = 汽水音乐去广告
-#!desc = 移除开屏广告、弹窗广告、播放器推广、歌曲详情界面视频推广，精简首页和我的页面。
-#!openUrl = https://apps.apple.com/app/id1605585211
-#!author = 可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
-#!tag = 去广告
-#!system =
-#!system_version =
-#!loon_version = 3.2.1(749)
-#!homepage = https://github.com/luestr/ProxyResource/blob/main/README.md
-#!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/SodaMusic.png
-#!date = 2024-09-23 02:43:41
-
 [Rule]
 # 拦截HTTPDNS
 AND, ((DOMAIN-KEYWORD, api100-core-quic-), (DOMAIN-SUFFIX, amemv.com)), REJECT

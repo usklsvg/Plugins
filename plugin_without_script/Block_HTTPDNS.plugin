@@ -10,19 +10,6 @@
 #!icon = https://raw.githubusercontent.com/luestr/IconResource/main/Other_icon/120px/HTTPDNS.png
 #!date = 2024-09-25 15:45:58
 
-title
-#!name = 拦截HTTPDNS
-#!desc = 拦截常见的HTTPDNS服务，以确保这些请求都能够在Loon的DNS框架下工作。
-#!openUrl =
-#!author = 可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md], VirgilClyne[https://github.com/VirgilClyne]
-#!tag = DNS
-#!system =
-#!system_version =
-#!loon_version = 3.2.1(749)
-#!homepage = https://github.com/luestr/ProxyResource/blob/main/README.md
-#!icon = https://raw.githubusercontent.com/luestr/IconResource/main/Other_icon/120px/HTTPDNS.png
-#!date = 2024-09-25 15:45:58
-
 [Rule]
 # YY语音
 DOMAIN, yyapp-httpdns.gslb.yy.com, REJECT

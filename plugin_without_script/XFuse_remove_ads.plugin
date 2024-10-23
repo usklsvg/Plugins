@@ -10,19 +10,6 @@
 #!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/XFuse.png
 #!date = 2024-07-25 00:39:16
 
-title
-#!name = 磁力宅播放器去广告
-#!desc = 移除开屏广告、弹窗和文件列表广告。
-#!openUrl = https://apps.apple.com/app/id6497060674
-#!author = 可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
-#!tag = 去广告
-#!system =
-#!system_version =
-#!loon_version = 3.2.1(749)
-#!homepage = https://github.com/luestr/ProxyResource/blob/main/README.md
-#!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/XFuse.png
-#!date = 2024-07-25 00:39:16
-
 [Rule]
 # 拦截HTTPDNS
 AND, ((DOMAIN-KEYWORD, tnc), (AND, ((OR, ((DOMAIN-KEYWORD, -bjlgy), (DOMAIN-KEYWORD, -alisc), (DOMAIN-KEYWORD, -aliec), (DOMAIN-KEYWORD, -alisg))), (OR, ((DOMAIN-SUFFIX, snssdk.com), (DOMAIN-SUFFIX, isnssdk.com), (DOMAIN-SUFFIX, toutiaoapi.com), (DOMAIN-SUFFIX, bytedance.com), (DOMAIN-SUFFIX, zijieapi.com)))))), REJECT

@@ -10,19 +10,6 @@
 #!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/KuaiKanComic.png
 #!date = 2024-07-19 05:26:31
 
-title
-#!name = 快看漫画去广告
-#!desc = 移除开屏广告、悬浮窗、漫画广告、社区广告、各类弹窗，精简顶部标签、我的页面。
-#!openUrl = https://apps.apple.com/app/id906936224
-#!author = 可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
-#!tag = 去广告
-#!system =
-#!system_version =
-#!loon_version = 3.2.1(749)
-#!homepage = https://github.com/luestr/ProxyResource/blob/main/README.md
-#!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/KuaiKanComic.png
-#!date = 2024-07-19 05:26:31
-
 [Rule]
 DOMAIN, ad.v3mh.com, REJECT
 DOMAIN, ipv6.kkmh.com, REJECT

@@ -10,19 +10,6 @@
 #!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Zhihu.png
 #!date = 2024-10-15 10:56:31
 
-title
-#!name = 知乎去广告
-#!desc = 移除各部分广告，移除知乎安全中心跳转，建议卸载知乎重新安装。如遇安全中心页面移除失败的，请积极反馈。
-#!openUrl = https://apps.apple.com/app/id432274380
-#!author = RuCu6[https://github.com/RuCu6], blackmatrix7[https://github.com/blackmatrix7]
-#!tag = 去广告
-#!system =
-#!system_version =
-#!loon_version = 3.2.1(749)
-#!homepage = https://github.com/luestr/ProxyResource/blob/main/README.md
-#!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Zhihu.png
-#!date = 2024-10-15 10:56:31
-
 [Rule]
 # 知乎
 DOMAIN, appcloud.zhihu.com, REJECT

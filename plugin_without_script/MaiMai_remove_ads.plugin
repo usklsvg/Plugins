@@ -10,19 +10,6 @@
 #!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/MaiMai.png
 #!date = 2024-08-18 00:53:34
 
-title
-#!name = 脉脉去广告
-#!desc = 移除开屏广告、信息流广告、横幅推广、相关帖子推荐。
-#!openUrl = https://apps.apple.com/app/id718659370
-#!author = 可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
-#!tag = 去广告
-#!system =
-#!system_version =
-#!loon_version = 3.2.1(749)
-#!homepage = https://github.com/luestr/ProxyResource/blob/main/README.md
-#!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/MaiMai.png
-#!date = 2024-08-18 00:53:34
-
 [Rewrite]
 # 开屏广告、职位页面横幅
 ^https:\/\/(h3\.)?open\.taou\.com\/maimai\/adshow\? reject-dict

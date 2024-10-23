@@ -10,19 +10,6 @@
 #!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/YoudaoDict.png
 #!date = 2024-09-07 23:36:24
 
-title
-#!name = 网易有道词典去广告
-#!desc = 移除开屏广告、弹窗广告、横幅广告、信息流广告、旧版翻译页面广告及搜索填充词。
-#!openUrl = https://apps.apple.com/app/id353115739
-#!author = 可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
-#!tag = 去广告
-#!system =
-#!system_version =
-#!loon_version = 3.2.1(749)
-#!homepage = https://github.com/luestr/ProxyResource/blob/main/README.md
-#!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/YoudaoDict.png
-#!date = 2024-09-07 23:36:24
-
 [Rule]
 # 拦截HTTPDNS
 DOMAIN, httpdns.music.163.com, REJECT

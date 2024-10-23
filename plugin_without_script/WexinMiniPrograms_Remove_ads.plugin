@@ -10,19 +10,6 @@
 #!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/WeixinMiniPrograms.png
 #!date = 2024-09-27 22:18:09
 
-title
-#!name = 微信小程序去广告
-#!desc = 收录常用小程序的去广告，作者署名在插件内。
-#!openUrl = https://apps.apple.com/app/id414478124
-#!author = 可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
-#!tag = 去广告
-#!system =
-#!system_version =
-#!loon_version = 3.2.1(749)
-#!homepage = https://github.com/luestr/ProxyResource/blob/main/README.md
-#!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/WeixinMiniPrograms.png
-#!date = 2024-09-27 22:18:09
-
 [Rule]
 # 微信小程序通用规则
 DOMAIN, wxsnsdy.wxs.qq.com, REJECT

@@ -10,19 +10,6 @@
 #!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/HUPU.png
 #!date = 2024-07-24 14:40:03
 
-title
-#!name = 虎扑去广告
-#!desc = 移除虎扑开屏广告、首页顶部推广、我的页面多余模块及各类横幅推广。
-#!openUrl = https://apps.apple.com/app/id906632439
-#!author = ZenmoFeiShi[https://github.com/ZenmoFeiShi]
-#!tag = 去广告
-#!system =
-#!system_version =
-#!loon_version = 3.2.1(749)
-#!homepage = https://gitlab.com/isous/loonresource/-/tree/main/Plugin
-#!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/HUPU.png
-#!date = 2024-07-24 14:40:03
-
 [Rewrite]
 ^https:\/\/games\.mobileapi\.hupu\.com\/\d\/\d\.\d\.\d+\/bplapi\/reddot\/v1\/app\/getReddot reject-dict
 ^https:\/\/bbs\.mobileapi\.hupu\.com\/\d\/\d\.\d\.\d+\/(bbsallapi\/tag\/v1\/heatTag|bbsrankapi\/v1\/rating\/list) reject-dict

@@ -10,19 +10,6 @@
 #!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/QQKSong.png
 #!date = 2024-09-08 16:16:45
 
-title
-#!name = 全民K歌去广告
-#!desc = 移除开屏广告、歌房页面弹窗广告、消息页广告和我的页面广告。
-#!openUrl = https://apps.apple.com/app/id910513149
-#!author = 可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
-#!tag = 去广告
-#!system =
-#!system_version =
-#!loon_version = 3.2.1(749)
-#!homepage = https://github.com/luestr/ProxyResource/blob/main/README.md
-#!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/QQKSong.png
-#!date = 2024-09-08 16:16:45
-
 [Rule]
 DOMAIN, adsmind.gdtimg.com, REJECT
 DOMAIN, adsmind.ugdtimg.com, REJECT

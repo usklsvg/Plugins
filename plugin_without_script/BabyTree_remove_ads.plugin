@@ -10,19 +10,6 @@
 #!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/BabyTree.png
 #!date = 2023-11-22 19:25
 
-title
-#!name = 宝宝树孕育去广告
-#!desc = 过滤宝宝树孕育广告
-#!openUrl = https://apps.apple.com/app/id523063187
-#!author = RuCu6[https://github.com/RuCu6]
-#!tag = 去广告
-#!system =
-#!system_version =
-#!loon_version = 3.2.1(749)
-#!homepage = https://github.com/luestr/ProxyResource/blob/main/README.md
-#!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/BabyTree.png
-#!date = 2023-11-22 19:25
-
 [Rule]
 # 首页 - 活动弹窗、签到图标
 URL-REGEX, ^http:\/\/go\.babytree\.com\/go_pregnancy\/api\/(index_activity\/get_app_index_activity|sign\/sign_h_5)\?, REJECT-DICT
