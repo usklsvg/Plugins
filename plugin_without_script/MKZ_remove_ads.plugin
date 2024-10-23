@@ -10,6 +10,19 @@
 #!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/MKZ.png
 #!date = 2024-07-18 21:07:01
 
+title
+#!name = 漫客栈去广告
+#!desc = 移除开屏广告、漫画广告、小说章末广告，精简我的页面。
+#!openUrl = https://apps.apple.com/app/id1189885433
+#!author = 可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!tag = 去广告
+#!system =
+#!system_version =
+#!loon_version = 3.2.1(749)
+#!homepage = https://github.com/luestr/ProxyResource/blob/main/README.md
+#!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/MKZ.png
+#!date = 2024-07-18 21:07:01
+
 [Rule]
 # 字节跳动广告
 AND, ((DOMAIN-KEYWORD, -ad-), (DOMAIN-SUFFIX, byteimg.com)), REJECT

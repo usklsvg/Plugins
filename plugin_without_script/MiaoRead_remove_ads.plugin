@@ -10,6 +10,19 @@
 #!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/MiaoRead.png
 #!date = 2024-07-06 11:57:26
 
+title
+#!name = 小喵看书去广告
+#!desc = 移除小喵看书章末广告
+#!openUrl = https://apps.apple.com/app/id6445987673
+#!author = 可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!tag = 去广告
+#!system =
+#!system_version =
+#!loon_version = 3.2.1(749)
+#!homepage = https://github.com/luestr/ProxyResource/blob/main/README.md
+#!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/MiaoRead.png
+#!date = 2024-07-06 11:57:26
+
 [Rule]
 # 字节跳动广告
 AND, ((DOMAIN-KEYWORD, -ad-), (DOMAIN-SUFFIX, byteimg.com)), REJECT

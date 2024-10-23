@@ -10,6 +10,19 @@
 #!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/WPS.png
 #!date = 2024-10-13 17:59:50
 
+title
+#!name = WPS每日签到
+#!desc = WPS每日签到并兑换会员，需要进入此插件的主页链接，阅读使用说明操作。
+#!openUrl = https://apps.apple.com/app/id599852710
+#!author = 小白脸
+#!tag = 签到
+#!system =
+#!system_version =
+#!loon_version = 3.2.1(749)
+#!homepage = https://github.com/luestr/ProxyResource/blob/main/Resource/Markdown/WPS/README.md
+#!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/WPS.png
+#!date = 2024-10-13 17:59:50
+
 [Argument]
 CaptureCookie = switch, false, true, tag = 捕获Cookie, desc = 此开关控制插件是否捕获Cookie
 AK = input, "", tag = 百度API Key, desc = 这里需要输入有效的百度API Key

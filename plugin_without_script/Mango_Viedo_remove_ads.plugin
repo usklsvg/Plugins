@@ -10,6 +10,19 @@
 #!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Mango_TV.png
 #!date = 2024-07-23 17:17:38
 
+title
+#!name = 芒果TV去广告
+#!desc = 过滤芒果TV客户端广告
+#!openUrl = https://apps.apple.com/app/id629774477
+#!author = RuCu6[https://github.com/RuCu6]
+#!tag = 去广告
+#!system =
+#!system_version =
+#!loon_version = 3.2.1(749)
+#!homepage = https://github.com/luestr/ProxyResource/blob/main/README.md
+#!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Mango_TV.png
+#!date = 2024-07-23 17:17:38
+
 [Rule]
 DOMAIN, credits.bz.mgtv.com, REJECT
 DOMAIN, credits2.bz.mgtv.com, REJECT
