@@ -73,11 +73,9 @@
 #### 仓库地址
 
 > [!TIP]
-> 以下两个仓库内容完全一致，根据自己的网络情况择一即可。
+> 可能需要通过代理访问
 
-[GitHub 仓库](https://github.com/luestr/ProxyResource/blob/main/README.md) - 需要代理访问
-
-[GitLab 仓库](https://gitlab.com/lodepuly/vpn_tool/-/blob/master/README.md/) - 电信联通可直连访问
+[GitHub 仓库](https://github.com/luestr/ProxyResource/blob/main/README.md)
 
 ------
 
