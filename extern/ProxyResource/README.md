@@ -622,7 +622,7 @@ Plus 流量 1024G 月付 120
   </tr>
   <tr>
     <td>110</td>
-    <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/ZongHeng_remove_ads.plugin">纵横小说去广告</a></td>
+    <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Plugin/ZongHeng_remove_ads.plugin">纵横小说去广告</a></td>
   </tr>
     <td></td>
     <td></td>
@@ -785,8 +785,7 @@ Plus 流量 1024G 月付 120
   </tr>
 </table>
 
-
 ------
 
 #### 配置图解
-![ConfigurationDiagram](https://kelee.one/Tool/Loon/Config/zh-CN/Resource/ConfigurationDiagram.png)
+![ConfigurationDiagram](https://raw.githubusercontent.com/luestr/ProxyResource/main/Tool/Loon/Config/zh-CN/Resource/ConfigurationDiagram.png)
