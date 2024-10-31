@@ -8,7 +8,7 @@
 #!loon_version = 3.2.1(749)
 #!homepage = https://github.com/luestr/ProxyResource/blob/main/README.md
 #!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Weibo.png
-#!date = 2024-10-30 21:58:54
+#!date = 2024-10-31 16:03:27
 
 [Rule]
 # 请求放行
