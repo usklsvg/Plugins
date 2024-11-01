@@ -1,0 +1,27 @@
+#!name=闲鱼去广告
+#!desc=移除开屏广告、商品信息流广告、搜索栏填充词、我的页面推广横幅。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md], ZenMoFiShi[https://github.com/ZenmoFeiShi], RuCu6[https://github.com/RuCu6]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/FleaMarket.png
+#!category=iKeLee - Scripts
+#!openUrl=https://apps.apple.com/app/id510909506
+#!tag=去广告
+#!loon_version=3.2.1(749)
+#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!date=2024-10-19 17:18:31
+
+[Script]
+# 我的页面
+移除我的页面推广 = type=http-response, pattern=^https:\/\/(g-)?acs\.m\.goofish\.com\/gw\/mtop\.idle\.user\.page\.my\.adapter\/, script-path=https://kelee.one/Resource/Script/FleaMarket/FleaMarket_remove_ads.js, requires-body=true, script-update-interval=-1
+
+# 首页信息流
+移除首页信息流推广 = type=http-response, pattern=^https:\/\/(g-)?acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlehome\.home\.nextfresh\/, script-path=https://kelee.one/Resource/Script/FleaMarket/FleaMarket_remove_ads.js, requires-body=true, script-update-interval=-1
+
+# 首页顶部标签
+移除首页顶部标签推广 = type=http-response, pattern=^https:\/\/(g-)?acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlehome\.home\.circle\.list\/, script-path=https://kelee.one/Resource/Script/FleaMarket/FleaMarket_remove_ads.js, requires-body=true, script-update-interval=-1
+
+# 搜索结果广告
+移除搜索结果广告 = type=http-response, pattern=^https:\/\/g-(g-)?acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlemtopsearch\.search\/, script-path=https://kelee.one/Resource/Script/FleaMarket/FleaMarket_remove_ads.js, requires-body=true, script-update-interval=-1
+
+[MITM]
+hostname = %APPEND% acs.m.goofish.com, g-acs.m.goofish.com
+

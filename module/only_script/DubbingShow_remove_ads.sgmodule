@@ -1,0 +1,18 @@
+#!name=配音秀去广告
+#!desc=移除开屏广告、弹窗、横幅、各类关注推荐。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/DubbingShow.png
+#!category=iKeLee - Scripts
+#!openUrl=https://apps.apple.com/app/id746925035
+#!tag=去广告
+#!loon_version=3.2.1(749)
+#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!date=2024-08-28 08:53:44
+
+[Script]
+# 首页 - 底部弹窗
+移除首页底部弹窗 = type=http-response, pattern=^https:\/\/iosapi\.peiyinxiu\.com\/Api\/Film\/GetConfigValue, script-path=https://kelee.one/Resource/Script/DubbingShow/DubbingShow_remove_ads.js, requires-body=true, script-update-interval=-1
+
+[MITM]
+hostname = %APPEND% iosapi.peiyinxiu.com
+
