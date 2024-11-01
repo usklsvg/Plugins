@@ -183,7 +183,7 @@ Plus 流量 1024G 月付 120
     <th>名称</th>
   </tr>
   <tr>
-    <td rowspan="111"><strong>去广告插件</strong></td>
+    <td rowspan="112"><strong>去广告插件</strong></td>
   <tr>
     <td>001</td>
     <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Plugin/BlockAdvertisers.plugin">广告平台拦截器</a></td>
@@ -623,6 +623,10 @@ Plus 流量 1024G 月付 120
   <tr>
     <td>110</td>
     <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Plugin/ZongHeng_remove_ads.plugin">纵横小说去广告</a></td>
+  </tr>
+  <tr>
+    <td>111</td>
+    <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Plugin/51Job_remove_ads.plugin">前程无忧去广告</a></td>
   </tr>
     <td></td>
     <td></td>
