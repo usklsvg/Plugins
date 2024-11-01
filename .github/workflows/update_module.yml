@@ -35,7 +35,7 @@ jobs:
       run: docker ps -a
 
     - name: Check Docker logs for issues
-      run: docker logs $(docker ps -q --filter ancestor=xream/scripthub:latest)
+      run: docker logs $(docker ps -q --filter ancestor=xream/script-hub:latest)
     
     - name: Run Python script
       run: |
