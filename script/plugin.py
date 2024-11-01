@@ -3,7 +3,7 @@ import shutil
 import requests
 
 
-current_dir = os.path.dirname(os.path.abspath(__file__), "..")
+current_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 extern_dir = os.path.join(current_dir, "extern", "ProxyResource")
 extern_plugin_dir = os.path.join(extern_dir, "plugin")
 extern_script_dir = os.path.join(extern_dir, "script")
