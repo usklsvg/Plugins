@@ -5,10 +5,10 @@ import shutil
 current_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 plugin_all_dir = os.path.join(current_dir, "extern", "ProxyResource", "plugin")
 plugin_no_script_dir = os.path.join(current_dir, "plugin", "no_script")
-plugin_only_script_dir = os.path.join(current_dir, "plugin", "only_Script")
+plugin_only_script_dir = os.path.join(current_dir, "plugin", "only_script")
 module_all_dir = os.path.join(current_dir, "module", "all")
 module_no_script_dir = os.path.join(current_dir, "module", "no_script")
-module_only_script_dir = os.path.join(current_dir, "module", "only_Script")
+module_only_script_dir = os.path.join(current_dir, "module", "only_script")
 
 
 def recreate_path(pathname: str):
