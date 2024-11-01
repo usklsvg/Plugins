@@ -10,7 +10,7 @@ jobs:
 
     services:
       docker:
-        image: xream/scripthub:latest
+        image: xream/script-hub:latest
         ports:
           - 9100:9100
           - 9101:9101
