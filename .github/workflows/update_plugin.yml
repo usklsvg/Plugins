@@ -2,8 +2,8 @@ name: Update Plugin
 
 on:
   schedule:
-    - cron: '0 */12 * * *'  
-  workflow_dispatch:  # 允许手动触发
+    - cron: '0 */12 * * *'
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,7 +23,7 @@ jobs:
 
     - name: Run Python script
       run: |
-        python main.py
+        python script/plugin.py
 
     - name: Commit and push changes
       uses: EndBug/add-and-commit@v9

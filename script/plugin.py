@@ -25,9 +25,7 @@ def download_url_file(url: str, filename: str):
         response = requests.get(url, headers=headers, stream=True)
         if response.status_code == 200:
             with open(filename, "wb") as f:
-                for chunk in response.iter_content(
-                    chunk_size=1024
-                ):  # 分块读取文件内容，每次读取1KB
+                for chunk in response.iter_content(chunk_size=1024):
                     if chunk:
                         f.write(chunk)
                         f.flush()
@@ -41,7 +39,7 @@ def recreate_path(pathname: str):
             shutil.rmtree(pathname)
         os.makedirs(pathname)
     except Exception as e:
-        print(f"error when recreate path '{pathname}'.")
+        print(f"error when recreate path '{pathname}': {e}")
         exit(1)
 
 
@@ -95,7 +93,7 @@ def save_plugin_scripts(plugin_name: str, data: list[str]):
         try:
             shutil.rmtree(local_dir)
         except Exception as e:
-            print(f"error when remove path '{local_dir}'.")
+            print(f"error when remove path '{local_dir}': {e}")
             exit(1)
 
 
@@ -173,8 +171,10 @@ def process_file(file_path: str):
 
     filename = file_path.split("/")[-1]
     filename = filename.split("\\")[-1]
+    plugin_name = filename[:filename.rfind(".")] 
+    data = extract_components(plugin_name, content)
+    
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    data = extract_components(filename.split(".")[0], content)
 
     has_content = False
     content_without_script = data["title"]
@@ -186,7 +186,7 @@ def process_file(file_path: str):
         content_without_script += f"{key}\n{data[key]}"
     if has_content:
         output_filename_without_scripts = os.path.join(
-            current_dir, "plugin_without_script", filename
+            current_dir, "plugin", "no_script", filename
         )
         save_content(content_without_script, output_filename_without_scripts)
 
@@ -200,7 +200,7 @@ def process_file(file_path: str):
             content_scripts += f"{key}\n{data[key]}"
     if has_script:
         output_filename_scripts = os.path.join(
-            current_dir, "plugin_with_script", filename
+            current_dir, "plugin", "only_script", filename
         )
         save_content(content_scripts, output_filename_scripts)
 
@@ -209,8 +209,8 @@ if __name__ == "__main__":
     filenames = colllect_files()
 
     recreate_path(extern_script_dir)
-    recreate_path(os.path.join(current_dir, "plugin_without_script"))
-    recreate_path(os.path.join(current_dir, "plugin_with_script"))
+    recreate_path(os.path.join(current_dir, "plugin", "no_script"))
+    recreate_path(os.path.join(current_dir, "plugin", "only_script"))
 
     for filename in filenames:
         process_file(filename)
