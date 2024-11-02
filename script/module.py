@@ -118,6 +118,17 @@ def modify_content_zhihu(content: str):
                 "https://kelee.one/Resource/Script/Zhihu/Zhihu_remove_ads.js",
                 "https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/Zhihu_remove_ads.js",
             )
+            if lines[i].find("next-(?:bff|data|render)") != -1:
+                temp = lines[i]
+                temp_0 = temp.replace(
+                    "next-(?:bff|data|render)",
+                    "next-(?:bff|data)"
+                )
+                temp_1 = temp.replace(
+                    "next-(?:bff|data|render)",
+                    "next-render(?!\?scenes=dynamic_task&sub_scenes=billboard_weekly)"
+                )
+                lines[i] = f"{temp_0}\n\n{temp_1}"
         i += 1
 
     ret = ""
