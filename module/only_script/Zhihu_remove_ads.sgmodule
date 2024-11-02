@@ -26,7 +26,7 @@
 # 回答详情页 - 评论区顶部、下一个回答
 移除回答详情页推广 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/next-(?:bff|data), script-path=https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/Zhihu_remove_ads.js, requires-body=true, script-update-interval=-1
 
-移除回答详情页推广 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/next-render(?!\?scenes=dynamic_task&sub_scenes=billboard_weekly), script-path=https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/Zhihu_remove_ads.js, requires-body=true, script-update-interval=-1
+移除回答详情页推广 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/next-render(?!.*sub_scenes=billboard_weekly), script-path=https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/Zhihu_remove_ads.js, requires-body=true, script-update-interval=-1
 
 移除回答详情页推广 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/questions\/\d+(?:\/answers|\/feeds|\?include=), script-path=https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/Zhihu_remove_ads.js, requires-body=true, script-update-interval=-1
 

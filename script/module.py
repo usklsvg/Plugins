@@ -126,7 +126,7 @@ def modify_content_zhihu(content: str):
                 )
                 temp_1 = temp.replace(
                     "next-(?:bff|data|render)",
-                    "next-render(?!\?scenes=dynamic_task&sub_scenes=billboard_weekly)"
+                    "next-render(?!.*sub_scenes=billboard_weekly)"
                 )
                 lines[i] = f"{temp_0}\n\n{temp_1}"
         i += 1
