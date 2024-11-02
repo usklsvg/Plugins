@@ -7,6 +7,8 @@ current_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 extern_dir = os.path.join(current_dir, "extern", "ProxyResource")
 extern_plugin_dir = os.path.join(extern_dir, "plugin")
 extern_script_dir = os.path.join(extern_dir, "script")
+plugin_no_script_dir = os.path.join(current_dir, "plugin", "no_script")
+plugin_only_script_dir = os.path.join(current_dir, "plugin", "only_script")
 
 
 def get_url_text_content(url: str):
@@ -171,10 +173,8 @@ def process_file(file_path: str):
 
     filename = file_path.split("/")[-1]
     filename = filename.split("\\")[-1]
-    plugin_name = filename[:filename.rfind(".")] 
+    plugin_name = filename[: filename.rfind(".")]
     data = extract_components(plugin_name, content)
-    
-    current_dir = os.path.dirname(os.path.abspath(__file__))
 
     has_content = False
     content_without_script = data["title"]
@@ -185,9 +185,7 @@ def process_file(file_path: str):
             has_content = True
         content_without_script += f"{key}\n{data[key]}"
     if has_content:
-        output_filename_without_scripts = os.path.join(
-            current_dir, "plugin", "no_script", filename
-        )
+        output_filename_without_scripts = os.path.join(plugin_no_script_dir, filename)
         save_content(content_without_script, output_filename_without_scripts)
 
     has_script = False
@@ -199,9 +197,7 @@ def process_file(file_path: str):
         elif str(key).lower() == "[argument]" or str(key).lower() == "[mitm]":
             content_scripts += f"{key}\n{data[key]}"
     if has_script:
-        output_filename_scripts = os.path.join(
-            current_dir, "plugin", "only_script", filename
-        )
+        output_filename_scripts = os.path.join(plugin_only_script_dir, filename)
         save_content(content_scripts, output_filename_scripts)
 
 
@@ -209,8 +205,8 @@ if __name__ == "__main__":
     filenames = colllect_files()
 
     recreate_path(extern_script_dir)
-    recreate_path(os.path.join(current_dir, "plugin", "no_script"))
-    recreate_path(os.path.join(current_dir, "plugin", "only_script"))
+    recreate_path(plugin_no_script_dir)
+    recreate_path(plugin_only_script_dir)
 
     for filename in filenames:
         process_file(filename)
