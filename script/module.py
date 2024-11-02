@@ -43,7 +43,7 @@ def save_content(content: str, filename: str):
         print(f"Error when saving content to {filename}: {e}")
 
 
-def modify_content(content: str, custom: bool):
+def modify_content_common(content: str):
     lines = content.splitlines()
 
     empty_content = True
@@ -72,34 +72,59 @@ def modify_content(content: str, custom: bool):
                 break
         i += 1
 
-    if custom:
-        i = 0
-        while i < len(lines):
-            if lines[i].startswith(
-                "^https:\/\/api\.zhihu\.com\/unlimited\/go\/my_card"
-            ):
-                lines[i] = f"# {lines[i]}"
-            elif lines[i].startswith("^https:\/\/api\.zhihu\.com\/me\/guides"):
-                lines[i] = f"# {lines[i]}"
-            elif lines[i].find("bilibili") != -1:
-                if lines[i].find("DmSegMobile") != -1:
-                    lines[i] = f"# {lines[i]}"
-                elif lines[i].find("DmView") != -1:
-                    lines[i] = f"# {lines[i]}"
-                elif lines[i].find("resource\/show\/tab\/v2") != -1:
-                    lines[i] = f"# {lines[i]}"
-                elif lines[i].find("search\/square") != -1:
-                    lines[i] = f"# {lines[i]}"
-                elif lines[i].find("account") != -1:
-                    lines[i] = f"# {lines[i]}"
-            i += 1
-
     ret = ""
     i = 0
     while i < len(lines):
         ret += f"{lines[i]}\n"
         i += 1
 
+    return ret
+
+
+def modify_content_bilibili(content: str):
+    lines = content.splitlines()
+    i = 0
+    while i < len(lines):
+        if lines[i].find("DmSegMobile") != -1:
+            lines[i] = f"# {lines[i]}"
+        elif lines[i].find("DmView") != -1:
+            lines[i] = f"# {lines[i]}"
+        elif lines[i].find("resource\/show\/tab\/v2") != -1:
+            lines[i] = f"# {lines[i]}"
+        elif lines[i].find("search\/square") != -1:
+            lines[i] = f"# {lines[i]}"
+        elif lines[i].find("account") != -1:
+            lines[i] = f"# {lines[i]}"
+        i += 1
+
+    ret = ""
+    i = 0
+    while i < len(lines):
+        ret += f"{lines[i]}\n"
+        i += 1
+    return ret
+
+
+def modify_content_zhihu(content: str):
+    lines = content.splitlines()
+    i = 0
+    while i < len(lines):
+        if lines[i].startswith("^https:\/\/api\.zhihu\.com\/unlimited\/go\/my_card"):
+            lines[i] = f"# {lines[i]}"
+        elif lines[i].startswith("^https:\/\/api\.zhihu\.com\/me\/guides"):
+            lines[i] = f"# {lines[i]}"
+        elif lines[i].find("script-path") != -1:
+            lines[i] = lines[i].replace(
+                "https://kelee.one/Resource/Script/Zhihu/Zhihu_remove_ads.js",
+                "https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/Zhihu_remove_ads.js",
+            )
+        i += 1
+
+    ret = ""
+    i = 0
+    while i < len(lines):
+        ret += f"{lines[i]}\n"
+        i += 1
     return ret
 
 
@@ -111,11 +136,13 @@ def process_file(src_dir: str, dst_dir: str, url_dir: str, categoty: str):
         content = get_url_text_content(request_url)
         if content == None:
             continue
-        content = modify_content(
-            content,
-            filename == "Bilibili_remove_ads.plugin"
-            or filename == "Zhihu_remove_ads.plugin",
-        )
+
+        content = modify_content_common(content)
+        if filename == "Bilibili_remove_ads.plugin":
+            content = modify_content_bilibili(content)
+        elif filename == "Zhihu_remove_ads.plugin":
+            content = modify_content_zhihu(content)
+
         if content == None:
             continue
         module_name = f"{filename[:filename.rfind('.')]}.sgmodule"
