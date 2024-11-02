@@ -139,6 +139,24 @@ def modify_content_zhihu(content: str):
     return ret
 
 
+def modify_content_taobao(content: str):
+    lines = content.splitlines()
+    i = 0
+    while i < len(lines):
+        if lines[i].find("script-path") != -1:
+            lines[i] = lines[i].replace(
+                "https://kelee.one/Resource/Script/Taobao/Taobao_remove_ads.js",
+                "https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/Taobao_remove_ads.js",
+            )
+        i += 1
+
+    ret = ""
+    i = 0
+    while i < len(lines):
+        ret += f"{lines[i]}\n"
+        i += 1
+    return ret
+
 def process_file(src_dir: str, dst_dir: str, url_dir: str, categoty: str):
     recreate_path(dst_dir)
     for filename in os.listdir(src_dir):
@@ -153,6 +171,8 @@ def process_file(src_dir: str, dst_dir: str, url_dir: str, categoty: str):
             content = modify_content_bilibili(content)
         elif filename == "Zhihu_remove_ads.plugin":
             content = modify_content_zhihu(content)
+        elif filename == "Taobao_remove_ads.plugin":
+            content = modify_content_taobao(content)
 
         if content == None:
             continue
