@@ -1,17 +1,27 @@
-#!name=美颜相机去广告
-#!desc=移除开屏广告、应用内弹窗，精简首页和我的页面。
+#!name=智联招聘去广告
+#!desc=移除开屏广告、弹窗、职位页面推广和各类横幅推广。需要IPA签名注入方可使用，App Store用户请勿使用此插件，务必点击下方主页链接查看详细教程。
 #!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
-#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/MeituMYXJ.png
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/ZhiLianZhaoPin.png
 #!category=iKeLee
-#!openUrl=https://apps.apple.com/app/id592331499
+#!openUrl=https://apps.apple.com/app/id488033535
 #!tag=去广告
-#!loon_version=3.2.3(751)
-#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-09-07 23:08:09
+#!loon_version=3.2.1(749)
+#!homepage=https://getupnote.com/share/notes/zSn1ShBmzNYISKcTgjXE5oHMrNf2/34bf3aad-7872-497d-b239-198e27e8c84c
+#!date=2024-11-02 15:28:25
 
 [Rule]
-# 广告下发
-DOMAIN,adui.tg.meitu.com,REJECT,extended-matching
+# 拦截HTTPDNS
+DOMAIN,httpdns.music.163.com,REJECT,extended-matching
+DOMAIN,httpdns.n.netease.com,REJECT,extended-matching
+DOMAIN,httpdns-sdk.n.netease.com,REJECT,extended-matching
+DOMAIN,httpdns.yunxindns.com,REJECT,extended-matching
+DOMAIN,lofter.httpdns.c.163.com,REJECT,extended-matching
+DOMAIN,music.httpdns.c.163.com,REJECT,extended-matching
+DOMAIN,httpdns.yunxindns.com,REJECT,extended-matching
+IP-CIDR,59.111.239.61/32,REJECT,no-resolve
+IP-CIDR,59.111.239.62/32,REJECT,no-resolve
+IP-CIDR,115.236.121.51/32,REJECT,no-resolve
+IP-CIDR,115.236.121.195/32,REJECT,no-resolve
 AND,((DOMAIN-KEYWORD,-ad-,extended-matching),(DOMAIN-SUFFIX,byteimg.com,extended-matching)),REJECT
 AND,((DOMAIN-KEYWORD,-ttam-,extended-matching),(DOMAIN-SUFFIX,ibyteimg.com,extended-matching)),REJECT
 AND,((DOMAIN-KEYWORD,ssdk-,extended-matching),(DOMAIN-SUFFIX,pangle.io,extended-matching)),REJECT
@@ -60,18 +70,6 @@ DOMAIN-KEYWORD,log-api.pangolin-sdk-toutiao,REJECT,extended-matching
 DOMAIN-KEYWORD,-ad.byteoversea.com,REJECT,extended-matching
 DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT,extended-matching
 DOMAIN-KEYWORD,asiad.byteactivity,REJECT,extended-matching
-# 百度联盟 - 广告服务商
-DOMAIN,als.baidu.com,REJECT,extended-matching
-DOMAIN,bgg.baidu.com,REJECT,extended-matching
-DOMAIN,cpro.baidustatic.com,REJECT,extended-matching
-DOMAIN,feed-image.baidu.com,REJECT,extended-matching
-DOMAIN,mobads-logs.baidu.com,REJECT,extended-matching
-DOMAIN,mobads-pre-config.cdn.bcebos.com,REJECT,extended-matching
-DOMAIN,mobads.baidu.com,REJECT,extended-matching
-DOMAIN,nadvideo2.baidu.com,REJECT,extended-matching
-DOMAIN,wn.pos.baidu.com,REJECT,extended-matching
-DOMAIN-SUFFIX,union.baidu.cn,REJECT,extended-matching
-DOMAIN-SUFFIX,union.baidu.com,REJECT,extended-matching
 # 腾讯
 DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching
 DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching
@@ -80,6 +78,7 @@ DOMAIN,huatuocode.huatuo.qq.com,REJECT,extended-matching
 DOMAIN,info4.video.qq.com,REJECT,extended-matching
 DOMAIN,info6.video.qq.com,REJECT,extended-matching
 DOMAIN,ios.bugly.qq.com,REJECT,extended-matching
+DOMAIN,pro.bugly.qq.com,REJECT,extended-matching
 DOMAIN,ios.video.mpush.qq.com,REJECT,extended-matching
 # DOMAIN, mazu.m.qq.com, REJECT // 误杀
 DOMAIN,mi.gdt.qq.com,REJECT,extended-matching
@@ -102,47 +101,27 @@ DOMAIN,v2.gdt.qq.com,REJECT,extended-matching
 DOMAIN,win.gdt.qq.com,REJECT,extended-matching
 DOMAIN,wup.imtt.qq.com,REJECT,extended-matching
 DOMAIN,tpstelemetry.tencent.com,REJECT,extended-matching
+DOMAIN,ii.gdt.qq.com,REJECT,extended-matching
 DOMAIN-KEYWORD,trace.qq.com,REJECT,extended-matching
 DOMAIN-KEYWORD,trace.video.qq.com,REJECT,extended-matching
 DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching
 DOMAIN-SUFFIX,l.qq.com,REJECT,extended-matching
 DOMAIN-SUFFIX,ugdtimg.com,REJECT,extended-matching
 IP-CIDR,47.110.187.87/32,REJECT,no-resolve
-# 个推
-DOMAIN,b-gtc.getui.net,REJECT,extended-matching
-DOMAIN,c-gtc.getui.net,REJECT,extended-matching
-DOMAIN,c-hzgt2.getui.com,REJECT,extended-matching
-DOMAIN,dnms.getui.com,REJECT,extended-matching
-DOMAIN,ido.getui.net,REJECT,extended-matching
-DOMAIN,sdk-conf.getui.com,REJECT,extended-matching
-DOMAIN,sdk-open-phone.getui.com,REJECT,extended-matching
-DOMAIN-SUFFIX,mobileservice.cn,REJECT,extended-matching
-DOMAIN-SUFFIX,getui.com,REJECT,extended-matching
-DOMAIN-SUFFIX,igexin.com,REJECT,extended-matching
-# 聚次方 - TopOn
-DOMAIN,api.mosspf.com,REJECT,extended-matching
-DOMAIN,da.mosspf.com,REJECT,extended-matching
+# 广告下发
+URL-REGEX,"^https:\/\/(ask|cgate)\.zhaopin\.com\/operation\/ad\/",REJECT,extended-matching
 
 [URL Rewrite]
-# 拼多多广告平台
-^https:\/\/video-dsp\.pddpic\.com\/market-dsp-video\/ - reject
-^https:\/\/t-dsp\.pinduoduo\.com\/dspcb\/i\/mrk_union - reject
-^https:\/\/images\.pinduoduo\.com\/mrk\/ - reject
-^https:\/\/images\.pinduoduo\.com\/marketing_api\/ - reject
+# 职位详情 - 竞争力分析、简历置顶推广
+^https:\/\/cgate\.zhaopin\.com\/bdp\/commercial\/queryLinkData$ - reject
 
 [Map Local]
-# 首页轮播图
-^https:\/\/api\.meiyan\.com\/operation\/home_banner\.json\? data-type=text data="{}" status-code=200
-
-# 弹窗和首页红点词
-^https:\/\/api\.meiyan\.com\/vip\/permission_update_popup\.json\? data-type=text data="{}" status-code=200
+# 弹窗 - 补充最新工作经历
+^https:\/\/cgate\.zhaopin\.com\/resumeapi\/resumeCheck\/positionDetailBottomTipCheck$ data-type=text data="{}" status-code=200
 
 [Script]
-body_rewrite_132 = type=http-response, pattern=^https:\/\/api\.meiyan\.com\/operation\/get_config\.json\?, script-path=https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22response.time_limit%22%2C%22response.bubble%22%2C%22response.person_center%22%5D%5D%2C%5B%22json-replace%22%2C%5B%5B%22response.function_pop.meiyan_style.is_pop%22%2Cfalse%5D%2C%5B%22response.onoff.vip_half_window_exit_remain_popup.open%22%2C0%5D%2C%5B%22response.onoff.vip_home_exit_remain_popup%22%2C0%5D%5D%5D%5D, script-update-interval=-1
-
-# 首页功能栏目和美颜推荐
-精简首页功能栏目并移除美颜推荐 = type=http-response, pattern=^https:\/\/api\.meiyan\.com\/operation\/home\.json\?, script-path=https://kelee.one/Resource/Script/MeituMYXJ/MeituMYXJ_remove_ads.js, requires-body=true, script-update-interval=-1
+body_rewrite_117 = type=http-response, pattern=^https:\/\/ask\.zhaopin\.com\/plat-zqa-server\/home\/\d\.\d\.\d\/getHomeContents\?, script-path=https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.templates%5B0%5D.data.banner%22%5D%5D%5D, script-update-interval=-1
 
 [MITM]
-hostname = %APPEND% api.meiyan.com, video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com
+hostname = %APPEND% ask.zhaopin.com, cgate.zhaopin.com
 
