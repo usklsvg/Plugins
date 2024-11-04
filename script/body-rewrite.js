@@ -17,7 +17,7 @@ let result = {};
     // $.log(JSON.stringify(actions, null, 2));
   }
   let shouldParseJSON = actions.find(([action]) => action.startsWith("json"));
-//   $.log(`shouldParseJSON: ${shouldParseJSON ? "true" : "false"}`);
+  //   $.log(`shouldParseJSON: ${shouldParseJSON ? "true" : "false"}`);
 
   let body;
   if (typeof $response != "undefined") {
@@ -63,10 +63,12 @@ let result = {};
       for (let item of items) {
         body = body.replace(new RegExp(item[0], "g"), item[1]);
       }
-      try {
-        body = JSON.parse(body);
-      } catch (e) {
-        throw new Error("replace-regex 过程中 JSON 解析失败");
+      if (shouldParseJSON) {
+        try {
+          body = JSON.parse(body);
+        } catch (e) {
+          throw new Error("replace-regex 过程中 JSON 解析失败");
+        }
       }
     }
   }
