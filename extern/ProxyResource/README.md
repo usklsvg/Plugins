@@ -1,48 +1,25 @@
-### 可莉的 Loon 资源
-
-插件列表在页面下方，末尾附有新手配置图解。
-
-------
+[![Banner1](Resource/IMG/Banner/Banner-1.png)](https://t.me/ibilibili)
 
 > [!CAUTION]
 > 禁止在中华人民共和国境内平台公开传播本仓库内的任何内容或以此牟利！
 
 > [!IMPORTANT]
-> 本仓库提供的插件大部分引用自其他作者，由我转写为 Loon 的插件。所有插件均保留了原作者署名信息，在此感谢各位原作者。
-
-> [!IMPORTANT]
-> 转载时你需要保留原作者署名信息，且遵守本仓库的 [CC BY-NC-SA 4.0](https://github.com/luestr/ProxyResource/blob/main/LICENSE.md) 许可协议。
-
-------
-
-#### 关注可莉
-
-> [!TIP]
-> 关注可莉获得最新的 Loon 资源
-
-**Telegram 频道** 👉 [**֍可莉日常֎**](https://t.me/ibilibili) 👈
+> 本仓库提供的插件有小部分引用自其他作者，并由我转写为 Loon 的插件，其余大部分插件为我自己编写。引用的插件均保留了原作者署名信息，在此感谢各位原作者。
+> 
+> 转载时你需要保留原作者署名信息，且遵守本仓库的 [CC BY-NC-SA 4.0](LICENSE.md) 许可协议。
 
 ------
 
+#### 机场推荐
 
-#### 社区和文档
+[ENET - 全专线 IEPL/UDPN IPLC 专线机场](Resource/Ad/ENET.md)
 
-> [!TIP]
-> 遇到不会的内容可以先阅读文档和知识库
+[CornSS - 全 IEPL 专线机场](Resource/Ad/ENET.md)
 
-> 官方渠道
+------
 
-[Loon 官方网站](https://nsloon.app/)          [Loon 官方文档](https://nsloon.app/docs/intro/)          [Loon 商店地址](https://apps.apple.com/app/loon/id1373567447)
-
-[Loon 官方群组](https://t.me/Loon0x00)          [Loon 官方频道](https://t.me/LoonNews)
-
-
-
-> 非官方渠道
-
-[Loon 第三方社区群组](https://t.me/LoonCommunity)          [Loon 第三方社区频道](https://t.me/Loon_Community)
-
-[Loon 的知识库](https://getupnote.com/share/notes/zSn1ShBmzNYISKcTgjXE5oHMrNf2/b6047d8b-621c-44af-bfa6-a28d35bcf928)
+#### 广告
+[![ADBanner1](Resource/IMG/Banner/ADBanner-1.png)](https://t.me/ibilibili)
 
 ------
 
@@ -50,117 +27,19 @@
 
 > [!TIP]
 > 详细阅读不同配置的说明，选择合适的配置模板事半功倍。
+> 
+> **If you are an English user, please click the `Config` button, It is an example of the English configuration of Loon;**
+> 
+> 你也可以查阅[推荐的Loon功能配置图](https://raw.githubusercontent.com/luestr/ProxyResource/main/Tool/Loon/Config/zh-CN/Resource/ConfigurationDiagram.png)，以便正确配置Loon的各项功能。
 
-[最小配置](https://t.me/ibilibili/135)      [进阶配置](https://t.me/ibilibili/136)
-
-[手动配置](https://t.me/ibilibili/163)      [无脑配置](https://t.me/ibilibili/165)
-
-[基础配置](https://t.me/ibilibili/442)      [回国配置](https://t.me/ibilibili/321)
-
-[tvOS 配置](https://t.me/ibilibili/432)
-
-------
-
-#### Example Configuration for Loon in English
-
-> [!TIP]
-> Foreigners click on the link below to find the configuration template
-
-[Configuration Examples](https://t.me/ibilibili/492)
-
-------
-
-#### 仓库地址
-
-> [!TIP]
-> 可能需要通过代理访问
-
-[GitHub 仓库](https://github.com/luestr/ProxyResource/blob/main/README.md)
-
-------
-
-#### 机场推荐
-
-> [!TIP]
-> 可莉的主力机场
-
-**CornSS - 全 IEPL 专线机场**
-
-> 线路
-
-1. 全站采用优质 IEPL 专线；
-2. 全节点 SS 协议，无设备数限制，无软件兼容性担忧；
-3. 全节点提供流媒体解锁及 AI 服务解锁（Netflix /  Disney+ / ChatGPT / MyTVSuper / HBO / BiliBili / Bahamut / ChatGPT 等）；
-4. 全节点支持 UDP 转发；
-5. 目前提供香港、台湾、日本、韩国、新加坡、美国六个地区的节点；
-6. 全天速率保证，无惧晚高峰和高墙期。
-
-> 价格
-
-• Seedling 套餐 - 77 GB 流量 /￥10 每月
-
-• Stalks 套餐 - 300 GB 流量 /￥25 每月
-
-• Ears 套餐 - 1024 GB 流量 /￥70 每月
-
-> 优惠
-
-可莉的个人永久九折优惠码：`iKeLee `
-
-优惠码续费可用
-
-> 购买
-
-点击[此处](https://www.cornss.com/#/register?code=06H97Dhm)前往购买
-
-> 官方群组
-
-[@cornss_c](https://t.me/cornss_c)
-
-------
-
-**ENET - 全专线 IEPL/UDPN IPLC 专线机场**
-
-全部采用高品质专线，无惧晚高峰以及高墙期，高稳定性以及速率保证；
-
-主打高稳定性和高用户体验评价。
-
-**线路介绍**
-
-1. 所有线路由 IEPL 以及 UDPN IPLC 内网专线接入；
-2. 提供香港、台湾、美国、英国等国家地区的家宽节点接入；
-3. 全节点 SS 协议，支持 UDP；
-4. 所有节点不限设备数量。
-
-**解锁介绍**
-
-1. 全节点解锁 Netflix、Disney+、ChatGPT 等服务，更有香港台湾美国英国等国家地区家宽节点；
-2. ChatGPT 和 TikTok 的解锁，除香港和并未开放服务（特指 ChatGPT 和 TikTok 并未开放服务区域）的地区都已全部解锁；
-
-**套餐介绍**
-
-> 按月购买
-
-Lite 流量 50G 月付 22
-
-Base 流量 300G 月付 42
-
-Plus 流量 1024G 月付 120
-
-> 按量购买
-
-500GB 流量不限时 400RMB
-
-1024GB 流量不限时 700RMB
-
-**购买方式**
-点击[此处](https://www.easy2023.com/#/register?code=sH2tNXOa)购买，输入永久不限时专属优惠码 `ikelee` 即可获得九折优惠。
-
-优惠码续费可用
-
-**联系方式**
-官方群组 [@enet_group](https://t.me/enet_group)
-</details>
+[![最小配置](Resource/IMG/Button/Button-1.png)](https://t.me/ibilibili/135)
+[![进阶配置](Resource/IMG/Button/Button-2.png)](https://t.me/ibilibili/136)
+[![手动配置](Resource/IMG/Button/Button-3.png)](https://t.me/ibilibili/163)
+[![无脑配置](Resource/IMG/Button/Button-4.png)](https://t.me/ibilibili/165)
+[![基础配置](Resource/IMG/Button/Button-5.png)](https://t.me/ibilibili/442)
+[![回国配置](Resource/IMG/Button/Button-6.png)](https://t.me/ibilibili/321)
+[![tvOS 配置](Resource/IMG/Button/Button-7.png)](https://t.me/ibilibili/432)
+[![English Configuration Examples](Resource/IMG/Button/Button-8.png)](https://t.me/ibilibili/492)
 
 ------
 
@@ -169,12 +48,8 @@ Plus 流量 1024G 月付 120
 > [!IMPORTANT]
 > 如果你点击下面的链接发现跳转到了空白页面，建议恢复 Safari 为默认浏览器后重启设备。待网络完全恢复到正常状态之后，再打开 Loon，以重新下载统一链接的配置文件。
 
-> [!WARNING]
-> 下面的所有插件可直接点击链接一键添加，不要复制链接手动安装。
-
 > [!NOTE]
-> 遇到插件失效的，请先阅读[知识库](https://getupnote.com/share/notes/zSn1ShBmzNYISKcTgjXE5oHMrNf2/b6047d8b-621c-44af-bfa6-a28d35bcf928)排查。
-
+> 下面的所有插件可直接点击链接一键添加，不要复制链接手动安装。遇到插件失效的，请先阅读[知识库](https://getupnote.com/share/notes/zSn1ShBmzNYISKcTgjXE5oHMrNf2/b6047d8b-621c-44af-bfa6-a28d35bcf928)排查。
 
 <table>
   <tr>
@@ -796,8 +671,3 @@ Plus 流量 1024G 月付 120
     <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Plugin/FollowRSS_checkin.plugin">Follow每日签到</a></td>
   </tr>
 </table>
-
-------
-
-#### 配置图解
-![ConfigurationDiagram](https://raw.githubusercontent.com/luestr/ProxyResource/main/Tool/Loon/Config/zh-CN/Resource/ConfigurationDiagram.png)
