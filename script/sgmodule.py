@@ -6,9 +6,9 @@ current_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 plugin_all_dir = os.path.join(current_dir, "extern", "ProxyResource", "plugin")
 plugin_no_script_dir = os.path.join(current_dir, "plugin", "no_script")
 plugin_only_script_dir = os.path.join(current_dir, "plugin", "only_script")
-module_all_dir = os.path.join(current_dir, "module", "all")
-module_no_script_dir = os.path.join(current_dir, "module", "no_script")
-module_only_script_dir = os.path.join(current_dir, "module", "only_script")
+module_all_dir = os.path.join(current_dir, "sgmodule", "all")
+module_no_script_dir = os.path.join(current_dir, "sgmodule", "no_script")
+module_only_script_dir = os.path.join(current_dir, "sgmodule", "only_script")
 
 
 def recreate_path(pathname: str):
@@ -65,9 +65,9 @@ def modify_content_common(content: str):
             if lines[i][0] != "#" and lines[i].find("script-path") != -1:
                 lines[i] = lines[i].replace(
                     "Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js",
-                    "usklsvg/Plugins/refs/heads/main/script/body-rewrite.js",
+                    "usklsvg/Plugins/refs/heads/main/script/body-rewrite-sg.js",
                 )
-                lines[i] += ", script-update-interval=-1"
+                lines[i] += ", script-update-interval=0"
             elif lines[i][0] == "[":
                 break
         i += 1
@@ -167,7 +167,7 @@ def process_file(src_dir: str, dst_dir: str, url_dir: str, categoty: str):
     recreate_path(dst_dir)
     for filename in os.listdir(src_dir):
         url = f"https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/{url_dir}/{filename}"
-        request_url = f"http://localhost:9101/file/_start_/{url}/_end_/sample.sgmodule.txt?type=loon-plugin&target=surge-module&sni=REJECT&del=true&category={categoty}"
+        request_url = f"http://localhost:9101/file/_start_/{url}/_end_/sample.sgmodule.txt?type=loon-plugin&target=shadowrocket-module&del=true&category={categoty}"
         content = get_url_text_content(request_url)
         if content == None:
             continue

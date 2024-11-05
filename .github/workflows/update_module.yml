@@ -36,10 +36,14 @@ jobs:
 
     - name: Check Docker logs for issues
       run: docker logs $(docker ps -q --filter ancestor=xream/script-hub:latest)
-    
-    - name: Run Python script
+
+    - name: Run Python script A
       run: |
         python script/module.py
+
+    - name: Run Python script B
+      run: |
+        python script/sgmodule.py
 
     - name: Commit and push changes
       uses: EndBug/add-and-commit@v9

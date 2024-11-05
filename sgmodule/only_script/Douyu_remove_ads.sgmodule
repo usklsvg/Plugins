@@ -1,0 +1,18 @@
+#!name=斗鱼去广告
+#!desc=移除开屏、首页视频流、首页轮播图广告，移除直播间悬浮窗。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Douyu.png
+#!category=iKeLee - Scripts
+#!openUrl=https://apps.apple.com/app/id863882795
+#!tag=去广告
+#!loon_version=3.2.1(749)
+#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!date=2024-10-27 21:09:24
+
+[Script]
+# 首页轮播图和视频流广告
+移除首页轮播图和视频流广告 = type=http-response, pattern=^https:\/\/apiv2\.douyucdn\.cn\/mgapi\/livenc\/home\/getRecV3, script-path=https://kelee.one/Resource/Script/Douyu/Douyu_remove_ads.js, requires-body=true, script-update-interval=0
+
+[MITM]
+hostname = %APPEND% rtbapi.douyucdn.cn, apiv2.douyucdn.cn, venus.douyucdn.cn
+
