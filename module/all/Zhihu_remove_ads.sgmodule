@@ -23,7 +23,7 @@ IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,REJECT,no-resolve
 
 [URL Rewrite]
 # ^https:\/\/api\.zhihu\.com\/unlimited\/go\/my_card - reject
-^https:\/\/www\.zhihu\.com\/appview\/v3\/zhmore - reject
+# ^https:\/\/www\.zhihu\.com\/appview\/v3\/zhmore - reject
 ^https:\/\/link\.zhihu\.com\/\?target=(?:https?)?(?:%3A|:)?(?:\/\/|%2F%2F)?(.*) http://$1 302
 
 [Map Local]
@@ -42,7 +42,7 @@ IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,REJECT,no-resolve
 # 我的页面 - 项目列表、会员卡片
 # ^https:\/\/api\.zhihu\.com\/me\/guides data-type=text data="{}" status-code=200
 
-^https:\/\/api\.zhihu\.com\/people\/homepage_entry_v2 data-type=text data="{}" status-code=200
+# ^https:\/\/api\.zhihu\.com\/people\/homepage_entry_v2 data-type=text data="{}" status-code=200
 
 # 搜索页 - 关键词、猜你想搜
 ^https:\/\/api\.zhihu\.com\/search\/(hot_search|preset_words) data-type=text data="{}" status-code=200
