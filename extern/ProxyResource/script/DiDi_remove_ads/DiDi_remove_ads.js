@@ -1,3 +1,6 @@
+/*
+脚本引用 https://raw.githubusercontent.com/ZenmoFeiShi/Qx/main/Didichuxing.js
+*/
 // 2024-08-20 09:49
 /*需要分流禁用掉 
 ip-cidr, 123.207.209.39/32, reject
