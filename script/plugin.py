@@ -99,10 +99,48 @@ def save_plugin_scripts(plugin_name: str, data: list[str]):
             exit(1)
 
 
+def modify_content_bilibili(lines: list[str]):
+    i = 0
+    while i < len(lines):
+        if lines[i].find("Popular") != -1:  # 注释移除热门话题
+            lines[i] = f"# {lines[i]}"
+        elif lines[i].find("DmView") != -1:  # 注释移除交互式弹幕
+            lines[i] = f"# {lines[i]}"
+        elif lines[i].find("resource\/show\/tab\/v2") != -1:  # 注释精简首页顶部标签
+            lines[i] = f"# {lines[i]}"
+        elif lines[i].find("search\/square") != -1:  # 注释移除热搜广告
+            lines[i] = f"# {lines[i]}"
+        elif lines[i].find("account") != -1:  # 注释精简我的页面
+            lines[i] = f"# {lines[i]}"
+        i += 1
+    return lines
+
+
+def modify_content_zhihu(lines: list[str]):
+    i = 0
+    while i < len(lines):
+        # 注释 我的页面
+        if lines[i].find("^https:\/\/api\.zhihu\.com\/me\/guides") != -1:
+            lines[i] = f"# {lines[i]}"
+        elif lines[i].find("^https:\/\/api\.zhihu\.com\/people\/homepage_entry_v2")!= -1:
+            lines[i] = f"# {lines[i]}"
+        elif lines[i].find("^https:\/\/api\.zhihu\.com\/unlimited\/go\/my_card")!= -1:
+            lines[i] = f"# {lines[i]}"
+        elif lines[i].find("^https:\/\/www\.zhihu\.com\/appview\/v3\/zhmore")!= -1:
+            lines[i] = f"# {lines[i]}"
+        i += 1
+    return lines
+
+
 def extract_components(plugin_name: str, content: str):
     lines = []
     for line in content:
         lines.append(line.strip())
+
+    if plugin_name == "Bilibili_remove_ads":
+        lines = modify_content_bilibili(lines)
+    elif plugin_name == "Zhihu_remove_ads":
+        lines = modify_content_zhihu(lines)
 
     data = {}
     line_index = 0

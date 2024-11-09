@@ -85,15 +85,15 @@ def modify_content_bilibili(content: str):
     lines = content.splitlines()
     i = 0
     while i < len(lines):
-        if lines[i].find("DmSegMobile") != -1:
+        if lines[i].find("Popular") != -1:  # 注释移除热门话题
             lines[i] = f"# {lines[i]}"
-        elif lines[i].find("DmView") != -1:
+        elif lines[i].find("DmView") != -1:  # 注释移除交互式弹幕
             lines[i] = f"# {lines[i]}"
-        elif lines[i].find("resource\/show\/tab\/v2") != -1:
+        elif lines[i].find("resource\/show\/tab\/v2") != -1:  # 注释精简首页顶部标签
             lines[i] = f"# {lines[i]}"
-        elif lines[i].find("search\/square") != -1:
+        elif lines[i].find("search\/square") != -1:  # 注释移除热搜广告
             lines[i] = f"# {lines[i]}"
-        elif lines[i].find("account") != -1:
+        elif lines[i].find("account") != -1:  # 注释精简我的页面
             lines[i] = f"# {lines[i]}"
         i += 1
 
@@ -109,16 +109,19 @@ def modify_content_zhihu(content: str):
     lines = content.splitlines()
     i = 0
     while i < len(lines):
-        if lines[i].startswith("^https:\/\/api\.zhihu\.com\/unlimited\/go\/my_card"):
+        # 注释 我的页面
+        if lines[i].startswith("^https:\/\/api\.zhihu\.com\/me\/guides"):
             lines[i] = f"# {lines[i]}"
-        elif lines[i].startswith("^https:\/\/api\.zhihu\.com\/me\/guides"):
+        elif lines[i].startswith(
+            "^https:\/\/api\.zhihu\.com\/people\/homepage_entry_v2"
+        ):
             lines[i] = f"# {lines[i]}"
-        elif lines[i].startswith("^https:\/\/api\.zhihu\.com\/people\/homepage_entry_v2"):
+        elif lines[i].startswith("^https:\/\/api\.zhihu\.com\/unlimited\/go\/my_card"):
             lines[i] = f"# {lines[i]}"
         elif lines[i].startswith("^https:\/\/www\.zhihu\.com\/appview\/v3\/zhmore"):
             lines[i] = f"# {lines[i]}"
-        elif lines[i].find("^https:\/\/api\.zhihu\.com\/search\/recommend_query\/v2\?") != -1:
-            lines[i] = f"# {lines[i]}"
+        # elif lines[i].find("^https:\/\/api\.zhihu\.com\/search\/recommend_query\/v2\?") != -1:
+        #     lines[i] = f"# {lines[i]}"
         elif lines[i].find("script-path") != -1:
             lines[i] = lines[i].replace(
                 "https://kelee.one/Resource/Script/Zhihu/Zhihu_remove_ads.js",
@@ -126,13 +129,10 @@ def modify_content_zhihu(content: str):
             )
             if lines[i].find("next-(?:bff|data|render)") != -1:
                 temp = lines[i]
-                temp_0 = temp.replace(
-                    "next-(?:bff|data|render)",
-                    "next-(?:bff|data)"
-                )
+                temp_0 = temp.replace("next-(?:bff|data|render)", "next-(?:bff|data)")
                 temp_1 = temp.replace(
                     "next-(?:bff|data|render)",
-                    "next-render(?!.*sub_scenes=billboard_weekly)"
+                    "next-render(?!.*sub_scenes=billboard_weekly)",
                 )
                 lines[i] = f"{temp_0}\n\n{temp_1}"
         i += 1
@@ -162,6 +162,7 @@ def modify_content_taobao(content: str):
         ret += f"{lines[i]}\n"
         i += 1
     return ret
+
 
 def process_file(src_dir: str, dst_dir: str, url_dir: str, categoty: str):
     recreate_path(dst_dir)
