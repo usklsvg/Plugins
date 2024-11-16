@@ -1,0 +1,18 @@
+#!name=YY去广告
+#!desc=移除开屏广告、应用内弹窗，精简底栏和我的页面。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/YY_Voice.png
+#!category=iKeLee - Scripts
+#!openUrl=https://apps.apple.com/app/id427941017
+#!tag=去广告
+#!loon_version=3.2.1(749)
+#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!date=2024-09-08 13:09:26
+
+[Script]
+# 我的页面
+精简我的页面 = type=http-response, pattern=^https:\/\/personal-center\.yy\.com\/personalCenter\/list\?, script-path=https://kelee.one/Resource/Script/YY_Voice/YY_Voice_remove_ads.js, requires-body=true, script-update-interval=-1
+
+[MITM]
+hostname = %APPEND% yyapp-act-entrance.yy.com, yyapp-fastnet.yy.com, personal-center.yy.com, tab.yy.com
+
