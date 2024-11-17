@@ -1,14 +1,14 @@
-#!name = 财新去广告
-#!desc = 过滤财新广告
-#!openUrl = https://apps.apple.com/app/id356023612
-#!author = RuCu6[https://github.com/RuCu6]
-#!tag = 去广告
-#!system =
-#!system_version =
-#!loon_version = 3.2.1(749)
-#!homepage = https://github.com/luestr/ProxyResource/blob/main/README.md
-#!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/CaixinMedia.png
-#!date = 2024-07-23 16:58:47
+#!name=财新去广告
+#!desc=过滤财新广告
+#!openUrl=https://apps.apple.com/app/id356023612
+#!author=RuCu6[https://github.com/RuCu6]
+#!tag=去广告
+#!system=
+#!system_version=
+#!loon_version=3.2.1(749)
+#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/CaixinMedia.png
+#!date=2024-07-23 16:58:47
 
 [Rewrite]
 # 财新数据通
@@ -25,4 +25,4 @@
 ^https:\/\/msgapi\.caixin\.com\/msg_api\/annmsg\/annlist reject-dict
 
 [MitM]
-hostname = e*.caixin.com, g*.caixin.com, m*.caixin.com
+hostname=e*.caixin.com,g*.caixin.com,m*.caixin.com
