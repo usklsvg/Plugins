@@ -1,6 +1,6 @@
 #!name=网易云音乐去广告
 #!desc=过滤网易云音乐广告，并允许自定义界面。
-#!author=RuCu6[https://github.com/RuCu6], Keywos[https://github.com/Keywos]
+#!author=RuCu6[https://github.com/RuCu6],Keywos[https://github.com/Keywos]
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/NeteaseCloudMusic.png
 #!category=iKeLee
 #!openUrl=https://apps.apple.com/app/id590338362
@@ -15,7 +15,7 @@ DOMAIN,httpdns.n.netease.com,REJECT,extended-matching
 DOMAIN,iadmat.nosdn.127.net,REJECT,extended-matching
 DOMAIN,iadmatapk.nosdn.127.net,REJECT,extended-matching
 DOMAIN,iadmusicmat.music.126.net,REJECT,extended-matching
-# DOMAIN, iadmusicmatvideo.music.126.net, REJECT
+# DOMAIN,iadmusicmatvideo.music.126.net,REJECT
 DOMAIN-SUFFIX,163jiasu.com,REJECT,extended-matching
 
 [Header Rewrite]

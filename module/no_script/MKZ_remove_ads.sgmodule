@@ -68,9 +68,9 @@ DOMAIN,ios.bugly.qq.com,REJECT,extended-matching
 DOMAIN,sdk.e.qq.com,REJECT,extended-matching
 DOMAIN,us.l.qq.com,REJECT,extended-matching
 DOMAIN-SUFFIX,ugdtimg.com,REJECT,extended-matching
-# DOMAIN, qzs.gdtimg.com, REJECT
+# DOMAIN,qzs.gdtimg.com,REJECT
 DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching
-# c2.gdt.qq.com, REJECT
+# c2.gdt.qq.com,REJECT
 DOMAIN,tmeadcomm.y.qq.com,REJECT,extended-matching
 # 友盟
 DOMAIN,cnlogs.umeng.com,REJECT,extended-matching
