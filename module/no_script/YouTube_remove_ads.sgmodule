@@ -8,15 +8,14 @@
 #!system_version=15
 #!loon_version=3.2.1(749)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-16 21:55:06
+#!date=2024-11-24 22:25:16
 
 [Rule]
 AND,((DOMAIN-SUFFIX,googlevideo.com,extended-matching),(PROTOCOL,QUIC)),REJECT
 AND,((DOMAIN-SUFFIX,youtubei.googleapis.com,extended-matching),(PROTOCOL,QUIC)),REJECT
 
 [Map Local]
-# 使用reject-dict方法以减少开销
-^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad data-type=text data="{}" status-code=200
+^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad data-type=file data="https://kelee.one/Resource/Script/YouTube/YouTube_remove_ads/YouTube_502Bad.mock" status-code=502 header="Content-Type:text/plain"
 
 [MITM]
 hostname = %APPEND% *.googlevideo.com, youtubei.googleapis.com
