@@ -8,7 +8,7 @@
 #!loon_version=3.2.1(749)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/PuPuMall.png
-#!date=2024-06-20 22:28:12
+#!date=2024-11-26 13:23:43
 
 [Script]
 http-response ^https:\/\/j1\.pupuapi\.com\/client\/marketing\/banner\/v7 script-path=https://kelee.one/Resource/Script/PuPuMall/PuPuMall_remove_ads.js,requires-body=true,tag=移除朴朴超市广告
