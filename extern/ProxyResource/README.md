@@ -58,7 +58,7 @@
     <th>名称</th>
   </tr>
   <tr>
-    <td rowspan="123"><strong>去广告插件</strong></td>
+    <td rowspan="124"><strong>去广告插件</strong></td>
   <tr>
     <td>001</td>
     <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Plugin/BlockAdvertisers.plugin">广告平台拦截器</a></td>
@@ -546,6 +546,10 @@
   <tr>
     <td>122</td>
     <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Plugin/XiaChuFang_remove_ads.plugin">下厨房去广告</a></td>
+  </tr>
+  <tr>
+    <td>123</td>
+    <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Plugin/KwaiVideoeditor_remove_ads.plugin">快影去广告</a></td>
   </tr>
     <td></td>
     <td></td>
