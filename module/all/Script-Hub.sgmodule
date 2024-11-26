@@ -9,9 +9,6 @@
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
 #!date=2024-10-22 22:52:14
 
-[General]
-force-http-engine-hosts = %APPEND% script.hub, *.script.hub
-
 [Script]
 前端界面 = type=http-request, pattern=^https?:\/\/script\.hub\/($|edit\/|reload), script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/script-hub.beta.js, timeout=120, script-update-interval=-1
 

@@ -9,10 +9,7 @@
 #!system_version=15
 #!loon_version=3.2.1(749)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-15 17:17:23
-
-[General]
-force-http-engine-hosts = %APPEND% :8000
+#!date=2024-11-26 13:23:43
 
 [Rule]
 # 开屏广告
@@ -53,7 +50,7 @@ URL-REGEX,"^http:\/\/[\d\.]+:8000\/v1\/resource\/\w{32}-1-SPLASH",REJECT-TINYGIF
 ^https:\/\/app\.bilibili\.com\/x\/resource\/top\/activity\? data-type=text data="{"code":-404,"message":"啥都木有","ttl":1,"data":null}" status-code=200 header="Content-Type:text/json"
 
 [Script]
-body_rewrite_27 = type=http-response, pattern=^https:\/\/app\.bilibili\.com\/x\/resource\/show\/skin\?, script-path=https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.common_equip%22%5D%5D%5D, script-update-interval=-1
+body_rewrite_25 = type=http-response, pattern=^https:\/\/app\.bilibili\.com\/x\/resource\/show\/skin\?, script-path=https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.common_equip%22%5D%5D%5D, script-update-interval=-1
 
 [MITM]
 hostname = %APPEND% ap?.bilibili.com, grpc.biliapi.net, www.bilibili.com, m.bilibili.com, *live.bilibili.com
