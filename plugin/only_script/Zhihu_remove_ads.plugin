@@ -5,10 +5,10 @@
 #!tag=去广告
 #!system=
 #!system_version=
-#!loon_version=3.2.1(749)
+#!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Zhihu.png
-#!date=2024-11-04 13:57:06
+#!date=2024-11-28 00:00:00
 
 [Script]
 http-response ^https:\/\/(?:api|page-info)\.zhihu\.com\/(?:answers|articles)\/v2\/\d+ script-path=https://kelee.one/Resource/Script/Zhihu/Zhihu_remove_ads.js,requires-body=true,tag=移除回答底部卡片推广
