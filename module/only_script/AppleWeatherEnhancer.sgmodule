@@ -7,9 +7,9 @@
 #!tag=功能增强
 #!system=ios
 #!system_version=18
-#!loon_version=3.2.1(749)
+#!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-10-17 21:06:24
+#!date=2024-11-28 00:00:00
 
 [Script]
 Availability响应处理 = type=http-response, pattern=^https?:\/\/weatherkit\.apple\.com\/api\/v1\/availability\/, script-path=https://github.com/NSRingo/WeatherKit/releases/download/v1.8.17/response.bundle.js, requires-body=true, argument="[{NextHour.Provider},{AQI.Provider},{AQI.ReplaceProviders},{AQI.Local.Scale},{AQI.Local.ReplaceScales},{AQI.Local.ConvertUnits},{API.ColorfulClouds.Token},{API.QWeather.Host},{API.QWeather.Token},{API.WAQI.Token}]", script-update-interval=-1

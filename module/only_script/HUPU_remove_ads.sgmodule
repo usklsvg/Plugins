@@ -5,9 +5,9 @@
 #!category=iKeLee - Scripts
 #!openUrl=https://apps.apple.com/app/id906632439
 #!tag=去广告
-#!loon_version=3.2.1(749)
+#!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-07-24 14:40:03
+#!date=2024-11-28 00:00:00
 
 [Script]
 移除虎扑广告 = type=http-response, pattern=^https:\/\/fairy\.mobileapi\.hupu\.com\/mang\/preview\/banners, script-path=https://kelee.one/Resource/Script/HUPU/HUPU_remove_ads.js, requires-body=true, script-update-interval=-1

@@ -5,9 +5,9 @@
 #!category=iKeLee - Scripts
 #!openUrl=https://apps.apple.com/app/id432274380
 #!tag=去广告
-#!loon_version=3.2.1(749)
+#!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-04 13:57:06
+#!date=2024-11-28 00:00:00
 
 [Script]
 移除回答底部卡片推广 = type=http-response, pattern=^https:\/\/(?:api|page-info)\.zhihu\.com\/(?:answers|articles)\/v2\/\d+, script-path=https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/Zhihu_remove_ads.js, requires-body=true, script-update-interval=-1

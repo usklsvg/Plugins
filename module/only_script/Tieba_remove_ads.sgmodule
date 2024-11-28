@@ -6,9 +6,9 @@
 #!openUrl=https://apps.apple.com/app/id477927812
 #!tag=去广告
 #!system_version=15
-#!loon_version=3.2.1(749)
+#!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-10-20 18:25:56
+#!date=2024-11-28 00:00:00
 
 [Script]
 清理首页 = type=http-response, pattern=^https:\/\/tiebac\.baidu\.com\/livefeed\/feed, script-path=https://kelee.one/Resource/Script/Tieba/Tieba_remove_ads.js, requires-body=true, script-update-interval=-1
