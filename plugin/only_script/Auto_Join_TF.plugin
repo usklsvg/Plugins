@@ -18,9 +18,7 @@ TimingParameters=input,"*/1 * * * * *",tag=定时参数,desc=这里需要输入�
 
 [Script]
 http-request ^https?:\/\/testflight\.apple\.com\/v3\/accounts\/.*\/apps$ script-path=https://kelee.one/Resource/Script/TestFlight/TF_keys.js,tag=获取账号令牌,enable={CaptureAccountToken}
-
 http-request ^https://testflight.apple.com/join/(.*) script-path=https://kelee.one/Resource/Script/TestFlight/TF_keys.js,tag=应用ID捕获,enable={CaptureAppID}
-
 cron {TimingParameters} script-path=https://kelee.one/Resource/Script/TestFlight/Auto_join_TF.js,tag=自动加入TF,timeout=180
 
 [MitM]

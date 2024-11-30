@@ -11,7 +11,6 @@
 #!date=2024-11-28 00:00:00
 
 [Script]
-# 移除横幅广告
 http-response ^https:\/\/app-v1\.ecoliving168\.com\/api\/v1\/movie\/index_recommend\? script-path=https://kelee.one/Resource/Script/555DY/555DY_remove_ads.js,requires-body=true,tag=移除横幅广告
 
 [MitM]

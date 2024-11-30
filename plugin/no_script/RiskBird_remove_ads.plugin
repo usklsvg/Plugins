@@ -11,10 +11,7 @@
 #!date=2024-11-28 00:00:00
 
 [Rewrite]
-# 首页 - 轮播图
 ^https:\/\/m\.riskbird\.com\/prod-qbb-api\/user\/getBannerList reject-dict
-
-# 首页 - 热门企业
 ^https:\/\/m\.riskbird\.com\/prod-qbb-api\/searchHotEnt reject-dict
 
 [MitM]

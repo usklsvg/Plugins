@@ -11,7 +11,6 @@
 #!date=2024-11-28 00:00:00
 
 [Script]
-# 首页 - 底部弹窗
 http-response ^https:\/\/iosapi\.peiyinxiu\.com\/Api\/Film\/GetConfigValue script-path=https://kelee.one/Resource/Script/DubbingShow/DubbingShow_remove_ads.js,requires-body=true,tag=移除首页底部弹窗
 
 [MitM]

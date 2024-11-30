@@ -11,7 +11,6 @@
 #!date=2024-11-28 00:00:00
 
 [Script]
-# 移除听书页面广告
 http-response ^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/tingshu\/index\/radio script-path=https://kelee.one/Resource/Script/Kuwo/Kuwo_remove_ads.js,requires-body=true,tag=移除听书页面广告
 
 [MitM]

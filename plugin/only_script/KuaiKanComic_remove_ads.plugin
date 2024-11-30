@@ -11,16 +11,9 @@
 #!date=2024-11-28 00:00:00
 
 [Script]
-# 修改广告参数
 http-response ^https:\/\/(cdn-)?api\.kkmh\.com\/v\d\/ironman\/comic\/recommend script-path=https://kelee.one/Resource/Script/KuaiKanComic/KuaiKanComic_remove_ads.js,requires-body=true,tag=修改广告参数
-
-# 首页 - 热门 - 顶部标签
 http-response ^https:\/\/(cdn-)?api\.kkmh\.com\/v\d\/ironman\/discovery_v\d\/tab_list_v\d script-path=https://kelee.one/Resource/Script/KuaiKanComic/KuaiKanComic_remove_ads.js,requires-body=true,tag=精简首页热门标签
-
-# 社区 - 发现 - 顶部标签
 http-response ^https:\/\/(cdn-)?social\.kkmh\.com\/v\d\/graph\/homepage\/comicVideo\/v\d\/configs script-path=https://kelee.one/Resource/Script/KuaiKanComic/KuaiKanComic_remove_ads.js,requires-body=true,tag=精简社区标签
-
-# 社区 - 信息流
 http-response ^https:\/\/(cdn-)?social\.kkmh\.com\/v\d\/graph\/unified_feed$ script-path=https://kelee.one/Resource/Script/KuaiKanComic/KuaiKanComic_remove_ads.js,requires-body=true,tag=精简社区信息流
 
 [MitM]

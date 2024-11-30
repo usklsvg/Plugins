@@ -11,11 +11,8 @@
 #!date=2024-11-28 00:00:00
 
 [Rewrite]
-# 人保头条
 ^https:\/\/zgrb\.epicc\.com\.cn\/G-HAPP\/h\/headlines\/queryHeadlines reject
-# 启动开屏
 ^https:\/\/zgrb\.epicc\.com\.cn\/G-HAPP\/a\/update\/startupPage\/v1 reject-dict
-# 猜你喜欢
 ^https:\/\/zgrb\.epicc\.com\.cn\/G-HAPP\/a\/config\/guessYouLike\/v3 reject-dict
 
 [MitM]

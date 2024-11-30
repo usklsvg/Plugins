@@ -12,9 +12,7 @@
 
 [Script]
 http-response ^https:\/\/nex\.163\.com\/q script-path=https://kelee.one/Resource/Script/NeteaseNews/NeteaseNews_remove_ads.js,requires-body=true,tag=移除网易新闻广告
-
 http-response ^https:\/\/gw\.m\.163\.com\/nc\/api\/v1\/feed\/dynamic\/headline-list\? script-path=https://kelee.one/Resource/Script/NeteaseNews/NeteaseNews_remove_ads.js,requires-body=true,tag=移除网易新闻广告
-
 http-response ^https:\/\/gw\.m\.163\.com\/nc\/api\/v1\/search\/hot-word script-path=https://kelee.one/Resource/Script/NeteaseNews/NeteaseNews_remove_ads.js,requires-body=true,tag=移除网易新闻广告
 
 [MitM]

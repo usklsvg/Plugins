@@ -11,20 +11,13 @@
 #!date=2024-11-28 00:00:00
 
 [Rule]
-# 放行地址
 DOMAIN-SUFFIX,cupid.iqiyi.com,DIRECT
-
-# 拦截地址
 DOMAIN,api.iqiyi.com,REJECT
 
 [Rewrite]
-# 播放页开通会员提示
 ^https:\/\/act\.vip\.iqiyi\.com\/interact\/api\/v2\/show\? reject-dict
-# 播放页多余动效
 ^https:\/\/iface2\.iqiyi\.com\/ivos\/interact\/video\/data\? reject-dict
-# 播放页升级白金会员按钮
 ^https:\/\/iface2\.iqiyi\.com\/video\/3\.0\/v_interface_proxy\? reject-dict
-# 青少年弹窗
 ^https:\/\/iface2\.iqiyi\.com\/views_pop\/3\.0\/pop_control\? reject-dict
 
 [MitM]

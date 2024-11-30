@@ -11,7 +11,6 @@
 #!date=2024-11-28 00:00:00
 
 [Rewrite]
-# 小说底部文案广告
 ^https:\/\/huichuan\.sm\.cn\/nativead$ reject
 ^https:\/\/stars\.shuqireader\.com\/kkios\/render\/load\/resource\/appConfig$ reject-dict
 
