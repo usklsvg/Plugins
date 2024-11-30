@@ -10,11 +10,9 @@
 #!date=2024-11-28 00:00:00
 
 [Rule]
-# 放行地址
 DOMAIN,push.m.youku.com,DIRECT
 DOMAIN,un-acs.youku.com,DIRECT
 DOMAIN,dorangesource.alicdn.com,DIRECT
-# 拦截地址
 DOMAIN,acs4baichuan.m.taobao.com,REJECT,extended-matching
 DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching
 DOMAIN,amdc.m.youku.com,REJECT,extended-matching
@@ -36,7 +34,6 @@ DOMAIN,ykad-data.youku.com,REJECT,extended-matching
 DOMAIN,youku-acs.m.taobao.com,REJECT,extended-matching
 
 [Map Local]
-# 播放页弹窗动图
 ^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.(pisp\.scripts\.get|xspace\.play\.position\.preload\.query|xspace\.poplayer\.position\.query) data-type=text data="{}" status-code=200
 
 [MITM]

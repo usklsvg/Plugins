@@ -11,7 +11,6 @@
 #!date=2024-11-28 00:00:00
 
 [Script]
-# YouTube字幕翻译
 JSON·YouTube播放器请求 = type=http-request, pattern=^https?:\/\/(www|m|tv)\.youtube\.com\/youtubei\/v1\/player\?(.*), script-path=https://kelee.one/Resource/Script/YouTube/YouTube_Subtitles_Translate/YouTube_Subtitles_request.js, requires-body=true, argument="[{Type},{AutoCC},{ShowOnly},{Position}]", script-update-interval=-1
 
 JSON·YouTube播放器响应 = type=http-response, pattern=^https?:\/\/(www|m|tv)\.youtube\.com\/youtubei\/v1\/player\?(.*), script-path=https://kelee.one/Resource/Script/YouTube/YouTube_Subtitles_Translate/YouTube_Subtitles_response.js, requires-body=true, argument="[{Type},{AutoCC},{ShowOnly},{Position}]", script-update-interval=-1
@@ -28,7 +27,6 @@ YouTube合成定时文本响应 = type=http-response, pattern=^https?:\/\/(www|m
 
 YouTube翻译定时文本响应 = type=http-response, pattern=^https?:\/\/(www|m)\.youtube\.com\/api\/timedtext\?(.*)subtype=Translate, script-path=https://kelee.one/Resource/Script/YouTube/YouTube_Subtitles_Translate/YouTube_Subtitles_Translate_response.js, requires-body=true, script-update-interval=-1
 
-# YouTube Music歌词翻译
 JSON·YouTube Music浏览请求 = type=http-request, pattern=^https?:\/\/music\.youtube\.com\/youtubei\/v1\/browse\?(.*), script-path=https://kelee.one/Resource/Script/YouTube/YouTube_Subtitles_Translate/YouTube_Subtitles_request.js, requires-body=true, argument="[{Type},{AutoCC},{ShowOnly},{Position}]", script-update-interval=-1
 
 Proto·YouTube Music浏览请求 = type=http-request, pattern=^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/browse\?(.*), script-path=https://kelee.one/Resource/Script/YouTube/YouTube_Subtitles_Translate/YouTube_Subtitles_request.js, requires-body=true, binary-body-mode=true, argument="[{Type},{AutoCC},{ShowOnly},{Position}]", script-update-interval=-1

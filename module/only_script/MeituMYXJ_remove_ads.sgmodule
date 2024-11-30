@@ -10,7 +10,6 @@
 #!date=2024-11-28 00:00:00
 
 [Script]
-# 首页功能栏目和美颜推荐
 精简首页功能栏目并移除美颜推荐 = type=http-response, pattern=^https:\/\/api\.meiyan\.com\/operation\/home\.json\?, script-path=https://kelee.one/Resource/Script/MeituMYXJ/MeituMYXJ_remove_ads.js, requires-body=true, script-update-interval=-1
 
 [MITM]

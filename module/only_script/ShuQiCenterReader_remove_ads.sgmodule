@@ -10,7 +10,6 @@
 #!date=2024-11-28 00:00:00
 
 [Script]
-# 书城横幅和阅读广告
 移除书城横幅和阅读广告 = type=http-response, pattern=^https:\/\/ocean\.shuqireader\.com\/sqios\/render\/render\/page\/bookstore$, script-path=https://kelee.one/Resource/Script/ShuQiCenterReader/ShuQiCenterReader_remove_ads.js, requires-body=true, script-update-interval=-1
 
 [MITM]

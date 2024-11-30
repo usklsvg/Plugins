@@ -10,7 +10,6 @@
 #!date=2024-11-28 00:00:00
 
 [Script]
-# 首页轮播图和视频流广告
 移除首页轮播图和视频流广告 = type=http-response, pattern=^https:\/\/apiv2\.douyucdn\.cn\/mgapi\/livenc\/home\/getRecV3, script-path=https://kelee.one/Resource/Script/Douyu/Douyu_remove_ads.js, requires-body=true, script-update-interval=-1
 
 [MITM]

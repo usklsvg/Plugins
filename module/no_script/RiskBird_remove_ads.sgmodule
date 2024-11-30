@@ -10,10 +10,8 @@
 #!date=2024-11-28 00:00:00
 
 [Map Local]
-# 首页 - 轮播图
 ^https:\/\/m\.riskbird\.com\/prod-qbb-api\/user\/getBannerList data-type=text data="{}" status-code=200
 
-# 首页 - 热门企业
 ^https:\/\/m\.riskbird\.com\/prod-qbb-api\/searchHotEnt data-type=text data="{}" status-code=200
 
 [MITM]

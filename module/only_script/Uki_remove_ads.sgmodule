@@ -10,16 +10,12 @@
 #!date=2024-11-28 00:00:00
 
 [Script]
-# 匹配卡横幅
 移除匹配卡横幅 = type=http-response, pattern=^https:\/\/api\.chenlongtech\.cn\/v\d\/lover\/productList, script-path=https://kelee.one/Resource/Script/Uki/Uki_remove_ads.js, requires-body=true, script-update-interval=-1
 
-# 密友横幅
 移除密友横幅 = type=http-response, pattern=^https:\/\/api\.chenlongtech\.cn\/v\d\/friends\/closeFriend\/home, script-path=https://kelee.one/Resource/Script/Uki/Uki_remove_ads.js, requires-body=true, script-update-interval=-1
 
-# 娱乐页面横幅和悬浮窗配置
 移除娱乐页面横幅和悬浮窗配置 = type=http-response, pattern=^https:\/\/api\.chenlongtech\.cn\/v\d\/party\/config$, script-path=https://kelee.one/Resource/Script/Uki/Uki_remove_ads.js, requires-body=true, script-update-interval=-1
 
-# 广场搜索填充词
 移除广场搜索填充词 = type=http-response, pattern=^https:\/\/api\.chenlongtech\.cn\/v1\/post\/fetchSearchRecommend$, script-path=https://kelee.one/Resource/Script/Uki/Uki_remove_ads.js, requires-body=true, script-update-interval=-1
 
 [MITM]

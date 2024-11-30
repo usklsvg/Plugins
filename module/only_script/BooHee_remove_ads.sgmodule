@@ -10,7 +10,6 @@
 #!date=2024-11-28 00:00:00
 
 [Script]
-# 广场 - 推荐 - 横幅
 移除广场推荐页面横幅 = type=http-response, pattern=^https:\/\/api\.boohee\.com\/meta-interface\/v1\/index\/plaza-flow\?, script-path=https://kelee.one/Resource/Script/BooHee/BooHee_remove_ads.js, requires-body=true, script-update-interval=-1
 
 [MITM]

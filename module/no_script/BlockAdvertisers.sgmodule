@@ -57,47 +57,34 @@ DOMAIN-KEYWORD,log-api.pangolin-sdk-toutiao,REJECT,extended-matching
 DOMAIN-KEYWORD,-ad.byteoversea.com,REJECT,extended-matching
 DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT,extended-matching
 DOMAIN-KEYWORD,asiad.byteactivity,REJECT,extended-matching
-# 讯飞AI营销
 DOMAIN-KEYWORD,iflyad.bj.openstorage.cn,REJECT,extended-matching
 DOMAIN-KEYWORD,bjimp.voiceads.cn,REJECT,extended-matching
-# 美数科技
 DOMAIN,sdk.1rtb.net,REJECT,extended-matching
 DOMAIN,cdn.1rtb.com,REJECT,extended-matching
-# 嗨量科技 - 海贝巨量
 DOMAIN,adx.halomobi.com,REJECT,extended-matching
-# 钧云 - ADHUB
 DOMAIN,api.htp.hubcloud.com.cn,REJECT,extended-matching
 DOMAIN,res1.hubcloud.com.cn,REJECT,extended-matching
 DOMAIN,sdktmp.hubcloud.com.cn,REJECT,extended-matching
 DOMAIN,v.adx.hubcloud.com.cn,REJECT,extended-matching
-# InMobi - 邑盟信息技术（上海）有限公司
 DOMAIN,config.inmobi.cn,REJECT,extended-matching
-# 北京锐讯灵通科技有限公司
 DOMAIN,ztoken.uyunad.com,REJECT,extended-matching
 DOMAIN,aaid.uyunad.com,REJECT,extended-matching
 DOMAIN,yumao.puata.info,REJECT,extended-matching
-# 快手联盟 - 广告服务商
 DOMAIN,gdfp.gifshow.com,REJECT,extended-matching
 DOMAIN,open.e.kuaishou.com,REJECT,extended-matching
 DOMAIN,adtrack.e.kuaishou.com,REJECT,extended-matching
 DOMAIN-SUFFIX,adukwai.com,REJECT,extended-matching
-# SupersonicAds
 DOMAIN,init.supersonicads.com,REJECT,extended-matching
-# APPSAD
 DOMAIN,st.appsad.cn,REJECT,extended-matching
-# 上海倍孜
 DOMAIN,sdk.beizi.biz,REJECT,extended-matching
 DOMAIN,api-htp.beizi.biz,REJECT,extended-matching
-# 秒针系统 - 广告服务商
 DOMAIN,admaster.com.cn,REJECT,extended-matching
 DOMAIN-SUFFIX,miaozhen.com,REJECT,extended-matching
-# 艾狄墨搏 - 广告服务商
 DOMAIN,monitor.ssp.admobile.top,REJECT,extended-matching
 DOMAIN,sdk.ssp.admobile.top,REJECT,extended-matching
 DOMAIN,ax.admobile.top,REJECT,extended-matching
 DOMAIN,jump.admobile.top,REJECT,extended-matching
 DOMAIN-SUFFIX,admobile.top,REJECT,extended-matching
-# 袤博 - 广告服务商
 DOMAIN,api-c.dutils.com,REJECT,extended-matching
 DOMAIN,api-d.dutils.com,REJECT,extended-matching
 DOMAIN,api-p0.yksdks.com,REJECT,extended-matching
@@ -110,7 +97,6 @@ DOMAIN,api.share.mob.com,REJECT,extended-matching
 DOMAIN,api.verify.mob.com,REJECT,extended-matching
 DOMAIN,log-verify.mob.com,REJECT,extended-matching
 DOMAIN,sdk.push.mob.com,REJECT,extended-matching
-# 极光 - 广告服务商
 DOMAIN,ali-stats.jpush.cn,REJECT,extended-matching
 DOMAIN,ce3e75d5.jpush.cn,REJECT,extended-matching
 DOMAIN,config-junion.jpush.cn,REJECT,extended-matching
@@ -127,7 +113,6 @@ DOMAIN,user.jpush.cn,REJECT,extended-matching
 DOMAIN-SUFFIX,jiguang.cn,REJECT,extended-matching
 DOMAIN-SUFFIX,jpush.cn,REJECT,extended-matching
 DOMAIN-SUFFIX,jpush.io,REJECT,extended-matching
-# 百度联盟 - 广告服务商
 DOMAIN,afd.baidu.com,REJECT,extended-matching
 DOMAIN,als.baidu.com,REJECT,extended-matching
 DOMAIN,bgg.baidu.com,REJECT,extended-matching
@@ -143,7 +128,6 @@ DOMAIN,wn.pos.baidu.com,REJECT,extended-matching
 DOMAIN,miniapp-ad.cdn.bcebos.com,REJECT,extended-matching
 DOMAIN-SUFFIX,union.baidu.cn,REJECT,extended-matching
 DOMAIN-SUFFIX,union.baidu.com,REJECT,extended-matching
-# 腾讯
 DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching
 DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching
 DOMAIN,c2.gdt.qq.com,REJECT,extended-matching
@@ -153,12 +137,10 @@ DOMAIN,info6.video.qq.com,REJECT,extended-matching
 DOMAIN,ios.bugly.qq.com,REJECT,extended-matching
 DOMAIN,pro.bugly.qq.com,REJECT,extended-matching
 DOMAIN,ios.video.mpush.qq.com,REJECT,extended-matching
-# DOMAIN,mazu.m.qq.com,REJECT // 误杀
 DOMAIN,mi.gdt.qq.com,REJECT,extended-matching
 DOMAIN,otheve.beacon.qq.com,REJECT,extended-matching
 DOMAIN,pgdt.gtimg.cn,REJECT,extended-matching
 DOMAIN,pgdt.ugdtimg.com,REJECT,extended-matching
-# DOMAIN,qzonestyle.gtimg.cn,REJECT // 误杀
 DOMAIN,qzs.gdtimg.com,REJECT,extended-matching
 DOMAIN,qzs.qq.com,REJECT,extended-matching
 DOMAIN,rmonitor.qq.com,REJECT,extended-matching
@@ -181,9 +163,7 @@ DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching
 DOMAIN-SUFFIX,l.qq.com,REJECT,extended-matching
 DOMAIN-SUFFIX,ugdtimg.com,REJECT,extended-matching
 IP-CIDR,47.110.187.87/32,REJECT,no-resolve
-# 分秒网络
 DOMAIN-SUFFIX,openinstall.io,REJECT,extended-matching
-# 个推
 DOMAIN,b-gtc.getui.net,REJECT,extended-matching
 DOMAIN,c-gtc.getui.net,REJECT,extended-matching
 DOMAIN,c-hzgt2.getui.com,REJECT,extended-matching
@@ -197,7 +177,6 @@ DOMAIN,ido.gepush.com,REJECT,extended-matching
 DOMAIN-SUFFIX,mobileservice.cn,REJECT,extended-matching
 DOMAIN-SUFFIX,getui.com,REJECT,extended-matching
 DOMAIN-SUFFIX,igexin.com,REJECT,extended-matching
-# 友盟
 DOMAIN,cnlogs.umeng.com,REJECT,extended-matching
 DOMAIN,errlog.umeng.com,REJECT,extended-matching
 DOMAIN,errnewlog.umeng.com,REJECT,extended-matching
@@ -210,18 +189,14 @@ DOMAIN,plbslog.umeng.com,REJECT,extended-matching
 DOMAIN,log.umtrack.com,REJECT,extended-matching
 DOMAIN,aaid.umeng.com,REJECT,extended-matching
 DOMAIN,log.umsns.com,REJECT,extended-matching
-# FUNLINK - 北京泛连科技
 DOMAIN,adtracker.adfunlink.com,REJECT,extended-matching
-# 天目 - 广告服务商
 DOMAIN,sdk.tianmu.mobi,REJECT,extended-matching
 DOMAIN,tracker.tianmu.mobi,REJECT,extended-matching
-# 上海优比客思科技有限公司 - 广告服务商
 DOMAIN,e-u1.ubixioe.com,REJECT,extended-matching
 DOMAIN,sdk-data.ubixioe.com,REJECT,extended-matching
 DOMAIN,tower.ubixioe.com,REJECT,extended-matching
 DOMAIN,tx-cfg-u1.ubixioe.com,REJECT,extended-matching
 DOMAIN,tx-data-u1.ubixioe.com,REJECT,extended-matching
-# 阿里巴巴
 DOMAIN,ossgw.alicdn.com,REJECT,extended-matching
 DOMAIN,ems.youku.com,REJECT,extended-matching
 DOMAIN,hudong.alicdn.com,REJECT,extended-matching
@@ -231,7 +206,6 @@ DOMAIN,beacon-api.aliyuncs.com,REJECT,extended-matching
 DOMAIN,adash.man.aliyuncs.com,REJECT,extended-matching
 DOMAIN,applog.uc.cn,REJECT,extended-matching
 AND,((DOMAIN-KEYWORD,adash,extended-matching),(DOMAIN-SUFFIX,ut.taobao.com,extended-matching)),REJECT
-# 网易
 DOMAIN,nex.163.com,REJECT,extended-matching
 DOMAIN,iad.g.163.com,REJECT,extended-matching
 DOMAIN,adx-bj.anythinktech.com,REJECT,extended-matching
@@ -239,20 +213,16 @@ DOMAIN,api.anythinktech.com,REJECT,extended-matching
 DOMAIN,tk.anythinktech.com,REJECT,extended-matching
 DOMAIN,da.anythinktech.com,REJECT,extended-matching
 DOMAIN,gorgon.youdao.com,REJECT,extended-matching
-# 小米
 DOMAIN,sdkconfig.ad.xiaomi.com,REJECT,extended-matching
-# 美团
 DOMAIN,al-log.d.meituan.net,REJECT,extended-matching
 DOMAIN,babel-statistics-android.d.meituan.net,REJECT,extended-matching
 DOMAIN,maplocatesdksnapshot.d.meituan.net,REJECT,extended-matching
 DOMAIN,metrics-picture.d.meituan.net,REJECT,extended-matching
 DOMAIN,route-stats.d.meituan.net,REJECT,extended-matching
-# 京东
 DOMAIN,dsp-x.jd.com,REJECT,extended-matching
 DOMAIN,im-x.jd.com,REJECT,extended-matching
 DOMAIN,xlog.jd.com,REJECT,extended-matching
 DOMAIN,janapi.jd.com,REJECT,extended-matching
-# 聚次方 - TopOn
 DOMAIN,api.mosspf.com,REJECT,extended-matching
 DOMAIN,da.mosspf.com,REJECT,extended-matching
 DOMAIN,mores.toponad.com,REJECT,extended-matching
@@ -260,52 +230,34 @@ DOMAIN,api.toponadss.com,REJECT,extended-matching
 DOMAIN,da.toponadss.com,REJECT,extended-matching
 DOMAIN,tk.toponadss.com,REJECT,extended-matching
 DOMAIN,adx-os.toponadss.com,REJECT,extended-matching
-# 塔酷信息
 DOMAIN,mores.motowoo.com,REJECT,extended-matching
 DOMAIN-SUFFIX,motowoo.com,REJECT,extended-matching
-# 变现猫
 DOMAIN,guide2.bianxianmao.com,REJECT,extended-matching
-# 章鱼移动
 DOMAIN,caid.adintl.cn,REJECT,extended-matching
 DOMAIN,sv.adintl.cn,REJECT,extended-matching
 DOMAIN,v.adintl.cn,REJECT,extended-matching
 DOMAIN,oss.cdn.adintl.cn,REJECT,extended-matching
-# 上海泰之菩信息科技有限公司
 DOMAIN,adx.adtaipo.com,REJECT,extended-matching
-# 浙江翼信科技有限公司
 DOMAIN,adx.yixin.im,REJECT,extended-matching
-# 天津快易科技有限公司
 DOMAIN,adx.kuaiyiad.com,REJECT,extended-matching
-# 天脉移动广告平台
 DOMAIN,adreport.adtianmai.com,REJECT,extended-matching
-# 数萤技术
 DOMAIN,adxapi.readgps.com,REJECT,extended-matching
-# 方麟数字营销
 DOMAIN,t.fanglinad.com,REJECT,extended-matching
-# 益起广告
 DOMAIN,trk1.17admob.com,REJECT,extended-matching
-# 北京上量优选科技有限公司
 DOMAIN,nfy.slyxmobi.com,REJECT,extended-matching
-# 新义互联
 DOMAIN,api.mobrtb.com,REJECT,extended-matching
-# 枫岚互联
 DOMAIN,ssp.maplehaze.cn,REJECT,extended-matching
-# 北京腾云天下科技有限公司
 DOMAIN-SUFFIX,lnk0.com,REJECT,extended-matching
-# 布里奇信息科技有限公司
 DOMAIN,tk.bridgeoos.com,REJECT,extended-matching
 DOMAIN,da.bridgeoos.com,REJECT,extended-matching
 DOMAIN,api.bridgeoos.com,REJECT,extended-matching
 DOMAIN,adx-os.bridgeoos.com,REJECT,extended-matching
 DOMAIN,adx-sg-req.bridgeoos.com,REJECT,extended-matching
 DOMAIN-SUFFIX,bridgeoos.com,REJECT,extended-matching
-# 海南丽声影视文化传播有限公司
 DOMAIN,ad-evods.tianya.tv,REJECT,extended-matching
-# 杭州推啊网络科技有限公司
 DOMAIN,adx.tuia.cn,REJECT,extended-matching
 
 [URL Rewrite]
-# 拼多多广告平台
 ^https:\/\/video-dsp\.pddpic\.com\/market-dsp-video\/ - reject
 ^https:\/\/t-dsp\.pinduoduo\.com\/dspcb\/i\/mrk_union - reject
 ^https:\/\/images\.pinduoduo\.com\/mrk\/ - reject

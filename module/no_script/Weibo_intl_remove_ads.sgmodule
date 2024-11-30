@@ -10,7 +10,6 @@
 #!date=2024-11-28 00:00:00
 
 [Map Local]
-# 热门视频、热推荐
 ^https?:\/\/api\.weibo\.cn\/\d\/(cardlist\?v_f=\d|ad\/weibointl\?) data-type=text data="{}" status-code=200
 
 ^https?:\/\/weibointl\.api\.weibo\.cn\/portal\.php\?a=hot_search_users data-type=text data="{}" status-code=200

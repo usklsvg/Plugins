@@ -10,17 +10,13 @@
 #!date=2024-11-28 00:00:00
 
 [URL Rewrite]
-# 全局广告配置
 ^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?module=advis - reject
 
 [Map Local]
-# 我的页面 - 弹窗
 ^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?module=vip_coupon data-type=text data="{}" status-code=200
 
-# 我的页面 - 悬浮窗
 ^https:\/\/ptf\.flyertrip\.com\/static\/img\/common\/ic_plate_mine_button\.png data-type=tiny-gif status-code=200
 
-# 发帖 - 横幅广告
 ^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?module=getdata data-type=text data="{}" status-code=200
 
 [MITM]

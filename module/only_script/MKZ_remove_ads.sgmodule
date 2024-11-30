@@ -10,7 +10,6 @@
 #!date=2024-11-28 00:00:00
 
 [Script]
-# 配置修改
 配置修改 = type=http-response, pattern=^https:\/\/base\.mkzcdn\.com\/app\/config\/, script-path=https://kelee.one/Resource/Script/MKZ/MKZ_remove_ads.js, requires-body=true, script-update-interval=-1
 
 [MITM]

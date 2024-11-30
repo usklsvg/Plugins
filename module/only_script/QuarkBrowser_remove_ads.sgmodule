@@ -10,7 +10,6 @@
 #!date=2024-11-28 00:00:00
 
 [Script]
-# 精简我的页面
 精简我的页面 = type=http-response, pattern=^https:\/\/open-cms-api\.quark\.cn\/open-cms, script-path=https://kelee.one/Resource/Script/QuarkBrowser/QuarkBrowser_remove_ads.js, requires-body=true, script-update-interval=-1
 
 [MITM]
