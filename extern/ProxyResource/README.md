@@ -58,7 +58,7 @@
     <th>名称</th>
   </tr>
   <tr>
-    <td rowspan="125"><strong>去广告插件</strong></td>
+    <td rowspan="126"><strong>去广告插件</strong></td>
   <tr>
     <td>001</td>
     <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Plugin/BlockAdvertisers.plugin">广告平台拦截器</a></td>
@@ -554,6 +554,10 @@
   <tr>
     <td>124</td>
     <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Plugin/LuckinCoffee_remove_ads.plugin">瑞幸咖啡去广告</a></td>
+  </tr>
+  <tr>
+    <td>125</td>
+    <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Plugin/QtingFM_remove_ads.plugin">蜻蜓FM去广告</a></td>
   </tr>
     <td></td>
     <td></td>
