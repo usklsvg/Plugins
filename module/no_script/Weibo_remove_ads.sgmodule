@@ -7,10 +7,11 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-28 00:00:00
+#!date=2024-12-11 17:30:36
 
 [Rule]
 DOMAIN,wbapp.uve.weibo.com,DIRECT
+DOMAIN,huodong.weibo.cn,REJECT,extended-matching
 DOMAIN-SUFFIX,biz.weibo.com,REJECT,extended-matching
 DOMAIN,dns.weibo.cn,REJECT,extended-matching
 IP-CIDR,39.97.130.51/32,REJECT,no-resolve
@@ -43,7 +44,7 @@ URL-REGEX,"^http:\/\/api\.weibo\.cn\/httpdns\/config",REJECT,extended-matching
 
 ^https:\/\/api\.weibo\.cn\/2\/video\/redpacket\? data-type=text data="{}" status-code=200
 
-^https:\/\/api\.weibo\.cn\/!\/sug\/list\/finderchange\? data-type=text data="{}" status-code=200
+^https:\/\/api\.weibo\.cn\/!\/(sug\/list\/finderchange|was\/finder\/searchbarchange)\? data-type=text data="{}" status-code=200
 
 ^https:\/\/bootrealtime\.uve\.weibo\.com\/v[23]\/ad\/realtime data-type=text data="{}" status-code=200
 
