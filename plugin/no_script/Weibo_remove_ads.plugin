@@ -8,17 +8,12 @@
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Weibo.png
-#!date=2024-12-11 17:30:36
+#!date=2024-12-17 21:27:52
 
 [Rule]
-DOMAIN,wbapp.uve.weibo.com,DIRECT
+DOMAIN-SUFFIX,uve.weibo.com,DIRECT
 DOMAIN,huodong.weibo.cn,REJECT
 DOMAIN-SUFFIX,biz.weibo.com,REJECT
-DOMAIN,dns.weibo.cn,REJECT
-IP-CIDR,39.97.130.51/32,REJECT,no-resolve
-IP-CIDR,39.97.128.148/32,REJECT,no-resolve
-URL-REGEX,"^http:\/\/api\.weibo\.cn\/2\/httpdns\/config",REJECT
-URL-REGEX,"^http:\/\/api\.weibo\.cn\/httpdns\/config",REJECT
 
 [Rewrite]
 ^https:\/\/api\.weibo\.cn\/2\/(?:ug\/checkin\/list|push\/daily) reject-dict
@@ -34,6 +29,7 @@ URL-REGEX,"^http:\/\/api\.weibo\.cn\/httpdns\/config",REJECT
 ^https:\/\/api\.weibo\.cn\/2\/hot\/hours_spotlight\? reject-dict
 ^https:\/\/api\.weibo\.cn\/2\/video\/redpacket\? reject-dict
 ^https:\/\/api\.weibo\.cn\/!\/(sug\/list\/finderchange|was\/finder\/searchbarchange)\? reject-dict
+^https:\/\/api\.weibo\.cn\/2\/video\/tiny_video_info_show\? reject-dict
 ^https:\/\/bootrealtime\.uve\.weibo\.com\/v[23]\/ad\/realtime reject-dict
 ^https:\/\/sdkapp\.uve\.weibo\.com\/interface\/sdk\/(?:get-lbs-cell-info\.php|sdkconfig\.php) reject-dict
 ^https:\/\/card\.weibo\.com\/article\/m\/aj\/(?:reward|uvead) reject-dict
