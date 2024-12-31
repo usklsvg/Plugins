@@ -190,6 +190,118 @@ def process_file(src_dir: str, dst_dir: str, url_dir: str, categoty: str):
         )
 
 
+def get_rules(url: str):
+    content = get_url_text_content(url)
+    rules = [item.strip() for item in content.split("\n") if item.startswith("D")]
+
+    ## get rules
+
+    domains = []
+    domain_suffixs = ["cn"]
+    domain_keywords = []
+    for rule in rules:
+        items = [item for item in rule.split(",") if item.strip()]
+        if rule.startswith("DOMAIN,"):
+            domains.append(items[1])
+        elif rule.startswith("DOMAIN-SUFFIX,"):
+            domain_suffixs.append(items[1])
+        elif rule.startswith("DOMAIN-KEYWORD,"):
+            domain_keywords.append(items[1])
+
+    ## remove duplicate suffixs
+    class TrieNode:
+        def __init__(self):
+            self.children: dict[str, TrieNode] = {}
+            self.end_of_word = False
+
+    class Trie:
+        def __init__(self):
+            self.root = TrieNode()
+
+        def insert(self, word: str):
+            node = self.root
+            for char in word:
+                if char not in node.children:
+                    node.children[char] = TrieNode()
+                node = node.children[char]
+            node.end_of_word = True
+
+        def get_prefix(self) -> list[str]:
+            result: list[str] = []
+
+            def dfs(node, current_prefix: str):
+                if node.end_of_word:
+                    result.append(current_prefix)
+                else:
+                    for char, child in node.children.items():
+                        dfs(child, f"{current_prefix}{char}")
+
+            dfs(self.root, "")
+
+            return result
+
+    temp_list = [
+        item
+        for item in domain_suffixs
+        if not any(keyword in item for keyword in domain_keywords)
+    ]
+    trie = Trie()
+    for suffix in temp_list:
+        reversed_suffix = suffix[::-1]
+        trie.insert(reversed_suffix)
+    domain_suffixs = sorted([item[::-1] for item in trie.get_prefix()])
+
+    ## remove duplicate suffixs
+
+    domains = [
+        item
+        for item in domains
+        if not any(keyword in item for keyword in domain_keywords)
+    ]
+    domains = [
+        item
+        for item in domains
+        if not any(item.endswith(suffix) for suffix in domain_suffixs)
+    ]
+
+    return domains, domain_suffixs, domain_keywords
+
+
+def create_dns_module():
+    url = "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ChinaDomain.list"
+    domains, domain_suffixs, domain_keywords = get_rules(url)
+
+    content = """
+#!name=Enhanced DNS
+#!desc=增强 DNS 分流
+#!category=DNS
+
+[General]
+encrypted-dns-server = https://dns.google/dns-query, https://cloudflare-dns.com/dns-query
+entrypted-dns-follow-outbound-mode = true
+
+[Rule]
+DOMAIN,dns.google,🇭🇰香港
+DOMAIN,cloudflare-dns.com,🇭🇰香港
+
+[Host]
+"""
+    for domain in domains:
+        content = f"{content}{domain} = server:syslib\n"
+    if len(domain_suffixs) > 0:
+        content = f"{content}\n"
+    for suffix in domain_suffixs:
+        content = f"{content}*.{suffix} = server:syslib\n"
+    if len(domain_keywords) > 0:
+        content = f"{content}\n"
+    for keyword in domain_keywords:
+        content = f"{content}*{keyword}* = server:syslib\n"
+
+    module_path = os.path.join(current_dir, "module", "other", "Enhanced DNS.sgmodule")
+    with open(module_path, "w", encoding="utf-8") as f:
+        f.write(content)
+
+
 if __name__ == "__main__":
     process_file(
         src_dir=plugin_all_dir,
@@ -211,3 +323,5 @@ if __name__ == "__main__":
         url_dir="plugin/only_script",
         categoty=f"iKeLee%20-%20Scripts",
     )
+
+    create_dns_module()
