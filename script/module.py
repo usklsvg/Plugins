@@ -276,10 +276,6 @@ def create_dns_module():
 #!desc=增强 DNS 分流
 #!category=DNS
 
-[General]
-encrypted-dns-server = https://dns.google/dns-query, https://cloudflare-dns.com/dns-query
-entrypted-dns-follow-outbound-mode = true
-
 [Host]
 """
     for domain in domains:
