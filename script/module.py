@@ -280,10 +280,6 @@ def create_dns_module():
 encrypted-dns-server = https://dns.google/dns-query, https://cloudflare-dns.com/dns-query
 entrypted-dns-follow-outbound-mode = true
 
-[Rule]
-DOMAIN,dns.google,🇭🇰香港
-DOMAIN,cloudflare-dns.com,🇭🇰香港
-
 [Host]
 """
     for domain in domains:
