@@ -3,6 +3,9 @@
 #!desc=增强 DNS 分流
 #!category=DNS
 
+[General]
+encrypted-dns-server = https://doh.pub/dns-query, h3://dns.alidns.com/dns-query
+
 [Host]
 wmsjsteam.com = server:syslib
 dl.steam.clngaa.com = server:syslib

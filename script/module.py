@@ -43,6 +43,13 @@ def save_content(content: str, filename: str):
         print(f"Error when saving content to {filename}: {e}")
 
 
+###############################################################################
+#
+# convert plugin to module
+#
+###############################################################################
+
+
 def modify_content_common(content: str):
     lines = content.splitlines()
 
@@ -190,15 +197,55 @@ def process_file(src_dir: str, dst_dir: str, url_dir: str, categoty: str):
         )
 
 
+###############################################################################
+#
+# process DNS module
+#
+###############################################################################
+
+
+class TrieNode:
+    def __init__(self):
+        self.children: dict[str, TrieNode] = {}
+        self.end_of_word = False
+
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+
+    def insert(self, word: str):
+        node = self.root
+        for char in word:
+            if char not in node.children:
+                node.children[char] = TrieNode()
+            node = node.children[char]
+        node.end_of_word = True
+
+    def get_prefix(self) -> list[str]:
+        result: list[str] = []
+
+        def dfs(node, current_prefix: str):
+            if node.end_of_word:
+                result.append(current_prefix)
+            else:
+                for char, child in node.children.items():
+                    dfs(child, f"{current_prefix}{char}")
+
+        dfs(self.root, "")
+
+        return result
+
+
 def get_rules(url: str):
     content = get_url_text_content(url)
     rules = [item.strip() for item in content.split("\n") if item.startswith("D")]
 
     ## get rules
 
-    domains = []
-    domain_suffixs = ["cn"]
-    domain_keywords = []
+    domains: list[str] = []
+    domain_suffixs: list[str] = ["cn"]
+    domain_keywords: list[str] = []
     for rule in rules:
         items = [item for item in rule.split(",") if item.strip()]
         if rule.startswith("DOMAIN,"):
@@ -209,36 +256,6 @@ def get_rules(url: str):
             domain_keywords.append(items[1])
 
     ## remove duplicate suffixs
-    class TrieNode:
-        def __init__(self):
-            self.children: dict[str, TrieNode] = {}
-            self.end_of_word = False
-
-    class Trie:
-        def __init__(self):
-            self.root = TrieNode()
-
-        def insert(self, word: str):
-            node = self.root
-            for char in word:
-                if char not in node.children:
-                    node.children[char] = TrieNode()
-                node = node.children[char]
-            node.end_of_word = True
-
-        def get_prefix(self) -> list[str]:
-            result: list[str] = []
-
-            def dfs(node, current_prefix: str):
-                if node.end_of_word:
-                    result.append(current_prefix)
-                else:
-                    for char, child in node.children.items():
-                        dfs(child, f"{current_prefix}{char}")
-
-            dfs(self.root, "")
-
-            return result
 
     temp_list = [
         item
@@ -254,14 +271,14 @@ def get_rules(url: str):
     ## remove duplicate suffixs
 
     domains = [
-        item
-        for item in domains
-        if not any(keyword in item for keyword in domain_keywords)
+        domain
+        for domain in domains
+        if not any(keyword in domain for keyword in domain_keywords)
     ]
     domains = [
-        item
-        for item in domains
-        if not any(item.endswith(suffix) for suffix in domain_suffixs)
+        domain
+        for domain in domains
+        if not any(domain.endswith(suffix) for suffix in domain_suffixs)
     ]
 
     return domains, domain_suffixs, domain_keywords
@@ -276,14 +293,19 @@ def create_dns_module():
 #!desc=增强 DNS 分流
 #!category=DNS
 
+[General]
+encrypted-dns-server = https://doh.pub/dns-query, h3://dns.alidns.com/dns-query
+
 [Host]
 """
     for domain in domains:
         content = f"{content}{domain} = server:syslib\n"
+
     if len(domain_suffixs) > 0:
         content = f"{content}\n"
     for suffix in domain_suffixs:
         content = f"{content}*.{suffix} = server:syslib\n"
+
     if len(domain_keywords) > 0:
         content = f"{content}\n"
     for keyword in domain_keywords:
@@ -292,6 +314,13 @@ def create_dns_module():
     module_path = os.path.join(current_dir, "module", "other", "Enhanced DNS.sgmodule")
     with open(module_path, "w", encoding="utf-8") as f:
         f.write(content)
+
+
+###############################################################################
+#
+# main
+#
+###############################################################################
 
 
 if __name__ == "__main__":
