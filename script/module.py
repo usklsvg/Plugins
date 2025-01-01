@@ -4,11 +4,8 @@ import shutil
 
 current_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 plugin_all_dir = os.path.join(current_dir, "extern", "ProxyResource", "plugin")
-plugin_no_script_dir = os.path.join(current_dir, "plugin", "no_script")
-plugin_only_script_dir = os.path.join(current_dir, "plugin", "only_script")
-module_all_dir = os.path.join(current_dir, "module", "all")
-module_no_script_dir = os.path.join(current_dir, "module", "no_script")
-module_only_script_dir = os.path.join(current_dir, "module", "only_script")
+sgmodule_dir = os.path.join(current_dir, "sgmodule")
+module_dir = os.path.join(current_dir, "module")
 
 
 def recreate_path(pathname: str):
@@ -50,7 +47,7 @@ def save_content(content: str, filename: str):
 ###############################################################################
 
 
-def modify_content_common(content: str):
+def modify_content_common(content: str, type: str):
     lines = content.splitlines()
 
     empty_content = True
@@ -72,9 +69,10 @@ def modify_content_common(content: str):
             if lines[i][0] != "#" and lines[i].find("script-path") != -1:
                 lines[i] = lines[i].replace(
                     "Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js",
-                    "usklsvg/Plugins/refs/heads/main/script/body-rewrite.js",
+                    f"usklsvg/Plugins/refs/heads/main/script/body-rewrite-{type}.js",
                 )
-                lines[i] += ", script-update-interval=-1"
+                if type == "sg":
+                    lines[i] += f", script-update-interval=-1"
             elif lines[i][0] == "[":
                 break
         i += 1
@@ -171,30 +169,25 @@ def modify_content_taobao(content: str):
     return ret
 
 
-def process_file(src_dir: str, dst_dir: str, url_dir: str, categoty: str):
-    recreate_path(dst_dir)
+def process_file(type: str, src_dir: str, dst_dir: str, url_dir: str, categoty: str):
     for filename in os.listdir(src_dir):
         url = f"https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/{url_dir}/{filename}"
-        request_url = f"http://localhost:9101/file/_start_/{url}/_end_/sample.sgmodule.txt?type=loon-plugin&target=surge-module&sni=REJECT&del=true&category={categoty}"
+        request_url = f"http://localhost:9101/file/_start_/{url}/_end_/sample.sgmodule.txt?type=loon-plugin&target={'shadowrocket' if type == 'sr' else 'surge'}-module&{'' if type == 'sr' else 'sni=REJECT&'}del=true&category={categoty}"
         content = get_url_text_content(request_url)
-        if content == None:
-            continue
-
-        content = modify_content_common(content)
-        if filename == "Bilibili_remove_ads.plugin":
-            content = modify_content_bilibili(content)
-        elif filename == "Zhihu_remove_ads.plugin":
-            content = modify_content_zhihu(content)
-        elif filename == "Taobao_remove_ads.plugin":
-            content = modify_content_taobao(content)
-
-        if content == None:
-            continue
-        module_name = f"{filename[:filename.rfind('.')]}.sgmodule"
-        save_content(
-            content,
-            os.path.join(dst_dir, module_name),
-        )
+        if content != None:
+            content = modify_content_common(content, type)
+            if filename == "Bilibili_remove_ads.plugin":
+                content = modify_content_bilibili(content)
+            elif filename == "Zhihu_remove_ads.plugin":
+                content = modify_content_zhihu(content)
+            elif filename == "Taobao_remove_ads.plugin":
+                content = modify_content_taobao(content)
+            if content != None:
+                module_name = f"{filename[:filename.rfind('.')]}.{'module' if type == 'sr' else 'sgmodule'}"
+                save_content(
+                    content,
+                    os.path.join(dst_dir, module_name),
+                )
 
 
 ###############################################################################
@@ -311,7 +304,7 @@ encrypted-dns-server = https://doh.pub/dns-query, h3://dns.alidns.com/dns-query
     for keyword in domain_keywords:
         content = f"{content}*{keyword}* = server:syslib\n"
 
-    module_path = os.path.join(current_dir, "module", "other", "Enhanced DNS.sgmodule")
+    module_path = os.path.join(current_dir, "sgmodule", "Enhanced_DNS.sgmodule")
     with open(module_path, "w", encoding="utf-8") as f:
         f.write(content)
 
@@ -324,25 +317,21 @@ encrypted-dns-server = https://doh.pub/dns-query, h3://dns.alidns.com/dns-query
 
 
 if __name__ == "__main__":
+    recreate_path(sgmodule_dir)
     process_file(
+        "sg",
         src_dir=plugin_all_dir,
-        dst_dir=module_all_dir,
+        dst_dir=sgmodule_dir,
         url_dir="extern/ProxyResource/plugin",
         categoty="iKeLee",
     )
-
-    process_file(
-        src_dir=plugin_no_script_dir,
-        dst_dir=module_no_script_dir,
-        url_dir="plugin/no_script",
-        categoty=f"iKeLee%20-%20Rules%20%26%20Rewrites",
-    )
-
-    process_file(
-        src_dir=plugin_only_script_dir,
-        dst_dir=module_only_script_dir,
-        url_dir="plugin/only_script",
-        categoty=f"iKeLee%20-%20Scripts",
-    )
-
     create_dns_module()
+
+    recreate_path(module_dir)
+    process_file(
+        "sr",
+        src_dir=plugin_all_dir,
+        dst_dir=module_dir,
+        url_dir="extern/ProxyResource/plugin",
+        categoty="iKeLee",
+    )
