@@ -10,6 +10,7 @@
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/PiPiXia.png
 #!date=2024-11-28 00:00:00
 
+
 [Rule]
 AND,((DOMAIN-KEYWORD,-ad-),(DOMAIN-SUFFIX,byteimg.com)),REJECT
 AND,((DOMAIN-KEYWORD,-ttam-),(DOMAIN-SUFFIX,ibyteimg.com)),REJECT
@@ -60,10 +61,14 @@ DOMAIN-KEYWORD,-ad.byteoversea.com,REJECT
 DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT
 DOMAIN-KEYWORD,asiad.byteactivity,REJECT
 
+
 [Rewrite]
 ^https:\/\/api(5-lq)?\.pipix\.com\/api\/ad\/ reject-dict
+
 ^https:\/\/api(5-lq)?\.pipix\.com\/bds\/banner\/ reject-dict
+
 ^https:\/\/api(5-lq)?\.pipix\.com\/bds\/feed\/follow_feed\/ reject-dict
+
 
 [MitM]
 hostname=api.pipix.com,api5-lq.pipix.com

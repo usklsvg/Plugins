@@ -10,6 +10,7 @@
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Weibo.png
 #!date=2024-12-17 21:27:52
 
+
 [Script]
 http-response ^https:\/\/api\.weibo\.cn\/2\/(?:checkin\/show|client\/publisher_list|push\/active) script-path=https://kelee.one/Resource/Script/Weibo/Weibo_remove_ads.js,requires-body=true,tag=移除首页推广
 http-response ^https:\/\/api\.weibo\.cn\/2\/groups\/allgroups\/v2\? script-path=https://kelee.one/Resource/Script/Weibo/Weibo_remove_ads.js,requires-body=true,tag=移除首页顶部标签
@@ -30,6 +31,7 @@ http-response ^https:\/\/api\.weibo\.cn\/2\/searchall\? script-path=https://kele
 http-response ^https:\/\/bootpreload\.uve\.weibo\.com\/v[12]\/ad\/preload script-path=https://kelee.one/Resource/Script/Weibo/Weibo_remove_ads.js,requires-body=true,tag=移除开屏广告 preload
 http-response ^https:\/\/sdkapp\.uve\.weibo\.com\/interface\/sdk\/sdkad\.php script-path=https://kelee.one/Resource/Script/Weibo/Weibo_remove_ads.js,requires-body=true,tag=移除开屏广告 sdkad
 http-response ^https:\/\/wbapp\.uve\.weibo\.com\/(?:preload\/get_ad|wbapplua\/wbpullad\.lua) script-path=https://kelee.one/Resource/Script/Weibo/Weibo_remove_ads.js,requires-body=true,tag=移除开屏广告 wbapplua
+
 
 [MitM]
 hostname=*.weibo.cn,*.weibo.com,weibo.com

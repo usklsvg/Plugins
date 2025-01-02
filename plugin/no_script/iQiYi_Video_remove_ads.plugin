@@ -10,15 +10,19 @@
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/iQiYi_Video.png
 #!date=2024-11-28 00:00:00
 
+
 [Rule]
 DOMAIN-SUFFIX,cupid.iqiyi.com,DIRECT
+
 DOMAIN,api.iqiyi.com,REJECT
+
 
 [Rewrite]
 ^https:\/\/act\.vip\.iqiyi\.com\/interact\/api\/v2\/show\? reject-dict
 ^https:\/\/iface2\.iqiyi\.com\/ivos\/interact\/video\/data\? reject-dict
 ^https:\/\/iface2\.iqiyi\.com\/video\/3\.0\/v_interface_proxy\? reject-dict
 ^https:\/\/iface2\.iqiyi\.com\/views_pop\/3\.0\/pop_control\? reject-dict
+
 
 [MitM]
 hostname=-i.vip.iqiyi.com,*.iqiyi.com

@@ -10,9 +10,11 @@
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Weibo_intl.png
 #!date=2024-11-28 00:00:00
 
+
 [Rewrite]
 ^https?:\/\/api\.weibo\.cn\/\d\/(cardlist\?v_f=\d|ad\/weibointl\?) reject-dict
 ^https?:\/\/weibointl\.api\.weibo\.cn\/portal\.php\?a=hot_search_users reject-dict
+
 
 [MitM]
 hostname=*api.weibo.cn,sdkapp.uve.weibo.com

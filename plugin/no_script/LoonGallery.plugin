@@ -10,9 +10,11 @@
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Loon.png
 #!date=2024-11-28 00:00:00
 
+
 [Rule]
 DOMAIN,loon-plugin.vercel.app,PROXY
 DOMAIN,raw.githubusercontent.com,PROXY
+
 
 [MitM]
 hostname=xn--ck8h.com

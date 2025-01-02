@@ -10,8 +10,10 @@
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/MeituMYXJ.png
 #!date=2024-11-28 00:00:00
 
+
 [Script]
 http-response ^https:\/\/api\.meiyan\.com\/operation\/home\.json\? script-path=https://kelee.one/Resource/Script/MeituMYXJ/MeituMYXJ_remove_ads.js,requires-body=true,tag=精简首页功能栏目并移除美颜推荐
+
 
 [MitM]
 hostname=api.meiyan.com,video-dsp.pddpic.com,t-dsp.pinduoduo.com,images.pinduoduo.com

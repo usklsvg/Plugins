@@ -13,8 +13,10 @@
 #!input=Parser_body_max
 #!input=Parser_http_timeout
 
+
 [Rule]
 DOMAIN,scripthub.vercel.app,PROXY
+
 
 [MitM]
 hostname=script.hub,*.script.hub

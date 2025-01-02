@@ -10,6 +10,7 @@
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/BabyTree.png
 #!date=2024-11-28 00:00:00
 
+
 [Script]
 http-response ^http:\/\/api\.babytree\.com\/bafconfigcenter_intf\/config\/get\? script-path=https://kelee.one/Resource/Script/BabyTree/BabyTree_remove_ads.js,requires-body=true,tag=调整整体配置
 http-response ^http:\/\/go\.babytree\.com\/go_pregnancy\/api\/(app_index\/get_app_tab|cms_column\/get_column_list|feeds\/get_index_feeds_list|user\/get_user_info)\? script-path=https://kelee.one/Resource/Script/BabyTree/BabyTree_remove_ads.js,requires-body=true,tag=移除各页面推广

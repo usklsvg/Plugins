@@ -13,9 +13,11 @@
 #!select=移除全部轮播图,开启,关闭
 #!date=2024-11-28 00:00:00
 
+
 [Rewrite]
 ^https?:\/\/api\.zuihuimai\.com\/static\/.*\/hongbao reject
 ^https?:\/\/dat\.ruanmei\.com\/ithome\/money\/acd\.json$ reject
+
 
 [MitM]
 hostname=napi.ithome.com,api.zuihuimai.com,dat.ruanmei.com
