@@ -277,38 +277,6 @@ def get_rules(url: str):
     return domains, domain_suffixs, domain_keywords
 
 
-def create_dns_module():
-    url = "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ChinaDomain.list"
-    domains, domain_suffixs, domain_keywords = get_rules(url)
-
-    content = """
-#!name=Enhanced DNS
-#!desc=增强 DNS 分流
-#!category=DNS
-
-[General]
-encrypted-dns-server = https://doh.pub/dns-query, h3://dns.alidns.com/dns-query
-
-[Host]
-"""
-    for domain in domains:
-        content = f"{content}{domain} = server:syslib\n"
-
-    if len(domain_suffixs) > 0:
-        content = f"{content}\n"
-    for suffix in domain_suffixs:
-        content = f"{content}*.{suffix} = server:syslib\n"
-
-    if len(domain_keywords) > 0:
-        content = f"{content}\n"
-    for keyword in domain_keywords:
-        content = f"{content}*{keyword}* = server:syslib\n"
-
-    module_path = os.path.join(current_dir, "sgmodule", "Enhanced_DNS.sgmodule")
-    with open(module_path, "w", encoding="utf-8") as f:
-        f.write(content)
-
-
 ###############################################################################
 #
 # main
@@ -325,7 +293,6 @@ if __name__ == "__main__":
         url_dir="extern/ProxyResource/plugin",
         categoty="iKeLee",
     )
-    create_dns_module()
 
     recreate_path(module_dir)
     process_file(

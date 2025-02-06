@@ -22,7 +22,7 @@ def get_url_text_content(url: str):
 
 
 def download_url_file(url: str, filename: str):
-    headers = {"User-Agent": "Loon/787 CFNetwork/1568.200.51 Darwin/24.1.0"}
+    headers = {"User-Agent": "Loon/821 CFNetwork/3826.400.120 Darwin/24.3.0"}
     try:
         response = requests.get(url, headers=headers, stream=True)
         if response.status_code == 200:
@@ -122,11 +122,13 @@ def modify_content_zhihu(lines: list[str]):
         # 注释 我的页面
         if lines[i].find("^https:\/\/api\.zhihu\.com\/me\/guides") != -1:
             lines[i] = f"# {lines[i]}"
-        elif lines[i].find("^https:\/\/api\.zhihu\.com\/people\/homepage_entry_v2")!= -1:
+        elif (
+            lines[i].find("^https:\/\/api\.zhihu\.com\/people\/homepage_entry_v2") != -1
+        ):
             lines[i] = f"# {lines[i]}"
-        elif lines[i].find("^https:\/\/api\.zhihu\.com\/unlimited\/go\/my_card")!= -1:
+        elif lines[i].find("^https:\/\/api\.zhihu\.com\/unlimited\/go\/my_card") != -1:
             lines[i] = f"# {lines[i]}"
-        elif lines[i].find("^https:\/\/www\.zhihu\.com\/appview\/v3\/zhmore")!= -1:
+        elif lines[i].find("^https:\/\/www\.zhihu\.com\/appview\/v3\/zhmore") != -1:
             lines[i] = f"# {lines[i]}"
         i += 1
     return lines
