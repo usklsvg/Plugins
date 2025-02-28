@@ -10,10 +10,8 @@
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/Other_icon/120px/BoxJS.png
 #!date=2024-11-28 00:00:00
 
-
 [Rule]
 DOMAIN-SUFFIX,jsdelivr.net,PROXY
-
 
 [MitM]
 hostname=boxjs.com,boxjs.net,*.boxjs.com,*.boxjs.net

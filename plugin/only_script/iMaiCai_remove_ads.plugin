@@ -10,10 +10,9 @@
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/iMaiCai.png
 #!date=2024-11-28 00:00:00
 
-
 [Script]
+# 下发广告
 http-response ^https:\/\/portal-portm\.meituan\.com\/horn_ios\/mergeRequest script-path=https://kelee.one/Resource/Script/iMaiCai/iMaiCai_remove_ads.js,requires-body=true,tag=移除下发广告
-
 
 [MitM]
 hostname=portal-portm.meituan.com,mall.meituan.com,businessapi.ksedt.com

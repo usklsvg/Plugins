@@ -10,11 +10,10 @@
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/QuarkBrowser.png
 #!date=2024-11-28 00:00:00
 
-
 [Rewrite]
+# 小说底部文案广告
 ^https:\/\/huichuan\.sm\.cn\/nativead$ reject
 ^https:\/\/stars\.shuqireader\.com\/kkios\/render\/load\/resource\/appConfig$ reject-dict
-
 
 [MitM]
 hostname=huichuan.sm.cn,stars.shuqireader.com,open-cms-api.quark.cn

@@ -10,10 +10,8 @@
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/CoolApk.png
 #!date=2024-12-05 14:00:35
 
-
 [Rewrite]
 ^https:\/\/api\.coolapk\.com\/v6\/search\?.*type=hotSearch reject-dict
-
 
 [MitM]
 hostname=api.coolapk.com

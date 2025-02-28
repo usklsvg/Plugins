@@ -10,13 +10,15 @@
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/FlyerTea.png
 #!date=2024-11-28 00:00:00
 
-
 [Rewrite]
+# 全局广告配置
 ^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?module=advis reject
+# 我的页面 - 弹窗
 ^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?module=vip_coupon reject-dict
+# 我的页面 - 悬浮窗
 ^https:\/\/ptf\.flyertrip\.com\/static\/img\/common\/ic_plate_mine_button\.png reject-img
+# 发帖 - 横幅广告
 ^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?module=getdata reject-dict
-
 
 [MitM]
 hostname=www.flyert.com.cn,ptf.flyertrip.com

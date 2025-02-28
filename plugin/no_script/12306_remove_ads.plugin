@@ -10,10 +10,9 @@
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/12306.png
 #!date=2024-11-28 00:00:00
 
-
 [Rule]
+# 放行规则
 DOMAIN,ad.12306.cn,DIRECT
-
 
 [MitM]
 hostname=ad.12306.cn,mobile.12306.cn

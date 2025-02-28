@@ -10,7 +10,6 @@
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/smzdm.png
 #!date=2024-11-28 00:00:00
 
-
 [Rule]
 DOMAIN,aaid.uyunad.com,REJECT
 DOMAIN,acs4baichuan.m.taobao.com,REJECT
@@ -23,10 +22,8 @@ DOMAIN,sec.umeng.com,REJECT
 DOMAIN,ulogs.umeng.com,REJECT
 DOMAIN,ynuf.aliapp.org,REJECT
 
-
 [Rewrite]
 ^https:\/\/haojia\.m\.smzdm\.com\/detail_modul\/(other_modul|wiki_related_modul)|^https:\/\/s3\.zdmimg\.com\/third\/index|^https:\/\/app-api\.smzdm\.com\/util\/loading reject-dict
-
 
 [MitM]
 hostname=haojia-api.smzdm.com,homepage-api.smzdm.com,app-api.smzdm.com,user-api.smzdm.com,article-api.smzdm.com ,qianbao.smzdm.com,s3.zdmimg.com

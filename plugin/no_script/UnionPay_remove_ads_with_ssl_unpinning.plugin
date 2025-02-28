@@ -10,16 +10,14 @@
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/UnionPay.png
 #!date=2024-11-28 00:00:00
 
-
 [Rule]
+# 开屏广告
 DOMAIN,ads.95516.com,REJECT
 DOMAIN,switch.cup.com.cn,REJECT
 DOMAIN,tysdk.95516.com,REJECT
 
-
 [Rewrite]
 ^https:\/\/wallet\.95516\.com(:10533)?\/s\/wl\/icon\/large\/1 reject
-
 
 [MitM]
 hostname=account.95516.com,base.95516.com,content.95516.com
