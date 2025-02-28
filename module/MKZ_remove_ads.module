@@ -58,15 +58,21 @@ DOMAIN-KEYWORD,log-api.pangolin-sdk-toutiao,REJECT
 DOMAIN-KEYWORD,-ad.byteoversea.com,REJECT
 DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT
 DOMAIN-KEYWORD,asiad.byteactivity,REJECT
+# InMobi - 邑盟信息技术（上海）有限公司
 DOMAIN,config.inmobi.cn,REJECT
+# 极光 - 广告服务商
 DOMAIN-SUFFIX,jiguang.cn,REJECT
 DOMAIN-SUFFIX,jpush.cn,REJECT
+# 腾讯优量汇 - 广告服务商
 DOMAIN,ios.bugly.qq.com,REJECT
 DOMAIN,sdk.e.qq.com,REJECT
 DOMAIN,us.l.qq.com,REJECT
 DOMAIN-SUFFIX,ugdtimg.com,REJECT
+# DOMAIN,qzs.gdtimg.com,REJECT
 DOMAIN-SUFFIX,gdt.qq.com,REJECT
+# c2.gdt.qq.com,REJECT
 DOMAIN,tmeadcomm.y.qq.com,REJECT
+# 友盟
 DOMAIN,cnlogs.umeng.com,REJECT
 DOMAIN,errlog.umeng.com,REJECT
 DOMAIN,errnewlog.umeng.com,REJECT
@@ -78,12 +84,16 @@ DOMAIN,aspect-upush.umeng.com,REJECT
 DOMAIN,plbslog.umeng.com,REJECT
 
 [URL Rewrite]
+# 阅读页面视频广告
 ^https:\/\/base\.mkzcdn\.com\/advert\/app\/read\/v\d - reject-dict
 ^https:\/\/base\.mkzcdn\.com\/advert\/app\/story\/read\/v\d - reject-dict
+# 任务激励视频
 ^https:\/\/base\.mkzcdn\.com\/advert\/app\/task\/motivate\/v\d - reject-dict
+# 我的页面 - 邀请好友、客栈魔法屋
 ^https:\/\/base\.mkzcdn\.com\/advert\/app\/user\/slide\d\/v\d\/ - reject-dict
 
 [Script]
+# 配置修改
 配置修改 = type=http-response, pattern=^https:\/\/base\.mkzcdn\.com\/app\/config\/, script-path=https://kelee.one/Resource/Script/MKZ/MKZ_remove_ads.js, requires-body=true
 
 [MITM]
