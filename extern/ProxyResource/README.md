@@ -191,7 +191,7 @@
   </tr>
   <tr>
     <td>033</td>
-    <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Plugin/Mango_Viedo_remove_ads.plugin">芒果TV去广告</a></td>
+    <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Plugin/MangoTV_remove_ads.plugin">芒果TV去广告</a></td>
   </tr>
   <tr>
     <td>034</td>
