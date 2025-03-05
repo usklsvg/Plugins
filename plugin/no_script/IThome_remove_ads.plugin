@@ -8,10 +8,11 @@
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/IThome.png
-#!select=移除置顶项,开启,关闭
-#!select=移除轮播图广告,开启,关闭
-#!select=移除全部轮播图,开启,关闭
-#!date=2024-11-28 00:00:00
+#!date=2025-03-04 22:39:03
+
+[Argument]
+removeTopSwitch=switch,true,tag=移除置顶项,desc=移除置顶文章
+removeBannerSwitch=switch,true,tag=移除轮播图,desc=移除轮播图
 
 [Rewrite]
 ^https?:\/\/api\.zuihuimai\.com\/static\/.*\/hongbao reject
