@@ -22,7 +22,7 @@ def get_url_text_content(url: str):
 
 
 def download_url_file(url: str, filename: str):
-    headers = {"User-Agent": "Loon/821 CFNetwork/3826.400.120 Darwin/24.3.0"}
+    headers = {"User-Agent": "script-hub/1.0.0"}
     try:
         response = requests.get(url, headers=headers, stream=True)
         if response.status_code == 200:

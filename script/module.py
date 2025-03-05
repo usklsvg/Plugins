@@ -172,7 +172,14 @@ def modify_content_taobao(content: str):
 def process_file(type: str, src_dir: str, dst_dir: str, url_dir: str, categoty: str):
     for filename in os.listdir(src_dir):
         url = f"https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/{url_dir}/{filename}"
-        request_url = f"http://localhost:9101/file/_start_/{url}/_end_/sample.sgmodule.txt?type=loon-plugin&target={'shadowrocket' if type == 'sr' else 'surge'}-module&{'' if type == 'sr' else 'sni=REJECT&'}del=true&category={categoty}"
+        request_url = f"http://localhost:9101/file/_start_/{url}/_end_/sample.sgmodule.txt?type=loon-plugin&del=true&category={categoty}"
+        if type == "sr":
+            request_url = f"{request_url}&target=shadowrocket-module"
+        else:
+            request_url = (
+                f"{request_url}&target=surge-module&sni=REJECT&pm=REJECT&jqEnabled=true"
+            )
+
         content = get_url_text_content(request_url)
         if content != None:
             content = modify_content_common(content, type)
@@ -192,97 +199,9 @@ def process_file(type: str, src_dir: str, dst_dir: str, url_dir: str, categoty: 
 
 ###############################################################################
 #
-# process DNS module
-#
-###############################################################################
-
-
-class TrieNode:
-    def __init__(self):
-        self.children: dict[str, TrieNode] = {}
-        self.end_of_word = False
-
-
-class Trie:
-    def __init__(self):
-        self.root = TrieNode()
-
-    def insert(self, word: str):
-        node = self.root
-        for char in word:
-            if char not in node.children:
-                node.children[char] = TrieNode()
-            node = node.children[char]
-        node.end_of_word = True
-
-    def get_prefix(self) -> list[str]:
-        result: list[str] = []
-
-        def dfs(node, current_prefix: str):
-            if node.end_of_word:
-                result.append(current_prefix)
-            else:
-                for char, child in node.children.items():
-                    dfs(child, f"{current_prefix}{char}")
-
-        dfs(self.root, "")
-
-        return result
-
-
-def get_rules(url: str):
-    content = get_url_text_content(url)
-    rules = [item.strip() for item in content.split("\n") if item.startswith("D")]
-
-    ## get rules
-
-    domains: list[str] = []
-    domain_suffixs: list[str] = ["cn"]
-    domain_keywords: list[str] = []
-    for rule in rules:
-        items = [item for item in rule.split(",") if item.strip()]
-        if rule.startswith("DOMAIN,"):
-            domains.append(items[1])
-        elif rule.startswith("DOMAIN-SUFFIX,"):
-            domain_suffixs.append(items[1])
-        elif rule.startswith("DOMAIN-KEYWORD,"):
-            domain_keywords.append(items[1])
-
-    ## remove duplicate suffixs
-
-    temp_list = [
-        item
-        for item in domain_suffixs
-        if not any(keyword in item for keyword in domain_keywords)
-    ]
-    trie = Trie()
-    for suffix in temp_list:
-        reversed_suffix = suffix[::-1]
-        trie.insert(reversed_suffix)
-    domain_suffixs = sorted([item[::-1] for item in trie.get_prefix()])
-
-    ## remove duplicate suffixs
-
-    domains = [
-        domain
-        for domain in domains
-        if not any(keyword in domain for keyword in domain_keywords)
-    ]
-    domains = [
-        domain
-        for domain in domains
-        if not any(domain.endswith(suffix) for suffix in domain_suffixs)
-    ]
-
-    return domains, domain_suffixs, domain_keywords
-
-
-###############################################################################
-#
 # main
 #
 ###############################################################################
-
 
 if __name__ == "__main__":
     recreate_path(sgmodule_dir)
