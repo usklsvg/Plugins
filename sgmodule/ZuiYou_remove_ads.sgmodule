@@ -11,31 +11,31 @@
 
 [Rule]
 # 字节跳动
-DOMAIN,toblog.ctobsnssdk.com,REJECT,extended-matching
-DOMAIN,mon.zijieapi.com,REJECT,extended-matching
-DOMAIN-KEYWORD,api-access.pangolin-sdk-toutiao,REJECT,extended-matching
-DOMAIN-KEYWORD,-fe-tos.pglstatp-toutiao.com,REJECT,extended-matching
-DOMAIN-KEYWORD,-be-pack-sign.pglstatp-toutiao.com,REJECT,extended-matching
-DOMAIN-KEYWORD,log-api.pangolin-sdk-toutiao,REJECT,extended-matching
+DOMAIN,toblog.ctobsnssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,mon.zijieapi.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,api-access.pangolin-sdk-toutiao,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,-fe-tos.pglstatp-toutiao.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,-be-pack-sign.pglstatp-toutiao.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,log-api.pangolin-sdk-toutiao,REJECT,extended-matching,pre-matching
 # 友盟
-DOMAIN,cnlogs.umeng.com,REJECT,extended-matching
-DOMAIN,errlog.umeng.com,REJECT,extended-matching
-DOMAIN,ucc.umeng.com,REJECT,extended-matching
-DOMAIN,ulogs.umeng.com,REJECT,extended-matching
-DOMAIN,utoken.umeng.com,REJECT,extended-matching
+DOMAIN,cnlogs.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,errlog.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,ucc.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,ulogs.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,utoken.umeng.com,REJECT,extended-matching,pre-matching
 # 腾讯
-DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching
-DOMAIN,ios.bugly.qq.com,REJECT,extended-matching
-DOMAIN,mi.gdt.qq.com,REJECT,extended-matching
-DOMAIN,pgdt.ugdtimg.com,REJECT,extended-matching
-DOMAIN,sdk.e.qq.com,REJECT,extended-matching
-DOMAIN,win.gdt.qq.com,REJECT,extended-matching
+DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching,pre-matching
+DOMAIN,ios.bugly.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,mi.gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,pgdt.ugdtimg.com,REJECT,extended-matching,pre-matching
+DOMAIN,sdk.e.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,win.gdt.qq.com,REJECT,extended-matching,pre-matching
 # 快手
-DOMAIN,gdfp.gifshow.com,REJECT,extended-matching
-DOMAIN,open.e.kuaishou.com,REJECT,extended-matching
-DOMAIN-SUFFIX,adukwai.com,REJECT,extended-matching
+DOMAIN,gdfp.gifshow.com,REJECT,extended-matching,pre-matching
+DOMAIN,open.e.kuaishou.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,adukwai.com,REJECT,extended-matching,pre-matching
 # 其他广告
-DOMAIN,adapi.izuiyou.com,REJECT,extended-matching
+DOMAIN,adapi.izuiyou.com,REJECT,extended-matching,pre-matching
 # 信息流广告
 URL-REGEX,"^http:\/\/mercury-gateway\.ixiaochuan\.cn\/mercury\/v1\/ad\/",REJECT-TINYGIF,extended-matching
 # 搜索 - 榜单页面

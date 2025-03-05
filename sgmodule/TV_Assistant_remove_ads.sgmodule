@@ -10,55 +10,55 @@
 #!date=2024-11-28 00:00:00
 
 [Rule]
-AND,((DOMAIN-KEYWORD,ads,extended-matching),(DOMAIN-KEYWORD,normal,extended-matching),(DOMAIN-SUFFIX,zijieapi.com,extended-matching)),REJECT
-AND,((DOMAIN-KEYWORD,-ad-,extended-matching),(DOMAIN-SUFFIX,byteimg.com,extended-matching)),REJECT
-AND,((DOMAIN-KEYWORD,minigame,extended-matching),(DOMAIN-SUFFIX,zijieapi.com,extended-matching)),REJECT
-AND,((DOMAIN-KEYWORD,tnc,extended-matching),(AND,((OR,((DOMAIN-KEYWORD,-bjlgy,extended-matching),(DOMAIN-KEYWORD,-alisc,extended-matching),(DOMAIN-KEYWORD,-aliec,extended-matching))),(OR,((DOMAIN-SUFFIX,snssdk.com,extended-matching),(DOMAIN-SUFFIX,toutiaoapi.com,extended-matching),(DOMAIN-SUFFIX,bytedance.com,extended-matching),(DOMAIN-SUFFIX,zijieapi.com,extended-matching)))))),REJECT
-DOMAIN,mon.zijieapi.com,REJECT,extended-matching
-DOMAIN,mssdk-bu.bytedance.com,REJECT,extended-matching
-DOMAIN,toblog.ctobsnssdk.com,REJECT,extended-matching
-DOMAIN,lf-cdn-tos.bytescm.com,REJECT,extended-matching
-DOMAIN-KEYWORD,-ad-sign.byteimg.com,REJECT,extended-matching
-DOMAIN-KEYWORD,-be-pack-sign.pglstatp-toutiao.com,REJECT,extended-matching
-DOMAIN-KEYWORD,-be-pack.pglstatp-toutiao.com,REJECT,extended-matching
-DOMAIN-KEYWORD,-fe-tos.pglstatp-toutiao.com,REJECT,extended-matching
-DOMAIN-KEYWORD,api-access.pangolin-sdk-toutiao,REJECT,extended-matching
-DOMAIN-KEYWORD,log-api.pangolin-sdk-toutiao,REJECT,extended-matching
+AND,((DOMAIN-KEYWORD,ads,extended-matching),(DOMAIN-KEYWORD,normal,extended-matching),(DOMAIN-SUFFIX,zijieapi.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,-ad-,extended-matching),(DOMAIN-SUFFIX,byteimg.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,minigame,extended-matching),(DOMAIN-SUFFIX,zijieapi.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,tnc,extended-matching),(AND,((OR,((DOMAIN-KEYWORD,-bjlgy,extended-matching),(DOMAIN-KEYWORD,-alisc,extended-matching),(DOMAIN-KEYWORD,-aliec,extended-matching))),(OR,((DOMAIN-SUFFIX,snssdk.com,extended-matching),(DOMAIN-SUFFIX,toutiaoapi.com,extended-matching),(DOMAIN-SUFFIX,bytedance.com,extended-matching),(DOMAIN-SUFFIX,zijieapi.com,extended-matching)))))),REJECT,pre-matching
+DOMAIN,mon.zijieapi.com,REJECT,extended-matching,pre-matching
+DOMAIN,mssdk-bu.bytedance.com,REJECT,extended-matching,pre-matching
+DOMAIN,toblog.ctobsnssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,lf-cdn-tos.bytescm.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,-ad-sign.byteimg.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,-be-pack-sign.pglstatp-toutiao.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,-be-pack.pglstatp-toutiao.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,-fe-tos.pglstatp-toutiao.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,api-access.pangolin-sdk-toutiao,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,log-api.pangolin-sdk-toutiao,REJECT,extended-matching,pre-matching
 # 快手联盟 - 广告服务商
-DOMAIN,gdfp.gifshow.com,REJECT,extended-matching
-DOMAIN,open.e.kuaishou.com,REJECT,extended-matching
-DOMAIN-SUFFIX,adukwai.com,REJECT,extended-matching
+DOMAIN,gdfp.gifshow.com,REJECT,extended-matching,pre-matching
+DOMAIN,open.e.kuaishou.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,adukwai.com,REJECT,extended-matching,pre-matching
 # 百度联盟 - 广告服务商
-DOMAIN,mobads.baidu.com,REJECT,extended-matching
-DOMAIN,mobads-logs.baidu.com,REJECT,extended-matching
-DOMAIN,wn.pos.baidu.com,REJECT,extended-matching
-DOMAIN,bgg.baidu.com,REJECT,extended-matching
-DOMAIN,als.baidu.com,REJECT,extended-matching
-DOMAIN,feed-image.baidu.com,REJECT,extended-matching
-DOMAIN-SUFFIX,union.baidu.cn,REJECT,extended-matching
-DOMAIN-SUFFIX,union.baidu.com,REJECT,extended-matching
+DOMAIN,mobads.baidu.com,REJECT,extended-matching,pre-matching
+DOMAIN,mobads-logs.baidu.com,REJECT,extended-matching,pre-matching
+DOMAIN,wn.pos.baidu.com,REJECT,extended-matching,pre-matching
+DOMAIN,bgg.baidu.com,REJECT,extended-matching,pre-matching
+DOMAIN,als.baidu.com,REJECT,extended-matching,pre-matching
+DOMAIN,feed-image.baidu.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,union.baidu.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,union.baidu.com,REJECT,extended-matching,pre-matching
 # 上海优比客思科技有限公司 - 广告服务商
-DOMAIN,tower.ubixioe.com,REJECT,extended-matching
-DOMAIN,sdk-data.ubixioe.com,REJECT,extended-matching
+DOMAIN,tower.ubixioe.com,REJECT,extended-matching,pre-matching
+DOMAIN,sdk-data.ubixioe.com,REJECT,extended-matching,pre-matching
 # 袤博 - 广告服务商
-DOMAIN,api-c.dutils.com,REJECT,extended-matching
-DOMAIN,api-d.dutils.com,REJECT,extended-matching
-DOMAIN,api-p0.yksdks.com,REJECT,extended-matching
-DOMAIN,cache-verify.dutils.com,REJECT,extended-matching
-DOMAIN,cdn-api-verify.dutils.com,REJECT,extended-matching
-DOMAIN,devs-data.dutils.com,REJECT,extended-matching
-DOMAIN,log-verify.dutils.com,REJECT,extended-matching
-DOMAIN,m.mpl.dutils.com,REJECT,extended-matching
-DOMAIN,api.share.mob.com,REJECT,extended-matching
-DOMAIN,api.verify.mob.com,REJECT,extended-matching
-DOMAIN,log-verify.mob.com,REJECT,extended-matching
-DOMAIN,sdk.push.mob.com,REJECT,extended-matching
+DOMAIN,api-c.dutils.com,REJECT,extended-matching,pre-matching
+DOMAIN,api-d.dutils.com,REJECT,extended-matching,pre-matching
+DOMAIN,api-p0.yksdks.com,REJECT,extended-matching,pre-matching
+DOMAIN,cache-verify.dutils.com,REJECT,extended-matching,pre-matching
+DOMAIN,cdn-api-verify.dutils.com,REJECT,extended-matching,pre-matching
+DOMAIN,devs-data.dutils.com,REJECT,extended-matching,pre-matching
+DOMAIN,log-verify.dutils.com,REJECT,extended-matching,pre-matching
+DOMAIN,m.mpl.dutils.com,REJECT,extended-matching,pre-matching
+DOMAIN,api.share.mob.com,REJECT,extended-matching,pre-matching
+DOMAIN,api.verify.mob.com,REJECT,extended-matching,pre-matching
+DOMAIN,log-verify.mob.com,REJECT,extended-matching,pre-matching
+DOMAIN,sdk.push.mob.com,REJECT,extended-matching,pre-matching
 # 友盟
-DOMAIN,cnlogs.umeng.com,REJECT,extended-matching
-DOMAIN,errlog.umeng.com,REJECT,extended-matching
-DOMAIN,ucc.umeng.com,REJECT,extended-matching
-DOMAIN,ulogs.umeng.com,REJECT,extended-matching
-DOMAIN,utoken.umeng.com,REJECT,extended-matching
+DOMAIN,cnlogs.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,errlog.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,ucc.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,ulogs.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,utoken.umeng.com,REJECT,extended-matching,pre-matching
 
 [Map Local]
 # 首页 - 弹窗

@@ -10,12 +10,12 @@
 #!date=2025-02-28 20:08:47
 
 [Rule]
-DOMAIN,iadmat.nosdn.127.net,REJECT,extended-matching
-DOMAIN,iadmatapk.nosdn.127.net,REJECT,extended-matching
-DOMAIN,iadmusicmat.music.126.net,REJECT,extended-matching
-DOMAIN,iadmusicmatvideo.music.126.net,REJECT,extended-matching
-DOMAIN,ipv4.music.163.com,REJECT,extended-matching
-DOMAIN,ipv6.music.163.com,REJECT,extended-matching
+DOMAIN,iadmat.nosdn.127.net,REJECT,extended-matching,pre-matching
+DOMAIN,iadmatapk.nosdn.127.net,REJECT,extended-matching,pre-matching
+DOMAIN,iadmusicmat.music.126.net,REJECT,extended-matching,pre-matching
+DOMAIN,iadmusicmatvideo.music.126.net,REJECT,extended-matching,pre-matching
+DOMAIN,ipv4.music.163.com,REJECT,extended-matching,pre-matching
+DOMAIN,ipv6.music.163.com,REJECT,extended-matching,pre-matching
 
 [Map Local]
 # 今日运势 商城 Beat专区 音乐收藏家 | type:ACTIVITY | 低至5.2折

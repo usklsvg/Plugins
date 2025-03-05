@@ -13,7 +13,7 @@
 # 放行地址
 DOMAIN-SUFFIX,cupid.iqiyi.com,DIRECT
 # 拦截地址
-DOMAIN,api.iqiyi.com,REJECT,extended-matching
+DOMAIN,api.iqiyi.com,REJECT,extended-matching,pre-matching
 
 [Map Local]
 # 播放页开通会员提示

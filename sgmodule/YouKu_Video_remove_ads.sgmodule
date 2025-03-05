@@ -15,25 +15,25 @@ DOMAIN,push.m.youku.com,DIRECT
 DOMAIN,un-acs.youku.com,DIRECT
 DOMAIN,dorangesource.alicdn.com,DIRECT
 # 拦截地址
-DOMAIN,acs4baichuan.m.taobao.com,REJECT,extended-matching
-DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching
-DOMAIN,amdc.m.youku.com,REJECT,extended-matching
-DOMAIN,api.sm.cn,REJECT,extended-matching
-DOMAIN,apiv4-iyes.youku.com,REJECT,extended-matching
-DOMAIN,baichuan-sdk.alicdn.com,REJECT,extended-matching
-DOMAIN,cad.youku.com,REJECT,extended-matching
-DOMAIN,huichuan-mc.sm.cn,REJECT,extended-matching
-DOMAIN,huichuan.sm.cn,REJECT,extended-matching
-DOMAIN,iyes.youku.com,REJECT,extended-matching
-DOMAIN,m-vali.cp31.ott.cibntv.net,REJECT,extended-matching
-DOMAIN,mc.atm.youku.com,REJECT,extended-matching
-DOMAIN,nbsdk-baichuan.alicdn.com,REJECT,extended-matching
-DOMAIN,pre-acs.youku.com,REJECT,extended-matching
-DOMAIN,vali-g1.cp31.ott.cibntv.net,REJECT,extended-matching
-DOMAIN,vali-ugc.cp31.ott.cibntv.net,REJECT,extended-matching
-DOMAIN,yk-ssp.ad.youku.com,REJECT,extended-matching
-DOMAIN,ykad-data.youku.com,REJECT,extended-matching
-DOMAIN,youku-acs.m.taobao.com,REJECT,extended-matching
+DOMAIN,acs4baichuan.m.taobao.com,REJECT,extended-matching,pre-matching
+DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching,pre-matching
+DOMAIN,amdc.m.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,api.sm.cn,REJECT,extended-matching,pre-matching
+DOMAIN,apiv4-iyes.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,baichuan-sdk.alicdn.com,REJECT,extended-matching,pre-matching
+DOMAIN,cad.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,huichuan-mc.sm.cn,REJECT,extended-matching,pre-matching
+DOMAIN,huichuan.sm.cn,REJECT,extended-matching,pre-matching
+DOMAIN,iyes.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,m-vali.cp31.ott.cibntv.net,REJECT,extended-matching,pre-matching
+DOMAIN,mc.atm.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,nbsdk-baichuan.alicdn.com,REJECT,extended-matching,pre-matching
+DOMAIN,pre-acs.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,vali-g1.cp31.ott.cibntv.net,REJECT,extended-matching,pre-matching
+DOMAIN,vali-ugc.cp31.ott.cibntv.net,REJECT,extended-matching,pre-matching
+DOMAIN,yk-ssp.ad.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,ykad-data.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,youku-acs.m.taobao.com,REJECT,extended-matching,pre-matching
 
 [Map Local]
 # 播放页弹窗动图

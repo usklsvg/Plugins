@@ -10,9 +10,9 @@
 #!date=2024-11-28 00:00:00
 
 [Rule]
-DOMAIN,cdn-ad.wtzw.com,REJECT,extended-matching
-DOMAIN,cdn-new-ad.wtzw.com,REJECT,extended-matching
-DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching
+DOMAIN,cdn-ad.wtzw.com,REJECT,extended-matching,pre-matching
+DOMAIN,cdn-new-ad.wtzw.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching,pre-matching
 
 [URL Rewrite]
 # 头条广告SDK
@@ -20,6 +20,10 @@ DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching
 # 其他广告
 ^https:\/\/api-cfg\.wtzw\.com\/v\d\/reward\/ - reject
 ^https:\/\/api-cfg\.wtzw\.com\/v\d\/adv\/ - reject
+
+[Body Rewrite]
+http-response-jq ^https:\/\/xiaoshuo\.wtzw\.com\/api\/v\d\/user\/my-center\? 'delpaths([["data","func_area",1]])'
+http-response-jq ^https:\/\/xiaoshuo\.wtzw\.com\/api\/v\d\/user\/my-center\? 'delpaths([["data","func_area",2]])'
 
 [Map Local]
 # 开屏广告
@@ -48,9 +52,6 @@ DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching
 ^https:\/\/api-cfg\.wtzw\.com\/v\d\/operation\/index\?ad_personal_switch data-type=text data="{}" status-code=200
 
 ^https:\/\/xiaoshuo\.wtzw\.com\/api\/v\d\/withdraw\/init data-type=text data="{}" status-code=200
-
-[Script]
-body_rewrite_44 = type=http-response, pattern=^https:\/\/xiaoshuo\.wtzw\.com\/api\/v\d\/user\/my-center\?, script-path=https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/body-rewrite-sg.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.func_area%5B1%5D%22%2C%22data.func_area%5B2%5D%22%5D%5D%5D, script-update-interval=-1
 
 [MITM]
 hostname = %APPEND% api-cfg.wtzw.com, sf3-fe-tos.pglstatp-toutiao.com, api-bc.wtzw.com, api-gw.wtzw.com, cdn.wtzw.com

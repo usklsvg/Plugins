@@ -11,15 +11,15 @@
 
 [Rule]
 # 微信小程序通用规则
-DOMAIN,wxsnsdy.wxs.qq.com,REJECT,extended-matching
-DOMAIN,wxsmsdy.video.qq.com,REJECT,extended-matching
-DOMAIN,wxsnsdythumb.wxs.qq.com,REJECT,extended-matching
+DOMAIN,wxsnsdy.wxs.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,wxsmsdy.video.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,wxsnsdythumb.wxs.qq.com,REJECT,extended-matching,pre-matching
 # 收钱吧广告
-DOMAIN,ads-shopping.shouqianba.com,REJECT,extended-matching
+DOMAIN,ads-shopping.shouqianba.com,REJECT,extended-matching,pre-matching
 # 猫眼电影
-DOMAIN,ad.maoyan.com,REJECT,extended-matching
+DOMAIN,ad.maoyan.com,REJECT,extended-matching,pre-matching
 # 捷停车 @怎么肥事
-DOMAIN,e.jparking.cn,REJECT,extended-matching
+DOMAIN,e.jparking.cn,REJECT,extended-matching,pre-matching
 
 [URL Rewrite]
 ^https:\/\/webapi\.qmai\.cn\/web\/cmk-center\/marketing\/canvas\/advert-reach - reject
@@ -60,6 +60,13 @@ DOMAIN,e.jparking.cn,REJECT,extended-matching
 ^https:\/\/api\.pinduoduo\.com\/api\/ktt_gateway\/activity\/feeds\/personal_home_page\/ - reject
 # 纷果出行 api.szbgcx.cn
 ^https:\/\/api\.szbgcx\.cn\/account\/adv\/ - reject
+
+[Body Rewrite]
+http-response-jq ^https:\/\/mcsp\.cloudpnr\.com\/api\/miniapp\/popular\/T_MINIAPP$ 'delpaths([["data"]])'
+http-response-jq ^https:\/\/saas-ad\.cloudpnr\.com\/huifuad-base-api\/api\/tactics\/ad$ 'delpaths([["data",0]])'
+http-response-jq ^https:\/\/saas-ad\.cloudpnr\.com\/huifuad-base-api\/api\/tactics\/ad$ 'delpaths([["data",1]])'
+http-response-jq ^https:\/\/saas-ad\.cloudpnr\.com\/huifuad-base-api\/api\/tactics\/ad$ 'delpaths([["data",2]])'
+http-response-jq ^https:\/\/rms\.meituan\.com\/api\/v1\/rmsmina\/c\/queryShopPortalInfo\? 'delpaths([["data","popUpWindows"]])'
 
 [Map Local]
 # 企迈点单系统
@@ -291,12 +298,6 @@ DOMAIN,e.jparking.cn,REJECT,extended-matching
 ^https:\/\/daijia\.kuaidadi\.com\/gateway\?api=prado\.cms\.delivery\.batch&apiVe data-type=text data="{}" status-code=200
 
 [Script]
-body_rewrite_218 = type=http-response, pattern=^https:\/\/mcsp\.cloudpnr\.com\/api\/miniapp\/popular\/T_MINIAPP$, script-path=https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/body-rewrite-sg.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data%22%5D%5D%5D, script-update-interval=-1
-
-body_rewrite_219 = type=http-response, pattern=^https:\/\/saas-ad\.cloudpnr\.com\/huifuad-base-api\/api\/tactics\/ad$, script-path=https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/body-rewrite-sg.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data%5B0%5D%22%2C%22data%5B1%5D%22%2C%22data%5B2%5D%22%5D%5D%5D, script-update-interval=-1
-
-body_rewrite_223 = type=http-response, pattern=^https:\/\/rms\.meituan\.com\/api\/v1\/rmsmina\/c\/queryShopPortalInfo\?, script-path=https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/body-rewrite-sg.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.popUpWindows%22%5D%5D%5D, script-update-interval=-1
-
 # 企迈点单系统 webapi.qmai.cn,images.qmai.cn
 企迈点单系统去广告 = type=http-response, pattern=^https:\/\/webapi\.qmai\.cn\/web\/catering\/design\/homePage-Config, script-path=https://kelee.one/Resource/Script/WexinMiniPrograms/kff/kff.js, requires-body=true, script-update-interval=-1
 

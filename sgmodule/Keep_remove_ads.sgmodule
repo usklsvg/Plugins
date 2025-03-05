@@ -11,49 +11,54 @@
 
 [Rule]
 # 拦截HTTPDNS
-DOMAIN,httpdns.n.netease.com,REJECT,extended-matching
-DOMAIN,httpdns.calorietech.com,REJECT,extended-matching
+DOMAIN,httpdns.n.netease.com,REJECT,extended-matching,pre-matching
+DOMAIN,httpdns.calorietech.com,REJECT,extended-matching,pre-matching
 # 拦截广告下发
-DOMAIN,hc-ssp.sm.cn,REJECT,extended-matching
+DOMAIN,hc-ssp.sm.cn,REJECT,extended-matching,pre-matching
 # 腾讯
-DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching
-DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching
-DOMAIN,c2.gdt.qq.com,REJECT,extended-matching
-DOMAIN,huatuocode.huatuo.qq.com,REJECT,extended-matching
-DOMAIN,info4.video.qq.com,REJECT,extended-matching
-DOMAIN,info6.video.qq.com,REJECT,extended-matching
-DOMAIN,ios.bugly.qq.com,REJECT,extended-matching
-DOMAIN,pro.bugly.qq.com,REJECT,extended-matching
-DOMAIN,ios.video.mpush.qq.com,REJECT,extended-matching
+DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching,pre-matching
+DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching,pre-matching
+DOMAIN,c2.gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,huatuocode.huatuo.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,info4.video.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,info6.video.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,ios.bugly.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,pro.bugly.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,ios.video.mpush.qq.com,REJECT,extended-matching,pre-matching
 # DOMAIN,mazu.m.qq.com,REJECT // 误杀
-DOMAIN,us.l.qq.com,REJECT,extended-matching
-DOMAIN,mi.gdt.qq.com,REJECT,extended-matching
-DOMAIN,otheve.beacon.qq.com,REJECT,extended-matching
-DOMAIN,pgdt.gtimg.cn,REJECT,extended-matching
-DOMAIN,pgdt.ugdtimg.com,REJECT,extended-matching
+DOMAIN,us.l.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,mi.gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,otheve.beacon.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,pgdt.gtimg.cn,REJECT,extended-matching,pre-matching
+DOMAIN,pgdt.ugdtimg.com,REJECT,extended-matching,pre-matching
 # DOMAIN,qzonestyle.gtimg.cn,REJECT // 误杀
-DOMAIN,qzs.gdtimg.com,REJECT,extended-matching
-DOMAIN,qzs.qq.com,REJECT,extended-matching
-DOMAIN,rmonitor.qq.com,REJECT,extended-matching
-DOMAIN,sdk.e.qq.com,REJECT,extended-matching
-DOMAIN,sdkconfig.video.qq.com,REJECT,extended-matching
-DOMAIN,t.gdt.qq.com,REJECT,extended-matching
-DOMAIN,tmead.y.qq.com,REJECT,extended-matching
-DOMAIN,tmeadbak.y.qq.com,REJECT,extended-matching
-DOMAIN,tmeadcomm.y.qq.com,REJECT,extended-matching
-DOMAIN,tpns.qq.com,REJECT,extended-matching
-DOMAIN,v.gdt.qq.com,REJECT,extended-matching
-DOMAIN,v2.gdt.qq.com,REJECT,extended-matching
-DOMAIN,win.gdt.qq.com,REJECT,extended-matching
-DOMAIN,wup.imtt.qq.com,REJECT,extended-matching
-DOMAIN,tpstelemetry.tencent.com,REJECT,extended-matching
-DOMAIN,ii.gdt.qq.com,REJECT,extended-matching
-DOMAIN-KEYWORD,trace.qq.com,REJECT,extended-matching
-DOMAIN-KEYWORD,trace.video.qq.com,REJECT,extended-matching
-DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching
-DOMAIN-SUFFIX,l.qq.com,REJECT,extended-matching
-DOMAIN-SUFFIX,ugdtimg.com,REJECT,extended-matching
-IP-CIDR,47.110.187.87/32,REJECT,no-resolve
+DOMAIN,qzs.gdtimg.com,REJECT,extended-matching,pre-matching
+DOMAIN,qzs.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,rmonitor.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,sdk.e.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,sdkconfig.video.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,t.gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,tmead.y.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,tmeadbak.y.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,tmeadcomm.y.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,tpns.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,v.gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,v2.gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,win.gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,wup.imtt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,tpstelemetry.tencent.com,REJECT,extended-matching,pre-matching
+DOMAIN,ii.gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,trace.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,trace.video.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,l.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ugdtimg.com,REJECT,extended-matching,pre-matching
+IP-CIDR,47.110.187.87/32,REJECT,no-resolve,pre-matching
+
+[Body Rewrite]
+http-response-jq ^https:\/\/api\.gotokeep\.com\/twins\/v4\/feed\/followPage 'if (getpath([]) | has("data")) then (setpath(["data"]; {})) else . end'
+http-response-jq ^https:\/\/api\.gotokeep\.com\/twins\/v4\/feed\/entryDetail 'if (getpath([]) | has("data")) then (setpath(["data"]; {})) else . end'
+http-response-jq ^https:\/\/api\.gotokeep\.com\/config\/v3\/basic '.data.homeTabs |= map(select(.name != "活动")) | .data.homeTabs[1].default = true | .data.homeTabs[2].default = false'
 
 [Map Local]
 # 搜索填充词
@@ -64,11 +69,6 @@ IP-CIDR,47.110.187.87/32,REJECT,no-resolve
 
 # 弹窗
 ^https:\/\/api\.gotokeep\.com\/guide-webapp\/v1\/popup\/getPopUp data-type=text data="{}" status-code=200
-
-[Script]
-body_rewrite_60 = type=http-response, pattern=^https:\/\/api\.gotokeep\.com\/twins\/v4\/feed\/followPage, script-path=https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/body-rewrite-sg.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-replace%22%2C%5B%5B%22data%22%2C%7B%7D%5D%5D%5D%5D, script-update-interval=-1
-
-body_rewrite_64 = type=http-response, pattern=^https:\/\/api\.gotokeep\.com\/twins\/v4\/feed\/entryDetail, script-path=https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/body-rewrite-sg.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-replace%22%2C%5B%5B%22data%22%2C%7B%7D%5D%5D%5D%5D, script-update-interval=-1
 
 [MITM]
 hostname = %APPEND% api.gotokeep.com, kad.gotokeep.com

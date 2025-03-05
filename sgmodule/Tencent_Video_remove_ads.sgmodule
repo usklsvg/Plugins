@@ -10,19 +10,19 @@
 #!date=2024-11-28 00:00:00
 
 [Rule]
-DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching
-DOMAIN,info4.video.qq.com,REJECT,extended-matching
-DOMAIN,info6.video.qq.com,REJECT,extended-matching
-DOMAIN,ios.video.mpush.qq.com,REJECT,extended-matching
-DOMAIN,otheve.beacon.qq.com,REJECT,extended-matching
-DOMAIN,pgdt.gtimg.cn,REJECT,extended-matching
-DOMAIN,tpns.qq.com,REJECT,extended-matching
-DOMAIN,vv6.video.qq.com,REJECT,extended-matching
-DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching
-DOMAIN-SUFFIX,l.qq.com,REJECT,extended-matching
-DOMAIN-KEYWORD,trace.qq.com,REJECT,extended-matching
-DOMAIN-KEYWORD,trace.video.qq.com,REJECT,extended-matching
-IP-CIDR,47.110.187.87/32,REJECT,no-resolve
+DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching,pre-matching
+DOMAIN,info4.video.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,info6.video.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,ios.video.mpush.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,otheve.beacon.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,pgdt.gtimg.cn,REJECT,extended-matching,pre-matching
+DOMAIN,tpns.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,vv6.video.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,l.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,trace.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,trace.video.qq.com,REJECT,extended-matching,pre-matching
+IP-CIDR,47.110.187.87/32,REJECT,no-resolve,pre-matching
 URL-REGEX,"^http:\/\/[\d\.:]*\/?(defaultts\.tc|vmind\.qqvideo\.tc|finderpdd\.video)\.qq\.com\/\w+",REJECT,extended-matching
 URL-REGEX,"^http:\/\/apd-vlive\.apdcdn\.tc\.qq\.com\/vmind\.qqvideo\.tc\.qq\.com\/\w+",REJECT,extended-matching
 URL-REGEX,"^http:\/\/apd-\w+\.v\.smtcdns\.com\/(defaultts|omts|vmind\.qqvideo)\.tc\.qq\.com\/\w+",REJECT,extended-matching

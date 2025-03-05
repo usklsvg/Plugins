@@ -11,7 +11,7 @@
 
 [Rule]
 # 移除福利页面
-DOMAIN,render-web.11222.cn,REJECT,extended-matching
+DOMAIN,render-web.11222.cn,REJECT,extended-matching,pre-matching
 
 [URL Rewrite]
 # 移除渲染资源 - 移除福利入口、悬浮窗资源、我的页面推广、推荐搜索词

@@ -11,28 +11,40 @@
 
 [Rule]
 # 拦截HTTPDNS
-DOMAIN,httpdns.music.163.com,REJECT,extended-matching
-DOMAIN,httpdns.n.netease.com,REJECT,extended-matching
-DOMAIN,httpdns-sdk.n.netease.com,REJECT,extended-matching
-DOMAIN,httpdns.yunxindns.com,REJECT,extended-matching
-DOMAIN,lofter.httpdns.c.163.com,REJECT,extended-matching
-DOMAIN,music.httpdns.c.163.com,REJECT,extended-matching
-IP-CIDR,59.111.239.61/32,REJECT,no-resolve
-IP-CIDR,59.111.239.62/32,REJECT,no-resolve
-IP-CIDR,115.236.121.51/32,REJECT,no-resolve
-IP-CIDR,115.236.121.195/32,REJECT,no-resolve
+DOMAIN,httpdns.music.163.com,REJECT,extended-matching,pre-matching
+DOMAIN,httpdns.n.netease.com,REJECT,extended-matching,pre-matching
+DOMAIN,httpdns-sdk.n.netease.com,REJECT,extended-matching,pre-matching
+DOMAIN,httpdns.yunxindns.com,REJECT,extended-matching,pre-matching
+DOMAIN,lofter.httpdns.c.163.com,REJECT,extended-matching,pre-matching
+DOMAIN,music.httpdns.c.163.com,REJECT,extended-matching,pre-matching
+IP-CIDR,59.111.239.61/32,REJECT,no-resolve,pre-matching
+IP-CIDR,59.111.239.62/32,REJECT,no-resolve,pre-matching
+IP-CIDR,115.236.121.51/32,REJECT,no-resolve,pre-matching
+IP-CIDR,115.236.121.195/32,REJECT,no-resolve,pre-matching
 # 友盟
-DOMAIN,cnlogs.umeng.com,REJECT,extended-matching
-DOMAIN,errlog.umeng.com,REJECT,extended-matching
-DOMAIN,errnewlog.umeng.com,REJECT,extended-matching
-DOMAIN,ucc.umeng.com,REJECT,extended-matching
-DOMAIN,ulogs.umeng.com,REJECT,extended-matching
-DOMAIN,utoken.umeng.com,REJECT,extended-matching
-DOMAIN,deeplink.umeng.com,REJECT,extended-matching
-DOMAIN,aspect-upush.umeng.com,REJECT,extended-matching
-DOMAIN,plbslog.umeng.com,REJECT,extended-matching
-DOMAIN,log.umtrack.com,REJECT,extended-matching
-DOMAIN,aaid.umeng.com,REJECT,extended-matching
+DOMAIN,cnlogs.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,errlog.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,errnewlog.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,ucc.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,ulogs.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,utoken.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,deeplink.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,aspect-upush.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,plbslog.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,log.umtrack.com,REJECT,extended-matching,pre-matching
+DOMAIN,aaid.umeng.com,REJECT,extended-matching,pre-matching
+
+[Body Rewrite]
+http-response-jq ^https:\/\/dict\.youdao\.com\/homepage\/toolbar\/get\? 'delpaths([["data","vipTag"]])'
+http-response-jq ^https:\/\/dict\.youdao\.com\/course\/tab\/translateTab\? 'delpaths([["data"]])'
+http-response-jq ^https:\/\/dict\.youdao\.com\/course\/tab\/home\? 'delpaths([["data","popup"]])'
+http-response-jq ^https:\/\/dict\.youdao\.com\/course\/tab\/home\? 'delpaths([["data","tab"]])'
+http-response-jq ^https:\/\/dict\.youdao\.com\/course\/tab\/home\? 'delpaths([["data","searchSuggestList"]])'
+http-response-jq ^https:\/\/dict\.youdao\.com\/course\/tab\/home\? 'delpaths([["data","newBanner"]])'
+http-response-jq ^https:\/\/dict\.youdao\.com\/course\/tab\/home\? 'delpaths([["data","icon","promotionList"]])'
+http-response-jq ^https:\/\/dict\.youdao\.com\/course\/tab\/home\? 'delpaths([["data","icon","iconList",1,"bubble"]])'
+http-response-jq ^https:\/\/dict\.youdao\.com\/course\/tab\/home\? 'delpaths([["data","icon","iconList",2,"bubble"]])'
+http-response-jq ^https:\/\/dict\.youdao\.com\/course\/tab\/home\? 'delpaths([["data","icon","iconList",8,"bubble"]])'
 
 [Map Local]
 # 开屏广告
@@ -40,13 +52,6 @@ DOMAIN,aaid.umeng.com,REJECT,extended-matching
 
 # 首页横幅及信息流广告
 ^https:\/\/gorgon\.youdao\.com\/gorgon\/request\.s\? data-type=text data="{}" status-code=200
-
-[Script]
-body_rewrite_39 = type=http-response, pattern=^https:\/\/dict\.youdao\.com\/homepage\/toolbar\/get\?, script-path=https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/body-rewrite-sg.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.vipTag%22%5D%5D%5D, script-update-interval=-1
-
-body_rewrite_43 = type=http-response, pattern=^https:\/\/dict\.youdao\.com\/course\/tab\/translateTab\?, script-path=https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/body-rewrite-sg.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data%22%5D%5D%5D, script-update-interval=-1
-
-body_rewrite_45 = type=http-response, pattern=^https:\/\/dict\.youdao\.com\/course\/tab\/home\?, script-path=https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/body-rewrite-sg.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.popup%22%2C%22data.tab%22%2C%22data.searchSuggestList%22%2C%22data.newBanner%22%2C%22data.icon.promotionList%22%2C%22data.icon.iconList%5B1%5D.bubble%22%2C%22data.icon.iconList%5B2%5D.bubble%22%2C%22data.icon.iconList%5B8%5D.bubble%22%5D%5D%5D, script-update-interval=-1
 
 [MITM]
 hostname = %APPEND% gorgon.youdao.com, dict.youdao.com

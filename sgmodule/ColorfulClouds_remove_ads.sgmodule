@@ -10,9 +10,9 @@
 #!date=2024-11-28 00:00:00
 
 [Rule]
-DOMAIN,abyss.cyapi.cn,REJECT,extended-matching
-DOMAIN,ad.cyapi.cn,REJECT,extended-matching
-DOMAIN,gather.colorfulclouds.net,REJECT,extended-matching
+DOMAIN,abyss.cyapi.cn,REJECT,extended-matching,pre-matching
+DOMAIN,ad.cyapi.cn,REJECT,extended-matching,pre-matching
+DOMAIN,gather.colorfulclouds.net,REJECT,extended-matching,pre-matching
 
 [Map Local]
 ^https:\/\/biz\.cyapi\.cn\/(p\/v1\/entries|p\/v1\/trial_card\/info|v2\/product) data-type=text data="{}" status-code=200

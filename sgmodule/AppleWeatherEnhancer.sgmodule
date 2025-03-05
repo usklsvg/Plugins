@@ -12,8 +12,8 @@
 #!date=2024-11-28 00:00:00
 
 [Rule]
-DOMAIN,weather-analytics-events.apple.com,REJECT,extended-matching
-DOMAIN-SUFFIX,tthr.apple.com,REJECT,extended-matching
+DOMAIN,weather-analytics-events.apple.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,tthr.apple.com,REJECT,extended-matching,pre-matching
 
 [Script]
 Availability响应处理 = type=http-response, pattern=^https?:\/\/weatherkit\.apple\.com\/api\/v1\/availability\/, script-path=https://github.com/NSRingo/WeatherKit/releases/download/v1.8.17/response.bundle.js, requires-body=true, argument="[{NextHour.Provider},{AQI.Provider},{AQI.ReplaceProviders},{AQI.Local.Scale},{AQI.Local.ReplaceScales},{AQI.Local.ConvertUnits},{API.ColorfulClouds.Token},{API.QWeather.Host},{API.QWeather.Token},{API.WAQI.Token}]", script-update-interval=-1

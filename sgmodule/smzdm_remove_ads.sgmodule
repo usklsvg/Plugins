@@ -10,16 +10,16 @@
 #!date=2024-11-28 00:00:00
 
 [Rule]
-DOMAIN,aaid.uyunad.com,REJECT,extended-matching
-DOMAIN,acs4baichuan.m.taobao.com,REJECT,extended-matching
-DOMAIN,adashxgc.ut.taobao.com,REJECT,extended-matching
-DOMAIN,analytics-api.smzdm.com,REJECT,extended-matching
-DOMAIN,baichuan-sdk.alicdn.com,REJECT,extended-matching
-DOMAIN,dgstatic.jd.com,REJECT,extended-matching
-DOMAIN,msg.umengcloud.com,REJECT,extended-matching
-DOMAIN,sec.umeng.com,REJECT,extended-matching
-DOMAIN,ulogs.umeng.com,REJECT,extended-matching
-DOMAIN,ynuf.aliapp.org,REJECT,extended-matching
+DOMAIN,aaid.uyunad.com,REJECT,extended-matching,pre-matching
+DOMAIN,acs4baichuan.m.taobao.com,REJECT,extended-matching,pre-matching
+DOMAIN,adashxgc.ut.taobao.com,REJECT,extended-matching,pre-matching
+DOMAIN,analytics-api.smzdm.com,REJECT,extended-matching,pre-matching
+DOMAIN,baichuan-sdk.alicdn.com,REJECT,extended-matching,pre-matching
+DOMAIN,dgstatic.jd.com,REJECT,extended-matching,pre-matching
+DOMAIN,msg.umengcloud.com,REJECT,extended-matching,pre-matching
+DOMAIN,sec.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,ulogs.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,ynuf.aliapp.org,REJECT,extended-matching,pre-matching
 
 [Map Local]
 ^https:\/\/haojia\.m\.smzdm\.com\/detail_modul\/(other_modul|wiki_related_modul)|^https:\/\/s3\.zdmimg\.com\/third\/index|^https:\/\/app-api\.smzdm\.com\/util\/loading data-type=text data="{}" status-code=200
