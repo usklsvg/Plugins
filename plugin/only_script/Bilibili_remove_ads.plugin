@@ -8,7 +8,7 @@
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Bilibili.png
-#!date=2025-03-06 23:23:20
+#!date=2025-03-08 00:01:52
 
 [Argument]
 showUpList=select,"auto","true","false",tag=[动态]中[最常访问]的显示方式,desc=auto：仅当列表中存在直播状态时显示；true：始终显示；false：始终隐藏。
@@ -32,7 +32,9 @@ http-response ^https:\/\/api\.bilibili\.com\/pgc\/page\/(?:bangumi|cinema\/tab) 
 http-response ^https:\/\/app\.bilibili\.com\/x\/v2\/splash\/(?:brand\/list|event\/list2|list|show) script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_remove_ads.js,requires-body=true,tag=移除开屏广告
 # http-response ^https:\/\/app\.bilibili\.com\/x\/resource\/show\/tab\/v2\? script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_remove_ads.js,requires-body=true,tag=精简首页顶部标签
 # http-response ^https:\/\/app\.bilibili\.com\/x\/v2\/account\/(?:mine|myinfo) script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_remove_ads.js,requires-body=true,tag=精简我的页面
-http-response ^https:\/\/app\.bilibili\.com\/x\/v2\/feed\/index script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_remove_ads.js,requires-body=true,tag=移除首页推荐广告
+
+# 已被JQ替代
+# http-response ^https:\/\/app\.bilibili\.com\/x\/v2\/feed\/index script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_remove_ads.js,requires-body=true,tag=移除首页推荐广告
 
 [MitM]
 hostname=*live.bilibili.com, ap?.bilibili.com, grpc.biliapi.net, m.bilibili.com, manga.bilibili.com, www.bilibili.com
