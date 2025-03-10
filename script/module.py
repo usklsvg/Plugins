@@ -90,15 +90,22 @@ def modify_content_bilibili(content: str):
     lines = content.splitlines()
     i = 0
     while i < len(lines):
-        if lines[i].find("Popular") != -1:  # 注释移除热门话题
+        # 注释移除热门话题
+        if lines[i].find("Popular") != -1:
+            lines[i] = lines[i].replace("|show\\.v1\\.Popular\\/Index|", "|")
+        # 注释移除交互式弹幕
+        if lines[i].find("DmView") != -1:
+            lines[i] = lines[i].replace(
+                "|community\\.service\\.dm\\.v1\\.DM\\/DmView|", "|"
+            )
+        # 注释精简首页顶部标签
+        if lines[i].find("resource\\/show\\/tab\\/v2") != -1:
             lines[i] = f"# {lines[i]}"
-        elif lines[i].find("DmView") != -1:  # 注释移除交互式弹幕
-            lines[i] = f"# {lines[i]}"
-        elif lines[i].find("resource\/show\/tab\/v2") != -1:  # 注释精简首页顶部标签
-            lines[i] = f"# {lines[i]}"
-        elif lines[i].find("search\/square") != -1:  # 注释移除热搜广告
-            lines[i] = f"# {lines[i]}"
-        elif lines[i].find("account") != -1:  # 注释精简我的页面
+            # 注释移除热搜广告
+        if lines[i].find("search\\/square") != -1:
+            lines[i] = lines[i].replace("|v2\\/search\\/square|", "|")
+        # 注释精简我的页面
+        if lines[i].find("account") != -1:
             lines[i] = f"# {lines[i]}"
         i += 1
 
@@ -115,18 +122,16 @@ def modify_content_zhihu(content: str):
     i = 0
     while i < len(lines):
         # 注释 我的页面
-        if lines[i].startswith("^https:\/\/api\.zhihu\.com\/me\/guides"):
+        if lines[i].startswith("^https:\\/\\/api\\.zhihu\\.com\\/me\\/guides"):
             lines[i] = f"# {lines[i]}"
         elif lines[i].startswith(
-            "^https:\/\/api\.zhihu\.com\/people\/homepage_entry_v2"
+            "^https:\\/\\/api\\.zhihu\\.com\\/people\\/homepage_entry_v2"
         ):
             lines[i] = f"# {lines[i]}"
-        elif lines[i].startswith("^https:\/\/api\.zhihu\.com\/unlimited\/go\/my_card"):
+        elif lines[i].startswith("^https:\\/\\/api\\.zhihu\\.com\\/unlimited\\/go\\/my_card"):
             lines[i] = f"# {lines[i]}"
-        elif lines[i].startswith("^https:\/\/www\.zhihu\.com\/appview\/v3\/zhmore"):
+        elif lines[i].startswith("^https:\\/\/www\\.zhihu\\.com\\/appview\\/v3\\/zhmore"):
             lines[i] = f"# {lines[i]}"
-        # elif lines[i].find("^https:\/\/api\.zhihu\.com\/search\/recommend_query\/v2\?") != -1:
-        #     lines[i] = f"# {lines[i]}"
         elif lines[i].find("script-path") != -1:
             lines[i] = lines[i].replace(
                 "https://kelee.one/Resource/Script/Zhihu/Zhihu_remove_ads.js",
