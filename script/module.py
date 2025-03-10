@@ -86,6 +86,22 @@ def modify_content_common(content: str, type: str):
     return ret
 
 
+def modify_content_amap(content: str):
+    lines = content.splitlines()
+    i = 0
+    while i < len(lines):
+        if lines[i].find("search\\/sp") != -1:
+            lines[i] = lines[i].replace("|search\\/sp|", "|")
+        i += 1
+
+    ret = ""
+    i = 0
+    while i < len(lines):
+        ret += f"{lines[i]}\n"
+        i += 1
+    return ret
+
+
 def modify_content_bilibili(content: str):
     lines = content.splitlines()
     i = 0
@@ -117,6 +133,25 @@ def modify_content_bilibili(content: str):
     return ret
 
 
+def modify_content_taobao(content: str):
+    lines = content.splitlines()
+    i = 0
+    while i < len(lines):
+        if lines[i].find("script-path") != -1:
+            lines[i] = lines[i].replace(
+                "https://kelee.one/Resource/Script/Taobao/Taobao_remove_ads.js",
+                "https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/Taobao_remove_ads.js",
+            )
+        i += 1
+
+    ret = ""
+    i = 0
+    while i < len(lines):
+        ret += f"{lines[i]}\n"
+        i += 1
+    return ret
+
+
 def modify_content_zhihu(content: str):
     lines = content.splitlines()
     i = 0
@@ -128,9 +163,13 @@ def modify_content_zhihu(content: str):
             "^https:\\/\\/api\\.zhihu\\.com\\/people\\/homepage_entry_v2"
         ):
             lines[i] = f"# {lines[i]}"
-        elif lines[i].startswith("^https:\\/\\/api\\.zhihu\\.com\\/unlimited\\/go\\/my_card"):
+        elif lines[i].startswith(
+            "^https:\\/\\/api\\.zhihu\\.com\\/unlimited\\/go\\/my_card"
+        ):
             lines[i] = f"# {lines[i]}"
-        elif lines[i].startswith("^https:\\/\/www\\.zhihu\\.com\\/appview\\/v3\\/zhmore"):
+        elif lines[i].startswith(
+            "^https:\\/\\/www\\.zhihu\\.com\\/appview\\/v3\\/zhmore"
+        ):
             lines[i] = f"# {lines[i]}"
         elif lines[i].find("script-path") != -1:
             lines[i] = lines[i].replace(
@@ -155,25 +194,6 @@ def modify_content_zhihu(content: str):
     return ret
 
 
-def modify_content_taobao(content: str):
-    lines = content.splitlines()
-    i = 0
-    while i < len(lines):
-        if lines[i].find("script-path") != -1:
-            lines[i] = lines[i].replace(
-                "https://kelee.one/Resource/Script/Taobao/Taobao_remove_ads.js",
-                "https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/Taobao_remove_ads.js",
-            )
-        i += 1
-
-    ret = ""
-    i = 0
-    while i < len(lines):
-        ret += f"{lines[i]}\n"
-        i += 1
-    return ret
-
-
 def process_file(type: str, src_dir: str, dst_dir: str, url_dir: str, categoty: str):
     for filename in os.listdir(src_dir):
         url = f"https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/{url_dir}/{filename}"
@@ -188,12 +208,14 @@ def process_file(type: str, src_dir: str, dst_dir: str, url_dir: str, categoty: 
         content = get_url_text_content(request_url)
         if content != None:
             content = modify_content_common(content, type)
-            if filename == "Bilibili_remove_ads.plugin":
+            if filename == "Amap_remove_ads.plugin":
+                content = modify_content_amap(content)
+            elif filename == "Bilibili_remove_ads.plugin":
                 content = modify_content_bilibili(content)
-            elif filename == "Zhihu_remove_ads.plugin":
-                content = modify_content_zhihu(content)
             elif filename == "Taobao_remove_ads.plugin":
                 content = modify_content_taobao(content)
+            elif filename == "Zhihu_remove_ads.plugin":
+                content = modify_content_zhihu(content)
             if content != None:
                 module_name = f"{filename[:filename.rfind('.')]}.{'module' if type == 'sr' else 'sgmodule'}"
                 save_content(
