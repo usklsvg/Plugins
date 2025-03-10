@@ -7,6 +7,7 @@ current_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 extern_dir = os.path.join(current_dir, "extern", "ProxyResource")
 extern_plugin_dir = os.path.join(extern_dir, "plugin")
 extern_script_dir = os.path.join(extern_dir, "script")
+extern_jq_dir = os.path.join(extern_dir, "jq")
 plugin_no_script_dir = os.path.join(current_dir, "plugin", "no_script")
 plugin_only_script_dir = os.path.join(current_dir, "plugin", "only_script")
 
@@ -99,6 +100,33 @@ def save_plugin_scripts(plugin_name: str, data: list[str]):
             exit(1)
 
 
+def save_plugin_jqs(plugin_name: str, data: list[str]):
+    local_dir = os.path.join(extern_jq_dir, plugin_name)
+    recreate_path(local_dir)
+
+    for line in data:
+        if line[0] == "[" or line[0] == "#" or line[0] == ";" or line[0] == "\n":
+            continue
+        items = [item for item in line.split() if item.find("jq-path") != -1]
+        if len(items) == 0:
+            continue
+
+        script_url = items[0].split("=")[-1].strip()
+        if script_url[0] == '"' or script_url[0] == "'":
+            script_url = script_url[1:]
+        if script_url[-1] == '"' or script_url[-1] == "'":
+            script_url = script_url[:-1]
+        script_filename = os.path.join(local_dir, script_url.split("/")[-1])
+        download_url_file(script_url, script_filename)
+
+    if not os.listdir(local_dir):
+        try:
+            shutil.rmtree(local_dir)
+        except Exception as e:
+            print(f"error when remove path '{local_dir}': {e}")
+            exit(1)
+
+
 def modify_content_bilibili(lines: list[str]):
     i = 0
     while i < len(lines):
@@ -106,9 +134,9 @@ def modify_content_bilibili(lines: list[str]):
             lines[i] = f"# {lines[i]}"
         elif lines[i].find("DmView") != -1:  # 注释移除交互式弹幕
             lines[i] = f"# {lines[i]}"
-        elif lines[i].find("resource\/show\/tab\/v2") != -1:  # 注释精简首页顶部标签
+        elif lines[i].find("resource\\/show\\/tab\\/v2") != -1:  # 注释精简首页顶部标签
             lines[i] = f"# {lines[i]}"
-        elif lines[i].find("search\/square") != -1:  # 注释移除热搜广告
+        elif lines[i].find("search\\/square") != -1:  # 注释移除热搜广告
             lines[i] = f"# {lines[i]}"
         elif lines[i].find("account") != -1:  # 注释精简我的页面
             lines[i] = f"# {lines[i]}"
@@ -120,15 +148,22 @@ def modify_content_zhihu(lines: list[str]):
     i = 0
     while i < len(lines):
         # 注释 我的页面
-        if lines[i].find("^https:\/\/api\.zhihu\.com\/me\/guides") != -1:
+        if lines[i].find("^https:\\/\\/api\\.zhihu\\.com\\/me\\/guides") != -1:
             lines[i] = f"# {lines[i]}"
         elif (
-            lines[i].find("^https:\/\/api\.zhihu\.com\/people\/homepage_entry_v2") != -1
+            lines[i].find("^https:\\/\\/api\\.zhihu\\.com\\/people\\/homepage_entry_v2")
+            != -1
         ):
             lines[i] = f"# {lines[i]}"
-        elif lines[i].find("^https:\/\/api\.zhihu\.com\/unlimited\/go\/my_card") != -1:
+        elif (
+            lines[i].find("^https:\\/\\/api\\.zhihu\\.com\\/unlimited\\/go\\/my_card")
+            != -1
+        ):
             lines[i] = f"# {lines[i]}"
-        elif lines[i].find("^https:\/\/www\.zhihu\.com\/appview\/v3\/zhmore") != -1:
+        elif (
+            lines[i].find("^https:\\/\\/www\\.zhihu\\.com\\/appview\\/v3\\/zhmore")
+            != -1
+        ):
             lines[i] = f"# {lines[i]}"
         i += 1
     return lines
@@ -194,6 +229,15 @@ def extract_components(plugin_name: str, content: str):
     if has_script:
         save_plugin_scripts(plugin_name, data[script_key])
 
+    script_key = ""
+    has_rewrite = False
+    for key in data:
+        if str(key).lower() == "[rewrite]":
+            has_rewrite = True
+            script_key = key
+    if has_rewrite:
+        save_plugin_jqs(plugin_name, data[script_key])
+
     ret = {}
     for key in data:
         ret[key] = ""
@@ -245,6 +289,7 @@ if __name__ == "__main__":
     filenames = colllect_files()
 
     recreate_path(extern_script_dir)
+    recreate_path(extern_jq_dir)
     recreate_path(plugin_no_script_dir)
     recreate_path(plugin_only_script_dir)
 
