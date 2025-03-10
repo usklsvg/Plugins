@@ -102,7 +102,7 @@ def modify_content_amap(content: str):
     return ret
 
 
-def modify_content_bilibili(content: str):
+def modify_content_bilibili(content: str, type: str):
     lines = content.splitlines()
     i = 0
     while i < len(lines):
@@ -123,6 +123,20 @@ def modify_content_bilibili(content: str):
         # 注释精简我的页面
         if lines[i].find("account") != -1:
             lines[i] = f"# {lines[i]}"
+
+        if lines[i].lower().strip() == "[script]" and type == "sg":
+            lines[
+                i
+            ] = """[Script]
+
+移除播放页面广告 playview = type=http-response, pattern=^https:\\/\\/(?:app\\.bilibili\\.com|grpc\\.biliapi\\.net)\\/bilibili\\.app\\.playurl\\.v1\\.PlayURL\\/PlayView$, script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_proto_kokoryh.js, requires-body=true, binary-body-mode=true, script-update-interval=-1
+
+移除播放页面广告 playerunite = type=http-response, pattern=^https:\\/\\/(?:app\\.bilibili\\.com|grpc\\.biliapi\\.net)\\/bilibili\\.app\\.playerunite\\.v1\\.Player\\/PlayViewUnite$, script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_proto_kokoryh.js, requires-body=true, binary-body-mode=true, script-update-interval=-1
+
+移除播放页面广告 view = type=http-response, pattern=^https:\\/\\/(?:app\\.bilibili\\.com|grpc\\.biliapi\\.net)\\/bilibili\\.app\\.view\\.v1\\.View\\/(?:View|ViewProgress)$, script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_proto_kokoryh.js, requires-body=true, binary-body-mode=true, script-update-interval=-1
+
+移除播放页面广告 viewunite = type=http-response, pattern=^https:\\/\\/(?:app\\.bilibili\\.com|grpc\\.biliapi\\.net)\\/bilibili\\.app\\.viewunite\\.v1\\.View\\/(?:RelatesFeed|View)$, script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_proto_kokoryh.js, requires-body=true, binary-body-mode=true, script-update-interval=-1
+"""
         i += 1
 
     ret = ""
@@ -211,7 +225,7 @@ def process_file(type: str, src_dir: str, dst_dir: str, url_dir: str, categoty: 
             if filename == "Amap_remove_ads.plugin":
                 content = modify_content_amap(content)
             elif filename == "Bilibili_remove_ads.plugin":
-                content = modify_content_bilibili(content)
+                content = modify_content_bilibili(content, type)
             elif filename == "Taobao_remove_ads.plugin":
                 content = modify_content_taobao(content)
             elif filename == "Zhihu_remove_ads.plugin":
