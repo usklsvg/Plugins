@@ -65,7 +65,7 @@ def save_content(content: str, filename: str):
 def extract_components(lines: str):
     lines = [line.strip() for line in lines]
 
-    data: dict[str, str] = {}
+    data: dict[str, list[str]] = {}
     line_index = 0
     data["title"] = []
     while line_index < len(lines):
@@ -190,7 +190,7 @@ def colllect_files():
             print(f"Error when reading content from {plugin_filename}: {e}")
             continue
         filenames.append(plugin_filename)
-        data: dict[str, str] = extract_components(content)
+        data: dict[str, list[str]] = extract_components(content)
 
         script_key = ""
         has_script = False
@@ -277,10 +277,11 @@ def process_file(filename: str):
         lines = modify_content_bilibili(lines)
     elif filename.endswith("Zhihu_remove_ads.plugin"):
         lines = modify_content_zhihu(lines)
-    data = extract_components(lines)
-    for key in data.keys():
+        
+    data: dict[str, str] = {}
+    for key, sub_data in extract_components(lines).items():
         str_tmp = f"{key}\n" if key != "title" else ""
-        for line in data[key]:
+        for line in sub_data:
             str_tmp = str_tmp + line
         data[key] = str_tmp
 

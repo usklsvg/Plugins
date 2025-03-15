@@ -19,15 +19,20 @@ def recreate_path(pathname: str):
 
 
 def get_url_text_content(url: str):
-    content = None
-    try:
-        for i in range(3):
-            response = requests.get(url, stream=True)
-            content = response.text
-            if content != None:
-                break
-    except requests.exceptions.RequestException as e:
-        print(f"error : {e}")
+    content, err_info = None, None
+    for _ in range(3):
+        try:
+            for i in range(3):
+                response = requests.get(url, stream=True)
+                content = response.text
+                if content != None:
+                    break
+        except requests.exceptions.RequestException as e:
+            err_info = e
+        err_info = None
+        break
+    if err_info:
+        print(f"error : {err_info}")
     return content
 
 
@@ -40,6 +45,53 @@ def save_content(content: str, filename: str):
         print(f"Error when saving content to {filename}: {e}")
 
 
+def extract_components(lines: str):
+    lines = [line.strip() for line in lines]
+
+    data: dict[str, list[str]] = {}
+    line_index = 0
+    data["title"] = []
+    while line_index < len(lines):
+        if len(lines[line_index]) == 0:
+            data["title"].append("\n")
+            line_index += 1
+        elif lines[line_index][0] != "[":
+            data["title"].append(f"{lines[line_index]}\n")
+            line_index += 1
+        else:
+            break
+
+    while line_index < len(lines):
+        item_name = lines[line_index]
+        line_index += 1
+        data[item_name] = []
+        while line_index < len(lines):
+            if len(lines[line_index]) == 0:
+                data[item_name].append("\n")
+                line_index += 1
+            elif lines[line_index][0] != "[":
+                data[item_name].append(f"{lines[line_index]}\n")
+                line_index += 1
+            else:
+                break
+
+    empty_keys = []
+    for key in data:
+        if key == "title":
+            continue
+        empty = True
+        for line in data[key]:
+            if line[0] != "[" and line[0] != "#" and line[0] != ";" and line[0] != "\n":
+                empty = False
+                break
+        if empty:
+            empty_keys.append(key)
+    for key in empty_keys:
+        del data[key]
+
+    return data
+
+
 ###############################################################################
 #
 # convert plugin to module
@@ -49,7 +101,6 @@ def save_content(content: str, filename: str):
 
 def modify_content_common(content: str, type: str):
     lines = content.splitlines()
-
     empty_content = True
     for line in lines:
         if len(line) > 0 and line[0] == "[" and line.lower() != "[mitm]":
@@ -58,30 +109,70 @@ def modify_content_common(content: str, type: str):
     if empty_content:
         return None
 
-    i = 0
-    while i < len(lines):
-        if lines[i].lower() == "[script]":
-            i += 1
-            break
-        i += 1
-    while i < len(lines):
-        if len(lines[i]) > 1:
-            if lines[i][0] != "#" and lines[i].find("script-path") != -1:
-                lines[i] = lines[i].replace(
-                    "Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js",
-                    f"usklsvg/Plugins/refs/heads/main/script/body-rewrite-{type}.js",
-                )
-                if type == "sg":
-                    lines[i] += f", script-update-interval=-1"
-            elif lines[i][0] == "[":
+    data = extract_components(lines)
+    if not "[Script]" in data:
+        return content
+
+    arguments: set[str] = set([])
+    for i, line in enumerate(data["[Script]"]):
+        if line.startswith("#") or line.find("script-path") == -1:
+            continue
+        if type == "sr":
+            data["[Script]"][i] = line.replace(
+                "Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js",
+                f"usklsvg/Plugins/refs/heads/main/script/body-rewrite-sr.js",
+            )
+        else:
+            items = [item.strip() for item in line.split(", ")]
+            line = items[0]
+            for j in range(1, len(items)):
+                if (
+                    items[j].lower().startswith("argument")
+                    and items[j].lower().find("{") != -1
+                ):
+                    sub_arguments = items[j].split("},{")
+                    sub_arguments[0] = sub_arguments[0][
+                        sub_arguments[0].find("{") + 1 :
+                    ]
+                    sub_arguments[-1] = sub_arguments[-1][: sub_arguments[-1].find("}")]
+                    items[j] = "argument="
+                    for k, item in enumerate(sub_arguments):
+                        arguments.add(item)
+                        if k != 0:
+                            items[j] += "&"
+                        items[j] += item + '="{{{' + item + '}}}"'
+                    _ = 1
+                line = f"{line}, {items[j]}"
+            data["[Script]"][i] = f"{line}, script-update-interval=-1\n"
+
+    if len(arguments) > 0:
+        arg_exist = False
+        for line in data["title"]:
+            if line.startswith("#!arguments"):
+                arg_exist = True
                 break
-        i += 1
+        if not arg_exist:
+            line_arg = "#!arguments="
+            for i, arg in enumerate(arguments):
+                if i == 0:
+                    line_arg += arg
+                else:
+                    line_arg += f", {arg}"
+            line_arg += "\n"
+            for i, line in enumerate(data["title"]):
+                if (
+                    i == len(data["title"]) - 1
+                    or len(data["title"][i + 1].strip()) == 0
+                ):
+                    data["title"][i] = line + line_arg
+                    break
 
     ret = ""
-    i = 0
-    while i < len(lines):
-        ret += f"{lines[i]}\n"
-        i += 1
+    for key, sub_data in data.items():
+        str_tmp = f"{key}\n" if key != "title" else ""
+        for line in sub_data:
+            str_tmp = str_tmp + line
+        ret = ret + str_tmp
 
     return ret
 
@@ -102,62 +193,15 @@ def modify_content_amap(content: str):
     return ret
 
 
-def modify_content_bilibili(content: str, type: str):
-    lines = content.splitlines()
-    i = 0
-    while i < len(lines):
-        # 注释移除热门话题
-        if lines[i].find("Popular") != -1:
-            lines[i] = lines[i].replace("|show\\.v1\\.Popular\\/Index|", "|")
-        # 注释移除交互式弹幕
-        if lines[i].find("DmView") != -1:
-            lines[i] = lines[i].replace(
-                "|community\\.service\\.dm\\.v1\\.DM\\/DmView|", "|"
-            )
-        # 注释精简首页顶部标签
-        if lines[i].find("resource\\/show\\/tab\\/v2") != -1:
-            lines[i] = f"# {lines[i]}"
-            # 注释移除热搜广告
-        if lines[i].find("search\\/square") != -1:
-            lines[i] = lines[i].replace("|v2\\/search\\/square|", "|")
-        # 注释精简我的页面
-        if lines[i].find("account") != -1:
-            lines[i] = f"# {lines[i]}"
-
-        if lines[i].lower().strip() == "[script]" and type == "sg":
-            lines[
-                i
-            ] = """[Script]
-
-移除播放页面广告 playview = type=http-response, pattern=^https:\\/\\/(?:app\\.bilibili\\.com|grpc\\.biliapi\\.net)\\/bilibili\\.app\\.playurl\\.v1\\.PlayURL\\/PlayView$, script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_proto_kokoryh.js, requires-body=true, binary-body-mode=true, script-update-interval=-1
-
-移除播放页面广告 playerunite = type=http-response, pattern=^https:\\/\\/(?:app\\.bilibili\\.com|grpc\\.biliapi\\.net)\\/bilibili\\.app\\.playerunite\\.v1\\.Player\\/PlayViewUnite$, script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_proto_kokoryh.js, requires-body=true, binary-body-mode=true, script-update-interval=-1
-
-移除播放页面广告 view = type=http-response, pattern=^https:\\/\\/(?:app\\.bilibili\\.com|grpc\\.biliapi\\.net)\\/bilibili\\.app\\.view\\.v1\\.View\\/(?:View|ViewProgress)$, script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_proto_kokoryh.js, requires-body=true, binary-body-mode=true, script-update-interval=-1
-
-移除播放页面广告 viewunite = type=http-response, pattern=^https:\\/\\/(?:app\\.bilibili\\.com|grpc\\.biliapi\\.net)\\/bilibili\\.app\\.viewunite\\.v1\\.View\\/(?:RelatesFeed|View)$, script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_proto_kokoryh.js, requires-body=true, binary-body-mode=true, script-update-interval=-1
-"""
-        i += 1
-
-    ret = ""
-    i = 0
-    while i < len(lines):
-        ret += f"{lines[i]}\n"
-        i += 1
-    return ret
-
-
 def modify_content_taobao(content: str):
     lines = content.splitlines()
     i = 0
     while i < len(lines):
-        if lines[i].find("script-path") != -1:
-            lines[i] = lines[i].replace(
-                "https://kelee.one/Resource/Script/Taobao/Taobao_remove_ads.js",
-                "https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/Taobao_remove_ads.js",
-            )
+        lines[i] = lines[i].replace(
+            "https://kelee.one/Resource/Script/Taobao/Taobao_remove_ads.js",
+            "https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/Taobao_remove_ads.js",
+        )
         i += 1
-
     ret = ""
     i = 0
     while i < len(lines):
@@ -170,34 +214,18 @@ def modify_content_zhihu(content: str):
     lines = content.splitlines()
     i = 0
     while i < len(lines):
-        # 注释 我的页面
-        if lines[i].startswith("^https:\\/\\/api\\.zhihu\\.com\\/me\\/guides"):
-            lines[i] = f"# {lines[i]}"
-        elif lines[i].startswith(
-            "^https:\\/\\/api\\.zhihu\\.com\\/people\\/homepage_entry_v2"
-        ):
-            lines[i] = f"# {lines[i]}"
-        elif lines[i].startswith(
-            "^https:\\/\\/api\\.zhihu\\.com\\/unlimited\\/go\\/my_card"
-        ):
-            lines[i] = f"# {lines[i]}"
-        elif lines[i].startswith(
-            "^https:\\/\\/www\\.zhihu\\.com\\/appview\\/v3\\/zhmore"
-        ):
-            lines[i] = f"# {lines[i]}"
-        elif lines[i].find("script-path") != -1:
-            lines[i] = lines[i].replace(
-                "https://kelee.one/Resource/Script/Zhihu/Zhihu_remove_ads.js",
-                "https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/Zhihu_remove_ads.js",
+        lines[i] = lines[i].replace(
+            "https://kelee.one/Resource/Script/Zhihu/Zhihu_remove_ads.js",
+            "https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/Zhihu_remove_ads.js",
+        )
+        if lines[i].find("next-(?:bff|data|render)") != -1:
+            temp = lines[i]
+            temp_0 = temp.replace("next-(?:bff|data|render)", "next-(?:bff|data)")
+            temp_1 = temp.replace(
+                "next-(?:bff|data|render)",
+                "next-render(?!.*sub_scenes=billboard_weekly)",
             )
-            if lines[i].find("next-(?:bff|data|render)") != -1:
-                temp = lines[i]
-                temp_0 = temp.replace("next-(?:bff|data|render)", "next-(?:bff|data)")
-                temp_1 = temp.replace(
-                    "next-(?:bff|data|render)",
-                    "next-render(?!.*sub_scenes=billboard_weekly)",
-                )
-                lines[i] = f"{temp_0}\n\n{temp_1}"
+            lines[i] = f"{temp_0}\n\n{temp_1}"
         i += 1
 
     ret = ""
@@ -224,8 +252,6 @@ def process_file(type: str, src_dir: str, dst_dir: str, url_dir: str, categoty: 
             content = modify_content_common(content, type)
             if filename == "Amap_remove_ads.plugin":
                 content = modify_content_amap(content)
-            elif filename == "Bilibili_remove_ads.plugin":
-                content = modify_content_bilibili(content, type)
             elif filename == "Taobao_remove_ads.plugin":
                 content = modify_content_taobao(content)
             elif filename == "Zhihu_remove_ads.plugin":
@@ -250,7 +276,7 @@ if __name__ == "__main__":
         "sg",
         src_dir=plugin_all_dir,
         dst_dir=sgmodule_dir,
-        url_dir="extern/ProxyResource/plugin",
+        url_dir="plugin/raw",
         categoty="iKeLee",
     )
 
@@ -259,6 +285,6 @@ if __name__ == "__main__":
         "sr",
         src_dir=plugin_all_dir,
         dst_dir=module_dir,
-        url_dir="extern/ProxyResource/plugin",
+        url_dir="plugin/raw",
         categoty="iKeLee",
     )

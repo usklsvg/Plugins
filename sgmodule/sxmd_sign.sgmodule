@@ -7,8 +7,9 @@
 #!openUrl=http://www.txtnovel.vip/
 #!date=2024-10-25 15:16:38
 #!tag=签到
+#!arguments=password, account
 
 [Script]
 # 定时签到
-书香门第每日签到 = type=cron, cronexp={CRONEXP}, script-path=https://raw.githubusercontent.com/bgvioletsky/ios_rule/refs/heads/main/Loon/Script/sxmd.js, timeout=120, argument="[{account},{password}]", script-update-interval=-1
+书香门第每日签到 = type=cron, cronexp={CRONEXP}, script-path=https://raw.githubusercontent.com/bgvioletsky/ios_rule/refs/heads/main/Loon/Script/sxmd.js, timeout=120, argument=account="{{{account}}}"&password="{{{password}}}", script-update-interval=-1
 

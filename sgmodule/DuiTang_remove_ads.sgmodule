@@ -101,13 +101,6 @@ DOMAIN,aspect-upush.umeng.com,REJECT,extended-matching,pre-matching
 # 穿山甲SDK
 DOMAIN,toblog.ctobsnssdk.com,REJECT,extended-matching,pre-matching
 
-[URL Rewrite]
-# 拼多多广告平台
-^https:\/\/video-dsp\.pddpic\.com\/market-dsp-video\/ - reject
-^https:\/\/t-dsp\.pinduoduo\.com\/dspcb\/i\/mrk_union - reject
-^https:\/\/images\.pinduoduo\.com\/mrk\/ - reject
-^https:\/\/images\.pinduoduo\.com\/marketing_api\/ - reject
-
 [Body Rewrite]
 http-response-jq ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ 'delpaths([["data","REWARD_AD_PLACES"]])'
 http-response-jq ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ 'delpaths([["data","SPLASH_SWING_OPEN"]])'
@@ -122,16 +115,6 @@ http-response-jq ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ 'delpaths(
 http-response-jq ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ 'delpaths([["data","ME_TAB","ANNOUNCEMENT"]])'
 http-response-jq ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ 'delpaths([["data","ME_TAB","MEMBERSHIP"]])'
 http-response-jq ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ 'delpaths([["data","ME_TAB","MEMBERSHIP2"]])'
-
-[Map Local]
-# 信息流广告
-^https:\/\/(www|api)\.duitang\.com\/napi\/(ad|ads)\/ data-type=text data="{}" status-code=200
-
-# 其他广告
-^https:\/\/api\.duitang\.com\/napi\/infra\/settings\/ data-type=text data="{}" status-code=200
-
-# 达人推荐
-^https:\/\/api\.duitang\.com\/napi\/vienna\/daren\/daren\/recommend\/ data-type=text data="{}" status-code=200
 
 [MITM]
 hostname = %APPEND% api.duitang.com, www.duitang.com, video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com

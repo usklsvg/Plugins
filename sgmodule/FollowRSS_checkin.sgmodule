@@ -8,8 +8,9 @@
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/Resource/Markdown/FollowRSS/README.md
 #!date=2024-11-28 00:00:00
+#!arguments=cookie, token
 
 [Script]
 # 定时签到
-Follow每日签到 = type=cron, cronexp={cron}, script-path=https://kelee.one/Resource/Script/FollowRSS/FollowRSS_checkin.js, timeout=120, argument="[{token},{cookie}]", script-update-interval=-1
+Follow每日签到 = type=cron, cronexp={cron}, script-path=https://kelee.one/Resource/Script/FollowRSS/FollowRSS_checkin.js, timeout=120, argument=token="{{{token}}}"&cookie="{{{cookie}}}", script-update-interval=-1
 
