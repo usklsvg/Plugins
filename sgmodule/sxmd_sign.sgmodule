@@ -7,7 +7,7 @@
 #!openUrl=http://www.txtnovel.vip/
 #!date=2024-10-25 15:16:38
 #!tag=签到
-#!arguments=password, account
+#!arguments=account, password
 
 [Script]
 # 定时签到

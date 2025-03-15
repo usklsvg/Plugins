@@ -9,7 +9,7 @@
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
 #!date=2025-03-09 12:18:42
-#!arguments=lyricLang, blockUpload, blockImmersive, captionLang, debug
+#!arguments=blockImmersive, blockUpload, captionLang, debug, lyricLang
 
 [Rule]
 AND,((DOMAIN-SUFFIX,googlevideo.com,extended-matching),(PROTOCOL,QUIC)),REJECT

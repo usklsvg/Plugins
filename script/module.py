@@ -153,7 +153,7 @@ def modify_content_common(content: str, type: str):
                 break
         if not arg_exist:
             line_arg = "#!arguments="
-            for i, arg in enumerate(arguments):
+            for i, arg in enumerate(sorted(list(arguments))):
                 if i == 0:
                     line_arg += arg
                 else:
@@ -184,6 +184,35 @@ def modify_content_amap(content: str):
         if lines[i].find("search\\/sp") != -1:
             lines[i] = lines[i].replace("|search\\/sp|", "|")
         i += 1
+
+    ret = ""
+    i = 0
+    while i < len(lines):
+        ret += f"{lines[i]}\n"
+        i += 1
+    return ret
+
+
+def modify_content_bilibili(content: str):
+    lines = content.splitlines()
+
+    for i, line in enumerate(lines):
+        if (
+            line.startswith("#")
+            or line.find("script-path") == -1
+            or line.find("argument") == -1
+        ):
+            continue
+        items = [item.strip() for item in line.split(", ")]
+        line = items[0]
+        for j in range(1, len(items)):
+            if (
+                items[j].lower().startswith("argument")
+                and items[j].lower().find("{") != -1
+            ):
+                continue
+            line = f"{line}, {items[j]}"
+        lines[i] = line
 
     ret = ""
     i = 0
@@ -249,13 +278,18 @@ def process_file(type: str, src_dir: str, dst_dir: str, url_dir: str, categoty: 
 
         content = get_url_text_content(request_url)
         if content != None:
+            if filename == "Bilibili_remove_ads.plugin":
+                content = modify_content_bilibili(content)
+
             content = modify_content_common(content, type)
+
             if filename == "Amap_remove_ads.plugin":
                 content = modify_content_amap(content)
-            elif filename == "Taobao_remove_ads.plugin":
+            if filename == "Taobao_remove_ads.plugin":
                 content = modify_content_taobao(content)
-            elif filename == "Zhihu_remove_ads.plugin":
+            if filename == "Zhihu_remove_ads.plugin":
                 content = modify_content_zhihu(content)
+
             if content != None:
                 module_name = f"{filename[:filename.rfind('.')]}.{'module' if type == 'sr' else 'sgmodule'}"
                 save_content(

@@ -8,7 +8,7 @@
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/Resource/Markdown/WPS/README.md
 #!date=2024-11-28 00:00:00
-#!arguments=SK, MAX_RETRIES, AK
+#!arguments=AK, MAX_RETRIES, SK
 
 [Script]
 # 捕获Cookie

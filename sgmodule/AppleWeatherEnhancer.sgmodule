@@ -10,7 +10,7 @@
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
 #!date=2024-11-28 00:00:00
-#!arguments=AQI.Local.ReplaceScales, AQI.Local.ConvertUnits, API.WAQI.Token, NextHour.Provider, AQI.Provider, AQI.ReplaceProviders, API.QWeather.Token, API.QWeather.Host, AQI.Local.Scale, API.ColorfulClouds.Token
+#!arguments=API.ColorfulClouds.Token, API.QWeather.Host, API.QWeather.Token, API.WAQI.Token, AQI.Local.ConvertUnits, AQI.Local.ReplaceScales, AQI.Local.Scale, AQI.Provider, AQI.ReplaceProviders, NextHour.Provider
 
 [Rule]
 DOMAIN,weather-analytics-events.apple.com,REJECT,extended-matching,pre-matching
