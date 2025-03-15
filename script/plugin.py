@@ -8,6 +8,7 @@ extern_dir = os.path.join(current_dir, "extern", "ProxyResource")
 extern_plugin_dir = os.path.join(extern_dir, "plugin")
 extern_script_dir = os.path.join(extern_dir, "script")
 extern_jq_dir = os.path.join(extern_dir, "jq")
+plugin_raw_dir = os.path.join(current_dir, "plugin", "raw")
 plugin_no_script_dir = os.path.join(current_dir, "plugin", "no_script")
 plugin_only_script_dir = os.path.join(current_dir, "plugin", "only_script")
 
@@ -24,16 +25,22 @@ def get_url_text_content(url: str):
 
 def download_url_file(url: str, filename: str):
     headers = {"User-Agent": "script-hub/1.0.0"}
-    try:
-        response = requests.get(url, headers=headers, stream=True)
-        if response.status_code == 200:
-            with open(filename, "wb") as f:
-                for chunk in response.iter_content(chunk_size=1024):
-                    if chunk:
-                        f.write(chunk)
-                        f.flush()
-    except requests.exceptions.RequestException as e:
-        print(f"error : {e}")
+    err_info = None
+    for _ in range(3):
+        try:
+            response = requests.get(url, headers=headers, stream=True)
+            if response.status_code == 200:
+                with open(filename, "wb") as f:
+                    for chunk in response.iter_content(chunk_size=1024):
+                        if chunk:
+                            f.write(chunk)
+                            f.flush()
+        except requests.exceptions.RequestException as e:
+            err_info = e
+        err_info = None
+        break
+    if err_info:
+        print(f"error : {err_info}")
 
 
 def recreate_path(pathname: str):
@@ -55,25 +62,58 @@ def save_content(content: str, filename: str):
         print(f"Error when saving content to {filename}: {e}")
 
 
-def colllect_files():
-    readme = get_url_text_content(
-        "https://raw.githubusercontent.com/luestr/ProxyResource/refs/heads/main/README.md"
-    )
-    save_content(readme, os.path.join(extern_dir, "README.md"))
+def extract_components(lines: str):
+    lines = [line.strip() for line in lines]
 
-    filenames = []
-    recreate_path(extern_plugin_dir)
-    for item in readme.split('"'):
-        if not item.endswith(".plugin"):
+    data: dict[str, str] = {}
+    line_index = 0
+    data["title"] = []
+    while line_index < len(lines):
+        if len(lines[line_index]) == 0:
+            data["title"].append("\n")
+            line_index += 1
+        elif lines[line_index][0] != "[":
+            data["title"].append(f"{lines[line_index]}\n")
+            line_index += 1
+        else:
+            break
+
+    while line_index < len(lines):
+        item_name = lines[line_index]
+        line_index += 1
+        data[item_name] = []
+        while line_index < len(lines):
+            if len(lines[line_index]) == 0:
+                data[item_name].append("\n")
+                line_index += 1
+            elif lines[line_index][0] != "[":
+                data[item_name].append(f"{lines[line_index]}\n")
+                line_index += 1
+            else:
+                break
+
+    empty_keys = []
+    for key in data:
+        if key == "title":
             continue
+        empty = True
+        for line in data[key]:
+            if line[0] != "[" and line[0] != "#" and line[0] != ";" and line[0] != "\n":
+                empty = False
+                break
+        if empty:
+            empty_keys.append(key)
+    for key in empty_keys:
+        del data[key]
 
-        plugin_url = item[46:]
-        plugin_filename = os.path.join(extern_plugin_dir, item.split("/")[-1])
-        download_url_file(plugin_url, plugin_filename)
+    return data
 
-        filenames.append(plugin_filename)
 
-    return filenames
+###############################################################################
+#
+# download extern
+#
+###############################################################################
 
 
 def save_plugin_scripts(plugin_name: str, data: list[str]):
@@ -127,26 +167,77 @@ def save_plugin_jqs(plugin_name: str, data: list[str]):
             exit(1)
 
 
+def colllect_files():
+    readme = get_url_text_content(
+        "https://raw.githubusercontent.com/luestr/ProxyResource/refs/heads/main/README.md"
+    )
+    save_content(readme, os.path.join(extern_dir, "README.md"))
+
+    filenames = []
+    recreate_path(extern_plugin_dir)
+    for item in readme.split('"'):
+        if not item.endswith(".plugin"):
+            continue
+
+        plugin_url = item[46:]
+        plugin_name = item.split("/")[-1]
+        plugin_filename = os.path.join(extern_plugin_dir, plugin_name)
+        download_url_file(plugin_url, plugin_filename)
+        try:
+            with open(plugin_filename, mode="r", encoding="utf-8") as f:
+                content = f.readlines()
+        except IOError as e:
+            print(f"Error when reading content from {plugin_filename}: {e}")
+            continue
+        filenames.append(plugin_filename)
+        data: dict[str, str] = extract_components(content)
+
+        script_key = ""
+        has_script = False
+        for key in data:
+            if str(key).lower() == "[script]":
+                has_script = True
+                script_key = key
+        if has_script:
+            save_plugin_scripts(plugin_name[: plugin_name.rfind(".")], data[script_key])
+
+        script_key = ""
+        has_rewrite = False
+        for key in data:
+            if str(key).lower() == "[rewrite]":
+                has_rewrite = True
+                script_key = key
+        if has_rewrite:
+            save_plugin_jqs(plugin_name[: plugin_name.rfind(".")], data[script_key])
+
+    return filenames
+
+
+###############################################################################
+#
+# adjust
+#
+###############################################################################
+
+
 def modify_content_bilibili(lines: list[str]):
     i = 0
     while i < len(lines):
-        # 注释移除热门话题
-        if lines[i].find("Popular") != -1:
-            lines[i] = lines[i].replace("|show\\.v1\\.Popular\\/Index|", "|")
-        # 注释移除交互式弹幕
-        if lines[i].find("DmView") != -1:
-            lines[i] = lines[i].replace(
-                "|community\\.service\\.dm\\.v1\\.DM\\/DmView|", "|"
-            )
         # 注释精简首页顶部标签
         if lines[i].find("resource\\/show\\/tab\\/v2") != -1:
             lines[i] = f"# {lines[i]}"
-            # 注释移除热搜广告
-        if lines[i].find("search\\/square") != -1:
-            lines[i] = lines[i].replace("|v2\\/search\\/square|", "|")
-        # 注释精简我的页面
+        # 注释移除热搜广告
+        lines[i] = lines[i].replace("|v2\\/search\\/square|", "|")
+        # 注释精简我的页面，非会员开启会员专属清晰度
         if lines[i].find("account") != -1:
             lines[i] = f"# {lines[i]}"
+        # 注释移除热门话题
+        lines[i] = lines[i].replace("|show\\.v1\\.Popular\\/Index|", "|")
+        # 注释移除交互式弹幕
+        lines[i] = lines[i].replace(
+            "|community\\.service\\.dm\\.v1\\.DM\\/DmView|", "|"
+        )
+
         i += 1
     return lines
 
@@ -154,21 +245,18 @@ def modify_content_bilibili(lines: list[str]):
 def modify_content_zhihu(lines: list[str]):
     i = 0
     while i < len(lines):
-        # 注释 我的页面
-        if lines[i].find("^https:\\/\\/api\\.zhihu\\.com\\/me\\/guides") != -1:
-            lines[i] = f"# {lines[i]}"
-        elif (
-            lines[i].find("^https:\\/\\/api\\.zhihu\\.com\\/people\\/homepage_entry_v2")
+        # 注释 我的页面 - 项目列表、会员卡片
+        if (
+            lines[i].find("^https:\\/\\/api\\.zhihu\\.com\\/me\\/guides") != -1
+            or lines[i].find(
+                "^https:\\/\\/api\\.zhihu\\.com\\/people\\/homepage_entry_v2"
+            )
             != -1
-        ):
-            lines[i] = f"# {lines[i]}"
-        elif (
-            lines[i].find("^https:\\/\\/api\\.zhihu\\.com\\/unlimited\\/go\\/my_card")
+            or lines[i].find(
+                "^https:\\/\\/api\\.zhihu\\.com\\/unlimited\\/go\\/my_card"
+            )
             != -1
-        ):
-            lines[i] = f"# {lines[i]}"
-        elif (
-            lines[i].find("^https:\\/\\/www\\.zhihu\\.com\\/appview\\/v3\\/zhmore")
+            or lines[i].find("^https:\\/\\/www\\.zhihu\\.com\\/appview\\/v3\\/zhmore")
             != -1
         ):
             lines[i] = f"# {lines[i]}"
@@ -176,96 +264,31 @@ def modify_content_zhihu(lines: list[str]):
     return lines
 
 
-def extract_components(plugin_name: str, content: str):
-    lines = []
-    for line in content:
-        lines.append(line.strip())
-
-    if plugin_name == "Bilibili_remove_ads":
-        lines = modify_content_bilibili(lines)
-    elif plugin_name == "Zhihu_remove_ads":
-        lines = modify_content_zhihu(lines)
-
-    data = {}
-    line_index = 0
-    data["title"] = []
-    while line_index < len(lines):
-        if len(lines[line_index]) == 0:
-            data["title"].append("\n")
-            line_index += 1
-        elif lines[line_index][0] != "[":
-            data["title"].append(f"{lines[line_index]}\n")
-            line_index += 1
-        else:
-            break
-
-    while line_index < len(lines):
-        item_name = lines[line_index]
-        line_index += 1
-        data[item_name] = []
-        while line_index < len(lines):
-            if len(lines[line_index]) == 0:
-                data[item_name].append("\n")
-                line_index += 1
-            elif lines[line_index][0] != "[":
-                data[item_name].append(f"{lines[line_index]}\n")
-                line_index += 1
-            else:
-                break
-
-    empty_keys = []
-    for key in data:
-        if key == "title":
-            continue
-        empty = True
-        for line in data[key]:
-            if line[0] != "[" and line[0] != "#" and line[0] != ";" and line[0] != "\n":
-                empty = False
-                break
-        if empty:
-            empty_keys.append(key)
-    for key in empty_keys:
-        del data[key]
-
-    script_key = ""
-    has_script = False
-    for key in data:
-        if str(key).lower() == "[script]":
-            has_script = True
-            script_key = key
-    if has_script:
-        save_plugin_scripts(plugin_name, data[script_key])
-
-    script_key = ""
-    has_rewrite = False
-    for key in data:
-        if str(key).lower() == "[rewrite]":
-            has_rewrite = True
-            script_key = key
-    if has_rewrite:
-        save_plugin_jqs(plugin_name, data[script_key])
-
-    ret = {}
-    for key in data:
-        ret[key] = ""
-        for line in data[key]:
-            ret[key] += line
-
-    return ret
-
-
-def process_file(file_path: str):
+def process_file(filename: str):
     try:
-        with open(file_path, mode="r", encoding="utf-8") as f:
-            content = f.readlines()
+        with open(filename, mode="r", encoding="utf-8") as f:
+            lines = f.readlines()
     except IOError as e:
-        print(f"Error when reading content from {file_path}: {e}")
+        print(f"Error when reading content from {filename}: {e}")
         return
 
-    filename = file_path.split("/")[-1]
-    filename = filename.split("\\")[-1]
-    plugin_name = filename[: filename.rfind(".")]
-    data = extract_components(plugin_name, content)
+    filename = (filename.split("/")[-1]).split("\\")[-1]
+    if filename.endswith("Bilibili_remove_ads.plugin"):
+        lines = modify_content_bilibili(lines)
+    elif filename.endswith("Zhihu_remove_ads.plugin"):
+        lines = modify_content_zhihu(lines)
+    data = extract_components(lines)
+    for key in data.keys():
+        str_tmp = f"{key}\n" if key != "title" else ""
+        for line in data[key]:
+            str_tmp = str_tmp + line
+        data[key] = str_tmp
+
+    content_raw = ""
+    for key in data:
+        content_raw += f"{data[key]}"
+    output_filename_raw = os.path.join(plugin_raw_dir, filename)
+    save_content(content_raw, output_filename_raw)
 
     has_content = False
     content_without_script = data["title"]
@@ -274,7 +297,7 @@ def process_file(file_path: str):
             continue
         elif str(key).lower() != "[argument]" and str(key).lower() != "[mitm]":
             has_content = True
-        content_without_script += f"{key}\n{data[key]}"
+        content_without_script += f"{data[key]}"
     if has_content:
         output_filename_without_scripts = os.path.join(plugin_no_script_dir, filename)
         save_content(content_without_script, output_filename_without_scripts)
@@ -284,21 +307,21 @@ def process_file(file_path: str):
     for key in data:
         if str(key).lower() == "[script]":
             has_script = True
-            content_scripts += f"{key}\n{data[key]}"
+            content_scripts += f"{data[key]}"
         elif str(key).lower() == "[argument]" or str(key).lower() == "[mitm]":
-            content_scripts += f"{key}\n{data[key]}"
+            content_scripts += f"{data[key]}"
     if has_script:
         output_filename_scripts = os.path.join(plugin_only_script_dir, filename)
         save_content(content_scripts, output_filename_scripts)
 
 
 if __name__ == "__main__":
-    filenames = colllect_files()
-
     recreate_path(extern_script_dir)
     recreate_path(extern_jq_dir)
+    filenames = colllect_files()
+
+    recreate_path(plugin_raw_dir)
     recreate_path(plugin_no_script_dir)
     recreate_path(plugin_only_script_dir)
-
     for filename in filenames:
         process_file(filename)
