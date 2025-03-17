@@ -11,17 +11,13 @@
 #!date=2024-11-28 00:00:00
 
 [Rewrite]
-# 财新数据通
 ^https:\/\/entities\.caixin\.com\/api\/(dataplus\/promotionHints|public\/push\/appIndex|public\/recommendNews) reject-dict
 
-# 广告样式
 ^https:\/\/gateway\.caixin\.com\/api\/app-api\/cxAdInfo\/selectIndexAdInfo reject-dict
 ^https:\/\/mappsv5\.caixin\.com\/channelv5\/article_ad_ios_info\.json reject-dict
 
-# 文章中间推广、文章底部相关阅读
 ^https:\/\/gg\.caixin\.com\/s\?z=caixin&slot=\d+ reject-dict
 
-# 首页弹出框
 ^https:\/\/msgapi\.caixin\.com\/msg_api\/annmsg\/annlist reject-dict
 
 [MitM]
