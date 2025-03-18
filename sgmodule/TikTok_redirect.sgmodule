@@ -10,7 +10,7 @@
 #!date=2024-11-28 00:00:00
 
 [Rule]
-AND,((GEOIP,CN),(DOMAIN,pitaya.bytedance.com)),DIRECT
+AND,((GEOIP,CN,no-resolve),(DOMAIN,pitaya.bytedance.com)),DIRECT
 
 [URL Rewrite]
 ^https:\/\/api-va\.tiktokv\.com\/api\/ad\/ - reject

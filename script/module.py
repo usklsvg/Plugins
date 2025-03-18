@@ -268,7 +268,7 @@ def modify_content_zhihu(content: str):
 def process_file(type: str, src_dir: str, dst_dir: str, url_dir: str, categoty: str):
     for filename in os.listdir(src_dir):
         url = f"https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/{url_dir}/{filename}"
-        request_url = f"http://localhost:9101/file/_start_/{url}/_end_/sample.sgmodule.txt?type=loon-plugin&del=true&category={categoty}"
+        request_url = f"http://localhost:9101/file/_start_/{url}/_end_/sample.sgmodule.txt?type=loon-plugin&del=true&nore=true&category={categoty}"
         if type == "sr":
             request_url = f"{request_url}&target=shadowrocket-module"
         else:
