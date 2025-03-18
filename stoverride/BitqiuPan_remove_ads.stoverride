@@ -1,0 +1,48 @@
+name: |-
+  比特球云盘去广告
+desc: |-
+  移除开屏广告和各类横幅推广。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/BitqiuPan.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id1388178609
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://github.com/luestr/ProxyResource/blob/main/README.md
+date: |-
+  2024-11-28 00:00:00
+
+rules:
+  - DOMAIN,cnlogs.umeng.com,REJECT
+  - DOMAIN,errlog.umeng.com,REJECT
+  - DOMAIN,errnewlog.umeng.com,REJECT
+  - DOMAIN,ucc.umeng.com,REJECT
+  - DOMAIN,ulogs.umeng.com,REJECT
+  - DOMAIN,utoken.umeng.com,REJECT
+  - DOMAIN,deeplink.umeng.com,REJECT
+  - DOMAIN,aspect-upush.umeng.com,REJECT
+  - DOMAIN,plbslog.umeng.com,REJECT
+  - DOMAIN,log.umtrack.com,REJECT
+  - DOMAIN,aaid.umeng.com,REJECT
+  - DOMAIN,log.umsns.com,REJECT
+
+http:
+
+  mitm:
+    - "pan-api.bitqiu.com"
+
+  url-rewrite:
+    - >-
+      ^https:\/\/pan-api\.bitqiu\.com\/activity\/getPromoteGuide$ - reject-dict
+    - >-
+      ^http:\/\/pan-api\.bitqiu\.com\/activity\/getUrlList$ - reject-dict
+    - >-
+      ^https:\/\/pan-api\.bitqiu\.com\/activity\/guides$ - reject-dict
+

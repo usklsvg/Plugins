@@ -1,0 +1,90 @@
+name: |-
+  百度网盘去广告
+desc: |-
+  移除开屏广告、首页卡片广告、传输页面广告、各类弹窗，精简侧拉抽屉和我的页面。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/BaiduNetDisk.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id547166701
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://github.com/luestr/ProxyResource/blob/main/README.md
+date: |-
+  2024-11-28 00:00:00
+
+rules:
+  - DOMAIN,frontier-aweme-hl.snssdk.com,REJECT
+  - DOMAIN,frontier-quic-test.bytedance.com,REJECT
+  - DOMAIN,mon.zijieapi.com,REJECT
+  - DOMAIN,lf-ad-ies.bytecdn.cn,REJECT
+  - DOMAIN,i.snssdk.com,REJECT
+  - DOMAIN,is.snssdk.com,REJECT
+  - DOMAIN,bds.snssdk.com,REJECT
+  - DOMAIN,dm.bytedance.com,REJECT
+  - DOMAIN,dm.pstatp.com,REJECT
+  - DOMAIN,dm.toutiao.com,REJECT
+  - DOMAIN,log.snssdk.com,REJECT
+  - DOMAIN,s3a.pstatp.com,REJECT
+  - DOMAIN,sdfp.snssdk.com,REJECT
+  - DOMAIN,tosv.boe.byted.org,REJECT
+  - DOMAIN,tosv.byted.org,REJECT
+  - DOMAIN,extlog.snssdk.com,REJECT
+  - DOMAIN,mssdk-bu.bytedance.com,REJECT
+  - DOMAIN,toblog.ctobsnssdk.com,REJECT
+  - DOMAIN,mssdk.volces.com,REJECT
+  - DOMAIN,pangolin.snssdk.com,REJECT
+  - DOMAIN,gromore.pangolin-sdk-toutiao.com,REJECT
+  - DOMAIN,ether-pack.pangolin-sdk-toutiao.com,REJECT
+  - DOMAIN-KEYWORD,-ad-sign.byteimg.com,REJECT
+  - DOMAIN-KEYWORD,api-access.pangolin-sdk-toutiao,REJECT
+  - DOMAIN-KEYWORD,log-api.pangolin-sdk-toutiao,REJECT
+  - DOMAIN-KEYWORD,-ad.byteoversea.com,REJECT
+  - DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT
+  - DOMAIN-KEYWORD,asiad.byteactivity,REJECT
+  - DOMAIN,mobads.baidu.com,REJECT
+  - DOMAIN,mobads-logs.baidu.com,REJECT
+  - DOMAIN,wn.pos.baidu.com,REJECT
+  - DOMAIN,bgg.baidu.com,REJECT
+  - DOMAIN,als.baidu.com,REJECT
+  - DOMAIN,mobads-pre-config.cdn.bcebos.com,REJECT
+  - DOMAIN,cpro.baidustatic.com,REJECT
+  - DOMAIN,feed-image.baidu.com,REJECT
+  - DOMAIN-SUFFIX,union.baidu.cn,REJECT
+  - DOMAIN-SUFFIX,union.baidu.com,REJECT
+
+http:
+
+  mitm:
+    - "pan.baidu.com"
+    - "180.76.76.200"
+    - "180.76.76.112"
+
+  url-rewrite:
+    - >-
+      ^http:\/\/p\d+-be-pack-sign\.pglstatp-toutiao\.com\/(ad-app-package|web\.business\.image)\/ - reject
+    - >-
+      ^https?:\/\/180\.76\.76\.200\/v\d\/resolve - reject
+    - >-
+      ^https?:\/\/180\.76\.76\.112\/v\d\/resolve - reject
+    - >-
+      ^https:\/\/pan\.baidu\.com\/api\/getconfig - reject-dict
+    - >-
+      ^https:\/\/pan\.baidu\.com\/api\/getsyscfg - reject-dict
+    - >-
+      ^https:\/\/pan\.baidu\.com\/api\/taskscore\/tasklist - reject-dict
+    - >-
+      ^https:\/\/pan\.baidu\.com\/act\/api\/activityentry - reject-dict
+    - >-
+      ^https:\/\/pan\.baidu\.com\/rest\/2\.0\/membership\/user\?method=gamecenter - reject-dict
+    - >-
+      ^https:\/\/pan\.baidu\.com\/act\/v2\/welfare\/list - reject-dict
+    - >-
+      ^https:\/\/pan\.baidu\.com\/rest\/\d\.\d\/pcs\/adv - reject-dict
+

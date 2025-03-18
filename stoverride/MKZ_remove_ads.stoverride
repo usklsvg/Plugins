@@ -1,0 +1,95 @@
+name: |-
+  漫客栈去广告
+desc: |-
+  移除开屏广告、漫画广告、小说章末广告，精简我的页面。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/MKZ.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id1189885433
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://github.com/luestr/ProxyResource/blob/main/README.md
+date: |-
+  2024-11-28 00:00:00
+
+rules:
+  - DOMAIN,mon.zijieapi.com,REJECT
+  - DOMAIN,lf-ad-ies.bytecdn.cn,REJECT
+  - DOMAIN,i.snssdk.com,REJECT
+  - DOMAIN,is.snssdk.com,REJECT
+  - DOMAIN,bds.snssdk.com,REJECT
+  - DOMAIN,dm.bytedance.com,REJECT
+  - DOMAIN,dm.pstatp.com,REJECT
+  - DOMAIN,dm.toutiao.com,REJECT
+  - DOMAIN,log.snssdk.com,REJECT
+  - DOMAIN,s3a.pstatp.com,REJECT
+  - DOMAIN,sdfp.snssdk.com,REJECT
+  - DOMAIN,tosv.boe.byted.org,REJECT
+  - DOMAIN,tosv.byted.org,REJECT
+  - DOMAIN,extlog.snssdk.com,REJECT
+  - DOMAIN,mssdk-bu.bytedance.com,REJECT
+  - DOMAIN,toblog.ctobsnssdk.com,REJECT
+  - DOMAIN,mssdk.volces.com,REJECT
+  - DOMAIN,pangolin.snssdk.com,REJECT
+  - DOMAIN,gromore.pangolin-sdk-toutiao.com,REJECT
+  - DOMAIN,ether-pack.pangolin-sdk-toutiao.com,REJECT
+  - DOMAIN-KEYWORD,-ad-sign.byteimg.com,REJECT
+  - DOMAIN-KEYWORD,api-access.pangolin-sdk-toutiao,REJECT
+  - DOMAIN-KEYWORD,log-api.pangolin-sdk-toutiao,REJECT
+  - DOMAIN-KEYWORD,-ad.byteoversea.com,REJECT
+  - DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT
+  - DOMAIN-KEYWORD,asiad.byteactivity,REJECT
+  - DOMAIN,config.inmobi.cn,REJECT
+  - DOMAIN-SUFFIX,jiguang.cn,REJECT
+  - DOMAIN-SUFFIX,jpush.cn,REJECT
+  - DOMAIN,ios.bugly.qq.com,REJECT
+  - DOMAIN,sdk.e.qq.com,REJECT
+  - DOMAIN,us.l.qq.com,REJECT
+  - DOMAIN-SUFFIX,ugdtimg.com,REJECT
+  - DOMAIN-SUFFIX,gdt.qq.com,REJECT
+  - DOMAIN,tmeadcomm.y.qq.com,REJECT
+  - DOMAIN,cnlogs.umeng.com,REJECT
+  - DOMAIN,errlog.umeng.com,REJECT
+  - DOMAIN,errnewlog.umeng.com,REJECT
+  - DOMAIN,ucc.umeng.com,REJECT
+  - DOMAIN,ulogs.umeng.com,REJECT
+  - DOMAIN,utoken.umeng.com,REJECT
+  - DOMAIN,deeplink.umeng.com,REJECT
+  - DOMAIN,aspect-upush.umeng.com,REJECT
+  - DOMAIN,plbslog.umeng.com,REJECT
+
+http:
+
+  mitm:
+    - "base.mkzcdn.com"
+
+  url-rewrite:
+    - >-
+      ^http:\/\/p\d+-be-pack-sign\.pglstatp-toutiao\.com\/(ad-app-package|web\.business\.image)\/ - reject
+    - >-
+      ^https:\/\/base\.mkzcdn\.com\/advert\/app\/read\/v\d - reject-dict
+    - >-
+      ^https:\/\/base\.mkzcdn\.com\/advert\/app\/story\/read\/v\d - reject-dict
+    - >-
+      ^https:\/\/base\.mkzcdn\.com\/advert\/app\/task\/motivate\/v\d - reject-dict
+    - >-
+      ^https:\/\/base\.mkzcdn\.com\/advert\/app\/user\/slide\d\/v\d\/ - reject-dict
+
+  script:
+    - match: ^https:\/\/base\.mkzcdn\.com\/app\/config\/
+      name: "配置修改_85"
+      type: response
+      require-body: true
+
+script-providers:
+  "配置修改_85":
+    url: https://kelee.one/Resource/Script/MKZ/MKZ_remove_ads.js
+    interval: 86400
+

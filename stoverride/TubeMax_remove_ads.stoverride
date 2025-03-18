@@ -1,0 +1,40 @@
+name: |-
+  TubeMax去广告
+desc: |-
+  过滤TubeMax广告
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/TubeMax.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id1634335563
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://github.com/luestr/ProxyResource/blob/main/README.md
+date: |-
+  2024-11-28 00:00:00
+
+rules:
+  - DOMAIN-SUFFIX,adjust.com,REJECT
+  - DOMAIN-SUFFIX,applvn.com,REJECT
+  - DOMAIN-SUFFIX,app-measurement.com,REJECT
+  - DOMAIN-SUFFIX,pangle.io,REJECT
+  - DOMAIN-SUFFIX,applovin.com,REJECT
+  - DOMAIN-SUFFIX,appier.net,REJECT
+  - DOMAIN-SUFFIX,adsmoloco.com,REJECT
+  - DOMAIN-SUFFIX,adcanvas.com,REJECT
+
+http:
+
+  mitm:
+    - "*.i18n-pglstatp.com"
+
+  url-rewrite:
+    - >-
+      ^https:\/\/.*\.i18n-pglstatp\.com\/obj\/ad-pattern-sg - reject
+

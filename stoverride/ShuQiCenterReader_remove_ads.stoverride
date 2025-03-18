@@ -1,0 +1,51 @@
+name: |-
+  书旗小说去广告
+desc: |-
+  移除书城横幅广告、听书广告、阅读广告、章末推荐、福利入口、悬浮窗、推荐搜索词，精简我的页面。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/ShuQiCenterReader.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id733689509
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://github.com/luestr/ProxyResource/blob/main/README.md
+date: |-
+  2024-11-28 00:00:00
+
+rules:
+  - DOMAIN,render-web.11222.cn,REJECT
+
+http:
+
+  mitm:
+    - "ocean.shuqireader.com"
+    - "huichuan.sm.cn"
+
+  url-rewrite:
+    - >-
+      ^https:\/\/huichuan\.sm\.cn\/nativead - reject-dict
+    - >-
+      ^https:\/\/ocean\.shuqireader\.com\/api\/route\/iosReadPage\/adV2 - reject-dict
+    - >-
+      ^https:\/\/ocean\.shuqireader\.com\/api\/route\/ios\/readPage$ - reject-dict
+    - >-
+      ^https:\/\/ocean\.shuqireader\.com\/api\/render\/load\/resource - reject
+
+  script:
+    - match: ^https:\/\/ocean\.shuqireader\.com\/sqios\/render\/render\/page\/bookstore$
+      name: "移除书城横幅和阅读广告_19"
+      type: response
+      require-body: true
+
+script-providers:
+  "移除书城横幅和阅读广告_19":
+    url: https://kelee.one/Resource/Script/ShuQiCenterReader/ShuQiCenterReader_remove_ads.js
+    interval: 86400
+

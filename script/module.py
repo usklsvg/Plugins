@@ -4,8 +4,6 @@ import shutil
 
 current_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 plugin_all_dir = os.path.join(current_dir, "extern", "ProxyResource", "plugin")
-sgmodule_dir = os.path.join(current_dir, "sgmodule")
-module_dir = os.path.join(current_dir, "module")
 
 
 def recreate_path(pathname: str):
@@ -99,7 +97,7 @@ def extract_components(lines: str):
 ###############################################################################
 
 
-def modify_content_common(content: str, type: str):
+def modify_content_common(content: str, file_ext: str):
     lines = content.splitlines()
     empty_content = True
     for line in lines:
@@ -117,12 +115,7 @@ def modify_content_common(content: str, type: str):
     for i, line in enumerate(data["[Script]"]):
         if line.startswith("#") or line.find("script-path") == -1:
             continue
-        if type == "sr":
-            data["[Script]"][i] = line.replace(
-                "Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js",
-                f"usklsvg/Plugins/refs/heads/main/script/body-rewrite-sr.js",
-            )
-        else:
+        if file_ext == "sgmodule":
             items = [item.strip() for item in line.split(", ")]
             line = items[0]
             for j in range(1, len(items)):
@@ -265,36 +258,49 @@ def modify_content_zhihu(content: str):
     return ret
 
 
-def process_file(type: str, src_dir: str, dst_dir: str, url_dir: str, categoty: str):
+def process_file(
+    file_ext: str, src_dir: str, dst_dir: str, url_dir: str, categoty: str
+):
     for filename in os.listdir(src_dir):
         url = f"https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/{url_dir}/{filename}"
         request_url = f"http://localhost:9101/file/_start_/{url}/_end_/sample.sgmodule.txt?type=loon-plugin&del=true&nore=true&category={categoty}"
-        if type == "sr":
-            request_url = f"{request_url}&target=shadowrocket-module"
-        else:
+        if file_ext == "sgmodule":
             request_url = (
                 f"{request_url}&target=surge-module&sni=REJECT&pm=REJECT&jqEnabled=true"
             )
+        elif file_ext == "module":
+            request_url = f"{request_url}&target=shadowrocket-module"
+        else:
+            request_url = f"{request_url}&target=stash-stoverride"
 
         content = get_url_text_content(request_url)
         if content != None:
-            if filename == "Bilibili_remove_ads.plugin":
-                content = modify_content_bilibili(content)
+            if file_ext != "stoverride":
+                if filename == "Bilibili_remove_ads.plugin":
+                    content = modify_content_bilibili(content)
 
-            content = modify_content_common(content, type)
+                content = modify_content_common(content, file_ext)
 
-            if filename == "Amap_remove_ads.plugin":
-                content = modify_content_amap(content)
-            if filename == "Taobao_remove_ads.plugin":
-                content = modify_content_taobao(content)
-            if filename == "Zhihu_remove_ads.plugin":
-                content = modify_content_zhihu(content)
+                if filename == "Amap_remove_ads.plugin":
+                    content = modify_content_amap(content)
+                if filename == "Taobao_remove_ads.plugin":
+                    content = modify_content_taobao(content)
+                if filename == "Zhihu_remove_ads.plugin":
+                    content = modify_content_zhihu(content)
 
-            if content != None:
-                module_name = f"{filename[:filename.rfind('.')]}.{'module' if type == 'sr' else 'sgmodule'}"
+                if content != None:
+                    save_content(
+                        content,
+                        os.path.join(
+                            dst_dir, f"{filename[:filename.rfind('.')]}.{file_ext}"
+                        ),
+                    )
+            else:
                 save_content(
                     content,
-                    os.path.join(dst_dir, module_name),
+                    os.path.join(
+                        dst_dir, f"{filename[:filename.rfind('.')]}.{file_ext}"
+                    ),
                 )
 
 
@@ -305,20 +311,13 @@ def process_file(type: str, src_dir: str, dst_dir: str, url_dir: str, categoty: 
 ###############################################################################
 
 if __name__ == "__main__":
-    recreate_path(sgmodule_dir)
-    process_file(
-        "sg",
-        src_dir=plugin_all_dir,
-        dst_dir=sgmodule_dir,
-        url_dir="plugin/raw",
-        categoty="iKeLee",
-    )
-
-    recreate_path(module_dir)
-    process_file(
-        "sr",
-        src_dir=plugin_all_dir,
-        dst_dir=module_dir,
-        url_dir="plugin/raw",
-        categoty="iKeLee",
-    )
+    for file_ext in ["sgmodule", "module", "stoverride"]:
+        dst_dir = os.path.join(current_dir, file_ext)
+        recreate_path(dst_dir)
+        process_file(
+            file_ext,
+            src_dir=plugin_all_dir,
+            dst_dir=dst_dir,
+            url_dir="plugin/raw",
+            categoty="iKeLee",
+        )

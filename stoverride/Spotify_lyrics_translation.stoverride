@@ -1,0 +1,80 @@
+name: |-
+  Spotify歌词增强
+desc: |-
+  将Spotify的外语歌词翻译为简体中文，并提供双语翻译支持。
+author: |-
+  VirgilClyne[https://github.com/VirgilClyne]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Spotify.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id324684580
+tag: |-
+  功能增强
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://github.com/luestr/ProxyResource/blob/main/README.md
+date: |-
+  2024-11-28 00:00:00
+
+http:
+
+  mitm:
+    - "api.spotify.com"
+    - "spclient.wg.spotify.com"
+
+  script:
+    - match: ^https?:\/\/api\.spotify\.com\/v1\/tracks\?
+      name: "跟踪响应·JSON_12"
+      type: response
+      require-body: true
+
+    - match: ^https?:\/\/spclient\.wg\.spotify\.com\/color-lyrics\/v2\/track\/(.+)\?(.*)format=json
+      name: "歌词请求·JSON_13"
+      type: request
+      require-body: true
+
+    - match: ^https?:\/\/spclient\.wg\.spotify\.com\/color-lyrics\/v2\/track\/\w+\?(.*)
+      name: "歌词请求·JSON_13"
+      type: request
+      require-body: true
+      binary-mode: true
+
+    - match: ^https?:\/\/spclient\.wg\.spotify\.com\/color-lyrics\/v2\/track\/(.+)\?(.*)format=json(.*)subtype=Translate
+      name: "翻译歌词响应·JSON_15"
+      type: response
+      require-body: true
+
+    - match: ^https?:\/\/spclient\.wg\.spotify\.com\/color-lyrics\/v2\/track\/\w+\?(.*)subtype=Translate
+      name: "翻译歌词响应·JSON_15"
+      type: response
+      require-body: true
+      binary-mode: true
+
+    - match: ^https?:\/\/spclient\.wg\.spotify\.com\/color-lyrics\/v2\/track\/(.+)\?(.*)format=json(.*)subtype=External
+      name: "外部歌词响应·JSON_17"
+      type: response
+      require-body: true
+
+    - match: ^https?:\/\/spclient\.wg\.spotify\.com\/color-lyrics\/v2\/track\/\w+\?(.*)subtype=External
+      name: "外部歌词响应·JSON_17"
+      type: response
+      require-body: true
+      binary-mode: true
+
+script-providers:
+  "跟踪响应·JSON_12":
+    url: https://kelee.one/Resource/Script/Spotify/Spotify_response.js
+    interval: 86400
+  "歌词请求·JSON_13":
+    url: https://kelee.one/Resource/Script/Spotify/Spotify_request.js
+    interval: 86400
+  "翻译歌词响应·JSON_15":
+    url: https://kelee.one/Resource/Script/Spotify/Translate_response.js
+    interval: 86400
+  "外部歌词响应·JSON_17":
+    url: https://kelee.one/Resource/Script/Spotify/External_Lyrics_response.js
+    interval: 86400
+

@@ -1,0 +1,55 @@
+name: |-
+  番茄小说去广告
+desc: |-
+  移除番茄小说开屏广告、移除文章底部和章末广告、移除听书页面广告、移除悬浮部件和底栏多余的福利标签。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/DragonRead.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id1468454200
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://github.com/luestr/ProxyResource/blob/main/README.md
+date: |-
+  2024-11-28 00:00:00
+
+rules:
+  - DOMAIN,mon.zijieapi.com,REJECT
+  - DOMAIN,lf-ad-ies.bytecdn.cn,REJECT
+  - DOMAIN,i.snssdk.com,REJECT
+  - DOMAIN,is.snssdk.com,REJECT
+  - DOMAIN,bds.snssdk.com,REJECT
+  - DOMAIN,dm.bytedance.com,REJECT
+  - DOMAIN,dm.pstatp.com,REJECT
+  - DOMAIN,dm.toutiao.com,REJECT
+  - DOMAIN,log.snssdk.com,REJECT
+  - DOMAIN,s3a.pstatp.com,REJECT
+  - DOMAIN,sdfp.snssdk.com,REJECT
+  - DOMAIN,tosv.boe.byted.org,REJECT
+  - DOMAIN,tosv.byted.org,REJECT
+  - DOMAIN,extlog.snssdk.com,REJECT
+  - DOMAIN,mssdk-bu.bytedance.com,REJECT
+  - DOMAIN,toblog.ctobsnssdk.com,REJECT
+  - DOMAIN,mssdk.volces.com,REJECT
+  - DOMAIN,pangolin.snssdk.com,REJECT
+  - DOMAIN,gromore.pangolin-sdk-toutiao.com,REJECT
+  - DOMAIN,ether-pack.pangolin-sdk-toutiao.com,REJECT
+  - DOMAIN-KEYWORD,-ad-sign.byteimg.com,REJECT
+  - DOMAIN-KEYWORD,api-access.pangolin-sdk-toutiao,REJECT
+  - DOMAIN-KEYWORD,log-api.pangolin-sdk-toutiao,REJECT
+  - DOMAIN-KEYWORD,-ad.byteoversea.com,REJECT
+  - DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT
+  - DOMAIN-KEYWORD,asiad.byteactivity,REJECT
+
+http:
+
+  url-rewrite:
+    - >-
+      ^http:\/\/p\d+-be-pack-sign\.pglstatp-toutiao\.com\/(ad-app-package|web\.business\.image)\/ - reject
+

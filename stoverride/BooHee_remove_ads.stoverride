@@ -1,0 +1,84 @@
+name: |-
+  薄荷健康去广告
+desc: |-
+  移除记录页大家都在看、移除各类弹窗，移除广场横幅推广，精简代谢中心页面。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/BooHee.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id457856023
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://github.com/luestr/ProxyResource/blob/main/README.md
+date: |-
+  2024-11-28 00:00:00
+
+http:
+
+  mitm:
+    - "api.boohee.com"
+    - "bohe.sfo-tx-shanghai-01.saas.sensorsdata.cn"
+    - "lego.boohee.com"
+    - "status.boohee.com"
+
+  url-rewrite:
+    - >-
+      ^https:\/\/api\.boohee\.com\/meta-interface\/v1\/index\/page_float_bubbles\? - reject-dict
+    - >-
+      ^https:\/\/api\.boohee\.com\/meta-interface\/v1\/index\/tool_buttons\? - reject-dict
+    - >-
+      ^https:\/\/api\.boohee\.com\/app-interface\/v1\/search\/search\? - reject-dict
+    - >-
+      ^https:\/\/status\.boohee\.com\/api\/v1\/merged_messages$ - reject-dict
+    - >-
+      ^https:\/\/bohe\.sfo-tx-shanghai-01\.saas\.sensorsdata\.cn\/api\/v2\/sfo\/user_popup_configs\? - reject-dict
+    - >-
+      ^https:\/\/api\.boohee\.com\/meta-interface\/v1\/index\/sensor-banners\? - reject-dict
+
+  script:
+    - match: ^https:\/\/api\.boohee\.com\/meta-interface\/v2\/index\?
+      name: "body_rewrite_12_12"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 30
+      argument: |-
+        %5B%5B%22json-del%22%2C%5B%22data.recom_cards%22%2C%22data.recom_btns%22%5D%5D%5D
+
+    - match: ^https:\/\/api\.boohee\.com\/meta-interface\/v1\/index\/plaza\?
+      name: "body_rewrite_12_12"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 30
+      argument: |-
+        %5B%5B%22json-del%22%2C%5B%22data.tabs%5B1%5D.badge%22%2C%22data.recommend_ads%22%5D%5D%5D
+
+    - match: ^https:\/\/api\.boohee\.com\/open-interface\/v1\/string\/market_page\?title=metabolism_config$
+      name: "body_rewrite_12_12"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 30
+      argument: |-
+        %5B%5B%22json-del%22%2C%5B%22top_banner%22%2C%22diagnos_config%22%2C%22partner_hospital%22%2C%22question_answer%22%2C%22product%22%2C%22brand_story%22%5D%5D%5D
+
+    - match: ^https:\/\/api\.boohee\.com\/meta-interface\/v1\/index\/plaza-flow\?
+      name: "移除广场推荐页面横幅_22"
+      type: response
+      require-body: true
+
+script-providers:
+  "body_rewrite_12_12":
+    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
+    interval: 86400
+  "移除广场推荐页面横幅_22":
+    url: https://kelee.one/Resource/Script/BooHee/BooHee_remove_ads.js
+    interval: 86400
+

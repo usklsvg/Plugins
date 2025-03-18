@@ -1,0 +1,115 @@
+name: |-
+  猫耳FM去广告
+desc: |-
+  移除开屏广告、横幅推广、移除青少年模式弹窗，精简首页顶部入口和发现页面。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/CatEarFM.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id1148465254
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://github.com/luestr/ProxyResource/blob/main/README.md
+date: |-
+  2024-12-08 00:49:15
+
+http:
+
+  mitm:
+    - "app.missevan.com"
+    - "fm.missevan.com"
+
+  url-rewrite:
+    - >-
+      ^https:\/\/fm\.missevan\.com\/api\/v\d\/chatroom\/open\/search-recommend-list$ - reject-dict
+    - >-
+      ^https:\/\/app\.missevan\.com\/sound\/recommend\? - reject-dict
+    - >-
+      ^https:\/\/app\.missevan\.com\/drama\/get-recommend-by-id\? - reject-dict
+    - >-
+      ^https:\/\/fm\.missevan\.com\/api\/v\d\/meta\/banner$ - reject-dict
+
+  script:
+    - match: ^https:\/\/app\.missevan\.com\/site\/launch\?
+      name: "body_rewrite_12_12"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 30
+      argument: |-
+        %5B%5B%22json-del%22%2C%5B%22info%22%5D%5D%5D
+
+    - match: ^https:\/\/app\.missevan\.com\/site\/config$
+      name: "body_rewrite_12_12"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 30
+      argument: |-
+        %5B%5B%22json-del%22%2C%5B%22info.homepage_top_task_button%22%2C%22info.teenager_popup_mode%22%5D%5D%5D
+
+    - match: ^https:\/\/app\.missevan\.com\/site\/get-top$
+      name: "body_rewrite_12_12"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 30
+      argument: |-
+        %5B%5B%22json-del%22%2C%5B%22info.search_words%22%2C%22info.extra_banners%22%5D%5D%5D
+
+    - match: ^https:\/\/app\.missevan\.com\/you-might-like\/my-favors\?
+      name: "body_rewrite_12_12"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 30
+      argument: |-
+        %5B%5B%22json-del%22%2C%5B%22info.video_card%22%5D%5D%5D
+
+    - match: ^https:\/\/fm\.missevan\.com\/api\/v2\/recommended\/top\?
+      name: "body_rewrite_12_12"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 30
+      argument: |-
+        %5B%5B%22json-del%22%2C%5B%22info%22%5D%5D%5D
+
+    - match: ^https:\/\/app\.missevan\.com\/drama\/catalog-homepage\?
+      name: "body_rewrite_12_12"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 30
+      argument: |-
+        %5B%5B%22json-del%22%2C%5B%22info.extra_banners%22%5D%5D%5D
+
+    - match: ^https:\/\/app\.missevan\.com\/catalog\/sound-homepage\?
+      name: "body_rewrite_12_12"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 30
+      argument: |-
+        %5B%5B%22json-del%22%2C%5B%22info.extra_banners%22%5D%5D%5D
+
+    - match: ^https:\/\/fm\.missevan\.com\/api\/v\d\/chatroom\/sound\/recommend\?
+      name: "body_rewrite_12_12"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 30
+      argument: |-
+        %5B%5B%22json-del%22%2C%5B%22info%22%5D%5D%5D
+
+script-providers:
+  "body_rewrite_12_12":
+    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
+    interval: 86400
+

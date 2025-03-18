@@ -1,0 +1,68 @@
+name: |-
+  盖得排行去广告
+desc: |-
+  精简首页、移除分类横幅推广、单单返猜你喜欢和编辑精选，移除我的页面推广。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/GuideRank.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id1129695874
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://github.com/luestr/ProxyResource/blob/main/README.md
+date: |-
+  2024-11-28 00:00:00
+
+http:
+
+  mitm:
+    - "zone.guiderank-app.com"
+
+  url-rewrite:
+    - >-
+      ^https:\/\/zone\.guiderank-app\.com\/guiderank-web\/app\/common\/getWeworkPromotionInfoBySceneType - reject-dict
+    - >-
+      ^https:\/\/zone\.guiderank-app\.com\/guiderank-web\/app\/popUpAdCollection\/getActiveCollection\.do - reject-dict
+    - >-
+      ^https:\/\/zone\.guiderank-app\.com\/guiderank-web\/app\/common\/getWeworkCategoryPromotionInfo - reject-dict
+    - >-
+      ^https:\/\/zone\.guiderank-app\.com\/guiderank-web\/app\/stockTaking\/pageStockTakingForHomePage - reject-dict
+    - >-
+      ^https:\/\/zone\.guiderank-app\.com\/guiderank-web\/app\/specialSale\/pageRecommendedItems - reject-dict
+    - >-
+      ^https:\/\/zone\.guiderank-app\.com\/guiderank-web\/app\/manualOperationGoods\/pageManualOperationGoods - reject-dict
+    - >-
+      ^https:\/\/zone\.guiderank-app\.com\/guiderank-web\/app\/specialSale\/listSpecialSalePageBanner - reject-dict
+    - >-
+      ^https:\/\/zone\.guiderank-app\.com\/guiderank-web\/app\/personal\/getPersonPageInfo\.do - reject-dict
+
+  script:
+    - match: ^https:\/\/zone\.guiderank-app\.com\/guiderank-web\/app\/home\/getHomePageV
+      name: "body_rewrite_16_16"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 30
+      argument: |-
+        %5B%5B%22json-del%22%2C%5B%22data.countdownBanner%22%2C%22data.newEvaluations%22%2C%22data.freeToPayBannerPhotoUrl%22%2C%22data.groupBuyingList%22%2C%22data.multiCountdownBanner%22%2C%22data.banners%22%2C%22data.multiPlatformBanner%22%2C%22data.specialSaleBannerPhotoUrl%22%2C%22data.guide90Evaluation%22%2C%22data.insurancePromotions%22%5D%5D%5D
+
+    - match: ^https:\/\/zone\.guiderank-app\.com\/guiderank-web\/app\/common\/getInitData\.do
+      name: "body_rewrite_16_16"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 30
+      argument: |-
+        %5B%5B%22json-del%22%2C%5B%22data.SpecialSalePageMidTabConfig%22%5D%5D%5D
+
+script-providers:
+  "body_rewrite_16_16":
+    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
+    interval: 86400
+

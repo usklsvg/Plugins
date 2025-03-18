@@ -1,0 +1,104 @@
+name: |-
+  什么值得买去广告
+desc: |-
+  移除开屏广告、首页顶部广告、好价信息顶部广告、信息页广告、红包弹窗、精简我的页面。
+author: |-
+  ZenmoFeiShi[https://github.com/ZenmoFeiShi]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/smzdm.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id518213356
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://github.com/luestr/ProxyResource/blob/main/README.md
+date: |-
+  2024-11-28 00:00:00
+
+rules:
+  - DOMAIN,aaid.uyunad.com,REJECT
+  - DOMAIN,acs4baichuan.m.taobao.com,REJECT
+  - DOMAIN,adashxgc.ut.taobao.com,REJECT
+  - DOMAIN,analytics-api.smzdm.com,REJECT
+  - DOMAIN,baichuan-sdk.alicdn.com,REJECT
+  - DOMAIN,dgstatic.jd.com,REJECT
+  - DOMAIN,msg.umengcloud.com,REJECT
+  - DOMAIN,sec.umeng.com,REJECT
+  - DOMAIN,ulogs.umeng.com,REJECT
+  - DOMAIN,ynuf.aliapp.org,REJECT
+
+http:
+
+  mitm:
+    - "haojia-api.smzdm.com"
+    - "homepage-api.smzdm.com"
+    - "app-api.smzdm.com"
+    - "user-api.smzdm.com"
+    - "article-api.smzdm.com"
+    - "qianbao.smzdm.com"
+    - "s3.zdmimg.com"
+
+  url-rewrite:
+    - >-
+      ^https:\/\/haojia\.m\.smzdm\.com\/detail_modul\/(other_modul|wiki_related_modul)|^https:\/\/s3\.zdmimg\.com\/third\/index|^https:\/\/app-api\.smzdm\.com\/util\/loading - reject-dict
+
+  script:
+    - match: ^https:\/\/app-api\.smzdm\.com\/util\/loading
+      name: "移除广告_25"
+      type: response
+      require-body: true
+
+    - match: ^https:\/\/haojia-api\.smzdm\.com\/home\/list
+      name: "移除广告_25"
+      type: response
+      require-body: true
+
+    - match: ^https:\/\/app-api\.smzdm\.com\/util\/update
+      name: "移除广告_25"
+      type: response
+      require-body: true
+
+    - match: ^https:\/\/homepage-api\.smzdm\.com\/v3\/home
+      name: "移除广告_25"
+      type: response
+      require-body: true
+
+    - match: ^https:\/\/user-api\.smzdm\.com\/vip
+      name: "移除广告_25"
+      type: response
+      require-body: true
+
+    - match: ^https:\/\/user-api\.smzdm\.com\/vip\/bottom_card_list
+      name: "移除广告_25"
+      type: response
+      require-body: true
+
+    - match: ^https:\/\/article-api\.smzdm\.com\/publish\/get_bubble
+      name: "移除广告_25"
+      type: response
+      require-body: true
+
+    - match: ^https:\/\/qianbao\.smzdm\.com\/v\d\/app\/home
+      name: "移除广告_25"
+      type: response
+      require-body: true
+
+    - match: ^https:\/\/s3\.zdmimg\.com\/third\/index
+      name: "移除广告_25"
+      type: response
+      require-body: true
+
+    - match: ^https:\/\/post\.m\.smzdm\.com\/ajax_app\/ajax_get_footer_list
+      name: "移除广告_25"
+      type: response
+      require-body: true
+
+script-providers:
+  "移除广告_25":
+    url: https://kelee.one/Resource/Script/smzdm/smzdm_remove_ads.js
+    interval: 86400
+

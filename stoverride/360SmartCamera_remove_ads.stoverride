@@ -1,0 +1,45 @@
+name: |-
+  360摄像机去广告
+desc: |-
+  移除开屏广告、首页推广、底栏商城入口及我的页面推广。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/360SmartCamera.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id958068931
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://github.com/luestr/ProxyResource/blob/main/README.md
+date: |-
+  2024-11-28 00:00:00
+
+rules:
+  - DOMAIN,ad.jia.360.cn,REJECT
+  - DOMAIN,ad.iot.360.cn,REJECT
+
+http:
+
+  mitm:
+    - "jia.360.cn"
+
+  script:
+    - match: ^https:\/\/jia\.360\.cn\/conf\/v1\.json
+      name: "body_rewrite_15_15"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 30
+      argument: |-
+        %5B%5B%22json-del%22%2C%5B%22tab_conf%22%2C%22ad_conf%22%2C%22activity%22%5D%5D%5D
+
+script-providers:
+  "body_rewrite_15_15":
+    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
+    interval: 86400
+

@@ -1,0 +1,33 @@
+name: |-
+  360智慧生活去广告
+desc: |-
+  移除开屏广告、首页推广横幅、商城入口及我的页面推广。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/SafetyHome.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id1488904375
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://github.com/luestr/ProxyResource/blob/main/README.md
+date: |-
+  2024-11-28 00:00:00
+
+rules:
+  - DOMAIN,ad.iot.360.cn,REJECT
+
+http:
+
+  mitm:
+    - "app.home.360.cn"
+
+  url-rewrite:
+    - >-
+      ^https:\/\/app\.home\.360\.cn\/v1\/config\/custom_config - reject-dict
+

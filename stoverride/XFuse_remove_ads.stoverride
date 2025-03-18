@@ -1,0 +1,90 @@
+name: |-
+  磁力宅播放器去广告
+desc: |-
+  移除开屏广告、弹窗和文件列表广告。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/XFuse.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id6497060674
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://github.com/luestr/ProxyResource/blob/main/README.md
+date: |-
+  2024-11-28 00:00:00
+
+rules:
+  - DOMAIN,mon.zijieapi.com,REJECT
+  - DOMAIN,lf-ad-ies.bytecdn.cn,REJECT
+  - DOMAIN,i.snssdk.com,REJECT
+  - DOMAIN,is.snssdk.com,REJECT
+  - DOMAIN,bds.snssdk.com,REJECT
+  - DOMAIN,dm.bytedance.com,REJECT
+  - DOMAIN,dm.pstatp.com,REJECT
+  - DOMAIN,dm.toutiao.com,REJECT
+  - DOMAIN,log.snssdk.com,REJECT
+  - DOMAIN,s3a.pstatp.com,REJECT
+  - DOMAIN,sdfp.snssdk.com,REJECT
+  - DOMAIN,tosv.boe.byted.org,REJECT
+  - DOMAIN,tosv.byted.org,REJECT
+  - DOMAIN,extlog.snssdk.com,REJECT
+  - DOMAIN,mssdk-bu.bytedance.com,REJECT
+  - DOMAIN,toblog.ctobsnssdk.com,REJECT
+  - DOMAIN,mssdk.volces.com,REJECT
+  - DOMAIN,pangolin.snssdk.com,REJECT
+  - DOMAIN,gromore.pangolin-sdk-toutiao.com,REJECT
+  - DOMAIN,ether-pack.pangolin-sdk-toutiao.com,REJECT
+  - DOMAIN-KEYWORD,-ad-sign.byteimg.com,REJECT
+  - DOMAIN-KEYWORD,api-access.pangolin-sdk-toutiao,REJECT
+  - DOMAIN-KEYWORD,log-api.pangolin-sdk-toutiao,REJECT
+  - DOMAIN-KEYWORD,-ad.byteoversea.com,REJECT
+  - DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT
+  - DOMAIN-KEYWORD,asiad.byteactivity,REJECT
+  - DOMAIN,adsmind.gdtimg.com,REJECT
+  - DOMAIN,info4.video.qq.com,REJECT
+  - DOMAIN,info6.video.qq.com,REJECT
+  - DOMAIN,ios.bugly.qq.com,REJECT
+  - DOMAIN,ios.video.mpush.qq.com,REJECT
+  - DOMAIN,otheve.beacon.qq.com,REJECT
+  - DOMAIN,pgdt.gtimg.cn,REJECT
+  - DOMAIN,sdk.e.qq.com,REJECT
+  - DOMAIN,tmead.y.qq.com,REJECT
+  - DOMAIN,tmeadbak.y.qq.com,REJECT
+  - DOMAIN,tmeadcomm.y.qq.com,REJECT
+  - DOMAIN,tpns.qq.com,REJECT
+  - DOMAIN-KEYWORD,trace.qq.com,REJECT
+  - DOMAIN-KEYWORD,trace.video.qq.com,REJECT
+  - DOMAIN-SUFFIX,gdt.qq.com,REJECT
+  - DOMAIN-SUFFIX,l.qq.com,REJECT
+  - DOMAIN-SUFFIX,ugdtimg.com,REJECT
+  - IP-CIDR,47.110.187.87/32,REJECT,no-resolve
+  - DOMAIN,cnlogs.umeng.com,REJECT
+  - DOMAIN,errlog.umeng.com,REJECT
+  - DOMAIN,errnewlog.umeng.com,REJECT
+  - DOMAIN,ucc.umeng.com,REJECT
+  - DOMAIN,ulogs.umeng.com,REJECT
+  - DOMAIN,utoken.umeng.com,REJECT
+  - DOMAIN,deeplink.umeng.com,REJECT
+  - DOMAIN,aspect-upush.umeng.com,REJECT
+  - DOMAIN,plbslog.umeng.com,REJECT
+  - DOMAIN,log.umtrack.com,REJECT
+
+http:
+
+  mitm:
+    - "cili.xfuse.fun"
+    - "i.micecube.com"
+    - "img.mofyi.com"
+
+  url-rewrite:
+    - >-
+      ^http:\/\/p\d+-be-pack-sign\.pglstatp-toutiao\.com\/(ad-app-package|web\.business\.image)\/ - reject
+    - >-
+      ^https:\/\/cili\.xfuse\.fun\/s\/ - reject
+
