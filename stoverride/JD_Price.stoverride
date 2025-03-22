@@ -1,9 +1,9 @@
 name: |-
   京东比价
 desc: |-
-  点击商品详情后以通知的形式推送比价内容
+  需在商品详情页面查看比价内容
 author: |-
-  githubdulong[https://github.com/githubdulong]
+  小白脸
 icon: |-
   https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/JD.png
 category: |-
@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2024-12-29 00:51:00
+  2025-03-21 22:38:39
 
 http:
 
@@ -29,6 +29,7 @@ http:
       name: "京东比价_12"
       type: response
       require-body: true
+      timeout: 10
 
 script-providers:
   "京东比价_12":
