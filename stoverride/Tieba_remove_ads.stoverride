@@ -19,7 +19,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2024-11-28 00:00:00
+  2025-03-23 22:21:51
 
 rules:
   - DOMAIN,afd.baidu.com,REJECT
@@ -38,49 +38,51 @@ http:
       ^https:\/\/tiebac\.baidu\.com\/c\/f\/search\/discover - reject-dict
     - >-
       ^https:\/\/tiebac\.baidu\.com\/c\/f\/forum\/forumGuide - reject-dict
+    - >-
+      ^https:\/\/tiebac\.baidu\.com\/c\/u\/chat\/getChatSubscriptionList - reject-dict
 
   script:
     - match: ^https:\/\/tiebac\.baidu\.com\/livefeed\/feed
-      name: "清理首页_20"
+      name: "清理首页_21"
       type: response
       require-body: true
 
     - match: ^https:\/\/tiebac\.baidu\.com\/c\/f\/sidebar\/home
-      name: "清理首页_20"
+      name: "清理首页_21"
       type: response
       require-body: true
 
     - match: ^https:\/\/tiebac\.baidu\.com\/c\/u\/user\/profile
-      name: "清理首页_20"
+      name: "清理首页_21"
       type: response
       require-body: true
 
     - match: ^https:\/\/tieba\.baidu\.com\/c\/f\/frs\/frsBottom
-      name: "清理首页_20"
+      name: "清理首页_21"
       type: response
       require-body: true
 
     - match: ^http(s:\/\/tiebac|:\/\/c\.tieba)\.baidu\.com\/(c\/f\/(frs\/(page|threadlist|generalTabList)|pb\/page|excellent\/personalized)$|tiebaads\/commonbatch|c\/s\/sync$)
-      name: "JSON处理_24"
+      name: "JSON处理_25"
       type: response
       require-body: true
       timeout: 10
 
     - match: ^http(s:\/\/tiebac|:\/\/c\.tieba)\.baidu\.com\/c\/f\/(frs\/(page|threadlist|generalTabList)|pb\/page|excellent\/personalized)\?cmd
-      name: "Proto处理_25"
+      name: "Proto处理_26"
       type: response
       require-body: true
       binary-mode: true
       timeout: 10
 
 script-providers:
-  "清理首页_20":
+  "清理首页_21":
     url: https://kelee.one/Resource/Script/Tieba/Tieba_remove_ads.js
     interval: 86400
-  "JSON处理_24":
+  "JSON处理_25":
     url: https://kelee.one/Resource/Script/Tieba/tieba-json.js
     interval: 86400
-  "Proto处理_25":
+  "Proto处理_26":
     url: https://kelee.one/Resource/Script/Tieba/tieba-proto.js
     interval: 86400
 
