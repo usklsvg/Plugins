@@ -17,10 +17,11 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2024-12-02 16:37:35
+  2025-03-26 12:10:14
 
 rules:
   - DOMAIN,adse.ximalaya.com,REJECT
+  - DOMAIN,adsehera.ximalaya.com,REJECT
   - DOMAIN,adse.wsa.ximalaya.com,REJECT
   - DOMAIN,adbehavior.ximalaya.com,REJECT
   - DOMAIN,adbehavior.wsa.ximalaya.com,REJECT
@@ -195,7 +196,7 @@ http:
 
   script:
     - match: ^https:\/\/(mobile|mobilehera|mobwsa)\.ximalaya\.com\/football-portal\/diff2\/batch\?
-      name: "body_rewrite_155_155"
+      name: "body_rewrite_156_156"
       type: response
       require-body: true
       max-size: -1
@@ -204,14 +205,14 @@ http:
         %5B%5B%22json-del%22%2C%5B%22json.ad%22%2C%22json.toc%22%5D%5D%5D
 
     - match: ^https:\/\/(m|mwsa)\.ximalaya\.com\/community\/square\/v\d\/stream\?
-      name: "echoResponse_160"
+      name: "echoResponse_161"
       type: request
       timeout: 60
       argument: |-
         text=%7B%22data%22%3A%7B%22cards%22%3A%5B%7B%22content%22%3A%7B%7D%2C%22type%22%3A%22RECOMMENDS%22%7D%5D%7D%2C%22ret%22%3A0%7D&status-code=200
 
     - match: ^https:\/\/(mobile|mobilehera|mobwsa)\.ximalaya\.com\/mobile-user\/v\d\/homePage\/
-      name: "body_rewrite_155_155"
+      name: "body_rewrite_156_156"
       type: response
       require-body: true
       max-size: -1
@@ -220,10 +221,10 @@ http:
         %5B%5B%22json-del%22%2C%5B%22data.freeListenV2%22%5D%5D%5D
 
 script-providers:
-  "body_rewrite_155_155":
+  "body_rewrite_156_156":
     url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
     interval: 86400
-  "echoResponse_160":
+  "echoResponse_161":
     url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/echo-response.js
     interval: 86400
 
