@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2024-11-28 00:00:00
+  2025-03-27 00:08:11
 
 rules:
   - DOMAIN,wxsnsdy.wxs.qq.com,REJECT
@@ -118,6 +118,9 @@ http:
     - "mcsp.cloudpnr.com"
     - "api.szbgcx.cn"
     - "rms.meituan.com"
+    - "chong.qq.com"
+    - "wx.online-cmcc.cn"
+    - "wx.10086.cn"
 
   url-rewrite:
     - >-
@@ -332,6 +335,10 @@ http:
       ^https:\/\/daijia\.kuaidadi\.com\/gateway\?api=prado\.cms\.delivery\.batch&apiVe - reject-dict
     - >-
       ^https:\/\/api\.szbgcx\.cn\/account\/adv\/ - reject
+    - >-
+      ^https:\/\/wx\.online-cmcc\.cn\/contactpoint\/customer\/api\/list\? - reject-dict
+    - >-
+      ^https:\/\/wx\.10086\.cn\/qwhdhub\/activity\/info - reject-dict
 
   script:
     - match: ^https:\/\/mcsp\.cloudpnr\.com\/api\/miniapp\/popular\/T_MINIAPP$
@@ -361,63 +368,72 @@ http:
       argument: |-
         %5B%5B%22json-del%22%2C%5B%22data.popUpWindows%22%5D%5D%5D
 
+    - match: ^https:\/\/chong\.qq\.com\/tws\/usernumberinfo\/GetUserInfo\?
+      name: "body_rewrite_124_124"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 30
+      argument: |-
+        %5B%5B%22json-del%22%2C%5B%22data.request.number.markSeat.servicehallOperList%22%2C%22data.request.number.servicehallOperList%22%2C%22data.request.number.markSeat.servicehallFuncList%22%2C%22data.request.number.servicehallFuncList%22%5D%5D%5D
+
     - match: ^https:\/\/webapi\.qmai\.cn\/web\/catering\/design\/homePage-Config
-      name: "企迈点单系统去广告_129"
+      name: "企迈点单系统去广告_134"
       type: response
       require-body: true
 
     - match: ^https:\/\/ump\.ems\.com\.cn\/new-generation-extend\/redis\/pageInfoByChannel
-      name: "EMS中国邮政物流速递去广告_130"
+      name: "EMS中国邮政物流速递去广告_135"
       type: response
       require-body: true
 
     - match: ^https:\/\/mapi\.xiaotucc\.com\/(mall\/main|main_page\/index\/getActivity)
-      name: "小兔充充去广告_131"
+      name: "小兔充充去广告_136"
       type: response
       require-body: true
 
     - match: ^https:\/\/minifm\.maxxipoint\.com\/banner\/list
-      name: "全家微会员去广告_132"
+      name: "全家微会员去广告_137"
       type: response
       require-body: true
 
     - match: ^https:\/\/lawsonapi\.yorentown\.com\/area\/sh-lawson\/app\/v1\/home
-      name: "罗森点点去广告_133"
+      name: "罗森点点去广告_138"
       type: response
       require-body: true
 
     - match: ^https:\/\/miniapp\.sexytea2013\.com\/cms\/slot\/queryByCodes\?codes=INDEX_TOP_BANNER
-      name: "茶颜悦色去广告_134"
+      name: "茶颜悦色去广告_139"
       type: response
       require-body: true
 
     - match: ^https:\/\/coco-com\.e\.verystar\.net\/v1\/home\/info
-      name: "COCO点单去广告_135"
+      name: "COCO点单去广告_140"
       type: response
       require-body: true
 
     - match: ^https:\/\/htwkop\.xiaojukeji\.com\/gateway\?api=hm\.fa\.homeConfig
-      name: "滴滴青桔去广告_136"
+      name: "滴滴青桔去广告_141"
       type: response
       require-body: true
 
     - match: ^https:\/\/cappapi\.alittle-tea\.com\/open\?method=catering\.set\.ad
-      name: "一点点+去广告_137"
+      name: "一点点+去广告_142"
       type: response
       require-body: true
 
     - match: ^https:\/\/api\.prod\.dj\.mstand\.cn\/scrm\/mini\/app\/index\/info
-      name: "M Stand去广告_138"
+      name: "M Stand去广告_143"
       type: response
       require-body: true
 
     - match: ^https:\/\/passenger\.t3go\.cn\/(solution\-|common\-)?(passenger\-)?(activity\-|app\-)?api\/notoken\/(trip\/)?api\/(home\/|common\/)?(v[1-3]\/)?(ad\/getNegativescreen|solution\/passenger\/open\/getHomeMenu|leftmenu|getHomeInfoGlobal)
-      name: "T3出行去广告_139"
+      name: "T3出行去广告_144"
       type: response
       require-body: true
 
     - match: ^https:\/\/newton\.gumingnc\.com\/newton-buyer\/newton\/buyer\/(ump|touch|external\/front)
-      name: "古茗去广告_140"
+      name: "古茗去广告_145"
       type: response
       require-body: true
 
@@ -425,40 +441,40 @@ script-providers:
   "body_rewrite_124_124":
     url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
     interval: 86400
-  "企迈点单系统去广告_129":
+  "企迈点单系统去广告_134":
     url: https://kelee.one/Resource/Script/WexinMiniPrograms/kff/kff.js
     interval: 86400
-  "EMS中国邮政物流速递去广告_130":
+  "EMS中国邮政物流速递去广告_135":
     url: https://kelee.one/Resource/Script/WexinMiniPrograms/ems/ems.js
     interval: 86400
-  "小兔充充去广告_131":
+  "小兔充充去广告_136":
     url: https://kelee.one/Resource/Script/WexinMiniPrograms/xiaotucc/xiaotucc.js
     interval: 86400
-  "全家微会员去广告_132":
+  "全家微会员去广告_137":
     url: https://kelee.one/Resource/Script/WexinMiniPrograms/FamilyMart/FamilyMart.js
     interval: 86400
-  "罗森点点去广告_133":
+  "罗森点点去广告_138":
     url: https://kelee.one/Resource/Script/WexinMiniPrograms/lawson/lawson.js
     interval: 86400
-  "茶颜悦色去广告_134":
+  "茶颜悦色去广告_139":
     url: https://kelee.one/Resource/Script/WexinMiniPrograms/chayanyuese/chayanyuese_remove_ads.js
     interval: 86400
-  "COCO点单去广告_135":
+  "COCO点单去广告_140":
     url: https://kelee.one/Resource/Script/WexinMiniPrograms/coco/coco.js
     interval: 86400
-  "滴滴青桔去广告_136":
+  "滴滴青桔去广告_141":
     url: https://kelee.one/Resource/Script/WexinMiniPrograms/qingju/qingju.js
     interval: 86400
-  "一点点+去广告_137":
+  "一点点+去广告_142":
     url: https://kelee.one/Resource/Script/WexinMiniPrograms/alittle-tea/alittle-tea.js
     interval: 86400
-  "M Stand去广告_138":
+  "M Stand去广告_143":
     url: https://kelee.one/Resource/Script/WexinMiniPrograms/M_Stand/M_Stand.js
     interval: 86400
-  "T3出行去广告_139":
+  "T3出行去广告_144":
     url: https://kelee.one/Resource/Script/WexinMiniPrograms/T3/T3.js
     interval: 86400
-  "古茗去广告_140":
+  "古茗去广告_145":
     url: https://kelee.one/Resource/Script/WexinMiniPrograms/ming/ming.js
     interval: 86400
 
