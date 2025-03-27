@@ -26,5 +26,5 @@ http:
 
   url-rewrite:
     - >-
-      ^https:\/\/api\.coolapk\.com\/v6\/search\? - reject-dict
+      ^https:\/\/api\.coolapk\.com\/v6\/search\?.*type=hotSearch - reject-dict
 

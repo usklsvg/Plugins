@@ -18,7 +18,7 @@ http-response-jq ^https:\/\/api\.coolapk\.com\/v6\/main\/indexV8 '.data |= (if l
 http-response-jq ^https:\/\/api\.coolapk\.com\/v6\/main\/init '.data |= map(select(.entityId? | [944,945,6390] | index(.) | not) | if .entityId == 20131 then .entities |= map(select(.title != "酷品")) else . end)'
 
 [Map Local]
-^https:\/\/api\.coolapk\.com\/v6\/search\? data-type=text data="{}" status-code=200
+^https:\/\/api\.coolapk\.com\/v6\/search\?.*type=hotSearch data-type=text data="{}" status-code=200
 
 [MITM]
 hostname = %APPEND% api.coolapk.com
