@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2024-11-28 00:00:00
+  2025-03-27 23:04:43
 
 rules:
   - DOMAIN,httpdns.music.163.com,REJECT
@@ -108,22 +108,31 @@ http:
   mitm:
     - "patientgate.91160.com"
     - "soapi.91160.com"
+    - "snsapi.91160.com"
     - "msglb.91160.com"
     - "patientappapi.91160.com"
 
   url-rewrite:
     - >-
-      ^https:\/\/patientgate\.91160\.com\/advert-api\/ - reject-dict
-    - >-
       ^https:\/\/msglb\.91160\.com\/msg\/outer\/broker\/get$ - reject-dict
     - >-
+      ^https:\/\/patientgate\.91160\.com\/advert-api\/ - reject-dict
+    - >-
+      ^https:\/\/snsapi\.91160\.com\/vipmemberapi\/mbCombo\/mbComboWords\? - reject-dict
+    - >-
       ^https:\/\/patientgate\.91160\.com\/rec\/homepage\/open\/getUserGoodsList\? - reject-dict
+    - >-
+      ^https:\/\/snsapi\.91160\.com\/hotword\/open\/v1\/getSearchExplore\? - reject-dict
+    - >-
+      ^https:\/\/snsapi\.91160\.com\/hotword\/open\/v1\/getHotWordPlate\? - reject-dict
+    - >-
+      ^https:\/\/snsapi\.91160\.com\/engine\/backgroundWord\/queryForFrontend\? - reject-dict
     - >-
       ^https:\/\/patientappapi\.91160\.com\/cus_index\.php\?c=adver - reject
 
   script:
     - match: ^https:\/\/soapi\.91160\.com\/homepage-recommendation\/recommendation\/medical\/complex\?
-      name: "body_rewrite_100_100"
+      name: "body_rewrite_97_97"
       type: response
       require-body: true
       max-size: -1
@@ -132,7 +141,7 @@ http:
         %5B%5B%22json-del%22%2C%5B%22data.checkupList%22%5D%5D%5D
 
 script-providers:
-  "body_rewrite_100_100":
+  "body_rewrite_97_97":
     url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
     interval: 86400
 

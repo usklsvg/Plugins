@@ -21,7 +21,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-03-23 22:26:05
+  2025-03-28 00:08:44
 
 rules:
   - DOMAIN,api.biliapi.com,REJECT
@@ -42,8 +42,6 @@ http:
       ^http:\/\/upos-sz-static\.bilivideo\.com\/ssaxcode\/\w{2}\/\w{2}\/\w{32}-1-SPLASH - reject-dict
     - >-
       ^http:\/\/[\d\.]+:8000\/v1\/resource\/\w{32}-1-SPLASH - reject-dict
-    - >-
-      ^https:\/\/api\.live\.bilibili\.com\/xlive\/e-commerce-interface\/v1\/ecommerce-user\/get_shopping_info\? - reject-dict
 
   script:
     - match: ^https:\/\/api\.bilibili\.com\/pgc\/activity\/deliver\/material\/receive\?
@@ -61,7 +59,7 @@ http:
         text=%7B%22code%22%3A-404%2C%22message%22%3A%22-404%22%2C%22ttl%22%3A1%2C%22data%22%3Anull%7D&status-code=200
 
     - match: ^https:\/\/app\.bilibili\.com\/x\/resource\/show\/skin\?
-      name: "body_rewrite_31_31"
+      name: "body_rewrite_30_30"
       type: response
       require-body: true
       max-size: -1
@@ -70,7 +68,7 @@ http:
         %5B%5B%22json-del%22%2C%5B%22data.common_equip%22%5D%5D%5D
 
     - match: ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(?:app\.(?:interface\.v1\.(?:Teenagers\/ModeStatus|Search\/DefaultWords)|dynamic\.v2\.Dynamic\/DynAll|view(?:unite)?\.v1\.View\/(?:View|ViewProgress|TFInfo|RelatesFeed)|playurl\.v1\.PlayURL\/PlayView|playerunite\.v1\.Player\/PlayViewUnite)|polymer\.app\.search\.v1\.Search\/SearchAll|main\.community\.reply\.v1\.Reply\/MainList|pgc\.gateway\.player\.v2\.PlayURL\/PlayView)$
-      name: "Proto处理_35"
+      name: "Proto处理_34"
       type: response
       require-body: true
       binary-mode: true
@@ -81,10 +79,10 @@ script-providers:
   "echoResponse_24":
     url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/echo-response.js
     interval: 86400
-  "body_rewrite_31_31":
+  "body_rewrite_30_30":
     url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
     interval: 86400
-  "Proto处理_35":
+  "Proto处理_34":
     url: https://kelee.one/Resource/Script/Bilibili/Bilibili_proto_kokoryh.js
     interval: 86400
 
