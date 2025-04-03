@@ -15,7 +15,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-03-17 23:36:29
+  2025-04-02 21:18:09
 
 rules:
   - DOMAIN,yyapp-httpdns.gslb.yy.com,REJECT
