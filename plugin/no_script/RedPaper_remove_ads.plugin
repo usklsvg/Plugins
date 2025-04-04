@@ -8,12 +8,14 @@
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/RedPaper.png
-#!date=2025-02-28 19:49:27
+#!date=2025-04-04 13:09:08
 
 [Rule]
 AND,((PROTOCOL,QUIC),(DOMAIN-SUFFIX,xiaohongshu.com)),REJECT
 
 [Rewrite]
+^https:\/\/ci\.xiaohongshu\.com\/system_config\/watermark reject-img
+
 ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v1\/surprisebox\/(?:get_style|open|submit_action) reject-dict
 ^https:\/\/www\.xiaohongshu\.com\/api\/marketing\/box\/trigger\? reject-dict
 
@@ -26,4 +28,4 @@ AND,((PROTOCOL,QUIC),(DOMAIN-SUFFIX,xiaohongshu.com)),REJECT
 ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v4\/search\/trending\? response-body-json-replace data.queries [] data.hint_word {}
 
 [MitM]
-hostname=edith.xiaohongshu.com,rec.xiaohongshu.com,www.xiaohongshu.com
+hostname=ci.xiaohongshu.com,edith.xiaohongshu.com,rec.xiaohongshu.com,www.xiaohongshu.com
