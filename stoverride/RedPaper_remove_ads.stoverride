@@ -17,16 +17,19 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-02-28 19:49:27
+  2025-04-04 13:09:08
 
 http:
 
   mitm:
+    - "ci.xiaohongshu.com"
     - "edith.xiaohongshu.com"
     - "rec.xiaohongshu.com"
     - "www.xiaohongshu.com"
 
   url-rewrite:
+    - >-
+      ^https:\/\/ci\.xiaohongshu\.com\/system_config\/watermark - reject-img
     - >-
       ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v1\/surprisebox\/(?:get_style|open|submit_action) - reject-dict
     - >-
@@ -38,7 +41,7 @@ http:
 
   script:
     - match: ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v1\/search\/banner_list$
-      name: "body_rewrite_18_18"
+      name: "body_rewrite_19_19"
       type: response
       require-body: true
       max-size: -1
@@ -47,7 +50,7 @@ http:
         %5B%5B%22json-replace%22%2C%5B%5B%22data%22%2C%7B%7D%5D%5D%5D%5D
 
     - match: ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v1\/search\/hot_list$
-      name: "body_rewrite_18_18"
+      name: "body_rewrite_19_19"
       type: response
       require-body: true
       max-size: -1
@@ -56,7 +59,7 @@ http:
         %5B%5B%22json-replace%22%2C%5B%5B%22data.items%22%2C%5B%5D%5D%5D%5D%5D
 
     - match: ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v4\/search\/hint
-      name: "body_rewrite_18_18"
+      name: "body_rewrite_19_19"
       type: response
       require-body: true
       max-size: -1
@@ -65,7 +68,7 @@ http:
         %5B%5B%22json-replace%22%2C%5B%5B%22data.hint_words%22%2C%5B%5D%5D%5D%5D%5D
 
     - match: ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v4\/search\/trending\?
-      name: "body_rewrite_18_18"
+      name: "body_rewrite_19_19"
       type: response
       require-body: true
       max-size: -1
@@ -74,65 +77,70 @@ http:
         %5B%5B%22json-replace%22%2C%5B%5B%22data.queries%22%2C%5B%5D%5D%2C%5B%22data.hint_word%22%2C%7B%7D%5D%5D%5D%5D
 
     - match: ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v1\/note\/(?:imagefeed|live_photo\/save)
-      name: "移除图片和实况照片水印_23"
+      name: "移除图片和实况照片水印_24"
       type: response
       require-body: true
 
     - match: ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v1\/system\/service\/ui\/config\?
-      name: "移除图片和实况照片水印_23"
+      name: "移除图片和实况照片水印_24"
       type: response
       require-body: true
 
     - match: ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v1\/system_service\/config\?
-      name: "移除图片和实况照片水印_23"
+      name: "移除图片和实况照片水印_24"
       type: response
       require-body: true
 
     - match: ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v2\/system_service\/splash_config
-      name: "移除图片和实况照片水印_23"
+      name: "移除图片和实况照片水印_24"
       type: response
       require-body: true
 
     - match: ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v2\/(?:note\/widgets|user\/followings\/followfeed)
-      name: "移除图片和实况照片水印_23"
+      name: "移除图片和实况照片水印_24"
       type: response
       require-body: true
 
     - match: ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v4\/followfeed\?
-      name: "移除图片和实况照片水印_23"
+      name: "移除图片和实况照片水印_24"
       type: response
       require-body: true
 
     - match: ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v5\/recommend\/user\/follow_recommend\?
-      name: "移除图片和实况照片水印_23"
-      type: response
-      require-body: true
-
-    - match: ^https:\/\/(?:edith|rec)\.xiaohongshu\.com\/api\/sns\/v6\/homefeed\?
-      name: "移除图片和实况照片水印_23"
+      name: "移除图片和实况照片水印_24"
       type: response
       require-body: true
 
     - match: ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v10\/search\/notes\?
-      name: "移除图片和实况照片水印_23"
+      name: "移除图片和实况照片水印_24"
+      type: response
+      require-body: true
+
+    - match: ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/(?:v1\/interaction\/comment\/video\/download|v5\/note\/comment\/list)
+      name: "移除图片和实况照片水印_24"
       type: response
       require-body: true
 
     - match: ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/(?:v2\/note\/feed|v3\/note\/videofeed)
-      name: "移除图片和实况照片水印_23"
+      name: "移除图片和实况照片水印_24"
+      type: response
+      require-body: true
+
+    - match: ^https:\/\/(?:edith|rec)\.xiaohongshu\.com\/api\/sns\/v6\/homefeed\?
+      name: "移除图片和实况照片水印_24"
       type: response
       require-body: true
 
     - match: ^https:\/\/(?:edith|rec|www)\.xiaohongshu\.com\/api\/sns\/(?:v4\/note\/videofeed|v10\/note\/video\/save)
-      name: "移除图片和实况照片水印_23"
+      name: "移除图片和实况照片水印_24"
       type: response
       require-body: true
 
 script-providers:
-  "body_rewrite_18_18":
+  "body_rewrite_19_19":
     url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
     interval: 86400
-  "移除图片和实况照片水印_23":
+  "移除图片和实况照片水印_24":
     url: https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js
     interval: 86400
 
