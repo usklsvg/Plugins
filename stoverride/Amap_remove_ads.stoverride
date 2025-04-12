@@ -20,6 +20,7 @@ date: |-
   2025-03-31 12:16:54
 
 rules:
+  - AND,((URL-REGEX,"^http:\/\/.+\/amdc\/mobileDispatch"),(USER-AGENT,"AMapiPhone*")),REJECT
   - DOMAIN,amap-aos-info-nogw.amap.com,REJECT
   - DOMAIN,free-aos-cdn-image.amap.com,REJECT
   - DOMAIN-SUFFIX,v.smtcdns.com,REJECT

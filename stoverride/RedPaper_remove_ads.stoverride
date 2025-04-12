@@ -19,6 +19,9 @@ homepage: |-
 date: |-
   2025-04-04 13:09:08
 
+rules:
+  - AND,((PROTOCOL,QUIC),(DOMAIN-SUFFIX,xiaohongshu.com)),REJECT
+
 http:
 
   mitm:

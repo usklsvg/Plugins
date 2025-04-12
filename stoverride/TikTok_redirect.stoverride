@@ -19,6 +19,9 @@ homepage: |-
 date: |-
   2024-11-28 00:00:00
 
+rules:
+  - AND,((GEOIP,CN,no-resolve),(DOMAIN,pitaya.bytedance.com)),DIRECT
+
 http:
 
   mitm:
