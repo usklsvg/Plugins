@@ -271,7 +271,7 @@ def process_file(
         elif file_ext == "module":
             request_url = f"{request_url}&target=shadowrocket-module"
         else:
-            request_url = f"{request_url}&target=stash-stoverride"
+            request_url = f"{request_url}&target=stash-stoverride&jqEnabled=true"
 
         content = get_url_text_content(request_url)
         if content != None:
