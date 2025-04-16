@@ -41,43 +41,35 @@ http:
     - >-
       ^https:\/\/api\.boohee\.com\/meta-interface\/v1\/index\/sensor-banners\? - reject-dict
 
+  body-rewrite:
+    - >-
+      ^https:\/\/api\.boohee\.com\/meta-interface\/v2\/index\? response-jq delpaths([["data","recom_cards"]])
+    - >-
+      ^https:\/\/api\.boohee\.com\/meta-interface\/v2\/index\? response-jq delpaths([["data","recom_btns"]])
+    - >-
+      ^https:\/\/api\.boohee\.com\/meta-interface\/v1\/index\/plaza\? response-jq delpaths([["data","tabs",1,"badge"]])
+    - >-
+      ^https:\/\/api\.boohee\.com\/meta-interface\/v1\/index\/plaza\? response-jq delpaths([["data","recommend_ads"]])
+    - >-
+      ^https:\/\/api\.boohee\.com\/open-interface\/v1\/string\/market_page\?title=metabolism_config$ response-jq delpaths([["top_banner"]])
+    - >-
+      ^https:\/\/api\.boohee\.com\/open-interface\/v1\/string\/market_page\?title=metabolism_config$ response-jq delpaths([["diagnos_config"]])
+    - >-
+      ^https:\/\/api\.boohee\.com\/open-interface\/v1\/string\/market_page\?title=metabolism_config$ response-jq delpaths([["partner_hospital"]])
+    - >-
+      ^https:\/\/api\.boohee\.com\/open-interface\/v1\/string\/market_page\?title=metabolism_config$ response-jq delpaths([["question_answer"]])
+    - >-
+      ^https:\/\/api\.boohee\.com\/open-interface\/v1\/string\/market_page\?title=metabolism_config$ response-jq delpaths([["product"]])
+    - >-
+      ^https:\/\/api\.boohee\.com\/open-interface\/v1\/string\/market_page\?title=metabolism_config$ response-jq delpaths([["brand_story"]])
+
   script:
-    - match: ^https:\/\/api\.boohee\.com\/meta-interface\/v2\/index\?
-      name: "body_rewrite_12_12"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.recom_cards%22%2C%22data.recom_btns%22%5D%5D%5D
-
-    - match: ^https:\/\/api\.boohee\.com\/meta-interface\/v1\/index\/plaza\?
-      name: "body_rewrite_12_12"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.tabs%5B1%5D.badge%22%2C%22data.recommend_ads%22%5D%5D%5D
-
-    - match: ^https:\/\/api\.boohee\.com\/open-interface\/v1\/string\/market_page\?title=metabolism_config$
-      name: "body_rewrite_12_12"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22top_banner%22%2C%22diagnos_config%22%2C%22partner_hospital%22%2C%22question_answer%22%2C%22product%22%2C%22brand_story%22%5D%5D%5D
-
     - match: ^https:\/\/api\.boohee\.com\/meta-interface\/v1\/index\/plaza-flow\?
       name: "移除广场推荐页面横幅_22"
       type: response
       require-body: true
 
 script-providers:
-  "body_rewrite_12_12":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
   "移除广场推荐页面横幅_22":
     url: https://kelee.one/Resource/Script/BooHee/BooHee_remove_ads.js
     interval: 86400

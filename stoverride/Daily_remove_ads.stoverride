@@ -24,18 +24,9 @@ http:
   mitm:
     - "m.pvp.xoyo.com"
 
-  script:
-    - match: ^https?:\/\/m\.pvp\.xoyo\.com\/conf\/server-mapping$
-      name: "body_rewrite_12_12"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.splashConf%22%2C%22data.splashConfNew%22%5D%5D%5D
-
-script-providers:
-  "body_rewrite_12_12":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
+  body-rewrite:
+    - >-
+      ^https?:\/\/m\.pvp\.xoyo\.com\/conf\/server-mapping$ response-jq delpaths([["data","splashConf"]])
+    - >-
+      ^https?:\/\/m\.pvp\.xoyo\.com\/conf\/server-mapping$ response-jq delpaths([["data","splashConfNew"]])
 

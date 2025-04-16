@@ -33,25 +33,17 @@ http:
     - >-
       ^https:\/\/(h3\.)?open\.taou\.com\/maimai\/go_gossip_darwin\/external\/v2\/query_flow_cards\? - reject-dict
 
-  script:
-    - match: ^https:\/\/(h3\.)?open\.taou\.com\/maimai\/feed\/v6\/detail_recommend_feeds\?
-      name: "body_rewrite_15_15"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22feeds%22%5D%5D%5D
+  body-rewrite:
+    - >-
+      ^https:\/\/(h3\.)?open\.taou\.com\/maimai\/feed\/v6\/detail_recommend_feeds\? response-jq delpaths([["feeds"]])
 
+  script:
     - match: ^https:\/\/(h3\.)?open\.taou\.com\/maimai\/(feed|gossip)\/v\d\/(focus_feed|gossip_detail_comment|feed_detail_comment?)\?
       name: "移除信息流和评论区大块广告_17"
       type: response
       require-body: true
 
 script-providers:
-  "body_rewrite_15_15":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
   "移除信息流和评论区大块广告_17":
     url: https://kelee.one/Resource/Script/MaiMai/MaiMai_remove_ads.js
     interval: 86400

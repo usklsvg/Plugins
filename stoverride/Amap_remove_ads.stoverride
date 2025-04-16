@@ -59,34 +59,19 @@ http:
     - >-
       ^https:\/\/m5-zb\.amap\.com\/ws\/boss\/pay\/web\/paySuccess\/info\/request - reject-dict
 
+  body-rewrite:
+    - >-
+      ^https:\/\/m5\.amap\.com\/ws\/shield\/search_business\/process\/marketingOperationStructured\? response-jq delpaths([["data","commonMaterial"]])
+    - >-
+      ^https:\/\/m5\.amap\.com\/ws\/shield\/search_business\/process\/marketingOperationStructured\? response-jq delpaths([["data","tipsOperationLocation"]])
+    - >-
+      ^https:\/\/m5\.amap\.com\/ws\/shield\/search_business\/process\/marketingOperationStructured\? response-jq delpaths([["data","resourcePlacement"]])
+    - >-
+      ^https:\/\/m5\.amap\.com\/ws\/shield\/search_poi\/homepage\? response-jq delpaths([["history_tags"]])
+    - >-
+      ^https:\/\/m5-zb\.amap\.com\/ws\/sharedtrip\/taxi\/order_detail_car_tips\? response-jq delpaths([["data","carTips","data","popupInfo"]])
+
   script:
-    - match: ^https:\/\/m5\.amap\.com\/ws\/shield\/search_business\/process\/marketingOperationStructured\?
-      name: "body_rewrite_19_19"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.commonMaterial%22%2C%22data.tipsOperationLocation%22%2C%22data.resourcePlacement%22%5D%5D%5D
-
-    - match: ^https:\/\/m5\.amap\.com\/ws\/shield\/search_poi\/homepage\?
-      name: "body_rewrite_19_19"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22history_tags%22%5D%5D%5D
-
-    - match: ^https:\/\/m5-zb\.amap\.com\/ws\/sharedtrip\/taxi\/order_detail_car_tips\?
-      name: "body_rewrite_19_19"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.carTips.data.popupInfo%22%5D%5D%5D
-
     - match: ^https:\/\/m5\.amap\.com\/ws\/aos\/perception\/publicTravel\/beforeNavi\?
       name: "移除路线规划推广_33"
       type: response
@@ -158,9 +143,6 @@ http:
       require-body: true
 
 script-providers:
-  "body_rewrite_19_19":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
   "移除路线规划推广_33":
     url: https://kelee.one/Resource/Script/Amap/Amap_remove_ads.js
     interval: 86400

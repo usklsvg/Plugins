@@ -114,18 +114,31 @@ http:
     - >-
       ^http:\/\/p\d+-be-pack-sign\.pglstatp-toutiao\.com\/(ad-app-package|web\.business\.image)\/ - reject
 
-  script:
-    - match: ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/
-      name: "body_rewrite_94_94"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.REWARD_AD_PLACES%22%2C%22data.SPLASH_SWING_OPEN%22%2C%22data.REWARD_AD_PHOTO_EDITOR%22%2C%22data.REWARD_AD_PAG_EDITOR%22%2C%22data.AD_PRICE_SHOW%22%2C%22data.AD_SCREEN_WAKEUP_TIME%22%2C%22data.REWARD_AD_CUTOUT_NUM%22%2C%22data.AD_HOME_ENTER_POP_COUNT%22%2C%22data.SHARE_BANNER%22%2C%22data.AD_MENU_SELECTIONS%22%2C%22data.ME_TAB.ANNOUNCEMENT%22%2C%22data.ME_TAB.MEMBERSHIP%22%2C%22data.ME_TAB.MEMBERSHIP2%22%5D%5D%5D
-
-script-providers:
-  "body_rewrite_94_94":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
+  body-rewrite:
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","REWARD_AD_PLACES"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","SPLASH_SWING_OPEN"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","REWARD_AD_PHOTO_EDITOR"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","REWARD_AD_PAG_EDITOR"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","AD_PRICE_SHOW"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","AD_SCREEN_WAKEUP_TIME"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","REWARD_AD_CUTOUT_NUM"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","AD_HOME_ENTER_POP_COUNT"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","SHARE_BANNER"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","AD_MENU_SELECTIONS"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","ME_TAB","ANNOUNCEMENT"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","ME_TAB","MEMBERSHIP"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","ME_TAB","MEMBERSHIP2"]])
 

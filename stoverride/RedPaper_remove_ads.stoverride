@@ -42,43 +42,19 @@ http:
     - >-
       ^https:\/\/www\.xiaohongshu\.com\/api\/sns\/(?:v1\/ads\/resource|v2\/hey\/\w+\/hey_gallery) - reject-dict
 
+  body-rewrite:
+    - >-
+      ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v1\/search\/banner_list$ response-jq if (getpath([]) | has("data")) then (setpath(["data"]; {})) else . end
+    - >-
+      ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v1\/search\/hot_list$ response-jq if (getpath(["data"]) | has("items")) then (setpath(["data","items"]; [])) else . end
+    - >-
+      ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v4\/search\/hint response-jq if (getpath(["data"]) | has("hint_words")) then (setpath(["data","hint_words"]; [])) else . end
+    - >-
+      ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v4\/search\/trending\? response-jq if (getpath(["data"]) | has("queries")) then (setpath(["data","queries"]; [])) else . end
+    - >-
+      ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v4\/search\/trending\? response-jq if (getpath(["data"]) | has("hint_word")) then (setpath(["data","hint_word"]; {})) else . end
+
   script:
-    - match: ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v1\/search\/banner_list$
-      name: "body_rewrite_19_19"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-replace%22%2C%5B%5B%22data%22%2C%7B%7D%5D%5D%5D%5D
-
-    - match: ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v1\/search\/hot_list$
-      name: "body_rewrite_19_19"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-replace%22%2C%5B%5B%22data.items%22%2C%5B%5D%5D%5D%5D%5D
-
-    - match: ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v4\/search\/hint
-      name: "body_rewrite_19_19"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-replace%22%2C%5B%5B%22data.hint_words%22%2C%5B%5D%5D%5D%5D%5D
-
-    - match: ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v4\/search\/trending\?
-      name: "body_rewrite_19_19"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-replace%22%2C%5B%5B%22data.queries%22%2C%5B%5D%5D%2C%5B%22data.hint_word%22%2C%7B%7D%5D%5D%5D%5D
-
     - match: ^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v1\/note\/(?:imagefeed|live_photo\/save)
       name: "移除图片和实况照片水印_24"
       type: response
@@ -140,9 +116,6 @@ http:
       require-body: true
 
 script-providers:
-  "body_rewrite_19_19":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
   "移除图片和实况照片水印_24":
     url: https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js
     interval: 86400

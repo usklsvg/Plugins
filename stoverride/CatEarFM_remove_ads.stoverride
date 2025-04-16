@@ -35,81 +35,29 @@ http:
     - >-
       ^https:\/\/fm\.missevan\.com\/api\/v\d\/meta\/banner$ - reject-dict
 
-  script:
-    - match: ^https:\/\/app\.missevan\.com\/site\/launch\?
-      name: "body_rewrite_12_12"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22info%22%5D%5D%5D
-
-    - match: ^https:\/\/app\.missevan\.com\/site\/config$
-      name: "body_rewrite_12_12"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22info.homepage_top_task_button%22%2C%22info.teenager_popup_mode%22%5D%5D%5D
-
-    - match: ^https:\/\/app\.missevan\.com\/site\/get-top$
-      name: "body_rewrite_12_12"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22info.search_words%22%2C%22info.extra_banners%22%5D%5D%5D
-
-    - match: ^https:\/\/app\.missevan\.com\/you-might-like\/my-favors\?
-      name: "body_rewrite_12_12"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22info.video_card%22%5D%5D%5D
-
-    - match: ^https:\/\/fm\.missevan\.com\/api\/v2\/recommended\/top\?
-      name: "body_rewrite_12_12"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22info%22%5D%5D%5D
-
-    - match: ^https:\/\/app\.missevan\.com\/drama\/catalog-homepage\?
-      name: "body_rewrite_12_12"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22info.extra_banners%22%5D%5D%5D
-
-    - match: ^https:\/\/app\.missevan\.com\/catalog\/sound-homepage\?
-      name: "body_rewrite_12_12"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22info.extra_banners%22%5D%5D%5D
-
-    - match: ^https:\/\/fm\.missevan\.com\/api\/v\d\/chatroom\/sound\/recommend\?
-      name: "body_rewrite_12_12"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22info%22%5D%5D%5D
-
-script-providers:
-  "body_rewrite_12_12":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
+  body-rewrite:
+    - >-
+      ^https:\/\/app\.missevan\.com\/site\/launch\? response-jq delpaths([["info"]])
+    - >-
+      ^https:\/\/app\.missevan\.com\/site\/config$ response-jq delpaths([["info","homepage_top_task_button"]])
+    - >-
+      ^https:\/\/app\.missevan\.com\/site\/config$ response-jq delpaths([["info","teenager_popup_mode"]])
+    - >-
+      ^https:\/\/app\.missevan\.com\/site\/get-top$ response-jq delpaths([["info","search_words"]])
+    - >-
+      ^https:\/\/app\.missevan\.com\/site\/get-top$ response-jq delpaths([["info","extra_banners"]])
+    - >-
+      ^https:\/\/app\.missevan\.com\/you-might-like\/my-favors\? response-jq delpaths([["info","video_card"]])
+    - >-
+      ^https:\/\/app\.missevan\.com\/you-might-like\/my-favors\? response-jq .info.ranks.data|=map(select(.name!="直播榜"))
+    - >-
+      ^https:\/\/fm\.missevan\.com\/api\/v2\/recommended\/top\? response-jq delpaths([["info"]])
+    - >-
+      ^https:\/\/app\.missevan\.com\/drama\/catalog-homepage\? response-jq delpaths([["info","extra_banners"]])
+    - >-
+      ^https:\/\/app\.missevan\.com\/catalog\/sound-homepage\? response-jq delpaths([["info","extra_banners"]])
+    - >-
+      ^https:\/\/fm\.missevan\.com\/api\/v\d\/chatroom\/sound\/recommend\? response-jq delpaths([["info"]])
+    - >-
+      ^https:\/\/app\.missevan\.com\/site\/icons\? response-jq .info.icons |= (if . == null then null else map(select(.title != 直播 and .title != "周边商城")) end)
 

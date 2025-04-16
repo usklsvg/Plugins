@@ -340,43 +340,31 @@ http:
     - >-
       ^https:\/\/wx\.10086\.cn\/qwhdhub\/activity\/info - reject-dict
 
+  body-rewrite:
+    - >-
+      ^https:\/\/mcsp\.cloudpnr\.com\/api\/miniapp\/popular\/T_MINIAPP$ response-jq delpaths([["data"]])
+    - >-
+      ^https:\/\/saas-ad\.cloudpnr\.com\/huifuad-base-api\/api\/tactics\/ad$ response-jq delpaths([["data",0]])
+    - >-
+      ^https:\/\/saas-ad\.cloudpnr\.com\/huifuad-base-api\/api\/tactics\/ad$ response-jq delpaths([["data",1]])
+    - >-
+      ^https:\/\/saas-ad\.cloudpnr\.com\/huifuad-base-api\/api\/tactics\/ad$ response-jq delpaths([["data",2]])
+    - >-
+      ^https:\/\/rms\.meituan\.com\/api\/v1\/rmsmina\/c\/queryShopPortalInfo\? response-jq delpaths([["data","popUpWindows"]])
+    - >-
+      ^https:\/\/chong\.qq\.com\/tws\/wxmobile\/GetProduct4App\? response-jq del(.respInfo.reserveProductList) | .respInfo.shortcut |= map(select(.name != 充流量 and .name != "领话费券"))
+    - >-
+      ^https:\/\/chong\.qq\.com\/tws\/wxmobile4app\/GetSecondProduct\? response-jq del(.respInfo.productList) | .respInfo.shortcut |= map(select(.name != 充流量 and .name != "领话费券"))
+    - >-
+      ^https:\/\/chong\.qq\.com\/tws\/usernumberinfo\/GetUserInfo\? response-jq delpaths([["data","request","number","markSeat","servicehallOperList"]])
+    - >-
+      ^https:\/\/chong\.qq\.com\/tws\/usernumberinfo\/GetUserInfo\? response-jq delpaths([["data","request","number","servicehallOperList"]])
+    - >-
+      ^https:\/\/chong\.qq\.com\/tws\/usernumberinfo\/GetUserInfo\? response-jq delpaths([["data","request","number","markSeat","servicehallFuncList"]])
+    - >-
+      ^https:\/\/chong\.qq\.com\/tws\/usernumberinfo\/GetUserInfo\? response-jq delpaths([["data","request","number","servicehallFuncList"]])
+
   script:
-    - match: ^https:\/\/mcsp\.cloudpnr\.com\/api\/miniapp\/popular\/T_MINIAPP$
-      name: "body_rewrite_124_124"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data%22%5D%5D%5D
-
-    - match: ^https:\/\/saas-ad\.cloudpnr\.com\/huifuad-base-api\/api\/tactics\/ad$
-      name: "body_rewrite_124_124"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data%5B0%5D%22%2C%22data%5B1%5D%22%2C%22data%5B2%5D%22%5D%5D%5D
-
-    - match: ^https:\/\/rms\.meituan\.com\/api\/v1\/rmsmina\/c\/queryShopPortalInfo\?
-      name: "body_rewrite_124_124"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.popUpWindows%22%5D%5D%5D
-
-    - match: ^https:\/\/chong\.qq\.com\/tws\/usernumberinfo\/GetUserInfo\?
-      name: "body_rewrite_124_124"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.request.number.markSeat.servicehallOperList%22%2C%22data.request.number.servicehallOperList%22%2C%22data.request.number.markSeat.servicehallFuncList%22%2C%22data.request.number.servicehallFuncList%22%5D%5D%5D
-
     - match: ^https:\/\/webapi\.qmai\.cn\/web\/catering\/design\/homePage-Config
       name: "企迈点单系统去广告_134"
       type: response
@@ -438,9 +426,6 @@ http:
       require-body: true
 
 script-providers:
-  "body_rewrite_124_124":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
   "企迈点单系统去广告_134":
     url: https://kelee.one/Resource/Script/WexinMiniPrograms/kff/kff.js
     interval: 86400

@@ -180,3 +180,9 @@ http:
     - >-
       ^https:\/\/api\.kmovie\.gifshow\.com\/rest\/n\/kmovie\/app\/resource\/activity\/pendant\? - reject-dict
 
+  body-rewrite:
+    - >-
+      ^https:\/\/api\.kmovie\.gifshow\.com\/rest\/n\/kmovie\/app\/banner\/common\/getBannerByTypeV2\? response-jq del(.list[] | select(.bannerChannelName == "活动"))
+    - >-
+      ^https:\/\/api\.kmovie\.gifshow\.com\/rest\/n\/kmovie\/app\/banner\/common\/getAllBannerPage\? response-jq del(.data[] | select(.bannerChannelName == "活动"))
+

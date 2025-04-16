@@ -40,25 +40,29 @@ http:
     - >-
       ^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzusercenter\/myprofilevariouscards$ - reject-dict
 
+  body-rewrite:
+    - >-
+      ^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzlogic\/mycontinenthomepage\? response-jq delpaths([["respData","topOpera","leftOpera"]])
+    - >-
+      ^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzlogic\/mycontinenthomepage\? response-jq delpaths([["respData","topOpera","rightOpera2"]])
+    - >-
+      ^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzlogic\/mycontinenthomepage\? response-jq delpaths([["respData","topActBanner"]])
+    - >-
+      ^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzlogic\/mycontinenthomepage\? response-jq delpaths([["respData","bmArea"]])
+    - >-
+      ^https:\/\/app\.zhuanzhuan\.com\/zzx\/transfer\/getConfigInfo\? response-jq delpaths([["respData","freeMarketTabLeadPop"]])
+    - >-
+      ^https:\/\/app\.zhuanzhuan\.com\/zzx\/transfer\/getConfigInfo\? response-jq delpaths([["respData","topOperations"]])
+    - >-
+      ^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzinfoshow\/getfeedflowinfo\? response-jq if .respData.userRed.campName == OCD挂件 then del(.respData.userRed) else . end | .respData.infoData |= map(del(.rotateResource,.appRecommendResource,."cargoGroupCardV2"))
+    - >-
+      ^https:\/\/app\.zhuanzhuan\.com\/zz\/transfer\/getmymoretools$ response-jq walk(if type == object and .name == 免流量特权 then empty else . end) | del(.respData.groupList[] | select(.groupName == 活动参与 or .groupName == "金融工具"))
+    - >-
+      ^https:\/\/app\.zhuanzhuan\.com\/zz\/transfer\/getmyprofilev3$ response-jq delpaths([["respData","bmNewInfo"]])
+    - >-
+      ^https:\/\/app\.zhuanzhuan\.com\/zz\/transfer\/getmyprofilev3$ response-jq del(.respData.itemGroupList[].itemList[] | select(.name == 天天赚钱 or .name == "借钱")) | del(.respData.itemGroupList[] | select(.groupType == 15))
+
   script:
-    - match: ^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzlogic\/mycontinenthomepage\?
-      name: "body_rewrite_13_13"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22respData.topOpera.leftOpera%22%2C%22respData.topOpera.rightOpera2%22%2C%22respData.topActBanner%22%2C%22respData.bmArea%22%5D%5D%5D
-
-    - match: ^https:\/\/app\.zhuanzhuan\.com\/zzx\/transfer\/getConfigInfo\?
-      name: "body_rewrite_13_13"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22respData.freeMarketTabLeadPop%22%2C%22respData.topOperations%22%5D%5D%5D
-
     - match: ^https:\/\/app\.zhuanzhuan\.com\/zzopen\/ptsimpleshow\/recommendbymyloveinfo\?
       name: "echoResponse_20"
       type: request
@@ -80,19 +84,7 @@ http:
       argument: |-
         text=%7B%22respCode%22%3A0%2C%22respData%22%3A%7B%7D%2C%22errorMsg%22%3A%22%22%2C%22errMsg%22%3A%22%22%7D&status-code=200
 
-    - match: ^https:\/\/app\.zhuanzhuan\.com\/zz\/transfer\/getmyprofilev3$
-      name: "body_rewrite_13_13"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22respData.bmNewInfo%22%5D%5D%5D
-
 script-providers:
-  "body_rewrite_13_13":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
   "echoResponse_20":
     url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/echo-response.js
     interval: 86400

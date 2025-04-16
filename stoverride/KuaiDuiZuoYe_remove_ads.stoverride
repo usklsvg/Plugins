@@ -154,18 +154,7 @@ http:
     - >-
       ^https:\/\/apivip\.kuaiduizuoye\.com\/viponline\/scancode\/mycard$ - reject-dict
 
-  script:
-    - match: ^https:\/\/www\.kuaiduizuoye\.com\/codesearch\/aid\/home$
-      name: "body_rewrite_131_131"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.homeBannerList%22%5D%5D%5D
-
-script-providers:
-  "body_rewrite_131_131":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
+  body-rewrite:
+    - >-
+      ^https:\/\/www\.kuaiduizuoye\.com\/codesearch\/aid\/home$ response-jq delpaths([["data","homeBannerList"]])
 

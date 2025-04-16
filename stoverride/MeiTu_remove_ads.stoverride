@@ -139,45 +139,25 @@ http:
     - >-
       ^https:\/\/api\.posters\.meitu\.com\/homepage\/leaflets\.json\? - reject-dict
 
-  script:
-    - match: ^https:\/\/api\.xiuxiu\.meitu\.com\/v\d\/common\/config\.json
-      name: "body_rewrite_115_115"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.home_top_live%22%2C%22data.splashControl%22%5D%5D%5D
-
-    - match: ^https:\/\/(api|tool)\.xiuxiu\.meitu\.com\/v\d\/tool\/common\/operation_icon\.json
-      name: "body_rewrite_115_115"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.home_top_icon%22%5D%5D%5D
-
-    - match: ^https:\/\/api\.posters\.meitu\.com\/common\/init\.json
-      name: "body_rewrite_115_115"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.vip%22%5D%5D%5D
-
-    - match: ^https:\/\/(api|tool)\.xiuxiu\.meitu\.com\/v\d\/tool\/common\/home\.json
-      name: "body_rewrite_115_115"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data%5B0%5D.items%5B10%5D%22%2C%22data%5B1%5D.scheme%22%2C%22data%5B1%5D.wallet_title%22%2C%22data%5B1%5D.items%5B1%5D%22%2C%22data%5B1%5D.items%5B1%5D%22%2C%22data%5B2%5D.items%5B1%5D%22%5D%5D%5D
-
-script-providers:
-  "body_rewrite_115_115":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
+  body-rewrite:
+    - >-
+      ^https:\/\/api\.xiuxiu\.meitu\.com\/v\d\/common\/config\.json response-jq delpaths([["data","home_top_live"]])
+    - >-
+      ^https:\/\/api\.xiuxiu\.meitu\.com\/v\d\/common\/config\.json response-jq delpaths([["data","splashControl"]])
+    - >-
+      ^https:\/\/(api|tool)\.xiuxiu\.meitu\.com\/v\d\/tool\/common\/operation_icon\.json response-jq delpaths([["data","home_top_icon"]])
+    - >-
+      ^https:\/\/api\.posters\.meitu\.com\/common\/init\.json response-jq delpaths([["data","vip"]])
+    - >-
+      ^https:\/\/(api|tool)\.xiuxiu\.meitu\.com\/v\d\/tool\/common\/home\.json response-jq delpaths([["data",0,"items",10]])
+    - >-
+      ^https:\/\/(api|tool)\.xiuxiu\.meitu\.com\/v\d\/tool\/common\/home\.json response-jq delpaths([["data",1,"scheme"]])
+    - >-
+      ^https:\/\/(api|tool)\.xiuxiu\.meitu\.com\/v\d\/tool\/common\/home\.json response-jq delpaths([["data",1,"wallet_title"]])
+    - >-
+      ^https:\/\/(api|tool)\.xiuxiu\.meitu\.com\/v\d\/tool\/common\/home\.json response-jq delpaths([["data",1,"items",1]])
+    - >-
+      ^https:\/\/(api|tool)\.xiuxiu\.meitu\.com\/v\d\/tool\/common\/home\.json response-jq delpaths([["data",1,"items",1]])
+    - >-
+      ^https:\/\/(api|tool)\.xiuxiu\.meitu\.com\/v\d\/tool\/common\/home\.json response-jq delpaths([["data",2,"items",1]])
 

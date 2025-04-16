@@ -45,63 +45,47 @@ http:
     - >-
       ^https?:\/\/iface2\.iqiyi\.com\/views_pop\/3\.0\/pop_control\? - reject-dict
 
-  script:
-    - match: ^https:\/\/cards\.iqiyi\.com\/views_home\/3\.0\/qy_home\?
-      name: "body_rewrite_19_19"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22base.statistics%22%5D%5D%5D
-
-    - match: ^https:\/\/cards\.iqiyi\.com\/views_plt\/3\.0\/player_tabs_v2\?
-      name: "body_rewrite_19_19"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22kv_pair.activity_tab%22%5D%5D%5D
-
-    - match: ^https?:\/\/iface2\.iqiyi\.com\/views_menus\/3\.0\/bottom_theme\?
-      name: "body_rewrite_19_19"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22theme_list%22%5D%5D%5D
-
-    - match: ^https?:\/\/iface2\.iqiyi\.com\/fusion\/3\.0\/common_switch\?
-      name: "body_rewrite_19_19"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22content.resource.cast_device_ad%22%5D%5D%2C%5B%22json-replace%22%2C%5B%5B%22content.switchs.app_ad.app_ad_enable%22%2C0%5D%2C%5B%22content.switchs.app_ad.app_ad_duration%22%2C0%5D%2C%5B%22content.switchs.ios_tech.kPreadAdHintSwitch%22%2C0%5D%2C%5B%22content.switchs.ios_tech.ad_download%22%2C0%5D%2C%5B%22content.switchs.m_qiyi_ios_tech.KFocusAdVideoPlayTimesIn4G%22%2C0%5D%5D%5D%5D
-
-    - match: ^https?:\/\/(kjp|t7z)\.cupid\.iqiyi\.com\/mixer\?
-      name: "body_rewrite_19_19"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22adSlots%22%5D%5D%5D
-
-    - match: ^https?:\/\/search\.video\.iqiyi\.com\/q\?
-      name: "body_rewrite_19_19"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data%22%5D%5D%5D
-
-script-providers:
-  "body_rewrite_19_19":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
+  body-rewrite:
+    - >-
+      ^https:\/\/cards\.iqiyi\.com\/views_home\/3\.0\/qy_home\? response-jq delpaths([["base","statistics"]])
+    - >-
+      ^https:\/\/cards\.iqiyi\.com\/views_home\/3\.0\/qy_home\? response-jq del(.cards[] | select(.alias_name == focus or .alias_name == ad_mobile_flow or .alias_name == "ad_trueview"))
+    - >-
+      ^https:\/\/cards\.iqiyi\.com\/views_category\/3\.0\/category_home\? response-jq del(.base.statistics | select(.ad_str)) | del(.cards[] | select(.alias_name == entrence_focus or .alias_name == "ad_trueview"))
+    - >-
+      ^https:\/\/cards\.iqiyi\.com\/waterfall(-plt)?\/3\.0\/feed\? response-jq del(.base.statistics | select(.ad_str)) | del(.. | select(.block_class?))
+    - >-
+      ^https:\/\/cards\.iqiyi\.com\/views_plt\/3\.0\/player_tabs_v2\? response-jq delpaths([["kv_pair","activity_tab"]])
+    - >-
+      ^https:\/\/cards\.iqiyi\.com\/views_plt\/3\.0\/player_tabs_v2\? response-jq del(.cards[] | select(.alias_name == play_vip_promotion or .alias_name == play_detail_tag or .alias_name == play_chat_entrance or .alias_name == play_ad_no_vip or .alias_name == play_vertical_short_video or .alias_name == play_rap_custom or .alias_name == play_topical_tab or .alias_name == play_vertical or .alias_name == "play_water_fall_like")) | del(.. | select(.block_class?))
+    - >-
+      ^https:\/\/comment-card\.iqiyi\.com\/views_comment\/3\.0\/long_video_comments\? response-jq ''
+    - >-
+      ^https:\/\/cards\.iqiyi\.com\/views_search\/3\.0\/hot_query_search\? response-jq .cards |= map(select(.alias_name as $name | $name != ad_trueview and $name != ad_mobile_flow and $name != "search_mid_text_ad")) | if .base.statistics.ad_str? then del(.base.statistics) else . end
+    - >-
+      ^https?:\/\/comment-card\.iqiyi\.com\/views_comment\/3\.0\/long_video_comments\? response-jq .cards |= map(select(has("alias_name")))
+    - >-
+      ^https?:\/\/iface2\.iqiyi\.com\/views_menus\/3\.0\/bottom_theme\? response-jq delpaths([["theme_list"]])
+    - >-
+      ^https?:\/\/iface2\.iqiyi\.com\/views_menus\/3\.0\/bottom_theme\? response-jq .cards |= map(.items |= map(select(.other.bottom_tab_type == rec or .other.bottom_tab_type == "my")))
+    - >-
+      ^https?:\/\/iface2\.iqiyi\.com\/views_menus\/3\.0\/home_top_menu\? response-jq .nav_group_data[].nav_list |= map(select(. == 0 or . == 2 or . == 1007 or . == 1 or . == 6 or . == "3"))
+    - >-
+      ^https?:\/\/iface2\.iqiyi\.com\/fusion\/3\.0\/common_switch\? response-jq delpaths([["content","resource","cast_device_ad"]])
+    - >-
+      ^https?:\/\/iface2\.iqiyi\.com\/fusion\/3\.0\/common_switch\? response-jq if (getpath(["content","switchs","app_ad"]) | has("app_ad_enable")) then (setpath(["content","switchs","app_ad","app_ad_enable"]; 0)) else . end
+    - >-
+      ^https?:\/\/iface2\.iqiyi\.com\/fusion\/3\.0\/common_switch\? response-jq if (getpath(["content","switchs","app_ad"]) | has("app_ad_duration")) then (setpath(["content","switchs","app_ad","app_ad_duration"]; 0)) else . end
+    - >-
+      ^https?:\/\/iface2\.iqiyi\.com\/fusion\/3\.0\/common_switch\? response-jq if (getpath(["content","switchs","ios_tech"]) | has("kPreadAdHintSwitch")) then (setpath(["content","switchs","ios_tech","kPreadAdHintSwitch"]; 0)) else . end
+    - >-
+      ^https?:\/\/iface2\.iqiyi\.com\/fusion\/3\.0\/common_switch\? response-jq if (getpath(["content","switchs","ios_tech"]) | has("ad_download")) then (setpath(["content","switchs","ios_tech","ad_download"]; 0)) else . end
+    - >-
+      ^https?:\/\/iface2\.iqiyi\.com\/fusion\/3\.0\/common_switch\? response-jq if (getpath(["content","switchs","m_qiyi_ios_tech"]) | has("KFocusAdVideoPlayTimesIn4G")) then (setpath(["content","switchs","m_qiyi_ios_tech","KFocusAdVideoPlayTimesIn4G"]; 0)) else . end
+    - >-
+      ^https?:\/\/(kjp|t7z)\.cupid\.iqiyi\.com\/mixer\? response-jq delpaths([["adSlots"]])
+    - >-
+      ^https?:\/\/search\.video\.iqiyi\.com\/q\? response-jq delpaths([["data"]])
+    - >-
+      ^https?:\/\/iface2\.iqiyi\.com\/aggregate\/3\.0\/getMyMenus\? response-jq .data |= map(select(.statistic.block != "wd_liebiao_2") | select(all(.menuList[]?.statistic2.block; . != "wd_liebiao_3")))
 

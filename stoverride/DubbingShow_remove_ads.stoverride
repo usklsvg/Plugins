@@ -32,52 +32,23 @@ http:
   mitm:
     - "iosapi.peiyinxiu.com"
 
+  body-rewrite:
+    - >-
+      ^https:\/\/iosapi\.peiyinxiu\.com\/Api\/live\/LiveList response-jq delpaths([["data","banners"]])
+    - >-
+      ^https:\/\/iosapi\.peiyinxiu\.com\/api\/live\/FollowList response-jq delpaths([["obj","data"]])
+    - >-
+      ^https:\/\/iosapi\.peiyinxiu\.com\/Api\/Friend\/GetRecommendUsers response-jq delpaths([["obj","data"]])
+    - >-
+      ^https:\/\/iosapi\.peiyinxiu\.com\/api\/Union\/HomeData response-jq delpaths([["obj","data"]])
+
   script:
-    - match: ^https:\/\/iosapi\.peiyinxiu\.com\/Api\/live\/LiveList
-      name: "body_rewrite_20_20"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.banners%22%5D%5D%5D
-
-    - match: ^https:\/\/iosapi\.peiyinxiu\.com\/api\/live\/FollowList
-      name: "body_rewrite_20_20"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22obj.data%22%5D%5D%5D
-
-    - match: ^https:\/\/iosapi\.peiyinxiu\.com\/Api\/Friend\/GetRecommendUsers
-      name: "body_rewrite_20_20"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22obj.data%22%5D%5D%5D
-
-    - match: ^https:\/\/iosapi\.peiyinxiu\.com\/api\/Union\/HomeData
-      name: "body_rewrite_20_20"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22obj.data%22%5D%5D%5D
-
     - match: ^https:\/\/iosapi\.peiyinxiu\.com\/Api\/Film\/GetConfigValue
       name: "移除首页底部弹窗_25"
       type: response
       require-body: true
 
 script-providers:
-  "body_rewrite_20_20":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
   "移除首页底部弹窗_25":
     url: https://kelee.one/Resource/Script/DubbingShow/DubbingShow_remove_ads.js
     interval: 86400

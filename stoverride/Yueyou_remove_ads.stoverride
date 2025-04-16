@@ -104,18 +104,51 @@ http:
     - >-
       ^http:\/\/p\d+-be-pack-sign\.pglstatp-toutiao\.com\/(ad-app-package|web\.business\.image)\/ - reject
 
-  script:
-    - match: ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\?
-      name: "body_rewrite_88_88"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.isShowDLPopup%22%2C%22data.isShowGame%22%2C%22data.touTiaoShowDlPopup%22%2C%22data.offLineDownload.WatchVideoBtnDesc%22%2C%22data.readVipFirstCfg%22%2C%22data.readVipNormalCfg%22%2C%22data.notifyAd%22%2C%22data.hotStartSplashTime%22%2C%22data.hotStartReqSwitch%22%2C%22data.isShowBFTab%22%2C%22data.popReqDelayTime%22%2C%22data.benefitCfg%22%2C%22data.chestTask%22%2C%22data.hotStartAd%22%2C%22data.activeTagList%22%2C%22data.secondOrderCfg%22%2C%22data.secondOrderList%22%2C%22data.blockedWordsCfg%22%2C%22data.aaReportListCfg%22%2C%22data.pddAdSwitch%22%2C%22data.isShowShelfAuthPopup%22%2C%22data.firstPopUpAmount%22%5D%5D%2C%5B%22json-replace%22%2C%5B%5B%22data.isAdClosed%22%2Ctrue%5D%5D%5D%5D
-
-script-providers:
-  "body_rewrite_88_88":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
+  body-rewrite:
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","isShowDLPopup"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","isShowGame"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","touTiaoShowDlPopup"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","offLineDownload","WatchVideoBtnDesc"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","readVipFirstCfg"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","readVipNormalCfg"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","notifyAd"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","hotStartSplashTime"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","hotStartReqSwitch"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","isShowBFTab"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","popReqDelayTime"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","benefitCfg"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","chestTask"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","hotStartAd"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","activeTagList"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","secondOrderCfg"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","secondOrderList"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","blockedWordsCfg"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","aaReportListCfg"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","pddAdSwitch"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","isShowShelfAuthPopup"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","firstPopUpAmount"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq if (getpath(["data"]) | has("isAdClosed")) then (setpath(["data","isAdClosed"]; true)) else . end
 

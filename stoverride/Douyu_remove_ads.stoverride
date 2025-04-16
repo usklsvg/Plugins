@@ -45,34 +45,31 @@ http:
     - >-
       ^https:\/\/rtbapi\.douyucdn\.cn\/japi\/sign\/app\/getinfo - reject-dict
 
+  body-rewrite:
+    - >-
+      ^https:\/\/apiv2\.douyucdn\.cn\/japi\/entrance\/roomRes\/nc\/m\/list response-jq delpaths([["data","pendant_a"]])
+    - >-
+      ^https:\/\/apiv2\.douyucdn\.cn\/japi\/entrance\/roomRes\/nc\/m\/list response-jq delpaths([["data","entrance_d"]])
+    - >-
+      ^https:\/\/venus\.douyucdn\.cn\/venus\/config\/static\/update.+keyCodeSet=flow_config response-jq if (getpath([]) | has("greatGodGameSitterSwitch")) then (setpath(["greatGodGameSitterSwitch"]; 0)) else . end
+    - >-
+      ^https:\/\/venus\.douyucdn\.cn\/venus\/config\/static\/update.+keyCodeSet=flow_config response-jq if (getpath([]) | has("followMoreAnchorEntrance")) then (setpath(["followMoreAnchorEntrance"]; 0)) else . end
+    - >-
+      ^https:\/\/venus\.douyucdn\.cn\/venus\/config\/static\/update.+keyCodeSet=flow_config response-jq if (getpath([]) | has("sdklivebanner")) then (setpath(["sdklivebanner"]; 0)) else . end
+    - >-
+      ^https:\/\/venus\.douyucdn\.cn\/venus\/config\/static\/update.+keyCodeSet=flow_config response-jq if (getpath([]) | has("homeActFloatSwitch")) then (setpath(["homeActFloatSwitch"]; 0)) else . end
+    - >-
+      ^https:\/\/venus\.douyucdn\.cn\/venus\/config\/static\/update.+keyCodeSet=flow_config response-jq if (getpath([]) | has("bringGoodsSwitch")) then (setpath(["bringGoodsSwitch"]; 0)) else . end
+    - >-
+      ^https:\/\/venus\.douyucdn\.cn\/venus\/config\/static\/update.+keyCodeSet=flow_config response-jq if (getpath([]) | has("qqGameSwitch")) then (setpath(["qqGameSwitch"]; 0)) else . end
+
   script:
-    - match: ^https:\/\/apiv2\.douyucdn\.cn\/japi\/entrance\/roomRes\/nc\/m\/list
-      name: "body_rewrite_23_23"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.pendant_a%22%2C%22data.entrance_d%22%5D%5D%5D
-
-    - match: ^https:\/\/venus\.douyucdn\.cn\/venus\/config\/static\/update.+keyCodeSet=flow_config
-      name: "body_rewrite_23_23"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-replace%22%2C%5B%5B%22greatGodGameSitterSwitch%22%2C0%5D%2C%5B%22followMoreAnchorEntrance%22%2C0%5D%2C%5B%22sdklivebanner%22%2C0%5D%2C%5B%22homeActFloatSwitch%22%2C0%5D%2C%5B%22bringGoodsSwitch%22%2C0%5D%2C%5B%22qqGameSwitch%22%2C0%5D%5D%5D%5D
-
     - match: ^https:\/\/apiv2\.douyucdn\.cn\/mgapi\/livenc\/home\/getRecV3
       name: "移除首页轮播图和视频流广告_26"
       type: response
       require-body: true
 
 script-providers:
-  "body_rewrite_23_23":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
   "移除首页轮播图和视频流广告_26":
     url: https://kelee.one/Resource/Script/Douyu/Douyu_remove_ads.js
     interval: 86400

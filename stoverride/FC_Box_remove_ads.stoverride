@@ -116,18 +116,9 @@ http:
     - >-
       ^https:\/\/consumer\.fcbox\.com\/fcboxactivityweb\/api\/guidePopup\/popup$ - reject-dict
 
-  script:
-    - match: ^https:\/\/consumer\.fcbox\.com\/v1\/dynamicConfig\/findTabbarConfig\/mainPage$
-      name: "body_rewrite_90_90"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.lifeService%22%2C%22data.mall%22%5D%5D%5D
-
-script-providers:
-  "body_rewrite_90_90":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
+  body-rewrite:
+    - >-
+      ^https:\/\/consumer\.fcbox\.com\/v1\/dynamicConfig\/findTabbarConfig\/mainPage$ response-jq delpaths([["data","lifeService"]])
+    - >-
+      ^https:\/\/consumer\.fcbox\.com\/v1\/dynamicConfig\/findTabbarConfig\/mainPage$ response-jq delpaths([["data","mall"]])
 

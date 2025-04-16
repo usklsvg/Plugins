@@ -78,25 +78,19 @@ http:
     - >-
       ^https:\/\/zhuanlan\.zhihu\.com\/api\/articles\/\d+\/recommendation - reject-dict
 
+  body-rewrite:
+    - >-
+      ^https:\/\/api\.zhihu\.com\/bazaar\/vip_tab\/header\? response-jq delpaths([["activity_banner"]])
+    - >-
+      ^https:\/\/api\.zhihu\.com\/bazaar\/vip_tab\/header\? response-jq delpaths([["activity_window"]])
+    - >-
+      ^https:\/\/api\.zhihu\.com\/bazaar\/vip_tab\/header\? response-jq delpaths([["vip_tip"]])
+    - >-
+      ^https:\/\/api\.zhihu\.com\/search\/recommend_query\/v2\? response-replace-regex "recommend_queries":\{.+\} "recommend_queries":{}
+    - >-
+      ^https:\/\/api\.zhihu\.com\/questions\/\d+(?:\/answers|\/feeds|\?include=) response-jq del(.ad_info, .data.ad_info?, .query_info) | if (.data | type) == array then .data |= map(select(.target?.answer_type?// "" | tostring | contains("paid") | not)) else . end
+
   script:
-    - match: ^https:\/\/api\.zhihu\.com\/bazaar\/vip_tab\/header\?
-      name: "body_rewrite_27_27"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22activity_banner%22%2C%22activity_window%22%2C%22vip_tip%22%5D%5D%5D
-
-    - match: ^https:\/\/api\.zhihu\.com\/search\/recommend_query\/v2\?
-      name: "body_rewrite_27_27"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22replace-regex%22%2C%5B%5B%22%5C%22recommend_queries%5C%22%3A%5C%5C%7B.%2B%5C%5C%7D%22%2C%22%5C%22recommend_queries%5C%22%3A%7B%7D%22%5D%5D%5D%5D
-
     - match: ^https:\/\/(?:api|page-info)\.zhihu\.com\/(?:answers|articles)\/v2\/\d+
       name: "移除回答底部卡片推广_50"
       type: response
@@ -148,9 +142,6 @@ http:
       require-body: true
 
 script-providers:
-  "body_rewrite_27_27":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
   "移除回答底部卡片推广_50":
     url: https://kelee.one/Resource/Script/Zhihu/Zhihu_remove_ads.js
     interval: 86400

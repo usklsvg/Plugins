@@ -54,36 +54,25 @@ http:
     - >-
       ^https:\/\/gorgon\.youdao\.com\/gorgon\/request\.s\? - reject-dict
 
-  script:
-    - match: ^https:\/\/dict\.youdao\.com\/homepage\/toolbar\/get\?
-      name: "body_rewrite_35_35"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.vipTag%22%5D%5D%5D
-
-    - match: ^https:\/\/dict\.youdao\.com\/course\/tab\/translateTab\?
-      name: "body_rewrite_35_35"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data%22%5D%5D%5D
-
-    - match: ^https:\/\/dict\.youdao\.com\/course\/tab\/home\?
-      name: "body_rewrite_35_35"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.popup%22%2C%22data.tab%22%2C%22data.searchSuggestList%22%2C%22data.newBanner%22%2C%22data.icon.promotionList%22%2C%22data.icon.iconList%5B1%5D.bubble%22%2C%22data.icon.iconList%5B2%5D.bubble%22%2C%22data.icon.iconList%5B8%5D.bubble%22%5D%5D%5D
-
-script-providers:
-  "body_rewrite_35_35":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
+  body-rewrite:
+    - >-
+      ^https:\/\/dict\.youdao\.com\/homepage\/toolbar\/get\? response-jq delpaths([["data","vipTag"]])
+    - >-
+      ^https:\/\/dict\.youdao\.com\/course\/tab\/translateTab\? response-jq delpaths([["data"]])
+    - >-
+      ^https:\/\/dict\.youdao\.com\/course\/tab\/home\? response-jq delpaths([["data","popup"]])
+    - >-
+      ^https:\/\/dict\.youdao\.com\/course\/tab\/home\? response-jq delpaths([["data","tab"]])
+    - >-
+      ^https:\/\/dict\.youdao\.com\/course\/tab\/home\? response-jq delpaths([["data","searchSuggestList"]])
+    - >-
+      ^https:\/\/dict\.youdao\.com\/course\/tab\/home\? response-jq delpaths([["data","newBanner"]])
+    - >-
+      ^https:\/\/dict\.youdao\.com\/course\/tab\/home\? response-jq delpaths([["data","icon","promotionList"]])
+    - >-
+      ^https:\/\/dict\.youdao\.com\/course\/tab\/home\? response-jq delpaths([["data","icon","iconList",1,"bubble"]])
+    - >-
+      ^https:\/\/dict\.youdao\.com\/course\/tab\/home\? response-jq delpaths([["data","icon","iconList",2,"bubble"]])
+    - >-
+      ^https:\/\/dict\.youdao\.com\/course\/tab\/home\? response-jq delpaths([["data","icon","iconList",8,"bubble"]])
 

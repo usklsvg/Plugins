@@ -74,27 +74,11 @@ http:
     - >-
       ^https:\/\/api\.gotokeep\.com\/guide-webapp\/v1\/popup\/getPopUp - reject-dict
 
-  script:
-    - match: ^https:\/\/api\.gotokeep\.com\/twins\/v4\/feed\/followPage
-      name: "body_rewrite_53_53"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-replace%22%2C%5B%5B%22data%22%2C%7B%7D%5D%5D%5D%5D
-
-    - match: ^https:\/\/api\.gotokeep\.com\/twins\/v4\/feed\/entryDetail
-      name: "body_rewrite_53_53"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-replace%22%2C%5B%5B%22data%22%2C%7B%7D%5D%5D%5D%5D
-
-script-providers:
-  "body_rewrite_53_53":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
+  body-rewrite:
+    - >-
+      ^https:\/\/api\.gotokeep\.com\/twins\/v4\/feed\/followPage response-jq if (getpath([]) | has("data")) then (setpath(["data"]; {})) else . end
+    - >-
+      ^https:\/\/api\.gotokeep\.com\/twins\/v4\/feed\/entryDetail response-jq if (getpath([]) | has("data")) then (setpath(["data"]; {})) else . end
+    - >-
+      ^https:\/\/api\.gotokeep\.com\/config\/v3\/basic response-jq .data.homeTabs |= map(select(.name != "活动")) | .data.homeTabs[1].default = true | .data.homeTabs[2].default = false
 

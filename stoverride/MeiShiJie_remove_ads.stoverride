@@ -136,3 +136,7 @@ http:
     - >-
       ^http:\/\/p\d+-be-pack-sign\.pglstatp-toutiao\.com\/(ad-app-package|web\.business\.image)\/ - reject
 
+  body-rewrite:
+    - >-
+      ^https:\/\/newapi\.meishi\.cc\/indexnew\/home_feeds response-jq if .data.items then .data.items |= map(select(.type | . != 101 and . != "12")) else . end
+

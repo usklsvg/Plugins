@@ -170,18 +170,7 @@ http:
     - >-
       ^https:\/\/images\.pinduoduo\.com\/marketing_api\/ - reject
 
-  script:
-    - match: ^https:\/\/common\.seeyouyima\.com\/v2\/conf_list$
-      name: "body_rewrite_140_140"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.confList.Minor_mode_card%22%5D%5D%5D
-
-script-providers:
-  "body_rewrite_140_140":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
+  body-rewrite:
+    - >-
+      ^https:\/\/common\.seeyouyima\.com\/v2\/conf_list$ response-jq delpaths([["data","confList","Minor_mode_card"]])
 

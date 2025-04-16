@@ -282,16 +282,13 @@ http:
     - >-
       ^https?:\/\/m\.client\.10010\.com\/mobileService\/customer\/accountListData\.htm - reject-img
 
-  script:
-    - match: ^https?:\/\/cmds\.omesoft\.com\/HypnotistWS\.asmx
-      name: "body_rewrite_121_121"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22replace-regex%22%2C%5B%5B%22%3CGetADResult%3E%5C%5C.%5C%5C*%5C%5C%3F%3C%5C%5C%2FGetADResult%3E%22%2C%22%3CGetADResult%3E%7B%5C%22ret%5C%22%3A0%2C%5C%22msg%5C%22%3A%5C%22%E6%AD%A3%E5%B8%B8%5C%22%2C%5C%22err_code%5C%22%3A0%2C%5C%22data%5C%22%3A%7B%5C%22ad%5C%22%3A%5B%5D%7D%7D%3C%2FGetADResult%3E%22%5D%5D%5D%5D
+  body-rewrite:
+    - >-
+      ^https?:\/\/cmds\.omesoft\.com\/HypnotistWS\.asmx response-replace-regex <GetADResult>\.\*\?<\/GetADResult> <GetADResult>{"ret":0,"msg":"正常","err_code":0,"data":{"ad":[]}}</GetADResult>
+    - >-
+      ^https?:\/\/api\.fenxianglife\.com\/njia\/index\/popup\/v2 response-jq .data.list = []
 
+  script:
     - match: ^https?:\/\/info\.mina\.xiaoaisound\.com\/(advertise|payGuide)\/
       name: "echoResponse_123"
       type: request
@@ -300,9 +297,6 @@ http:
         text=%7B%22code%22%3A0%2C%22message%22%3A%22Success%22%2C%22data%22%3A%5B%5D%7D
 
 script-providers:
-  "body_rewrite_121_121":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
   "echoResponse_123":
     url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/echo-response.js
     interval: 86400

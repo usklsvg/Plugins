@@ -215,16 +215,23 @@ http:
     - >-
       ^https:\/\/images\.pinduoduo\.com\/marketing_api\/ - reject
 
-  script:
-    - match: ^https:\/\/(mobile|mobilehera|mobwsa)\.ximalaya\.com\/football-portal\/diff2\/batch\?
-      name: "body_rewrite_156_156"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22json.ad%22%2C%22json.toc%22%5D%5D%5D
+  body-rewrite:
+    - >-
+      ^https:\/\/(mobile|mobilehera|mobwsa)\.ximalaya\.com\/discovery-feed\/v\d\/mix\/ response-jq .heData |= map(select(.item.list[].bizType != "SceneListenCard"))
+    - >-
+      ^https:\/\/(mobile|mobilehera|mobwsa)\.ximalaya\.com\/discovery-category\/customCategories\/ response-jq .categoryList |= map(.itemList |= map(select(.title | test("直播|123狂欢节|SVIP"; "i") | not))) | .customCategoryList |= map(select(.title | test("直播|123狂欢节|SVIP"; "i") | not))
+    - >-
+      ^https:\/\/(mobile|mobilehera|mobwsa)\.ximalaya\.com\/football-portal\/diff2\/batch\? response-jq delpaths([["json","ad"]])
+    - >-
+      ^https:\/\/(mobile|mobilehera|mobwsa)\.ximalaya\.com\/football-portal\/diff2\/batch\? response-jq delpaths([["json","toc"]])
+    - >-
+      ^https:\/\/(mobile|mobilehera|mobwsa)\.ximalaya\.com\/nexus-web\/v\d\/tabs\/customTabs\? response-jq .data.feedTabs |= map(select(.name != "大赛"))
+    - >-
+      ^https:\/\/(mobile|mobilehera|mobwsa)\.ximalaya\.com\/mobile-user\/v\d\/homePage\/ response-jq delpaths([["data","freeListenV2"]])
+    - >-
+      ^https:\/\/(mobile|mobilehera|mobwsa)\.ximalaya\.com\/mobile-user\/v\d\/homePage\/ response-jq .data.serviceModule.entrances |= map(select(.name == "全部服务"))
 
+  script:
     - match: ^https:\/\/(m|mwsa)\.ximalaya\.com\/community\/square\/v\d\/stream\?
       name: "echoResponse_161"
       type: request
@@ -232,19 +239,7 @@ http:
       argument: |-
         text=%7B%22data%22%3A%7B%22cards%22%3A%5B%7B%22content%22%3A%7B%7D%2C%22type%22%3A%22RECOMMENDS%22%7D%5D%7D%2C%22ret%22%3A0%7D&status-code=200
 
-    - match: ^https:\/\/(mobile|mobilehera|mobwsa)\.ximalaya\.com\/mobile-user\/v\d\/homePage\/
-      name: "body_rewrite_156_156"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.freeListenV2%22%5D%5D%5D
-
 script-providers:
-  "body_rewrite_156_156":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
   "echoResponse_161":
     url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/echo-response.js
     interval: 86400

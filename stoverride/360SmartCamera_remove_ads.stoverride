@@ -28,18 +28,11 @@ http:
   mitm:
     - "jia.360.cn"
 
-  script:
-    - match: ^https:\/\/jia\.360\.cn\/conf\/v1\.json
-      name: "body_rewrite_15_15"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22tab_conf%22%2C%22ad_conf%22%2C%22activity%22%5D%5D%5D
-
-script-providers:
-  "body_rewrite_15_15":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
+  body-rewrite:
+    - >-
+      ^https:\/\/jia\.360\.cn\/conf\/v1\.json response-jq delpaths([["tab_conf"]])
+    - >-
+      ^https:\/\/jia\.360\.cn\/conf\/v1\.json response-jq delpaths([["ad_conf"]])
+    - >-
+      ^https:\/\/jia\.360\.cn\/conf\/v1\.json response-jq delpaths([["activity"]])
 

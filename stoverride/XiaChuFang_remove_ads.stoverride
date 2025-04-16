@@ -164,3 +164,9 @@ http:
     - >-
       ^https:\/\/api\.xiachufang\.com\/v2\/mark_mission\/get_sticker_info\.json - reject-dict
 
+  body-rewrite:
+    - >-
+      ^https:\/\/api\.xiachufang\.com\/v2\/homepage\/paged_waterfall_recommendations\.json$ response-jq del(.multiplex_cells[] | select(.recommendation_cell.impression_sensor_events[]?.properties.target_type? == "ad"))
+    - >-
+      ^https:\/\/api\.xiachufang\.com\/v2\/config\/get\.json$ response-jq del(.content.tab_name[] | select(. == 减脂 or . == 商店 or . == "分类"))
+

@@ -195,45 +195,17 @@ http:
     - >-
       ^https:\/\/images\.pinduoduo\.com\/marketing_api\/ - reject
 
-  script:
-    - match: ^https:\/\/app\.qtfm\.cn\/m-bff\/v\d\/signin\/show_homepage_icon$
-      name: "body_rewrite_156_156"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-replace%22%2C%5B%5B%22data.display_icon%22%2Cfalse%5D%5D%5D%5D
-
-    - match: ^https:\/\/app\.qtfm\.cn\/m-bff\/v\d\/channel\/\d{6}\/playpage\/\d{8}
-      name: "body_rewrite_156_156"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.related_recommend%22%5D%5D%5D
-
-    - match: ^https:\/\/app\.qtfm\.cn\/m-bff\/v\d\/mylistenpage
-      name: "body_rewrite_156_156"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.banner%22%5D%5D%5D
-
-    - match: ^https:\/\/app\.qtfm\.cn\/m-bff\/v\d\/subscribed_channels\?
-      name: "body_rewrite_156_156"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.recommends%22%5D%5D%5D
-
-script-providers:
-  "body_rewrite_156_156":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
+  body-rewrite:
+    - >-
+      ^https:\/\/app\.qtfm\.cn\/m-bff\/v\d\/signin\/show_homepage_icon$ response-jq if (getpath(["data"]) | has("display_icon")) then (setpath(["data","display_icon"]; false)) else . end
+    - >-
+      ^https:\/\/app\.qtfm\.cn\/recommendapi\/v\d\/hotpage\? response-jq del(.data.head[].data[] | select(.title == "超级会员")) | del(.data.head[].data[] | select(.link.type == "RadioStation")) | del(.data.head[] | select(.title == "听头条")) | del(.data.feeds[] | select(.type == "ListenListRadio"))
+    - >-
+      ^https:\/\/app\.qtfm\.cn\/m-bff\/v\d\/channel\/\d{6}\/playpage\/\d{8} response-jq delpaths([["data","related_recommend"]])
+    - >-
+      ^https:\/\/app\.qtfm\.cn\/m-bff\/v\d\/mylistenpage response-jq delpaths([["data","banner"]])
+    - >-
+      ^https:\/\/app\.qtfm\.cn\/m-bff\/v\d\/subscribed_channels\? response-jq delpaths([["data","recommends"]])
+    - >-
+      ^https:\/\/entry\.qtfm\.cn\/api\/v\d\/personal\/\?carrier response-jq delpaths([["data", "membership"], ["data", "level_info"]]) | .data.discovery.entries |= map(select(.title != "借钱"))
 

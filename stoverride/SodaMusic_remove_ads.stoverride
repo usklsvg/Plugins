@@ -100,36 +100,15 @@ http:
     - >-
       ^https:\/\/beta-luna\.douyin\.com\/luna\/commerce\/v2\/commerce_info\? - reject-dict
 
-  script:
-    - match: ^https:\/\/beta-luna\.douyin\.com\/luna\/me\?
-      name: "body_rewrite_78_78"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22reward_ad_banner%22%5D%5D%5D
-
-    - match: ^https:\/\/beta-luna\.douyin\.com\/luna\/card\?
-      name: "body_rewrite_78_78"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-replace%22%2C%5B%5B%22card_items%5B0%5D.priority_display%22%2Cfalse%5D%2C%5B%22card_items%5B0%5D.is_show%22%2Cfalse%5D%2C%5B%22preview_guide%22%2Cnull%5D%5D%5D%5D
-
-    - match: ^https:\/\/beta-luna\.douyin\.com\/luna\/more-panel\?
-      name: "body_rewrite_78_78"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22blocks%5B1%5D%22%5D%5D%5D
-
-script-providers:
-  "body_rewrite_78_78":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
+  body-rewrite:
+    - >-
+      ^https:\/\/beta-luna\.douyin\.com\/luna\/me\? response-jq delpaths([["reward_ad_banner"]])
+    - >-
+      ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? response-jq if (getpath(["card_items",0]) | has("priority_display")) then (setpath(["card_items",0,"priority_display"]; false)) else . end
+    - >-
+      ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? response-jq if (getpath(["card_items",0]) | has("is_show")) then (setpath(["card_items",0,"is_show"]; false)) else . end
+    - >-
+      ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? response-jq if (getpath([]) | has("preview_guide")) then (setpath(["preview_guide"]; null)) else . end
+    - >-
+      ^https:\/\/beta-luna\.douyin\.com\/luna\/more-panel\? response-jq delpaths([["blocks",1]])
 

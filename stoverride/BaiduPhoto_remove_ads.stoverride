@@ -97,18 +97,9 @@ http:
     - >-
       ^https:\/\/pan\.baidu\.com\/youai\/material\/v1\/getbynavid\?.*nav_id=1 - reject-dict
 
-  script:
-    - match: ^https:\/\/mbd\.baidu\.com\/ccs\/v1\/start\/confsync\?
-      name: "body_rewrite_78_78"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.service.config.advertisement%22%2C%22data.service.config.youa.pm_config_ad%22%5D%5D%5D
-
-script-providers:
-  "body_rewrite_78_78":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
+  body-rewrite:
+    - >-
+      ^https:\/\/mbd\.baidu\.com\/ccs\/v1\/start\/confsync\? response-jq delpaths([["data","service","config","advertisement"]])
+    - >-
+      ^https:\/\/mbd\.baidu\.com\/ccs\/v1\/start\/confsync\? response-jq delpaths([["data","service","config","youa","pm_config_ad"]])
 

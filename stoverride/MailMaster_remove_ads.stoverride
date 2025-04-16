@@ -221,18 +221,13 @@ http:
     - >-
       ^https:\/\/images\.pinduoduo\.com\/marketing_api\/ - reject
 
-  script:
-    - match: ^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/page\/v2\/conf\.do$
-      name: "body_rewrite_179_179"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.functionOperatorInfoList%22%2C%22data.memberOperator%22%2C%22data.activityTabInfoList%22%5D%5D%5D
-
-script-providers:
-  "body_rewrite_179_179":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
+  body-rewrite:
+    - >-
+      ^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/page\/v2\/conf\.do$ response-jq delpaths([["data","functionOperatorInfoList"]])
+    - >-
+      ^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/page\/v2\/conf\.do$ response-jq delpaths([["data","memberOperator"]])
+    - >-
+      ^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/page\/v2\/conf\.do$ response-jq delpaths([["data","activityTabInfoList"]])
+    - >-
+      ^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/config\/function\.do$ response-jq .data.config[] |= if .result.tools then .result.tools |= map(select(.name == 邮件追踪 or .name == "替身邮箱")) else . end | del(.data.config[] | select(.functionName == "Function-AD"))
 

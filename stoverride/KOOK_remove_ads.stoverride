@@ -25,18 +25,11 @@ http:
     - "m.kookapp.cn"
     - "www.kookapp.cn"
 
-  script:
-    - match: ^https:\/\/(m|www)\.kookapp\.cn\/api\/v\d\/user\/settings$
-      name: "body_rewrite_12_12"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22ad_banner%22%2C%22advertise_on_off%22%5D%5D%2C%5B%22json-replace%22%2C%5B%5B%22ios_mall_switch%22%2Cfalse%5D%5D%5D%5D
-
-script-providers:
-  "body_rewrite_12_12":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
+  body-rewrite:
+    - >-
+      ^https:\/\/(m|www)\.kookapp\.cn\/api\/v\d\/user\/settings$ response-jq delpaths([["ad_banner"]])
+    - >-
+      ^https:\/\/(m|www)\.kookapp\.cn\/api\/v\d\/user\/settings$ response-jq delpaths([["advertise_on_off"]])
+    - >-
+      ^https:\/\/(m|www)\.kookapp\.cn\/api\/v\d\/user\/settings$ response-jq if (getpath([]) | has("ios_mall_switch")) then (setpath(["ios_mall_switch"]; false)) else . end
 

@@ -130,18 +130,7 @@ http:
     - >-
       ^https:\/\/cgate\.zhaopin\.com\/bdp\/commercial\/queryLinkData$ - reject
 
-  script:
-    - match: ^https:\/\/ask\.zhaopin\.com\/plat-zqa-server\/home\/\d\.\d\.\d\/getHomeContents\?
-      name: "body_rewrite_108_108"
-      type: response
-      require-body: true
-      max-size: -1
-      timeout: 30
-      argument: |-
-        %5B%5B%22json-del%22%2C%5B%22data.templates%5B0%5D.data.banner%22%5D%5D%5D
-
-script-providers:
-  "body_rewrite_108_108":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js
-    interval: 86400
+  body-rewrite:
+    - >-
+      ^https:\/\/ask\.zhaopin\.com\/plat-zqa-server\/home\/\d\.\d\.\d\/getHomeContents\? response-jq delpaths([["data","templates",0,"data","banner"]])
 
