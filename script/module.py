@@ -268,14 +268,12 @@ def process_file(
             request_url = (
                 f"{request_url}&target=surge-module&sni=REJECT&pm=REJECT&jqEnabled=true"
             )
-        elif file_ext == "module":
-            request_url = f"{request_url}&target=shadowrocket-module"
         else:
             request_url = f"{request_url}&target=stash-stoverride&jqEnabled=true"
 
         content = get_url_text_content(request_url)
         if content != None:
-            if file_ext != "stoverride":
+            if file_ext == "sgmodule":
                 if filename == "Bilibili_remove_ads.plugin":
                     content = modify_content_bilibili(content)
 
@@ -311,7 +309,7 @@ def process_file(
 ###############################################################################
 
 if __name__ == "__main__":
-    for file_ext in ["sgmodule", "module", "stoverride"]:
+    for file_ext in ["sgmodule", "stoverride"]:
         dst_dir = os.path.join(current_dir, file_ext)
         recreate_path(dst_dir)
         process_file(
