@@ -228,9 +228,6 @@ def modify_content_bilibili(lines: list[str]):
             lines[i] = f"# {lines[i]}"
         # 注释移除热搜广告
         lines[i] = lines[i].replace("|v2\\/search\\/square|", "|")
-        # 注释精简我的页面，非会员开启会员专属清晰度
-        if lines[i].find("account") != -1:
-            lines[i] = f"# {lines[i]}"
         # 注释移除热门话题
         lines[i] = lines[i].replace("|show\\.v1\\.Popular\\/Index|", "|")
         # 注释移除交互式弹幕
@@ -277,7 +274,7 @@ def process_file(filename: str):
         lines = modify_content_bilibili(lines)
     elif filename.endswith("Zhihu_remove_ads.plugin"):
         lines = modify_content_zhihu(lines)
-        
+
     data: dict[str, str] = {}
     for key, sub_data in extract_components(lines).items():
         str_tmp = f"{key}\n" if key != "title" else ""
