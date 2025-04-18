@@ -226,6 +226,9 @@ def modify_content_bilibili(lines: list[str]):
         # 注释精简首页顶部标签
         if lines[i].find("resource\\/show\\/tab\\/v2") != -1:
             lines[i] = f"# {lines[i]}"
+        # 注释精简我的页面
+        if lines[i].find("account\\/mine") != -1:
+            lines[i] = f"# {lines[i]}"
         # 注释移除热搜广告
         lines[i] = lines[i].replace("|v2\\/search\\/square|", "|")
         # 注释移除热门话题
