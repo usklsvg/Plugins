@@ -1,9 +1,9 @@
 name: |-
   京东比价
 desc: |-
-  需在商品详情页面查看比价内容
+  首次使用需安装慢慢买应用，之后点击进入[我的]页面以捕获Cookie，捕获成功后方可在商品详情页面查看比价内容。
 author: |-
-  小白脸
+  wf021325[https://github.com/wf021325],githubdulong[https://github.com/githubdulong],mw418[https://github.com/mw418]
 icon: |-
   https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/JD.png
 category: |-
@@ -17,22 +17,29 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-04-12 22:50:31
+  2025-04-22 00:22:22
 
 http:
 
   mitm:
     - "in.m.jd.com"
+    - "apapia-sqk-weblogic.manmanbuy.com"
 
   script:
-    - match: ^https:\/\/in\.m\.jd\.com\/product\/graphext\/\d+\.html
-      name: "京东比价_12"
+    - match: ^https?:\/\/apapia-sqk-weblogic\.manmanbuy\.com\/baoliao\/center\/menu$
+      name: "捕获令牌_12"
+      type: response
+      require-body: true
+      timeout: 10
+
+    - match: ^https?:\/\/in\.m\.jd\.com\/product\/graphext\/\d+\.html
+      name: "捕获令牌_12"
       type: response
       require-body: true
       timeout: 10
 
 script-providers:
-  "京东比价_12":
+  "捕获令牌_12":
     url: https://kelee.one/Resource/Script/JD/JD_Price.js
     interval: 86400
 
