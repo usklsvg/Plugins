@@ -15,7 +15,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-04-02 21:18:09
+  2025-04-22 14:25:47
 
 rules:
   - DOMAIN,yyapp-httpdns.gslb.yy.com,REJECT
@@ -29,6 +29,7 @@ rules:
   - DOMAIN,dns.weixin.qq.com,REJECT
   - DOMAIN,dns.weixin.qq.com.cn,REJECT
   - DOMAIN,aedns.weixin.qq.com,REJECT
+  - DOMAIN,paydns.wechatpay.cn,REJECT
   - IP-CIDR,39.156.140.30/32,REJECT,no-resolve
   - IP-CIDR,39.156.140.47/32,REJECT,no-resolve
   - IP-CIDR,39.156.140.245/32,REJECT,no-resolve
@@ -115,6 +116,7 @@ rules:
   - DOMAIN,apidns.kwd.inkuai.com,REJECT
   - DOMAIN,apidns-js.kwd.inkuai.com,REJECT
   - DOMAIN,httpdns.meituan.com,REJECT
+  - DOMAIN,httpdnsmultiapivip.meituan.com,REJECT
   - DOMAIN,httpdns.music.163.com,REJECT
   - DOMAIN,httpdns.n.netease.com,REJECT
   - DOMAIN,httpdns-sdk.n.netease.com,REJECT

@@ -1,7 +1,7 @@
 name: |-
   KOOK去广告
 desc: |-
-  移除房间横幅推广、精简我的页面，移除底栏商城入口。
+  移除开屏广告、房间横幅推广、精简我的页面，移除底栏商城入口。
 author: |-
   可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
 icon: |-
@@ -17,13 +17,17 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2024-12-13 06:49:26
+  2025-04-22 14:14:26
 
 http:
 
   mitm:
     - "m.kookapp.cn"
     - "www.kookapp.cn"
+
+  url-rewrite:
+    - >-
+      ^https:\/\/www\.kookapp\.cn\/api\/v3\/ad\/config$ - reject-dict
 
   body-rewrite:
     - >-

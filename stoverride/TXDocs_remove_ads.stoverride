@@ -1,0 +1,33 @@
+name: |-
+  腾讯文档去广告
+desc: |-
+  移除开屏广告、首页横幅推广。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/TXDocs.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id1370780836
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://github.com/luestr/ProxyResource/blob/main/README.md
+date: |-
+  2025-04-22 13:21:28
+
+http:
+
+  mitm:
+    - "tianshu.qq.com"
+    - "h5.qzone.qq.com"
+
+  url-rewrite:
+    - >-
+      ^https:\/\/tianshu\.qq\.com\/open\/ts_access\/GetAds\? - reject-dict
+    - >-
+      ^https:\/\/h5\.qzone\.qq\.com\/p\/adboss\/api\/json\/ts_access\/GetAds$ - reject-dict
+
