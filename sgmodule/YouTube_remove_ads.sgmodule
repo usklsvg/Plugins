@@ -8,7 +8,7 @@
 #!system_version=15
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2025-03-30 17:34:38
+#!date=2025-04-25 23:32:42
 #!arguments=blockImmersive, blockShorts, blockUpload, captionLang, debug, lyricLang
 
 [Rule]
@@ -16,7 +16,7 @@ AND,((DOMAIN-SUFFIX,googlevideo.com,extended-matching),(PROTOCOL,QUIC)),REJECT
 AND,((DOMAIN-SUFFIX,youtubei.googleapis.com,extended-matching),(PROTOCOL,QUIC)),REJECT
 
 [Map Local]
-^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad data-type=text data="" status-code=502 header="Content-Type:text/plain"
+^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad data-type=text data=" " status-code=200
 
 [Script]
 YouTube去广告 = type=http-response, pattern=^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch), script-path=https://kelee.one/Resource/Script/YouTube/YouTube_remove_ads/YouTube_remove_ads_response.js, requires-body=true, binary-body-mode=true, argument=blockUpload="{{{blockUpload}}}"&blockShorts="{{{blockShorts}}}"&blockImmersive="{{{blockImmersive}}}"&captionLang="{{{captionLang}}}"&lyricLang="{{{lyricLang}}}"&debug="{{{debug}}}", script-update-interval=-1
