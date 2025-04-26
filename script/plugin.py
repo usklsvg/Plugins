@@ -260,6 +260,12 @@ def modify_content_zhihu(lines: list[str]):
             != -1
         ):
             lines[i] = f"# {lines[i]}"
+        # 每周必看
+        lines[i] = lines[i].replace(
+            "next-(?:bff|data|render) ",
+            "next-(?:bff|data|render(?!.*sub_scenes=billboard_weekly)) ",
+        )
+
         i += 1
     return lines
 

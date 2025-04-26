@@ -170,22 +170,6 @@ def modify_content_common(content: str, file_ext: str):
     return ret
 
 
-def modify_content_amap(content: str):
-    lines = content.splitlines()
-    i = 0
-    while i < len(lines):
-        if lines[i].find("search\\/sp") != -1:
-            lines[i] = lines[i].replace("|search\\/sp|", "|")
-        i += 1
-
-    ret = ""
-    i = 0
-    while i < len(lines):
-        ret += f"{lines[i]}\n"
-        i += 1
-    return ret
-
-
 def modify_content_bilibili(content: str):
     lines = content.splitlines()
 
@@ -240,14 +224,6 @@ def modify_content_zhihu(content: str):
             "https://kelee.one/Resource/Script/Zhihu/Zhihu_remove_ads.js",
             "https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/Zhihu_remove_ads.js",
         )
-        if lines[i].find("next-(?:bff|data|render)") != -1:
-            temp = lines[i]
-            temp_0 = temp.replace("next-(?:bff|data|render)", "next-(?:bff|data)")
-            temp_1 = temp.replace(
-                "next-(?:bff|data|render)",
-                "next-render(?!.*sub_scenes=billboard_weekly)",
-            )
-            lines[i] = f"{temp_0}\n\n{temp_1}"
         i += 1
 
     ret = ""
@@ -279,8 +255,6 @@ def process_file(
 
                 content = modify_content_common(content, file_ext)
 
-                if filename == "Amap_remove_ads.plugin":
-                    content = modify_content_amap(content)
                 if filename == "Taobao_remove_ads.plugin":
                     content = modify_content_taobao(content)
                 if filename == "Zhihu_remove_ads.plugin":
