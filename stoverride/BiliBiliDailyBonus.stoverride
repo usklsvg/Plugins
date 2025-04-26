@@ -14,11 +14,11 @@ homepage: |-
 http:
 
   mitm:
-    - "app.bilibili.com"
+    - "cm.bilibili.com"
     - "m.bilibili.com"
 
   script:
-    - match: ^https?:\/\/app\.bilibili\.com\/x\/resource\/fingerprint\?
+    - match: ^https?:\/\/cm\.bilibili\.com\/cm\/api\/fees\/wise$
       name: "B站每日等级任务_14"
       type: request
 
