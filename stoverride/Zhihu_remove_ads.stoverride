@@ -121,7 +121,7 @@ http:
       type: response
       require-body: true
 
-    - match: ^https:\/\/api\.zhihu\.com\/next-(?:bff|data|render)
+    - match: ^https:\/\/api\.zhihu\.com\/next-(?:bff|data|render(?!.*sub_scenes=billboard_weekly))
       name: "移除回答底部卡片推广_50"
       type: response
       require-body: true
