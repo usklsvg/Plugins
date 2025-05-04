@@ -21,6 +21,11 @@ date: |-
 
 http:
 
+  mitm:
+    - "aliyun.example.com"
+    - "quark.example.com"
+    - "pikpak.example.com"
+
   script:
     - match: ^http:\/\/(aliyun|quark|pikpak)\.example\.com
       name: "三合一网盘挂载_12"

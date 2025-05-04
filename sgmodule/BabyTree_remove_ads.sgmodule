@@ -23,3 +23,6 @@ URL-REGEX,"^http:\/\/plough\.babytree\.com\/plough\.do",REJECT-TINYGIF,extended-
 
 移除搜索列表推广 = type=http-response, pattern=^http:\/\/go\.babytree\.com\/go_search\/api\/mobile_search_new\/search_index, script-path=https://kelee.one/Resource/Script/BabyTree/BabyTree_remove_ads.js, requires-body=true, script-update-interval=-1
 
+[MITM]
+hostname = %APPEND% api.babytree.com, go.babytree.com
+

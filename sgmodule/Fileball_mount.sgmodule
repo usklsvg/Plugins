@@ -12,3 +12,6 @@
 [Script]
 三合一网盘挂载 = type=http-request, pattern=^http:\/\/(aliyun|quark|pikpak)\.example\.com, script-path=https://kelee.one/Resource/Script/Fileball/Fileball_mount.js, requires-body=true, script-update-interval=-1
 
+[MITM]
+hostname = %APPEND% aliyun.example.com, quark.example.com, pikpak.example.com
+

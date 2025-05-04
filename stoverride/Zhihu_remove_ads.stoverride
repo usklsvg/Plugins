@@ -33,7 +33,13 @@ rules:
 http:
 
   mitm:
-    - "*.zhihu.com"
+    - "api.zhihu.com"
+    - "appcloud2.zhihu.com"
+    - "link.zhihu.com"
+    - "m-cloud.zhihu.com"
+    - "page-info.zhihu.com"
+    - "www.zhihu.com"
+    - "zhuanlan.zhihu.com"
 
   url-rewrite:
     - >-

@@ -21,6 +21,10 @@ date: |-
 
 http:
 
+  mitm:
+    - "api.babytree.com"
+    - "go.babytree.com"
+
   url-rewrite:
     - >-
       ^http:\/\/go\.babytree\.com\/go_pregnancy\/api\/(index_activity\/get_app_index_activity|sign\/sign_h_5)\? - reject-dict

@@ -19,6 +19,11 @@ homepage: |-
 date: |-
   2024-11-28 00:00:00
 
+http:
+
+  mitm:
+    - "api.follow.is"
+
 cron:
   script:
     - name: "Follow每日签到_16"

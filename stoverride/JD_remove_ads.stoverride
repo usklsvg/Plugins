@@ -17,11 +17,10 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-04-25 21:39:21
+  2025-05-04 17:30:01
 
 rules:
   - DOMAIN,dns.jd.com,REJECT
-  - AND,((PROTOCOL,TCP),(DOMAIN,api.m.jd.com)),REJECT-NO-DROP
   - IP-CIDR,101.124.19.122/32,REJECT,no-resolve
   - IP-CIDR6,2402:db40:5100:1011::5/128,REJECT,no-resolve
 
@@ -46,12 +45,12 @@ http:
 
   script:
     - match: ^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=(deliverLayer|getTabHomeInfo|myOrderInfo|orderTrackBusiness|personinfoBusiness|start|welcomeHome)
-      name: "移除京东广告_21"
+      name: "移除京东广告_20"
       type: response
       require-body: true
 
 script-providers:
-  "移除京东广告_21":
+  "移除京东广告_20":
     url: https://kelee.one/Resource/Script/JD/JD_remove_ads.js
     interval: 86400
 

@@ -1,7 +1,7 @@
 name: |-
   哔哩哔哩去广告
 desc: |-
-  过滤哔哩哔哩广告、移除青少年模式弹窗和交互式弹幕、移除无用功能和链接跟踪参数。此插件仅建议iOS 15以上设备使用，且必须启用MitM-over-HTTP/2功能。
+  过滤哔哩哔哩广告、移除青少年模式弹窗和交互式弹幕、移除无用功能和链接跟踪参数，增加空降助手以便跳过视频中插入的广告。此插件仅建议iOS 15以上设备使用，且必须启用MitM-over-HTTP/2功能。\n空降助手是第三方提供的功能，依赖于Android版空降助手的服务器数据运作，可能会存在不准确或者失效的问题，此功能与哔哩哔哩官方无关。
 author: |-
   Maasea[https://github.com/Maasea],kokoryh[https://github.com/kokoryh],RuCu6[https://github.com/RuCu6],可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
 icon: |-
@@ -21,7 +21,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-04-25 23:12:32
+  2025-05-04 18:22:02
 
 rules:
   - DOMAIN,api.biliapi.com,REJECT
@@ -69,21 +69,33 @@ http:
 
   script:
     - match: ^https:\/\/api\.bilibili\.com\/pgc\/activity\/deliver\/material\/receive\?
-      name: "echoResponse_25"
+      name: "echoResponse_27"
       type: request
       timeout: 60
       argument: |-
         text=%7B%22code%22%3A0%2C%22data%22%3A%7B%22closeType%22%3A%22close_win%22%2C%22container%22%3A%5B%5D%2C%22showTime%22%3A%22%22%7D%2C%22message%22%3A%22success%22%7D&status-code=200
 
     - match: ^https:\/\/ap[ip]\.bilibili\.com\/x\/(?:resource\/(?:top\/activity|patch\/tab)|vip\/ads\/materials)\?
-      name: "echoResponse_25"
+      name: "echoResponse_27"
       type: request
       timeout: 60
       argument: |-
         text=%7B%22code%22%3A-404%2C%22message%22%3A%22-404%22%2C%22ttl%22%3A1%2C%22data%22%3Anull%7D&status-code=200
 
+    - match: ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.playerunite\.v1\.Player\/PlayViewUnite$
+      name: "空降助手自动版_38"
+      type: request
+      require-body: true
+      binary-mode: true
+
+    - match: ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.community\.service\.dm\.v1\.DM\/DmSegMobile$
+      name: "空降助手自动版_38"
+      type: request
+      require-body: true
+      binary-mode: true
+
     - match: ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(?:app\.(?:interface\.v1\.(?:Teenagers\/ModeStatus|Search\/DefaultWords)|dynamic\.v2\.Dynamic\/DynAll|view(?:unite)?\.v1\.View\/(?:View|ViewProgress|TFInfo|RelatesFeed)|playurl\.v1\.PlayURL\/PlayView|playerunite\.v1\.Player\/PlayViewUnite)|polymer\.app\.search\.v1\.Search\/SearchAll|main\.community\.reply\.v1\.Reply\/MainList|pgc\.gateway\.player\.v2\.PlayURL\/PlayView)$
-      name: "Proto处理_36"
+      name: "Proto处理_40"
       type: response
       require-body: true
       binary-mode: true
@@ -91,10 +103,13 @@ http:
         [{showUpList}, {filterTopReplies}]
 
 script-providers:
-  "echoResponse_25":
+  "echoResponse_27":
     url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/echo-response.js
     interval: 86400
-  "Proto处理_36":
+  "空降助手自动版_38":
+    url: https://raw.githubusercontent.com/kokoryh/Sparkle/refs/heads/master/dist/bilibili.airborne.js
+    interval: 86400
+  "Proto处理_40":
     url: https://kelee.one/Resource/Script/Bilibili/Bilibili_proto_kokoryh.js
     interval: 86400
 
