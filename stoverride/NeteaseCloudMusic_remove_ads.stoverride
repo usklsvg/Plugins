@@ -3,7 +3,7 @@ name: |-
 desc: |-
   过滤网易云音乐广告，并允许自定义界面。
 author: |-
-  RuCu6[https://github.com/RuCu6],Keywos[https://github.com/Keywos]
+  RuCu6[https://github.com/RuCu6], Keywos[https://github.com/Keywos]
 icon: |-
   https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/NeteaseCloudMusic.png
 category: |-
