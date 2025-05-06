@@ -28,7 +28,7 @@ http:
   script:
     - match: ^https?:\/\/apapia-sqk-weblogic\.manmanbuy\.com\/baoliao\/center\/menu$
       name: "捕获令牌_12"
-      type: response
+      type: request
       require-body: true
       timeout: 10
 
