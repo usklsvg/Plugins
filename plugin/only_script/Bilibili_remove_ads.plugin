@@ -17,9 +17,9 @@ enableAirborne = switch, "false", "true", tag = 空降助手自动版, desc = �
 enableAirborneDm = switch, "false", "true", tag = 空降助手弹幕版, desc = 弹幕版仅限iPad版开启
 
 [Script]
-http-request ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.playerunite\.v1\.Player\/PlayViewUnite$ script-path = https://raw.githubusercontent.com/kokoryh/Sparkle/refs/heads/master/dist/bilibili.airborne.js,  requires-body = true, binary-body-mode = true, enable = {enableAirborne}, tag = 空降助手自动版
+http-request ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.playerunite\.v1\.Player\/PlayViewUnite$ script-path = https://raw.githubusercontent.com/kokoryh/Sparkle/refs/heads/master/dist/bilibili.airborne.js, requires-body = true, binary-body-mode = true, enable = {enableAirborne}, tag = 空降助手自动版
 
-http-request ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.community\.service\.dm\.v1\.DM\/DmSegMobile$ script-path = https://raw.githubusercontent.com/kokoryh/Sparkle/refs/heads/master/dist/bilibili.airborne.js,  requires-body = true, binary-body-mode = true, enable = {enableAirborneDm}, tag = 空降助手弹幕版
+http-request ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.community\.service\.dm\.v1\.DM\/DmSegMobile$ script-path = https://raw.githubusercontent.com/kokoryh/Sparkle/refs/heads/master/dist/bilibili.airborne.js, requires-body = true, binary-body-mode = true, enable = {enableAirborneDm}, tag = 空降助手弹幕版
 
 http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(?:app\.(?:interface\.v1\.(?:Teenagers\/ModeStatus|Search\/DefaultWords)|dynamic\.v2\.Dynamic\/DynAll|view(?:unite)?\.v1\.View\/(?:View|ViewProgress|TFInfo|RelatesFeed)|playurl\.v1\.PlayURL\/PlayView|playerunite\.v1\.Player\/PlayViewUnite)|polymer\.app\.search\.v1\.Search\/SearchAll|main\.community\.reply\.v1\.Reply\/MainList|pgc\.gateway\.player\.v2\.PlayURL\/PlayView)$ script-path = https://kelee.one/Resource/Script/Bilibili/Bilibili_proto_kokoryh.js, requires-body = true, binary-body-mode = true, argument = [{showUpList}, {filterTopReplies}], tag = Proto处理
 
