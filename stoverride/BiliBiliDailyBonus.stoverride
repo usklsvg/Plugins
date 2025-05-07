@@ -14,26 +14,21 @@ homepage: |-
 http:
 
   mitm:
-    - "cm.bilibili.com"
-    - "m.bilibili.com"
+    - "app.bilibili.com"
 
   script:
-    - match: ^https?:\/\/cm\.bilibili\.com\/cm\/api\/fees\/wise$
-      name: "B站每日等级任务_17"
-      type: request
-
-    - match: ^https?:\/\/m.bilibili.com/$
-      name: "B站每日等级任务_17"
+    - match: ^https?:\/\/app\.bilibili\.com\/x\/resource\/fingerprint\?
+      name: "B站每日等级任务_18"
       type: request
 
 cron:
   script:
 # BiliBili每日等级任务
-    - name: "B站每日等级任务_17"
+    - name: "B站每日等级任务_18"
       cron: 30 7 * * *
 
 script-providers:
-  "B站每日等级任务_17":
+  "B站每日等级任务_18":
     url: https://raw.githubusercontent.com/ClydeTime/BiliBili/main/js/BiliBiliDailyBonus.js
     interval: 86400
 

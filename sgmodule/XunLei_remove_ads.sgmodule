@@ -85,7 +85,7 @@ DOMAIN,janapi.jd.com,REJECT,extended-matching,pre-matching
 DOMAIN,et.tanx.com,REJECT,extended-matching,pre-matching
 
 [Map Local]
-^https:\/\/api-shoulei-ssl\.xunlei\.com\/flowhub\/v1\/slots:batchGet$ data-type=text data="{}" status-code=200
+^https:\/\/api-shoulei-ssl\.xunlei\.com\/flowhub\/v1\/slots:batchGet$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 [Script]
 精简我的页面 = type=http-response, pattern=^https:\/\/conf-m-ssl\.xunlei\.com\/external\/, script-path=https://kelee.one/Resource/Script/XunLei/XunLei_remove_ads.js, requires-body=true, script-update-interval=-1

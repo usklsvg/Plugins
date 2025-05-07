@@ -24,13 +24,13 @@ http-response-jq ^https:\/\/fm\.missevan\.com\/api\/v\d\/chatroom\/sound\/recomm
 http-response-jq ^https:\/\/app\.missevan\.com\/site\/icons\? '.info.icons |= (if . == null then null else map(select(.title != "直播" and .title != "周边商城")) end)'
 
 [Map Local]
-^https:\/\/fm\.missevan\.com\/api\/v\d\/chatroom\/open\/search-recommend-list$ data-type=text data="{}" status-code=200
+^https:\/\/fm\.missevan\.com\/api\/v\d\/chatroom\/open\/search-recommend-list$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
-^https:\/\/app\.missevan\.com\/sound\/recommend\? data-type=text data="{}" status-code=200
+^https:\/\/app\.missevan\.com\/sound\/recommend\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
-^https:\/\/app\.missevan\.com\/drama\/get-recommend-by-id\? data-type=text data="{}" status-code=200
+^https:\/\/app\.missevan\.com\/drama\/get-recommend-by-id\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
-^https:\/\/fm\.missevan\.com\/api\/v\d\/meta\/banner$ data-type=text data="{}" status-code=200
+^https:\/\/fm\.missevan\.com\/api\/v\d\/meta\/banner$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 [MITM]
 hostname = %APPEND% app.missevan.com, fm.missevan.com
