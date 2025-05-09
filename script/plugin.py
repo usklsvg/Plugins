@@ -322,6 +322,122 @@ def process_file(filename: str):
         save_content(content_scripts, output_filename_scripts)
 
 
+###############################################################################
+#
+# create DNS plugin
+#
+###############################################################################
+
+
+class TrieNode:
+    def __init__(self):
+        self.children: dict[str, TrieNode] = {}
+        self.end_of_word = False
+
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+
+    def insert(self, word: str):
+        node = self.root
+        for char in word:
+            if char not in node.children:
+                node.children[char] = TrieNode()
+            node = node.children[char]
+        node.end_of_word = True
+
+    def get_prefix(self) -> list[str]:
+        result: list[str] = []
+
+        def dfs(node, current_prefix: str):
+            if node.end_of_word:
+                result.append(current_prefix)
+            else:
+                for char, child in node.children.items():
+                    dfs(child, f"{current_prefix}{char}")
+
+        dfs(self.root, "")
+
+        return result
+
+
+def get_rules(url: str):
+    content = get_url_text_content(url)
+    rules = [item.strip() for item in content.split("\n") if item.startswith("D")]
+
+    ## get rules
+
+    domains: list[str] = []
+    domain_suffixs: list[str] = ["cn"]
+    domain_keywords: list[str] = []
+    for rule in rules:
+        items = [item for item in rule.split(",") if item.strip()]
+        if rule.startswith("DOMAIN,"):
+            domains.append(items[1])
+        elif rule.startswith("DOMAIN-SUFFIX,"):
+            domain_suffixs.append(items[1])
+        elif rule.startswith("DOMAIN-KEYWORD,"):
+            domain_keywords.append(items[1])
+
+    ## remove duplicate suffixs
+
+    temp_list = [
+        item
+        for item in domain_suffixs
+        if not any(keyword in item for keyword in domain_keywords)
+    ]
+    trie = Trie()
+    for suffix in temp_list:
+        reversed_suffix = suffix[::-1]
+        trie.insert(reversed_suffix)
+    domain_suffixs = sorted([item[::-1] for item in trie.get_prefix()])
+
+    ## remove duplicate suffixs
+
+    domains = [
+        domain
+        for domain in domains
+        if not any(keyword in domain for keyword in domain_keywords)
+    ]
+    domains = [
+        domain
+        for domain in domains
+        if not any(domain.endswith(suffix) for suffix in domain_suffixs)
+    ]
+
+    return domains, domain_suffixs, domain_keywords
+
+
+def create_dns_plugin():
+    url = "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ChinaDomain.list"
+    domains, domain_suffixs, domain_keywords = get_rules(url)
+
+    content_plugin = """#!name=Enhanced DNS
+#!desc=使用系统 DNS 解析内地常见域名
+#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
+#!category=DNS
+
+[Host]
+"""
+    for domain in domains:
+        content_plugin = f"{content_plugin}{domain} = server:system\n"
+
+    if len(domain_suffixs) > 0:
+        content_plugin = f"{content_plugin}\n"
+    for suffix in domain_suffixs:
+        content_plugin = f"{content_plugin}*.{suffix} = server:system\n"
+
+    if len(domain_keywords) > 0:
+        content_plugin = f"{content_plugin}\n"
+    for keyword in domain_keywords:
+        content_plugin = f"{content_plugin}*{keyword}* = server:system\n"
+
+    module_path = os.path.join(current_dir, "plugin", "raw", "Enhanced_DNS.plugin")
+    with open(module_path, "w", encoding="utf-8") as f:
+        f.write(content_plugin)
+
+
 if __name__ == "__main__":
     recreate_path(extern_script_dir)
     recreate_path(extern_jq_dir)
@@ -332,3 +448,4 @@ if __name__ == "__main__":
     recreate_path(plugin_only_script_dir)
     for filename in filenames:
         process_file(filename)
+    create_dns_plugin()
