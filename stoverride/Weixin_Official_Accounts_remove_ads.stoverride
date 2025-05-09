@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2024-11-28 00:00:00
+  2025-05-09 16:52:32
 
 rules:
   - DOMAIN-SUFFIX,wxs.qq.com,REJECT
@@ -30,4 +30,6 @@ http:
   url-rewrite:
     - >-
       ^https:\/\/mp\.weixin\.qq\.com\/mp\/(cps_product_info|getappmsgad|jsmonitor|masonryfeed|relatedarticle)\? - reject-dict
+    - >-
+      ^https:\/\/mp\.weixin\.qq\.com\/mp\/relatedsearchword - reject-dict
 
