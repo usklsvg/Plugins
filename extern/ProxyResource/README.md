@@ -60,7 +60,7 @@
     <th>名称</th>
   </tr>
   <tr>
-    <td rowspan="135"><strong>去广告插件</strong></td>
+    <td rowspan="136"><strong>去广告插件</strong></td>
   <tr>
     <td>001</td>
     <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Plugin/BlockAdvertisers.plugin">广告平台拦截器</a></td>
@@ -596,6 +596,10 @@
   <tr>
     <td>134</td>
     <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Plugin/CosmosPodcast_remove_ads.plugin">小宇宙去广告</a></td>
+  </tr>
+  <tr>
+    <td>135</td>
+    <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Plugin/DingdongMaicai_remove_ads.plugin">叮咚买菜去广告</a></td>
   </tr>
     <td></td>
     <td></td>
