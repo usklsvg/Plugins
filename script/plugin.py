@@ -333,26 +333,29 @@ class TrieNode:
     def __init__(self):
         self.children: dict[str, TrieNode] = {}
         self.end_of_word = False
+        self.valid = True
 
 
 class Trie:
     def __init__(self):
         self.root = TrieNode()
 
-    def insert(self, word: str):
+    def insert(self, word: str, valid: bool = True):
         node = self.root
         for char in word:
             if char not in node.children:
                 node.children[char] = TrieNode()
             node = node.children[char]
         node.end_of_word = True
+        node.valid = valid
 
     def get_prefix(self) -> list[str]:
         result: list[str] = []
 
         def dfs(node, current_prefix: str):
             if node.end_of_word:
-                result.append(current_prefix)
+                if node.valid:
+                    result.append(current_prefix)
             else:
                 for char, child in node.children.items():
                     dfs(child, f"{current_prefix}{char}")
@@ -362,35 +365,59 @@ class Trie:
         return result
 
 
-def get_rules(url: str):
-    content = get_url_text_content(url)
-    rules = [item.strip() for item in content.split("\n") if item.startswith("D")]
+class DomainRules:
+    def __init__(self):
+        self.domains: list[str] = []
+        self.domain_suffixs: list[str] = []
+        self.domain_keywords: list[str] = []
 
+
+def get_rules(predefined: DomainRules, url: str):
     ## get rules
 
     domains: list[str] = []
-    domain_suffixs: list[str] = ["cn"]
+    domain_suffixs: list[str] = []
     domain_keywords: list[str] = []
+
+    content = get_url_text_content(url)
+    rules = [item.strip() for item in content.split("\n") if item.startswith("D")]
     for rule in rules:
         items = [item for item in rule.split(",") if item.strip()]
         if rule.startswith("DOMAIN,"):
             domains.append(items[1])
         elif rule.startswith("DOMAIN-SUFFIX,"):
-            domain_suffixs.append(items[1])
+            domain_suffixs.append(f".{items[1]}")
         elif rule.startswith("DOMAIN-KEYWORD,"):
             domain_keywords.append(items[1])
+
+    ## remove duplicate keywords
+
+    domain_keywords = [
+        item
+        for item in domain_keywords
+        if not any(keyword in item for keyword in predefined.domain_keywords)
+    ]
 
     ## remove duplicate suffixs
 
     temp_list = [
-        item
-        for item in domain_suffixs
-        if not any(keyword in item for keyword in domain_keywords)
+        suffix
+        for suffix in domain_suffixs
+        if (
+            (not any(keyword in suffix for keyword in domain_keywords))
+            and (not any(keyword in suffix for keyword in predefined.domain_keywords))
+        )
     ]
     trie = Trie()
+
     for suffix in temp_list:
         reversed_suffix = suffix[::-1]
         trie.insert(reversed_suffix)
+
+    for suffix in predefined.domain_suffixs:
+        reversed_suffix = suffix[::-1]
+        trie.insert(reversed_suffix, False)
+
     domain_suffixs = sorted([item[::-1] for item in trie.get_prefix()])
 
     ## remove duplicate suffixs
@@ -398,39 +425,112 @@ def get_rules(url: str):
     domains = [
         domain
         for domain in domains
-        if not any(keyword in domain for keyword in domain_keywords)
+        if (
+            (not any(keyword in domain for keyword in domain_keywords))
+            and (not any(keyword in domain for keyword in predefined.domain_keywords))
+        )
     ]
     domains = [
         domain
         for domain in domains
-        if not any(domain.endswith(suffix) for suffix in domain_suffixs)
+        if (
+            (not any(domain.endswith(suffix) for suffix in domain_suffixs))
+            and (
+                not any(domain.endswith(suffix) for suffix in predefined.domain_suffixs)
+            )
+        )
     ]
 
-    return domains, domain_suffixs, domain_keywords
+    current_rules = DomainRules()
+    current_rules.domains = domains
+    current_rules.domain_suffixs = domain_suffixs
+    current_rules.domain_keywords = domain_keywords
+
+    return current_rules
 
 
 def create_dns_plugin():
-    url = "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ChinaDomain.list"
-    domains, domain_suffixs, domain_keywords = get_rules(url)
-
     content_plugin = """#!name=Enhanced DNS
-#!desc=使用系统 DNS 解析内地常见域名
+#!desc=使用系统 DNS 解析一部分苹果，微软，以及内地常见域名
 #!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
 #!category=DNS
 
 [Host]
 """
-    for domain in domains:
+
+    # 包含内地常见域名
+    rules_china = DomainRules()
+    rules_china.domain_suffixs = [".cdn-apple.com"]
+    rules_china = get_rules(
+        rules_china,
+        "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ChinaDomain.list",
+    )
+    for domain in rules_china.domains:
         content_plugin = f"{content_plugin}{domain} = server:system\n"
-
-    if len(domain_suffixs) > 0:
+    if len(rules_china.domain_suffixs) > 0:
         content_plugin = f"{content_plugin}\n"
-    for suffix in domain_suffixs:
-        content_plugin = f"{content_plugin}*.{suffix} = server:system\n"
-
-    if len(domain_keywords) > 0:
+    for suffix in rules_china.domain_suffixs:
+        content_plugin = f"{content_plugin}*{suffix} = server:system\n"
+    if len(rules_china.domain_keywords) > 0:
         content_plugin = f"{content_plugin}\n"
-    for keyword in domain_keywords:
+    for keyword in rules_china.domain_keywords:
+        content_plugin = f"{content_plugin}*{keyword}* = server:system\n"
+
+    # 不包含 AppleProxy
+    rules_china.domain_suffixs.append(".cdn-apple.com")
+    rules_apple_proxy = get_rules(
+        rules_china,
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/AppleProxy/AppleProxy.list",
+    )
+    rules_china.domain_suffixs.pop()
+    rules_apple_proxy.domains += rules_china.domains
+    rules_apple_proxy.domain_keywords += rules_china.domain_keywords
+    rules_apple_proxy.domain_suffixs += rules_china.domain_suffixs
+
+    # 包含 Apple
+    rules_apple = get_rules(
+        rules_apple_proxy,
+        "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Apple.list",
+    )
+    if len(rules_apple.domains) > 0:
+        content_plugin = f"{content_plugin}\n"
+    for domain in rules_apple.domains:
+        content_plugin = f"{content_plugin}{domain} = server:system\n"
+    if len(rules_apple.domain_suffixs) > 0:
+        content_plugin = f"{content_plugin}\n"
+    for suffix in rules_apple.domain_suffixs:
+        content_plugin = f"{content_plugin}*{suffix} = server:system\n"
+    if len(rules_apple.domain_keywords) > 0:
+        content_plugin = f"{content_plugin}\n"
+    for keyword in rules_apple.domain_keywords:
+        content_plugin = f"{content_plugin}*{keyword}* = server:system\n"
+
+    # 不包含 OneDrive
+    rules_onedrive = DomainRules()
+    rules_onedrive = get_rules(
+        rules_onedrive,
+        "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/OneDrive.list",
+    )
+    rules_onedrive.domains += rules_china.domains
+    rules_onedrive.domain_keywords += rules_china.domain_keywords
+    rules_onedrive.domain_suffixs += rules_china.domain_suffixs
+
+    # 包含 Microsoft
+    rules_ms = get_rules(
+        rules_onedrive,
+        "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Microsoft.list",
+    )
+    if len(rules_ms.domains) > 0:
+        content_plugin = f"{content_plugin}\n"
+    for domain in rules_ms.domains:
+        content_plugin = f"{content_plugin}{domain} = server:system\n"
+    if len(rules_ms.domain_suffixs) > 0:
+        content_plugin = f"{content_plugin}\n"
+    for suffix in rules_ms.domain_suffixs:
+        content_plugin = f"{content_plugin}*{suffix} = server:system\n"
+    if len(rules_ms.domain_keywords) > 0:
+        content_plugin = f"{content_plugin}\n"
+    for keyword in rules_ms.domain_keywords:
         content_plugin = f"{content_plugin}*{keyword}* = server:system\n"
 
     module_path = os.path.join(current_dir, "plugin", "raw", "Enhanced_DNS.plugin")
