@@ -15,7 +15,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-05-06 02:31:58
+  2025-05-10 02:46:59
 
 rules:
   - DOMAIN,yyapp-httpdns.gslb.yy.com,REJECT
@@ -142,7 +142,7 @@ rules:
 http:
 
   mitm:
-    - "119.29.29.29"
+    - "119.29.29.*"
     - "203.107.1.1"
     - "203.107.1.33"
     - "203.107.1.66"
@@ -234,7 +234,7 @@ http:
     - >-
       ^http:\/\/103\.41\.167\.237\/v2\/resolv - reject
     - >-
-      ^https?:\/\/119\.29\.29\.29\/d - reject
+      ^https?:\/\/119\.29\.29\.\d+\/d - reject-200
     - >-
       ^https?:\/\/203\.107\.1\.1/\d+/ss - reject
     - >-

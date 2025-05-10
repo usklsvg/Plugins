@@ -15,7 +15,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2024-12-02 10:07:27
+  2025-05-10 03:30:00
 
 rules:
   - DOMAIN,acdn.adnxs.com,REJECT
@@ -202,7 +202,7 @@ http:
     - >-
       ^https?:\/\/us\.l\.qq\.com\/exapp - reject-200
     - >-
-      ^https:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/(explorePage\/getAdverList|init\/startInit) - reject
+      ^https:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/init\/startInit$ - reject
     - >-
       ^https:\/\/dict\.youdao\.com\/course\/tab\/translateTab - reject-dict
     - >-
