@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-05-10 03:16:28
+  2025-05-11 00:34:33
 
 rules:
   - AND,((URL-REGEX,"^http:\/\/.+\/amdc\/mobileDispatch"),(USER-AGENT,"Cainiao4iPhone*")),REJECT
@@ -64,6 +64,8 @@ http:
     - >-
       ^https:\/\/(?:cn-acs\.m|mtop-bff-mtop)\.cainiao\.com\/gw\/mtop\.cainiao\.nbpresentation\.(?:homepage\.merge|tabbar\.marketing)\.get\.cn - reject-dict
     - >-
+      ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.nbcps\.presentation\.fetch\.cn - reject-dict
+    - >-
       ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.com\.cainiao\.cnactivitycenter - reject-dict
     - >-
       ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.com\.cainiao\.cncreditmarket\.hit\.getactivityhit\.cn - reject-dict
@@ -74,37 +76,37 @@ http:
 
   script:
     - match: ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.app\.e2e\.engine\.page\.fetch\.cn
-      name: "移除新版我的页面推广_45"
+      name: "移除新版我的页面推广_46"
       type: response
       require-body: true
 
     - match: ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.app\.mine\.main\.cn
-      name: "移除新版我的页面推广_45"
+      name: "移除新版我的页面推广_46"
       type: response
       require-body: true
 
     - match: ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.nbpresentation\.(?:pickup\.empty\.page|protocol\.homepage)\.get\.cn
-      name: "移除新版我的页面推广_45"
+      name: "移除新版我的页面推广_46"
       type: response
       require-body: true
 
     - match: ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.nbfriend\.message\.conversation\.list\.cn
-      name: "移除新版我的页面推广_45"
+      name: "移除新版我的页面推广_46"
       type: response
       require-body: true
 
     - match: ^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.cainiao\.guoguo\.nbnetflow\.ads\.mshow
-      name: "移除新版我的页面推广_45"
+      name: "移除新版我的页面推广_46"
       type: response
       require-body: true
 
     - match: ^https:\/\/(?:cn-acs\.m|netflow-mtop)\.cainiao\.com\/gw\/mtop\.cainiao\.guoguo\.nbnetflow\.ads\.m?show\.cn
-      name: "移除新版我的页面推广_45"
+      name: "移除新版我的页面推广_46"
       type: response
       require-body: true
 
 script-providers:
-  "移除新版我的页面推广_45":
+  "移除新版我的页面推广_46":
     url: https://kelee.one/Resource/Script/Cainiao/Cainiao_remove_ads.js
     interval: 86400
 

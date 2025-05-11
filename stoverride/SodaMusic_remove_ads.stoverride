@@ -1,7 +1,7 @@
 name: |-
   汽水音乐去广告
 desc: |-
-  移除开屏广告、弹窗广告、播放器推广、歌曲详情界面视频推广，精简首页和我的页面。
+  移除开屏广告、弹窗广告、播放器推广、歌曲详情界面视频推广、播放页面的歌曲视频，精简首页和我的页面。
 author: |-
   可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
 icon: |-
@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2024-11-28 00:00:00
+  2025-05-11 01:31:09
 
 rules:
   - AND,((DOMAIN-KEYWORD,api100-core-quic-),(DOMAIN-SUFFIX,amemv.com)),REJECT
@@ -90,12 +90,23 @@ http:
   mitm:
     - "webcast-open.douyin.com"
     - "beta-luna.douyin.com"
+    - "api.qishui.com"
 
   url-rewrite:
     - >-
       ^http:\/\/p\d+-be-pack-sign\.pglstatp-toutiao\.com\/(ad-app-package|web\.business\.image)\/ - reject
     - >-
+      ^https:\/\/beta-luna\.douyin\.com\/luna\/commerce\/upsells_config\? - reject-dict
+    - >-
+      ^https:\/\/api\.qishui\.com\/luna\/ads\/config\? - reject-dict
+    - >-
       ^https:\/\/webcast-open\.douyin\.com\/webcast\/openapi\/feed\/\? - reject-dict
+    - >-
+      ^https:\/\/beta-luna\.douyin\.com\/luna\/treasure\/entrance\/config\? - reject-dict
+    - >-
+      ^https:\/\/beta-luna\.douyin\.com\/luna\/activities\? - reject-dict
+    - >-
+      ^https:\/\/beta-luna\.douyin\.com\/luna\/media_ads\? - reject-dict
     - >-
       ^https:\/\/beta-luna\.douyin\.com\/luna\/commerce\/upsells\? - reject-dict
     - >-
@@ -105,11 +116,13 @@ http:
     - >-
       ^https:\/\/beta-luna\.douyin\.com\/luna\/me\? response-jq delpaths([["reward_ad_banner"]])
     - >-
-      ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? response-jq if (getpath(["card_items",0]) | has("priority_display")) then (setpath(["card_items",0,"priority_display"]; false)) else . end
+      ^https:\/\/beta-luna\.douyin\.com\/luna\/me\/recently-played-media\? response-jq .media |= map(select(.type != "video"))
     - >-
-      ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? response-jq if (getpath(["card_items",0]) | has("is_show")) then (setpath(["card_items",0,"is_show"]; false)) else . end
+      ^https:\/\/beta-luna\.douyin\.com\/luna\/feed\/song-tab\? response-jq del(.items[] | select(.type == "video_track_mix"))
     - >-
-      ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? response-jq if (getpath([]) | has("preview_guide")) then (setpath(["preview_guide"]; null)) else . end
+      ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? response-jq delpaths([["preview_guide"]])
     - >-
-      ^https:\/\/beta-luna\.douyin\.com\/luna\/more-panel\? response-jq delpaths([["blocks",1]])
+      ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? response-jq del(.card_items[] | select(has("priority_display")))
+    - >-
+      ^https:\/\/beta-luna\.douyin\.com\/luna\/more-panel\? response-jq .blocks |= map(select(.type != "related_video"))
 

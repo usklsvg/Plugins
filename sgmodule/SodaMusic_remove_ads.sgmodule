@@ -1,5 +1,5 @@
 #!name=汽水音乐去广告
-#!desc=移除开屏广告、弹窗广告、播放器推广、歌曲详情界面视频推广，精简首页和我的页面。
+#!desc=移除开屏广告、弹窗广告、播放器推广、歌曲详情界面视频推广、播放页面的歌曲视频，精简首页和我的页面。
 #!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/SodaMusic.png
 #!category=iKeLee
@@ -7,7 +7,7 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-28 00:00:00
+#!date=2025-05-11 01:31:09
 
 [Rule]
 AND,((DOMAIN-KEYWORD,api100-core-quic-,extended-matching),(DOMAIN-SUFFIX,amemv.com,extended-matching)),REJECT,pre-matching
@@ -78,18 +78,29 @@ DOMAIN-KEYWORD,asiad.byteactivity,REJECT,extended-matching,pre-matching
 
 [Body Rewrite]
 http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/me\? 'delpaths([["reward_ad_banner"]])'
-http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? 'if (getpath(["card_items",0]) | has("priority_display")) then (setpath(["card_items",0,"priority_display"]; false)) else . end'
-http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? 'if (getpath(["card_items",0]) | has("is_show")) then (setpath(["card_items",0,"is_show"]; false)) else . end'
-http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? 'if (getpath([]) | has("preview_guide")) then (setpath(["preview_guide"]; null)) else . end'
-http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/more-panel\? 'delpaths([["blocks",1]])'
+http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/me\/recently-played-media\? '.media |= map(select(.type != "video"))'
+http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/feed\/song-tab\? 'del(.items[] | select(.type == "video_track_mix"))'
+http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? 'delpaths([["preview_guide"]])'
+http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? 'del(.card_items[] | select(has("priority_display")))'
+http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/more-panel\? '.blocks |= map(select(.type != "related_video"))'
 
 [Map Local]
+^https:\/\/beta-luna\.douyin\.com\/luna\/commerce\/upsells_config\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+^https:\/\/api\.qishui\.com\/luna\/ads\/config\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
 ^https:\/\/webcast-open\.douyin\.com\/webcast\/openapi\/feed\/\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+^https:\/\/beta-luna\.douyin\.com\/luna\/treasure\/entrance\/config\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+^https:\/\/beta-luna\.douyin\.com\/luna\/activities\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+^https:\/\/beta-luna\.douyin\.com\/luna\/media_ads\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 ^https:\/\/beta-luna\.douyin\.com\/luna\/commerce\/upsells\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 ^https:\/\/beta-luna\.douyin\.com\/luna\/commerce\/v2\/commerce_info\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 [MITM]
-hostname = %APPEND% webcast-open.douyin.com, beta-luna.douyin.com
+hostname = %APPEND% webcast-open.douyin.com, beta-luna.douyin.com, api.qishui.com
 
