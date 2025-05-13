@@ -17,10 +17,9 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-03-06 14:59:35
+  2025-05-13 15:17:08
 
 rules:
-  - DOMAIN,hd.xiaojukeji.com,REJECT
   - DOMAIN,gwp.xiaojukeji.com,REJECT
   - AND,((IP-ASN,45090,no-resolve),(DEST-PORT,25641),(PROTOCOL,TCP)),REJECT
   - AND,((IP-ASN,63646,no-resolve),(DEST-PORT,25641),(PROTOCOL,TCP)),REJECT

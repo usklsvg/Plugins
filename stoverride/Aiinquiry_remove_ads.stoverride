@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2024-11-28 00:00:00
+  2025-05-13 15:17:08
 
 http:
 
@@ -25,8 +25,6 @@ http:
     - "aiqicha.baidu.com"
 
   url-rewrite:
-    - >-
-      ^http:\/\/180\.76\.76\.112\/v\d\/ - reject
     - >-
       ^https:\/\/aiqicha\.baidu\.com\/app\/bannerPicAjax - reject-dict
     - >-

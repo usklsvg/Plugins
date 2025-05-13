@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2024-11-28 00:00:00
+  2025-05-13 15:17:08
 
 http:
 
@@ -25,10 +25,6 @@ http:
     - "manga.bilibili.com"
 
   url-rewrite:
-    - >-
-      ^http:\/\/203\.107\.1\.33\/191607\/resolve\? - reject
-    - >-
-      ^http:\/\/119\.29\.29\.29\/d - reject
     - >-
       ^https:\/\/manga\.bilibili\.com\/twirp\/comic\.v\d\.Comic\/GetActivityTab - reject-dict
     - >-
@@ -52,17 +48,17 @@ http:
 
   script:
     - match: ^https:\/\/manga\.bilibili\.com\/twirp\/comic\.v\d\.Comic\/GetClassPageAllTabs
-      name: "移除顶部标签_27"
+      name: "移除顶部标签_24"
       type: response
       require-body: true
 
     - match: ^https:\/\/manga\.bilibili\.com\/twirp\/user\.v\d\.User\/UCenterConf
-      name: "移除顶部标签_27"
+      name: "移除顶部标签_24"
       type: response
       require-body: true
 
 script-providers:
-  "移除顶部标签_27":
+  "移除顶部标签_24":
     url: https://kelee.one/Resource/Script/BiliComic/BiliComic_remove_ads.js
     interval: 86400
 

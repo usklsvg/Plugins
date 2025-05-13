@@ -17,11 +17,9 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2024-11-28 00:00:00
+  2025-05-13 15:17:08
 
 rules:
-  - IP-CIDR,119.29.29.98/32,REJECT,no-resolve
-  - IP-CIDR,119.29.29.99/32,REJECT,no-resolve
   - AND,((DEST-PORT,18000),(PROTOCOL,STUN)),REJECT
   - DOMAIN,stun1.douyucdn.cn,REJECT
   - DOMAIN,stun1.qvb.qcloud.com,REJECT
@@ -34,10 +32,6 @@ http:
     - "venus.douyucdn.cn"
 
   url-rewrite:
-    - >-
-      ^http:\/\/203\.107\.1\.33\/\d+\/ss - reject
-    - >-
-      ^http:\/\/203\.107\.1\.34\/\d+\/ss - reject
     - >-
       ^http:\/\/linkmicschedule\.douyucdn\.cn\/im_schedule\/im_gate_list - reject
     - >-
@@ -65,12 +59,12 @@ http:
 
   script:
     - match: ^https:\/\/apiv2\.douyucdn\.cn\/mgapi\/livenc\/home\/getRecV3
-      name: "移除首页轮播图和视频流广告_26"
+      name: "移除首页轮播图和视频流广告_22"
       type: response
       require-body: true
 
 script-providers:
-  "移除首页轮播图和视频流广告_26":
+  "移除首页轮播图和视频流广告_22":
     url: https://kelee.one/Resource/Script/Douyu/Douyu_remove_ads.js
     interval: 86400
 
