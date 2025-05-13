@@ -8,7 +8,7 @@
 #!loon_version = 3.2.4(787)
 #!homepage = https://github.com/luestr/ProxyResource/blob/main/README.md
 #!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Uki.png
-#!date = 2024-11-28 00:00:00
+#!date = 2025-05-13 15:17:08
 
 [Script]
 http-response ^https:\/\/api\.chenlongtech\.cn\/v\d\/lover\/productList script-path = https://kelee.one/Resource/Script/Uki/Uki_remove_ads.js, requires-body = true, tag = 移除匹配卡横幅
@@ -20,4 +20,4 @@ http-response ^https:\/\/api\.chenlongtech\.cn\/v\d\/party\/config$ script-path 
 http-response ^https:\/\/api\.chenlongtech\.cn\/v1\/post\/fetchSearchRecommend$ script-path = https://kelee.one/Resource/Script/Uki/Uki_remove_ads.js, requires-body = true, tag = 移除广场搜索填充词
 
 [MitM]
-hostname = api.chenlongtech.cn, 203.107.1.1, 203.107.1.33, 203.107.1.66, 203.107.1.67, 203.107.1.97, 2401:b180:2000:30::1c, 2401:b180:2000:20::10
+hostname = api.chenlongtech.cn
