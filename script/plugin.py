@@ -237,6 +237,9 @@ def modify_content_bilibili(lines: list[str]):
         lines[i] = lines[i].replace(
             "|community\\.service\\.dm\\.v1\\.DM\\/DmView|", "|"
         )
+        # 注释空降助手
+        if lines[i].find("Bilibili_airborne_kokoryh") != -1:
+            lines[i] = f"# {lines[i]}"
 
         i += 1
     return lines
