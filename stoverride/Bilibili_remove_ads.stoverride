@@ -82,18 +82,7 @@ http:
       argument: |-
         text=%7B%22code%22%3A-404%2C%22message%22%3A%22-404%22%2C%22ttl%22%3A1%2C%22data%22%3Anull%7D&status-code=200
 
-    - match: ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.playerunite\.v1\.Player\/PlayViewUnite$
-      name: "空降助手自动版_38"
-      type: request
-      require-body: true
-      binary-mode: true
-
-    - match: ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.community\.service\.dm\.v1\.DM\/DmSegMobile$
-      name: "空降助手自动版_38"
-      type: request
-      require-body: true
-      binary-mode: true
-
+# http-request ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.community\.service\.dm\.v1\.DM\/DmSegMobile$ script-path = https://kelee.one/Resource/Script/Bilibili/Bilibili_airborne_kokoryh.js, requires-body = true, binary-body-mode = true, enable = {enableAirborneDm}, tag = 空降助手弹幕版
     - match: ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(?:app\.(?:interface\.v1\.(?:Teenagers\/ModeStatus|Search\/DefaultWords)|dynamic\.v2\.Dynamic\/DynAll|view(?:unite)?\.v1\.View\/(?:View|ViewProgress|TFInfo|RelatesFeed)|playurl\.v1\.PlayURL\/PlayView|playerunite\.v1\.Player\/PlayViewUnite)|polymer\.app\.search\.v1\.Search\/SearchAll|main\.community\.reply\.v1\.Reply\/MainList|pgc\.gateway\.player\.v2\.PlayURL\/PlayView)$
       name: "Proto处理_40"
       type: response
@@ -105,9 +94,6 @@ http:
 script-providers:
   "echoResponse_27":
     url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/echo-response.js
-    interval: 86400
-  "空降助手自动版_38":
-    url: https://kelee.one/Resource/Script/Bilibili/Bilibili_airborne_kokoryh.js
     interval: 86400
   "Proto处理_40":
     url: https://kelee.one/Resource/Script/Bilibili/Bilibili_proto_kokoryh.js
