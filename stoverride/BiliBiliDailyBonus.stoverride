@@ -19,6 +19,11 @@ http:
   script:
     - match: ^https?:\/\/app\.bilibili\.com\/x\/resource\/fingerprint\?
       name: "B站每日等级任务_20"
+      type: response
+      timeout: 30
+
+    - match: ^https?:\/\/app\.bilibili\.com\/x\/resource\/fingerprint\?
+      name: "B站每日等级任务_20"
       type: request
 
 cron:
