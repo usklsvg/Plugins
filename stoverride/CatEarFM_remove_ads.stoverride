@@ -1,7 +1,7 @@
 name: |-
   猫耳FM去广告
 desc: |-
-  移除开屏广告、横幅推广、移除青少年模式弹窗，精简首页顶部入口和发现页面。
+  移除开屏广告、移除青少年模式弹窗，精简首页顶部入口。
 author: |-
   可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
 icon: |-
@@ -17,47 +17,44 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-05-13 15:17:08
+  2025-05-17 04:51:20
 
 http:
 
   mitm:
     - "app.missevan.com"
+    - "data.missevan.com"
     - "fm.missevan.com"
 
   url-rewrite:
     - >-
-      ^https:\/\/fm\.missevan\.com\/api\/v\d\/chatroom\/open\/search-recommend-list$ - reject-dict
+      ^https:\/\/app\.missevan\.com\/site\/launch\? - reject-dict
     - >-
-      ^https:\/\/app\.missevan\.com\/sound\/recommend\? - reject-dict
+      ^https:\/\/data\.missevan\.com\/site\/ad-track$ - reject-dict
     - >-
-      ^https:\/\/app\.missevan\.com\/drama\/get-recommend-by-id\? - reject-dict
+      ^https:\/\/app\.missevan\.com\/x\/recommend\/get-popup$ - reject-dict
     - >-
-      ^https:\/\/fm\.missevan\.com\/api\/v\d\/meta\/banner$ - reject-dict
+      ^https:\/\/fm\.missevan\.com\/api\/v2\/recommended\/top\? - reject-dict
+    - >-
+      ^https:\/\/fm\.missevan\.com\/api\/v2\/chatroom\/sound\/recommend\? - reject-dict
 
   body-rewrite:
     - >-
-      ^https:\/\/app\.missevan\.com\/site\/launch\? response-jq delpaths([["info"]])
+      ^https:\/\/app\.missevan\.com\/site\/config$ response-jq delpaths([["info","tab_bar_live"]])
     - >-
-      ^https:\/\/app\.missevan\.com\/site\/config$ response-jq delpaths([["info","homepage_top_task_button"]])
+      ^https:\/\/app\.missevan\.com\/site\/config$ response-jq delpaths([["0"]])
+    - >-
+      ^https:\/\/app\.missevan\.com\/site\/config$ response-jq delpaths([["info","enable_tab_bar_live_notice"]])
+    - >-
+      ^https:\/\/app\.missevan\.com\/site\/config$ response-jq delpaths([["false"]])
     - >-
       ^https:\/\/app\.missevan\.com\/site\/config$ response-jq delpaths([["info","teenager_popup_mode"]])
     - >-
-      ^https:\/\/app\.missevan\.com\/site\/get-top$ response-jq delpaths([["info","search_words"]])
+      ^https:\/\/app\.missevan\.com\/site\/config$ response-jq delpaths([["0"]])
     - >-
-      ^https:\/\/app\.missevan\.com\/site\/get-top$ response-jq delpaths([["info","extra_banners"]])
+      ^https:\/\/app\.missevan\.com\/site\/config$ response-jq delpaths([["info","httpdns"]])
     - >-
-      ^https:\/\/app\.missevan\.com\/you-might-like\/my-favors\? response-jq delpaths([["info","video_card"]])
+      ^https:\/\/app\.missevan\.com\/site\/config$ response-jq delpaths([["info","homepage_top_task_button"]])
     - >-
-      ^https:\/\/app\.missevan\.com\/you-might-like\/my-favors\? response-jq .info.ranks.data|=map(select(.name!="直播榜"))
-    - >-
-      ^https:\/\/fm\.missevan\.com\/api\/v2\/recommended\/top\? response-jq delpaths([["info"]])
-    - >-
-      ^https:\/\/app\.missevan\.com\/drama\/catalog-homepage\? response-jq delpaths([["info","extra_banners"]])
-    - >-
-      ^https:\/\/app\.missevan\.com\/catalog\/sound-homepage\? response-jq delpaths([["info","extra_banners"]])
-    - >-
-      ^https:\/\/fm\.missevan\.com\/api\/v\d\/chatroom\/sound\/recommend\? response-jq delpaths([["info"]])
-    - >-
-      ^https:\/\/app\.missevan\.com\/site\/icons\? response-jq .info.icons |= (if . == null then null else map(select(.title != 直播 and .title != "周边商城")) end)
+      ^https:\/\/app\.missevan\.com\/site\/config$ response-jq .info.cronet |= (fromjson | .quic = false | tojson)
 
