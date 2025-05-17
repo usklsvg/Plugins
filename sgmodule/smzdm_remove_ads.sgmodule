@@ -7,7 +7,7 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2025-05-16 22:37:35
+#!date=2025-05-17 13:41:25
 
 [Rule]
 DOMAIN,adx-api.zdmimg.com,REJECT,extended-matching,pre-matching
@@ -29,6 +29,7 @@ http-response-jq ^https:\/\/user-api\.smzdm\.com\/vip$ 'delpaths([["data","big_b
 http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? 'delpaths([["data","search_faxian"]])'
 http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? 'delpaths([["data","tonglan"]])'
 http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? 'delpaths([["data","hongbao"]])'
+http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? '.data.search_hot.home |= map(select(.article_tag.article_title != "广告"))'
 
 [Map Local]
 ^https:\/\/app-api\.smzdm\.com\/util\/loading\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
