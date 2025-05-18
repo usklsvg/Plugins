@@ -26,5 +26,5 @@ http:
 
   url-rewrite:
     - >-
-      ^https:\/\/client-api-v2\.oray\.com\/materials\/SLCC_iOS_DEVICE_FREE\? - reject
+      ^https:\/\/client-api-v2\.oray\.com\/materials\/SLCC_iOS_DEVICE_FREE\? - reject-dict
 
