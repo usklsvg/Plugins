@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-05-14 03:12:36
+  2025-05-18 01:29:34
 
 http:
 
@@ -50,8 +50,6 @@ http:
     - >-
       ^https:\/\/beta-luna\.douyin\.com\/luna\/me\? response-jq delpaths([["reward_ad_banner"]])
     - >-
-      ^https:\/\/beta-luna\.douyin\.com\/luna\/me\/recently-played-media\? response-jq .media |= map(select(.type != "video"))
-    - >-
       ^https:\/\/beta-luna\.douyin\.com\/luna\/feed\/song-tab\? response-jq del(.items[] | select(.type == "video_track_mix"))
     - >-
       ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? response-jq delpaths([["preview_guide"]])
@@ -59,4 +57,15 @@ http:
       ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? response-jq del(.card_items[] | select(has("priority_display")))
     - >-
       ^https:\/\/beta-luna\.douyin\.com\/luna\/more-panel\? response-jq .blocks |= map(select(.type != "related_video"))
+
+  script:
+    - match: ^https:\/\/beta-luna\.douyin\.com\/luna\/me\/recently-played-media\?
+      name: "移除播放页面视频流_27"
+      type: response
+      require-body: true
+
+script-providers:
+  "移除播放页面视频流_27":
+    url: https://kelee.one/Resource/Script/SodaMusic/SodaMusic_remove_ads.js
+    interval: 86400
 
