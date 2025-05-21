@@ -1,14 +1,14 @@
-#!name = 菜鸟去广告
-#!desc = 过滤菜鸟广告
-#!openUrl = https://apps.apple.com/app/id951610982
-#!author = RuCu6[https://github.com/RuCu6]
-#!tag = 去广告
-#!system =
-#!system_version =
-#!loon_version = 3.2.4(787)
-#!homepage = https://github.com/luestr/ProxyResource/blob/main/README.md
-#!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Cainiao.png
-#!date = 2025-05-13 15:17:08
+#!name=菜鸟去广告
+#!desc=过滤菜鸟广告
+#!openUrl=https://apps.apple.com/app/id951610982
+#!author=RuCu6[https://github.com/RuCu6]
+#!tag=去广告
+#!system=
+#!system_version=
+#!loon_version=3.2.4(787)
+#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Cainiao.png
+#!date=2025-05-13 15:17:08
 
 [Rule]
 AND, ((URL-REGEX, "^http:\/\/.+\/amdc\/mobileDispatch"), (USER-AGENT, "Cainiao4iPhone*")), REJECT
@@ -51,4 +51,4 @@ DOMAIN, youku-acs.m.taobao.com, REJECT
 ^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.cainiao\.adx\.flyad\.getad reject-dict
 
 [MitM]
-hostname = *-mtop.cainiao.com, cn-acs.m.cainiao.com, guide-acs.m.taobao.com
+hostname=*-mtop.cainiao.com, cn-acs.m.cainiao.com, guide-acs.m.taobao.com

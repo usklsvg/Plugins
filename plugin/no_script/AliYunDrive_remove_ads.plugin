@@ -1,14 +1,14 @@
-#!name = 阿里云盘去广告
-#!desc = 移除首页广告横幅、弹窗和顶部奖励。
-#!openUrl = https://apps.apple.com/app/id1494661473
-#!author = RuCu6[https://github.com/RuCu6]
-#!tag = 去广告
-#!system =
-#!system_version =
-#!loon_version = 3.2.4(787)
-#!homepage = https://github.com/luestr/ProxyResource/blob/main/README.md
-#!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/AliYunDrive.png
-#!date = 2025-05-13 15:17:08
+#!name=阿里云盘去广告
+#!desc=移除首页广告横幅、弹窗和顶部奖励。
+#!openUrl=https://apps.apple.com/app/id1494661473
+#!author=RuCu6[https://github.com/RuCu6]
+#!tag=去广告
+#!system=
+#!system_version=
+#!loon_version=3.2.4(787)
+#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/AliYunDrive.png
+#!date=2025-05-13 15:17:08
 
 [Rule]
 IP-CIDR, 203.107.1.1/24, REJECT, no-resolve
@@ -19,4 +19,4 @@ IP-CIDR, 203.107.1.1/24, REJECT, no-resolve
 
 
 [MitM]
-hostname = api.alipan.com, member.alipan.com, bizapi.alipan.com
+hostname=api.alipan.com, member.alipan.com, bizapi.alipan.com

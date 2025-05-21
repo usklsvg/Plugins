@@ -1,14 +1,14 @@
-#!name = 微博去广告
-#!desc = 过滤微博广告及去除各部分推广模块
-#!openUrl = https://apps.apple.com/app/id350962117
-#!author = RuCu6[https://github.com/RuCu6], zmqcherish[https://github.com/zmqcherish]
-#!tag = 去广告
-#!system =
-#!system_version =
-#!loon_version = 3.2.4(787)
-#!homepage = https://github.com/luestr/ProxyResource/blob/main/README.md
-#!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Weibo.png
-#!date = 2025-05-15 22:51:24
+#!name=微博去广告
+#!desc=过滤微博广告及去除各部分推广模块
+#!openUrl=https://apps.apple.com/app/id350962117
+#!author=RuCu6[https://github.com/RuCu6], zmqcherish[https://github.com/zmqcherish]
+#!tag=去广告
+#!system=
+#!system_version=
+#!loon_version=3.2.4(787)
+#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Weibo.png
+#!date=2025-05-15 22:51:24
 
 [Rule]
 DOMAIN-SUFFIX, uve.weibo.com, DIRECT
@@ -42,4 +42,4 @@ DOMAIN-SUFFIX, biz.weibo.com, REJECT
 ^https:\/\/weibo\.com\/ttarticle\/x\/m\/aj\/(?:reward|uvead) reject-dict
 
 [MitM]
-hostname = *.weibo.cn, *.weibo.com, weibo.com
+hostname=*.weibo.cn, *.weibo.com, weibo.com

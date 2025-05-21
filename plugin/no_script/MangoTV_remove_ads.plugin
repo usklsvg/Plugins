@@ -1,14 +1,14 @@
-#!name = 芒果TV去广告
-#!desc = 过滤芒果TV客户端广告
-#!openUrl = https://apps.apple.com/app/id629774477
-#!author = RuCu6[https://github.com/RuCu6]
-#!tag = 去广告
-#!system =
-#!system_version =
-#!loon_version = 3.2.4(787)
-#!homepage = https://github.com/luestr/ProxyResource/blob/main/README.md
-#!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/MangoTV.png
-#!date = 2025-05-13 15:17:08
+#!name=芒果TV去广告
+#!desc=过滤芒果TV客户端广告
+#!openUrl=https://apps.apple.com/app/id629774477
+#!author=RuCu6[https://github.com/RuCu6]
+#!tag=去广告
+#!system=
+#!system_version=
+#!loon_version=3.2.4(787)
+#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/MangoTV.png
+#!date=2025-05-13 15:17:08
 
 [Rule]
 DOMAIN, credits.bz.mgtv.com, REJECT
@@ -36,4 +36,4 @@ URL-REGEX, "^http:\/\/mobileso\.bz\.mgtv\.com\/spotlight\/search\/v1\?", REJECT-
 ^https:\/\/mobile\.api\.mgtv\.com\/v2\/mobile\/checkUpdate\? reject-dict
 
 [MitM]
-hostname = *.mgtv.com
+hostname=*.mgtv.com
