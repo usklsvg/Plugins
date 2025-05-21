@@ -35,7 +35,7 @@ http:
     - >-
       ^https?:\/\/weibointl\.api\.weibo\.cn\/portal\.php\?a=get_coopen_ads& response-jq .data |= . + {"ad_list":[],"pic_ad":[],"gdt_video_ad_ios":[],"display_ad":0,"ad_ios_id":null,"app_ad_ios_id":null,"reserve_ad_ios_id":"","reserve_app_ad_ios_id":"","ad_duration":604800,"ad_cd_interval":604800}
     - >-
-      ^https?:\/\/weibointl\.api\.weibo\.cn\/portal\.php\?a=trends& response-jq if .data.order then .data.order = ["search_topic"] end
+      ^https?:\/\/weibointl\.api\.weibo\.cn\/portal\.php\?a=trends& response-jq if .data.order then .data.order=["search_topic"] end
     - >-
       ^https?:\/\/weibointl\.api\.weibo\.cn\/portal\.php\?a=search_topic& response-jq if .data.search_topic.cards[0].type == searchtop then del(.data.search_topic.cards[0]) end
     - >-

@@ -64,15 +64,6 @@ http:
       require-body: true
       binary-mode: true
 
-cron:
-  script:
-    - name: "跟踪响应·JSON_12"
-      cron: http-response ^https?:\/\/api\.spotify\.com\/v1\/tracks\? requires-body = true,script-path =
-      timeout: 120
-    - name: "歌词请求·JSON_13"
-      cron: http-request ^https?:\/\/spclient\.wg\.spotify\.com\/color-lyrics\/v2\/track\/(.+)\?(.*)format=json requires-body = true,script-path =
-      timeout: 120
-
 script-providers:
   "跟踪响应·JSON_12":
     url: https://kelee.one/Resource/Script/Spotify/Spotify_response.js

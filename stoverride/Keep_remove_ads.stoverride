@@ -39,5 +39,5 @@ http:
     - >-
       ^https:\/\/api\.gotokeep\.com\/twins\/v4\/feed\/entryDetail response-jq if (getpath([]) | has("data")) then (setpath(["data"]; {})) else . end
     - >-
-      ^https:\/\/api\.gotokeep\.com\/config\/v3\/basic response-jq .data.homeTabs |= map(select(.name != "活动")) | .data.homeTabs[1].default = true | .data.homeTabs[2].default = false
+      ^https:\/\/api\.gotokeep\.com\/config\/v3\/basic response-jq .data.homeTabs |= map(select(.name != "活动")) | .data.homeTabs[1].default=true | .data.homeTabs[2].default=false
 
