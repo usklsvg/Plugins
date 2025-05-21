@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-05-17 13:41:25
+  2025-05-21 14:54:15
 
 rules:
   - DOMAIN,adx-api.zdmimg.com,REJECT
@@ -65,6 +65,8 @@ http:
       ^https:\/\/haojia-api\.smzdm\.com\/home\/list\? response-jq .data.rows |= map(select(.cell_type == "39001")) | .data.banner_v2 |= map(select(.cell_type == "21028"))
     - >-
       ^https:\/\/haojia\.m\.smzdm\.com\/detail_modul\/user_related_modul\? response-jq delpaths([["data","super_coupon"]])
+    - >-
+      ^https:\/\/haojia\.m\.smzdm\.com\/detail_modul\/other_modul\? response-jq delpaths([["data","banner"]])
     - >-
       ^https:\/\/user-api\.smzdm\.com\/vip$ response-jq delpaths([["data","big_banner"]])
     - >-
