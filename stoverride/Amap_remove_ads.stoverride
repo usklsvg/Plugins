@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-05-13 15:17:08
+  2025-05-22 21:41:32
 
 rules:
   - AND,((URL-REGEX,"^http:\/\/.+\/amdc\/mobileDispatch"),(USER-AGENT,"AMapiPhone*")),REJECT
@@ -92,11 +92,6 @@ http:
       type: response
       require-body: true
 
-    - match: ^https:\/\/m5\.amap\.com\/ws\/shield\/search\/(?:common\/coupon\/info|poi\/detail)
-      name: "移除路线规划推广_33"
-      type: response
-      require-body: true
-
     - match: ^https:\/\/m5\.amap\.com\/ws\/shield\/search_bff\/hotword\?
       name: "移除路线规划推广_33"
       type: response
@@ -138,6 +133,11 @@ http:
       require-body: true
 
     - match: ^https:\/\/m5-zb\.amap\.com\/ws\/promotion-web\/resource(\/home)?\?
+      name: "移除路线规划推广_33"
+      type: response
+      require-body: true
+
+    - match: ^https:\/\/(?:info|m5)\.amap\.com\/ws\/shield\/search\/(?:common\/coupon\/info|poi\/detail)
       name: "移除路线规划推广_33"
       type: response
       require-body: true
