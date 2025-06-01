@@ -21,7 +21,7 @@ enableAirborneDm=switch, "false", "true", tag=空降助手弹幕版, desc=弹幕
 
 # http-request ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.community\.service\.dm\.v1\.DM\/DmSegMobile$ script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_airborne_kokoryh.js, requires-body=true, binary-body-mode=true, enable={enableAirborneDm}, tag=空降助手弹幕版
 
-http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(?:app\.(?:show\.v1\.Popular\/Index|dynamic\.v2\.Dynamic\/DynAll|view(?:unite)?\.v1\.View\/(?:View|ViewProgress|RelatesFeed)|playurl\.v1\.PlayURL\/PlayView|playerunite\.v1\.Player\/PlayViewUnite)|polymer\.app\.search\.v1\.Search\/SearchAll|main\.community\.reply\.v1\.Reply\/MainList|pgc\.gateway\.player\.v2\.PlayURL\/PlayView)$ script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_proto_kokoryh.js, requires-body=true, binary-body-mode=true, argument=[{showUpList}, {filterTopReplies}], tag=Proto处理
+http-response ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(?:app\.(?:dynamic\.v2\.Dynamic\/DynAll|view(?:unite)?\.v1\.View\/(?:View|ViewProgress|RelatesFeed)|playurl\.v1\.PlayURL\/PlayView|playerunite\.v1\.Player\/PlayViewUnite)|polymer\.app\.search\.v1\.Search\/SearchAll|main\.community\.reply\.v1\.Reply\/MainList|pgc\.gateway\.player\.v2\.PlayURL\/PlayView)$ script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_proto_kokoryh.js, requires-body=true, binary-body-mode=true, argument=[{showUpList}, {filterTopReplies}], tag=Proto处理
 
 [MitM]
 hostname=grpc.biliapi.net, app.bilibili.com, api.bilibili.com, api.live.bilibili.com

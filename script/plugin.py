@@ -14,7 +14,7 @@ plugin_only_script_dir = os.path.join(current_dir, "plugin", "only_script")
 
 
 def get_url_text_content(url: str):
-    content = None
+    content = ""
     try:
         response = requests.get(url, stream=True)
         content = response.text
@@ -62,7 +62,7 @@ def save_content(content: str, filename: str):
         print(f"Error when saving content to {filename}: {e}")
 
 
-def extract_components(lines: str):
+def extract_components(lines: list[str]):
     lines = [line.strip() for line in lines]
 
     data: dict[str, list[str]] = {}
@@ -232,7 +232,7 @@ def modify_content_bilibili(lines: list[str]):
         # 注释移除热搜广告
         lines[i] = lines[i].replace("|v2\\/search\\/square|", "|")
         # 注释移除热门话题
-        lines[i] = lines[i].replace("|show\\.v1\\.Popular\\/Index|", "|")
+        lines[i] = lines[i].replace("show\\.v1\\.Popular\\/Index|", "")
         # 注释移除交互式弹幕
         lines[i] = lines[i].replace(
             "|community\\.service\\.dm\\.v1\\.DM\\/DmView|", "|"
