@@ -1,9 +1,9 @@
 name: |-
   Spotify去广告
 desc: |-
-  过滤Spotify播放广告，移除随机播放，恢复歌手和专辑列表的正常展示。建议重新登录并清除缓存，且音质不能设置为超高，仅建议iOS 15及以上设备使用。
+  移除播放广告，恢复歌手和专辑列表的正常展示。
 author: |-
-  app2smile[https://github.com/app2smile]
+  001ProMax[https://github.com/001ProMax]
 icon: |-
   https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Spotify.png
 category: |-
@@ -17,31 +17,34 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-05-13 15:17:08
+  2025-06-01 00:10:38
+
+rules:
+  - AND,((DOMAIN,spclient.wg.spotify.com),(PROTOCOL,QUIC)),REJECT
 
 http:
 
   mitm:
     - "spclient.wg.spotify.com"
 
-  script:
-    - match: ^https:\/\/spclient\.wg\.spotify\.com\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/
-      name: "JSON处理_12"
-      type: request
-      timeout: 10
+  url-rewrite:
+    - >-
+      ^https:\/\/spclient\.wg\.spotify\.com\/pendragon\/ - reject-dict
+    - >-
+      ^https:\/\/spclient\.wg\.spotify\.com\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/(.*)platform=iphone https://spclient.wg.spotify.com/$1/$2platform=ipad header
 
-    - match: ^https:\/\/spclient\.wg\.spotify\.com\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$
-      name: "Proto处理_13"
+  script:
+    - match: ^https:\/\/spclient\.wg\.spotify\.com\/(?:bootstrap|user-customization-service)
+      name: "Protobuf处理_20"
       type: response
       require-body: true
       binary-mode: true
       timeout: 10
+      argument: |-
+        [{tab},{useractivity}]
 
 script-providers:
-  "JSON处理_12":
+  "Protobuf处理_20":
     url: https://kelee.one/Resource/Script/Spotify/Spotify_remove_ads.js
-    interval: 86400
-  "Proto处理_13":
-    url: https://kelee.one/Resource/Script/Spotify/Spotify_proto.js
     interval: 86400
 
