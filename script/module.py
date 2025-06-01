@@ -169,6 +169,45 @@ def modify_content_common(content: str, file_ext: str):
     return ret
 
 
+def modify_content_bilibili(content: str):
+    lines = content.splitlines()
+    data = extract_components(lines)
+    for i, line in enumerate(data["[Script]"]):
+        if line.startswith("#") or line.find("script-path") == -1:
+            continue
+        line = line.strip()
+        arg_pos_begin = line.find("argument=")
+        if arg_pos_begin != -1:
+            arg_pos_end = line.find("}]", arg_pos_begin)
+            if arg_pos_end != -1:
+                arg_pos_end += 2
+                pos_temp = line[:arg_pos_begin].rfind(",")
+                if arg_pos_end < len(line) and line[arg_pos_end] == '"':
+                    arg_pos_end += 1
+                line = (
+                    line[:pos_temp]
+                    + line[arg_pos_end:]
+                    + ', argument="{"showUpList":"{{{动态最常访问}}}","filterTopReplies":{{{过滤置顶评论广告}}}}"'
+                )
+        data["[Script]"][i] = f"{line}, script-update-interval=-1\n"
+
+    line_arg = "#!arguments=动态最常访问:auto,过滤置顶评论广告:1\n"
+    line_arg += "#!arguments-desc=动态最常访问: [true, false, auto]\\n- true: 始终显示\\n- false: 始终隐藏\\n- auto: 仅当列表中存在直播状态时显示\\n\\n过滤置顶评论广告: [1, 0]\\n- 1: 开启\\n- 0: 关闭\n"
+    for i, line in enumerate(data["title"]):
+        if i == len(data["title"]) - 1 or len(data["title"][i + 1].strip()) == 0:
+            data["title"][i] = line + line_arg
+            break
+
+    ret = ""
+    for key, sub_data in data.items():
+        str_tmp = f"{key}\n" if key != "title" else ""
+        for line in sub_data:
+            str_tmp = str_tmp + line
+        ret = ret + str_tmp
+
+    return ret
+
+
 def modify_content_taobao(content: str):
     lines = content.splitlines()
     i = 0
@@ -219,7 +258,10 @@ def process_file(
     content = get_url_text_content(request_url)
     if len(content.strip()) != 0:
         if file_ext == "sgmodule":
-            content = modify_content_common(content, file_ext)
+            if filename == "Bilibili_remove_ads.plugin":
+                content = modify_content_bilibili(content)
+            else:
+                content = modify_content_common(content, file_ext)
 
             if filename == "Taobao_remove_ads.plugin":
                 content = modify_content_taobao(content)
