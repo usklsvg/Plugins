@@ -14,8 +14,13 @@
 tab=switch, "false", "true", tag=移除底栏创建按钮, desc=此开关控制是否移除底栏创建按钮
 useractivity=switch, "true", "false", tag=启用Apple设备接力, desc=此开关控制是否使用Apple设备接力
 
-[Script]
-http-response ^https:\/\/spclient\.wg\.spotify\.com\/(?:bootstrap|user-customization-service) script-path=https://kelee.one/Resource/Script/Spotify/Spotify_remove_ads.js, requires-body=true, binary-body-mode=true, timeout=10, argument=[{tab},{useractivity}], tag=Protobuf处理
+[Rule]
+AND, ((DOMAIN, spclient.wg.spotify.com), (PROTOCOL, QUIC)), REJECT
+
+[Rewrite]
+^https:\/\/spclient\.wg\.spotify\.com\/pendragon\/ reject-dict
+
+^https:\/\/spclient\.wg\.spotify\.com\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/(.*)platform=iphone header https://spclient.wg.spotify.com/$1/$2platform=ipad
 
 [MitM]
 hostname=spclient.wg.spotify.com
