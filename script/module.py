@@ -17,7 +17,7 @@ def recreate_path(pathname: str):
 
 
 def get_url_text_content(url: str):
-    content, err_info = None, None
+    content, err_info = "", None
     for _ in range(3):
         try:
             for i in range(3):
@@ -31,6 +31,8 @@ def get_url_text_content(url: str):
         break
     if err_info:
         print(f"error : {err_info}")
+    if content.find("Response code 404 (Not Found)") != -1:
+        content = ""
     return content
 
 
@@ -43,7 +45,7 @@ def save_content(content: str, filename: str):
         print(f"Error when saving content to {filename}: {e}")
 
 
-def extract_components(lines: str):
+def extract_components(lines: list[str]):
     lines = [line.strip() for line in lines]
 
     data: dict[str, list[str]] = {}
@@ -105,7 +107,7 @@ def modify_content_common(content: str, file_ext: str):
             empty_content = False
             break
     if empty_content:
-        return None
+        return ""
 
     data = extract_components(lines)
     if not "[Script]" in data:
@@ -116,26 +118,23 @@ def modify_content_common(content: str, file_ext: str):
         if line.startswith("#") or line.find("script-path") == -1:
             continue
         if file_ext == "sgmodule":
-            items = [item.strip() for item in line.split(", ")]
-            line = items[0]
-            for j in range(1, len(items)):
-                if (
-                    items[j].lower().startswith("argument")
-                    and items[j].lower().find("{") != -1
-                ):
-                    sub_arguments = items[j].split("},{")
-                    sub_arguments[0] = sub_arguments[0][
-                        sub_arguments[0].find("{") + 1 :
-                    ]
-                    sub_arguments[-1] = sub_arguments[-1][: sub_arguments[-1].find("}")]
-                    items[j] = "argument="
-                    for k, item in enumerate(sub_arguments):
-                        arguments.add(item)
-                        if k != 0:
-                            items[j] += "&"
-                        items[j] += item + '="{{{' + item + '}}}"'
-                    _ = 1
-                line = f"{line}, {items[j]}"
+            line = line.strip()
+            arg_pos_begin = line.find("argument=")
+            if arg_pos_begin != -1:
+                arg_pos_end = line.find("}]", arg_pos_begin)
+                if arg_pos_end != -1:
+                    arg_pos_end += 2
+                    args = line[arg_pos_begin + 11 : arg_pos_end - 1]
+                    pos_temp = line[:arg_pos_begin].rfind(",")
+                    if arg_pos_end < len(line) and line[arg_pos_end] == '"':
+                        arg_pos_end += 1
+                    line = line[:pos_temp] + line[arg_pos_end:] + ", argument="
+                    args = [item.strip()[1:-1] for item in args.split(",")]
+                    for arg_idx in range(0, len(args)):
+                        arguments.add(args[arg_idx])
+                        if arg_idx > 0:
+                            line = f"{line}&"
+                        line = f'{line}{args[arg_idx]}="{{{{{{{args[arg_idx]}}}}}}}"'
             data["[Script]"][i] = f"{line}, script-update-interval=-1\n"
 
     if len(arguments) > 0:
@@ -167,35 +166,6 @@ def modify_content_common(content: str, file_ext: str):
             str_tmp = str_tmp + line
         ret = ret + str_tmp
 
-    return ret
-
-
-def modify_content_bilibili(content: str):
-    lines = content.splitlines()
-
-    for i, line in enumerate(lines):
-        if (
-            line.startswith("#")
-            or line.find("script-path") == -1
-            or line.find("argument") == -1
-        ):
-            continue
-        items = [item.strip() for item in line.split(", ")]
-        line = items[0]
-        for j in range(1, len(items)):
-            if (
-                items[j].lower().startswith("argument")
-                and items[j].lower().find("{") != -1
-            ):
-                continue
-            line = f"{line}, {items[j]}"
-        lines[i] = line
-
-    ret = ""
-    i = 0
-    while i < len(lines):
-        ret += f"{lines[i]}\n"
-        i += 1
     return ret
 
 
@@ -235,45 +205,39 @@ def modify_content_zhihu(content: str):
 
 
 def process_file(
-    file_ext: str, src_dir: str, dst_dir: str, url_dir: str, categoty: str
+    filename: str, file_ext: str, dst_dir: str, url_dir: str, categoty: str
 ):
-    for filename in os.listdir(src_dir):
-        url = f"https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/{url_dir}/{filename}"
-        request_url = f"http://localhost:9100/file/_start_/{url}/_end_/sample.sgmodule.txt?type=loon-plugin&del=true&nore=true&category={categoty}"
+    url = f"https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/{url_dir}/{filename}"
+    request_url = f"http://localhost:9100/file/_start_/{url}/_end_/sample.sgmodule.txt?type=loon-plugin&del=true&nore=true&category={categoty}"
+    if file_ext == "sgmodule":
+        request_url = (
+            f"{request_url}&target=surge-module&sni=REJECT&pm=REJECT&jqEnabled=true"
+        )
+    else:
+        request_url = f"{request_url}&target=stash-stoverride&jqEnabled=true"
+
+    content = get_url_text_content(request_url)
+    if len(content.strip()) != 0:
         if file_ext == "sgmodule":
-            request_url = (
-                f"{request_url}&target=surge-module&sni=REJECT&pm=REJECT&jqEnabled=true"
-            )
-        else:
-            request_url = f"{request_url}&target=stash-stoverride&jqEnabled=true"
+            content = modify_content_common(content, file_ext)
 
-        content = get_url_text_content(request_url)
-        if content != None:
-            if file_ext == "sgmodule":
-                if filename == "Bilibili_remove_ads.plugin":
-                    content = modify_content_bilibili(content)
+            if filename == "Taobao_remove_ads.plugin":
+                content = modify_content_taobao(content)
+            if filename == "Zhihu_remove_ads.plugin":
+                content = modify_content_zhihu(content)
 
-                content = modify_content_common(content, file_ext)
-
-                if filename == "Taobao_remove_ads.plugin":
-                    content = modify_content_taobao(content)
-                if filename == "Zhihu_remove_ads.plugin":
-                    content = modify_content_zhihu(content)
-
-                if content != None:
-                    save_content(
-                        content,
-                        os.path.join(
-                            dst_dir, f"{filename[:filename.rfind('.')]}.{file_ext}"
-                        ),
-                    )
-            else:
+            if len(content.strip()) != 0:
                 save_content(
                     content,
                     os.path.join(
                         dst_dir, f"{filename[:filename.rfind('.')]}.{file_ext}"
                     ),
                 )
+        else:
+            save_content(
+                content,
+                os.path.join(dst_dir, f"{filename[:filename.rfind('.')]}.{file_ext}"),
+            )
 
 
 ###############################################################################
@@ -286,10 +250,11 @@ if __name__ == "__main__":
     for file_ext in ["sgmodule", "stoverride"]:
         dst_dir = os.path.join(current_dir, file_ext)
         recreate_path(dst_dir)
-        process_file(
-            file_ext,
-            src_dir=plugin_all_dir,
-            dst_dir=dst_dir,
-            url_dir="plugin/raw",
-            categoty="iKeLee",
-        )
+        for filename in os.listdir(plugin_all_dir):
+            process_file(
+                filename,
+                file_ext,
+                dst_dir=dst_dir,
+                url_dir="plugin/raw",
+                categoty="iKeLee",
+            )

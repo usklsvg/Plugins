@@ -10,6 +10,7 @@
 #!loon_version=3.2.9(837)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
 #!date=2025-05-21 03:16:51
+#!arguments=filterTopReplies, showUpList
 
 [Rule]
 DOMAIN,api.biliapi.com,REJECT,extended-matching,pre-matching
@@ -46,7 +47,7 @@ http-response-jq ^https:\/\/app\.bilibili\.com\/x\/v2\/account\/myinfo\? '.data.
 
 [Script]
 # http-request ^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.community\.service\.dm\.v1\.DM\/DmSegMobile$ script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_airborne_kokoryh.js, requires-body=true, binary-body-mode=true, enable={enableAirborneDm}, tag=空降助手弹幕版
-Proto处理 = type=http-response, pattern=^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(?:app\.(?:show\.v1\.Popular\/Index|dynamic\.v2\.Dynamic\/DynAll|view(?:unite)?\.v1\.View\/(?:View|ViewProgress|RelatesFeed)|playurl\.v1\.PlayURL\/PlayView|playerunite\.v1\.Player\/PlayViewUnite)|polymer\.app\.search\.v1\.Search\/SearchAll|main\.community\.reply\.v1\.Reply\/MainList|pgc\.gateway\.player\.v2\.PlayURL\/PlayView)$, script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_proto_kokoryh.js, requires-body=true, binary-body-mode=true, {filterTopReplies}]", script-update-interval=-1
+Proto处理 = type=http-response, pattern=^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(?:app\.(?:dynamic\.v2\.Dynamic\/DynAll|view(?:unite)?\.v1\.View\/(?:View|ViewProgress|RelatesFeed)|playurl\.v1\.PlayURL\/PlayView|playerunite\.v1\.Player\/PlayViewUnite)|polymer\.app\.search\.v1\.Search\/SearchAll|main\.community\.reply\.v1\.Reply\/MainList|pgc\.gateway\.player\.v2\.PlayURL\/PlayView)$, script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_proto_kokoryh.js, requires-body=true, binary-body-mode=true, argument=showUpList="{{{showUpList}}}"&filterTopReplies="{{{filterTopReplies}}}", script-update-interval=-1
 
 [MITM]
 hostname = %APPEND% grpc.biliapi.net, app.bilibili.com, api.bilibili.com, api.live.bilibili.com
