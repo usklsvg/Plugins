@@ -17,11 +17,12 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-05-13 15:17:08
+  2025-06-02 01:02:42
 
 rules:
   - DOMAIN,splash.yy.com,REJECT
   - DOMAIN,dsp-ad.yy.com,REJECT
+  - DOMAIN,ysad.yy.com,REJECT
 
 http:
 
@@ -47,7 +48,7 @@ http:
     - >-
       ^https:\/\/tab\.yy\.com\/tabs\? response-jq delpaths([["data","tabsForSelect"]])
     - >-
-      ^https:\/\/tab\.yy\.com\/tabs\? response-jq .data.tabs |= map(select(.name != 直播 and .name != "短剧")) | {data: .data, message: .message, code: .code}
+      ^https:\/\/tab\.yy\.com\/tabs\? response-jq .data.tabs |= map(select(.alias == follow or .alias == im or .alias == "me"))
     - >-
-      ^https:\/\/personal-center\.yy\.com\/personalCenter\/list\? response-jq .data.modules |= map(select(.moduleName != "Banner轮播")) | .data.modules[] |= if .entrances != null then .entrances |= map(select(.name != 度小满借钱 and .name != 手机充值 and .name != "免流量")) else . end
+      ^https:\/\/personal-center\.yy\.com\/personalCenter\/list\? response-jq .data.modules |= map(select(.moduleName != "Banner轮播")) | .data.modules |= map(if has("entrances") then .entrances |= map(select(.bizCode|IN("jishijiedaikuan","duxiaoman2","chongzhi","freeData")|not)) else . end)
 
