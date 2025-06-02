@@ -1,7 +1,7 @@
 name: |-
   Spotify去广告
 desc: |-
-  移除播放广告，恢复歌手和专辑列表的正常展示。
+  移除播放广告，恢复歌手和专辑列表的正常展示。修改插件自定义配置项需要重新登陆方可生效。
 author: |-
   001ProMax[https://github.com/001ProMax]
 icon: |-
@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-06-01 00:10:38
+  2025-06-02 19:39:26
 
 rules:
   - AND,((DOMAIN,spclient.wg.spotify.com),(PROTOCOL,QUIC)),REJECT
