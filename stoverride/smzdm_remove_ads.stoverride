@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-06-03 09:01:17
+  2025-06-03 18:12:18
 
 rules:
   - DOMAIN,adx-api.zdmimg.com,REJECT
@@ -59,6 +59,8 @@ http:
       ^https:\/\/app-api\.smzdm\.com\/util\/update$ response-jq delpaths([["data","video_cache_num_configs"]])
     - >-
       ^https:\/\/app-api\.smzdm\.com\/util\/update$ response-jq delpaths([["data","haojia_widget"]])
+    - >-
+      ^https:\/\/app-api\.smzdm\.com\/util\/update$ response-jq delpaths([["data","widget"]])
     - >-
       ^https:\/\/app-api\.smzdm\.com\/util\/update$ response-jq def r: if type=="object" then if has("ad_campaign_name") and (.ad_campaign_name|type=="string") and (.ad_campaign_name|test("\\S")) then empty else . end elif type=="array" then map(r) else . end; .data.operation_float |= map(map(r))
     - >-
