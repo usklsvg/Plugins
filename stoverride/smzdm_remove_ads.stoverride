@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-06-03 18:12:18
+  2025-06-04 04:07:26
 
 rules:
   - DOMAIN,adx-api.zdmimg.com,REJECT
@@ -79,6 +79,8 @@ http:
       ^https:\/\/user-api\.smzdm\.com\/vip$ response-jq delpaths([["data","top_banner"]])
     - >-
       ^https:\/\/user-api\.smzdm\.com\/vip$ response-jq delpaths([["data","banner_switch"]])
+    - >-
+      ^https:\/\/s-api\.smzdm\.com\/sou\/list_v10\? response-jq .data.rows |= map(select(.model_type != "ads"))
     - >-
       ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? response-jq delpaths([["data","search_faxian"]])
     - >-
