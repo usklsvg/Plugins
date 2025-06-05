@@ -650,7 +650,6 @@
   <tr>
     <td rowspan="24"><strong>功能插件</strong></td>
   <tr>
-  <tr>
     <td>01</td>
     <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Plugin/Block_HTTPDNS.plugin">HTTPDNS拦截器</a></td>
   </tr>
