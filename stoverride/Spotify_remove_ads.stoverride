@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-06-02 19:39:26
+  2025-06-08 03:40:18
 
 rules:
   - AND,((DOMAIN,spclient.wg.spotify.com),(PROTOCOL,QUIC)),REJECT
@@ -25,16 +25,16 @@ rules:
 http:
 
   mitm:
-    - "spclient.wg.spotify.com"
+    - "*.spotify.com"
 
   url-rewrite:
     - >-
-      ^https:\/\/spclient\.wg\.spotify\.com\/pendragon\/ - reject-dict
+      ^https:\/\/.+\.spotify\.com\/pendragon\/ - reject-dict
     - >-
-      ^https:\/\/spclient\.wg\.spotify\.com\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/(.*)platform=iphone https://spclient.wg.spotify.com/$1/$2platform=ipad header
+      ^https:\/\/(.+)\.spotify\.com(:443)?\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/(.*)platform=iphone https://$1.spotify.com$2/$3/$4platform=ipad header
 
   script:
-    - match: ^https:\/\/spclient\.wg\.spotify\.com\/(?:bootstrap|user-customization-service)
+    - match: ^https:\/\/.+\.spotify\.com(:443)?\/(?:bootstrap|user-customization-service)
       name: "Protobuf处理_20"
       type: response
       require-body: true
