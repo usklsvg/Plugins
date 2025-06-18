@@ -20,6 +20,7 @@ date: |-
   2025-05-13 15:17:08
 
 rules:
+  - AND,((URL-REGEX,"^http:\/\/.+\/amdc\/mobileDispatch"),(USER-AGENT,"%E6%B7%98%E5%AE%9D*")),REJECT
   - DOMAIN,adashx.m.taobao.com,REJECT
   - DOMAIN,ossgw.alicdn.com,REJECT
   - DOMAIN,ems.youku.com,REJECT
@@ -61,17 +62,17 @@ http:
 
   script:
     - match: ^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.(cloudvideo\.video\.query|wireless\.home\.splash\.awesome\.get)
-      name: "移除淘宝开屏广告_31"
+      name: "移除淘宝开屏广告_32"
       type: response
       require-body: true
 
     - match: ^https:\/\/poplayer\.template\.alibaba\.com\/\w+\.json
-      name: "移除淘宝开屏广告_31"
+      name: "移除淘宝开屏广告_32"
       type: response
       require-body: true
 
 script-providers:
-  "移除淘宝开屏广告_31":
+  "移除淘宝开屏广告_32":
     url: https://kelee.one/Resource/Script/Taobao/Taobao_remove_ads.js
     interval: 86400
 
