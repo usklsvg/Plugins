@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-06-19 10:50:43
+  2025-06-24 10:59:53
 
 rules:
   - DOMAIN,adx-api.zdmimg.com,REJECT
@@ -97,5 +97,5 @@ http:
     - >-
       ^https:\/\/haojia-api\.smzdm\.com\/detail\/\d+\? response-jq delpaths([["data","quan_log"]])
     - >-
-      ^https:\/\/haojia-cdn\.smzdm\.com\/preload\/\d+\/fiphone\/v\d+_\d+_\d+\/wx\d+\/im\d+\/[a-z0-9]+\/h5(?:c[0-9a-f]+)?\.json$ response-jq delpaths([["data","quan_log"]])
+      ^https:\/\/haojia-cdn\.smzdm\.com\/preload\/\d+\/fiphone\/v\d+_\d+_\d+\/wx\d+\/im\d+\/[0-9a-z]+\/[0-9a-z]+\.json$ response-jq delpaths([["data","quan_log"]])
 
