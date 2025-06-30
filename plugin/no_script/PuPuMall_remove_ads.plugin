@@ -13,6 +13,8 @@
 [Rewrite]
 ^https:\/\/j1\.pupuapi\.com\/client\/account\/discount\/order reject
 ^https:\/\/j1\.pupuapi\.com\/client\/marketing\/banner\/v7\?position_types=100 reject
+# 旧版应用的主页实惠卡
+# ^https:\/\/j1\.pupuapi\.com\/client\/member_card\/index\/my reject
 
 [MitM]
 hostname=j1.pupuapi.com

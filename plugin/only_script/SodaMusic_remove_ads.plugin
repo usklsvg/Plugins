@@ -11,6 +11,7 @@
 #!date=2025-05-18 01:29:34
 
 [Script]
+# 播放页面 - 视频流[响应体太大]
 http-response ^https:\/\/beta-luna\.douyin\.com\/luna\/me\/recently-played-media\? script-path=https://kelee.one/Resource/Script/SodaMusic/SodaMusic_remove_ads.js, requires-body=true, tag=移除播放页面视频流
 
 [MitM]

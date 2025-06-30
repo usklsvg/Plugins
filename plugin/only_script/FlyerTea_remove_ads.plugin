@@ -11,7 +11,11 @@
 #!date=2025-05-13 15:17:08
 
 [Script]
+# 板块广告
 http-response ^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?version=5 script-path=https://kelee.one/Resource/Script/FlyerTea/FlyerTea_remove_ads.js, requires-body=true, tag=移除板块广告
+# 我的页面 - 新用户推广横幅
+# http-response ^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?module=basicdata&type=app_onoff script-path=https://kelee.one/Resource/Script/FlyerTea/FlyerTea_remove_ads.js, requires-body=true, tag=清理我的页面
+# 签到弹窗广告
 http-response ^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?module=plugin&id=k_misign:sign script-path=https://kelee.one/Resource/Script/FlyerTea/FlyerTea_remove_ads.js, requires-body=true, tag=移除签到弹窗广告
 
 [MitM]
