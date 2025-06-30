@@ -176,11 +176,12 @@ def colllect_files():
     filenames = []
     recreate_path(extern_plugin_dir)
     for item in readme.split('"'):
-        if not item.endswith(".plugin"):
+        if not (item.endswith(".lpx") or item.endswith(".plugin")):
             continue
 
         plugin_url = item[46:]
         plugin_name = item.split("/")[-1]
+        plugin_name = plugin_name[: plugin_name.rfind(".")] + ".plugin"
         plugin_filename = os.path.join(extern_plugin_dir, plugin_name)
         download_url_file(plugin_url, plugin_filename)
         try:
