@@ -25,40 +25,51 @@ http:
     - "manga.bilibili.com"
 
   url-rewrite:
+# 底栏 - 活动按钮
     - >-
       ^https:\/\/manga\.bilibili\.com\/twirp\/comic\.v\d\.Comic\/GetActivityTab - reject-dict
+# 首页 - 推荐 - 悬浮窗
     - >-
       ^https:\/\/manga\.bilibili\.com\/twirp\/comic\.v\d\.Comic\/GetBubbles - reject-dict
+# 我的、搜索 - 横幅广告
     - >-
       ^https:\/\/manga\.bilibili\.com\/twirp\/comic\.v\d\.Comic\/GetCommonBanner - reject-dict
     - >-
       ^https:\/\/manga\.bilibili\.com\/twirp\/comic\.v\d\.Comic\/SearchBanner - reject-dict
+# 我的 - 今日推荐阅读任务
     - >-
       ^https:\/\/manga\.bilibili\.com\/twirp\/user\.v\d\.SeasonV\d\/GetSeasonInfo - reject-dict
+# 书架 - 漫画 - 你可能喜欢
     - >-
       ^https:\/\/manga\.bilibili\.com\/twirp\/bookshelf\.v\d\.Bookshelf\/ListEmptyRecommend - reject-dict
+# 书架 - 小说 - 你可能喜欢
     - >-
       ^https:\/\/manga\.bilibili\.com\/twirp\/bookshelf\.v\d\.Bookshelf\/NovelRecommend - reject-dict
+# 小说 - 详情 - 更多推荐
     - >-
       ^https:\/\/manga\.bilibili\.com\/twirp\/novel\.v\d\.Novel\/MoreRecommend - reject-dict
+# 首页 - 弹窗
     - >-
       ^https:\/\/manga\.bilibili\.com\/twirp\/comic\.v\d\.Comic\/AppInit - reject-dict
+# 开屏广告
     - >-
       ^https:\/\/manga\.bilibili\.com\/twirp\/comic\.v\d\.Comic\/ListFlash - reject-dict
 
   script:
+# 顶部标签
     - match: ^https:\/\/manga\.bilibili\.com\/twirp\/comic\.v\d\.Comic\/GetClassPageAllTabs
-      name: "移除顶部标签_24"
+      name: "移除顶部标签_35"
       type: response
       require-body: true
 
+# 我的页面
     - match: ^https:\/\/manga\.bilibili\.com\/twirp\/user\.v\d\.User\/UCenterConf
-      name: "移除顶部标签_24"
+      name: "移除顶部标签_35"
       type: response
       require-body: true
 
 script-providers:
-  "移除顶部标签_24":
+  "移除顶部标签_35":
     url: https://kelee.one/Resource/Script/BiliComic/BiliComic_remove_ads.js
     interval: 86400
 

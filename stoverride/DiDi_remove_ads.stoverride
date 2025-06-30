@@ -20,6 +20,7 @@ date: |-
   22025-06-03 19:47:21
 
 rules:
+# 拦截广告下发
   - DOMAIN,gwp.xiaojukeji.com,REJECT
   - AND,((IP-ASN,45090,no-resolve),(DEST-PORT,25641),(PROTOCOL,TCP)),REJECT
   - AND,((IP-ASN,63646,no-resolve),(DEST-PORT,25641),(PROTOCOL,TCP)),REJECT
@@ -80,14 +81,19 @@ http:
     - "2402:840:d001::4"
 
   url-rewrite:
+# 活动弹窗
     - >-
       ^https:\/\/res\.xiaojukeji\.com\/resapi\/activity\/mget - reject-dict
+# 顶部活动通知
     - >-
       ^https:\/\/lion\.didialift\.com\/broker\/\? - reject-dict
+# 重逢专属福利
     - >-
       ^https:\/\/conf\.diditaxi\.com\.cn\/homepage\/v1\/other\/slow\? - reject-dict
+# 首页 - 拼车功能运营卡片配置数据
     - >-
       ^https:\/\/ct\.xiaojukeji\.com\/agent\/v3\/feeds\? - reject-dict
+# 打车页面 - 运营卡片配置数据
     - >-
       ^https:\/\/conf\.diditaxi\.com\.cn\/dynamic\/conf - reject-dict
 

@@ -27,6 +27,7 @@ http:
     - "img.mofyi.com"
 
   url-rewrite:
+# 广告下发
     - >-
       ^https:\/\/cili\.xfuse\.fun\/s\/ - reject
 

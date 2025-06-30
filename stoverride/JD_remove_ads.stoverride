@@ -25,6 +25,7 @@ http:
     - "api.m.jd.com"
 
   url-rewrite:
+# AND, ((PROTOCOL, TCP), (DOMAIN, api.m.jd.com)), REJECT-NO-DROP // 会导致商品评价无法查看
     - >-
       ^http:\/\/\w{32}\.jddebug\.com\/diagnose\? - reject
     - >-
@@ -40,12 +41,12 @@ http:
 
   script:
     - match: ^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=(deliverLayer|getTabHomeInfo|myOrderInfo|orderTrackBusiness|personinfoBusiness|start|welcomeHome)
-      name: "移除京东广告_17"
+      name: "移除京东广告_18"
       type: response
       require-body: true
 
 script-providers:
-  "移除京东广告_17":
+  "移除京东广告_18":
     url: https://kelee.one/Resource/Script/JD/JD_remove_ads.js
     interval: 86400
 

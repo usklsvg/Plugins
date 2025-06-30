@@ -27,19 +27,21 @@ http:
     - "open-cms-api.quark.cn"
 
   url-rewrite:
+# 小说底部文案广告
     - >-
       ^https:\/\/huichuan\.sm\.cn\/nativead$ - reject
     - >-
       ^https:\/\/stars\.shuqireader\.com\/kkios\/render\/load\/resource\/appConfig$ - reject-dict
 
   script:
+# 精简我的页面
     - match: ^https:\/\/open-cms-api\.quark\.cn\/open-cms
-      name: "精简我的页面_15"
+      name: "精简我的页面_17"
       type: response
       require-body: true
 
 script-providers:
-  "精简我的页面_15":
+  "精简我的页面_17":
     url: https://kelee.one/Resource/Script/QuarkBrowser/QuarkBrowser_remove_ads.js
     interval: 86400
 

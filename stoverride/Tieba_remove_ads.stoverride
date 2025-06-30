@@ -32,8 +32,10 @@ http:
     - "tieba.baidu.com"
 
   url-rewrite:
+# 弹窗广告
     - >-
       ^https:\/\/tieba\.baidu\.com\/c\/f\/member\/getMemberPopups$ - reject-dict
+# 搜索填充词
     - >-
       ^https:\/\/tiebac\.baidu\.com\/c\/f\/search\/discover$ - reject-dict
 
@@ -69,14 +71,14 @@ http:
 
   script:
     - match: ^http(s:\/\/tiebac|:\/\/c\.tieba)\.baidu\.com\/c\/f\/(frs\/(page|threadlist|generalTabList)|pb\/page|excellent\/personalized)\?cmd
-      name: "Proto处理_24"
+      name: "Proto处理_31"
       type: response
       require-body: true
       binary-mode: true
       timeout: 10
 
 script-providers:
-  "Proto处理_24":
+  "Proto处理_31":
     url: https://kelee.one/Resource/Script/Tieba/tieba-proto.js
     interval: 86400
 

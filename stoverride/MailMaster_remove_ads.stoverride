@@ -26,10 +26,13 @@ http:
     - "dashi.163.com"
 
   url-rewrite:
+# 拦截HTTPDNS
     - >-
       ^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/http\/urlConfig\.do$ - reject-dict
+# 签到任务
     - >-
       ^https:\/\/dashi\.163\.com\/task-center-api\/fapi\/task\/list$ - reject-dict
+# 扩容推广
     - >-
       ^https:\/\/appconf\.mail\.163\.com\/mailoperating\/mailmaster\/api\/operator\/get$ - reject-dict
 

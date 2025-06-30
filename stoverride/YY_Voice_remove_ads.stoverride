@@ -20,7 +20,9 @@ date: |-
   2025-06-02 01:02:42
 
 rules:
+# 开屏广告
   - DOMAIN,splash.yy.com,REJECT
+# 广告下发
   - DOMAIN,dsp-ad.yy.com,REJECT
   - DOMAIN,ysad.yy.com,REJECT
 
@@ -35,8 +37,10 @@ http:
     - "yyapp-idx.yy.com"
 
   url-rewrite:
+# 首页 - 下拉进入直播间
     - >-
       ^https:\/\/yyapp-fastnet\.yy\.com\/dispatch\? - reject-dict
+# 首页 - 弹窗
     - >-
       ^https:\/\/data\.3g\.yy\.com\/popup\/topLiveCardPopup\? - reject-dict
     - >-

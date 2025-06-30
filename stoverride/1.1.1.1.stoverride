@@ -26,31 +26,33 @@ http:
     - "zero-trust-client.cloudflareclient.com"
 
   script:
+# WARP Personal
     - match: ^https?:\/\/(api|zero-trust-client)\.cloudflareclient\.com\/(.*)\/reg\/[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$
-      name: "WARP Personal Request_12"
+      name: "WARP Personal Request_13"
       type: request
       require-body: true
 
     - match: ^https?:\/\/(api|zero-trust-client)\.cloudflareclient\.com\/(.*)\/reg\/[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$
-      name: "WARP Personal Response_13"
+      name: "WARP Personal Response_14"
       type: response
       require-body: true
 
+# Cloudflare for Teams
     - match: ^https?:\/\/(api|zero-trust-client)\.cloudflareclient\.com\/(.*)\/reg\/t\.[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$
-      name: "WARP Personal Request_12"
+      name: "WARP Personal Request_13"
       type: request
       require-body: true
 
     - match: ^https?:\/\/(api|zero-trust-client)\.cloudflareclient\.com\/(.*)\/reg\/t\.[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$
-      name: "WARP Personal Response_13"
+      name: "WARP Personal Response_14"
       type: response
       require-body: true
 
 script-providers:
-  "WARP Personal Request_12":
+  "WARP Personal Request_13":
     url: https://raw.githubusercontent.com/VirgilClyne/Cloudflare/main/js/1.1.1.1.request.js
     interval: 86400
-  "WARP Personal Response_13":
+  "WARP Personal Response_14":
     url: https://raw.githubusercontent.com/VirgilClyne/Cloudflare/main/js/1.1.1.1.response.js
     interval: 86400
 

@@ -26,6 +26,7 @@ http:
     - "app-conf.ds.163.com"
 
   url-rewrite:
+# 广告下发
     - >-
       ^https:\/\/god\.gameyw\.netease\.com\/v\d\/ad - reject
 

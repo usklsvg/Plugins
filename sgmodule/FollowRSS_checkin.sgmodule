@@ -11,6 +11,7 @@
 #!arguments=cookie, token
 
 [Script]
+# 定时签到
 Follow每日签到 = type=cron, cronexp={cron}, script-path=https://kelee.one/Resource/Script/FollowRSS/FollowRSS_checkin.js, timeout=120, argument=token="{{{token}}}"&cookie="{{{cookie}}}", script-update-interval=-1
 
 [MITM]

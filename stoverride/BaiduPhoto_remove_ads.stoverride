@@ -26,8 +26,10 @@ http:
     - "mbd.baidu.com"
 
   url-rewrite:
+# 一刻核心经常变更的配置
     - >-
       ^https:\/\/pan\.baidu\.com\/act\/api\/conf\?.*conf_key=youa_core_config_ios - reject-dict
+# 弹窗推广
     - >-
       ^https:\/\/pan\.baidu\.com\/youai\/material\/v1\/getbynavid\?.*nav_id=1 - reject-dict
 

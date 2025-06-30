@@ -25,6 +25,7 @@ http:
     - "api.xiaoheihe.cn"
 
   url-rewrite:
+# 开屏广告
     - >-
       ^https:\/\/api\.xiaoheihe\.cn\/account\/get_ads_info_v2 - reject-dict
 

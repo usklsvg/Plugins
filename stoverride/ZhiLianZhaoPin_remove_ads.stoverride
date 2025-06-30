@@ -26,10 +26,13 @@ http:
     - "cgate.zhaopin.com"
 
   url-rewrite:
+# 广告下发
     - >-
       ^https:\/\/(ask|cgate)\.zhaopin\.com\/operation\/ad\/ - reject
+# 弹窗 - 补充最新工作经历
     - >-
       ^https:\/\/cgate\.zhaopin\.com\/resumeapi\/resumeCheck\/positionDetailBottomTipCheck$ - reject-dict
+# 职位详情 - 竞争力分析、简历置顶推广
     - >-
       ^https:\/\/cgate\.zhaopin\.com\/bdp\/commercial\/queryLinkData$ - reject
 

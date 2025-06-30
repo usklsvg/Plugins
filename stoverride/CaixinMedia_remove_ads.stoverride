@@ -27,50 +27,59 @@ http:
     - "m*.caixin.com"
 
   url-rewrite:
+# 财新数据通
     - >-
       ^https:\/\/entities\.caixin\.com\/api\/(dataplus\/promotionHints|public\/push\/appIndex|public\/recommendNews) - reject-dict
+# 广告样式
     - >-
       ^https:\/\/gateway\.caixin\.com\/api\/app-api\/cxAdInfo\/selectIndexAdInfo - reject-dict
     - >-
       ^https:\/\/mappsv5\.caixin\.com\/channelv5\/article_ad_ios_info\.json - reject-dict
+# 文章中间推广、文章底部相关阅读
     - >-
       ^https:\/\/gg\.caixin\.com\/s\?z=caixin&slot=\d+ - reject-dict
+# 首页弹出框
     - >-
       ^https:\/\/msgapi\.caixin\.com\/msg_api\/annmsg\/annlist - reject-dict
 
   script:
+# 财新数据通
     - match: ^https:\/\/entities\.caixin\.com\/api\/dataplus\/columns
-      name: "移除财新数据通广告_18"
+      name: "移除财新数据通广告_23"
       type: response
       require-body: true
 
+# 文章底部广告、搜索框填充词
     - match: ^https:\/\/gateway\.caixin\.com\/api\/app-api\/(caixinapp\/appinfo|search\/getkeyword)
-      name: "移除财新数据通广告_18"
+      name: "移除财新数据通广告_23"
       type: response
       require-body: true
 
+# 财新FM
     - match: ^https:\/\/gateway\.caixin\.com\/api\/app-content\/fm\/index\/list\?
-      name: "移除财新数据通广告_18"
+      name: "移除财新数据通广告_23"
       type: response
       require-body: true
 
+# 开屏广告、文章顶部横幅
     - match: ^https:\/\/gg\.caixin\.com\/s\?z=caixin&op=\d
-      name: "移除财新数据通广告_18"
+      name: "移除财新数据通广告_23"
       type: response
       require-body: true
 
+# 文章中间推广、文章底部相关阅读
     - match: ^https:\/\/mappsv5\.caixin\.com\/articlev5\/\d+\/\d+\.json$
-      name: "移除财新数据通广告_18"
+      name: "移除财新数据通广告_23"
       type: response
       require-body: true
 
     - match: ^https:\/\/mapps?v5\.caixin\.com\/(channelv5\/list|\/?index_page_v5\/)\w+
-      name: "移除财新数据通广告_18"
+      name: "移除财新数据通广告_23"
       type: response
       require-body: true
 
 script-providers:
-  "移除财新数据通广告_18":
+  "移除财新数据通广告_23":
     url: https://kelee.one/Resource/Script/CaixinMedia/CaixinMedia_remove_ads.js
     interval: 86400
 

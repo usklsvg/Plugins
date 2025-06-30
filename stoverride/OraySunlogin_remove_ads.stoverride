@@ -25,6 +25,7 @@ http:
     - "client-api-v2.oray.com"
 
   url-rewrite:
+# 首页横幅
     - >-
       ^https:\/\/client-api-v2\.oray\.com\/materials\/SLCC_iOS_DEVICE_FREE\? - reject-dict
 

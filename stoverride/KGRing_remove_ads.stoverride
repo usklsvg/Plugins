@@ -25,6 +25,7 @@ http:
     - "api.ring.kugou.com"
 
   url-rewrite:
+# DIY社区 - 关注 - 大家都在关注
     - >-
       ^http:\/\/api\.ring\.kugou\.com\/user\/notice\/recommend$ - reject-dict
 

@@ -28,8 +28,10 @@ http:
     - "mp.weixin.qq.com"
 
   url-rewrite:
+# ^http:\/\/\w+\.wxs\.qq\.com\/\d+\/\d+\/(snscosdownload|snssvpdownload)\/(SH|SZ)\/reserved\/\w+ reject-dict
     - >-
       ^https:\/\/mp\.weixin\.qq\.com\/mp\/(cps_product_info|getappmsgad|jsmonitor|masonryfeed|relatedarticle)\? - reject-dict
+# 移除微信公众号文章底栏都在搜 @wish
     - >-
       ^https:\/\/mp\.weixin\.qq\.com\/mp\/relatedsearchword - reject-dict
 

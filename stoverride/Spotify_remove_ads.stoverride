@@ -28,14 +28,16 @@ http:
     - "*.spotify.com"
 
   url-rewrite:
+# 播放广告
     - >-
       ^https:\/\/.+\.spotify\.com\/pendragon\/ - reject-dict
+# 恢复歌手和专辑列表的正常展示
     - >-
       ^https:\/\/(.+)\.spotify\.com(:443)?\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/(.*)platform=iphone https://$1.spotify.com$2/$3/$4platform=ipad header
 
   script:
     - match: ^https:\/\/.+\.spotify\.com(:443)?\/(?:bootstrap|user-customization-service)
-      name: "Protobuf处理_20"
+      name: "Protobuf处理_22"
       type: response
       require-body: true
       binary-mode: true
@@ -44,7 +46,7 @@ http:
         [{tab},{useractivity}]
 
 script-providers:
-  "Protobuf处理_20":
+  "Protobuf处理_22":
     url: https://kelee.one/Resource/Script/Spotify/Spotify_remove_ads.js
     interval: 86400
 

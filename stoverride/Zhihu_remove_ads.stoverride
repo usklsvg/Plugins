@@ -20,6 +20,7 @@ date: |-
   2025-05-13 15:17:08
 
 rules:
+# 知乎
   - DOMAIN,appcloud.zhihu.com,REJECT
   - DOMAIN,appcloud2.in.zhihu.com,REJECT
   - DOMAIN,crash2.zhihu.com,REJECT
@@ -42,6 +43,7 @@ http:
     - "zhuanlan.zhihu.com"
 
   url-rewrite:
+# 首页 - 悬浮图标、顶部横幅、开屏广告、关注页推荐、推荐信息流、热榜信息流、热榜直播、回答底部卡片
     - >-
       ^https:\/\/api\.zhihu\.com\/commercial_api\/ - reject-dict
     - >-
@@ -50,19 +52,22 @@ http:
       ^https:\/\/api\.zhihu\.com\/(?:moments\/lastread|drama\/hot-drama-list) - reject-dict
     - >-
       ^https:\/\/api\.zhihu\.com\/root\/window - reject-dict
+# 会员页面 - 弹窗、悬浮动图
     - >-
       ^https:\/\/api\.zhihu\.com\/(?:bazaar\/float_window|market\/popovers_v2) - reject-dict
-# ^https:\/\/www\.zhihu\.com\/appview\/v3\/zhmore reject
+# 搜索页 - 关键词、猜你想搜
     - >-
       ^https:\/\/api\.zhihu\.com\/search\/(hot_search|preset_words) - reject-dict
     - >-
       ^https:\/\/www\.zhihu\.com\/api\/v4\/search\/related_queries\/(?:article|answer)\/\d+ - reject-dict
+# 回答详情页 - 评论区顶部、下一个回答
     - >-
       ^https:\/\/api\.zhihu\.com\/comment_v5\/(?:articles|answers)\/\d+\/list-headers - reject-dict
     - >-
       ^https:\/\/api\.zhihu\.com\/prague\/related_suggestion_native\/feed\? - reject-dict
     - >-
       ^https:\/\/api\.zhihu\.com\/v5\.1\/topics\/answer\/\d+\/relation - reject-dict
+# 其他 - 服务器推送配置
     - >-
       ^https:\/\/api\.zhihu\.com\/ab\/api\/v1\/products\/zhihu\/platforms\/ios\/config - reject-dict
     - >-
@@ -71,6 +76,7 @@ http:
       ^https:\/\/appcloud2\.zhihu\.com\/v3\/resource\?group_name=mp - reject-dict
     - >-
       ^https:\/\/link\.zhihu\.com\/\?target=(?:https?)?(?:%3A|:)?(?:\/\/|%2F%2F)?(.*) http://$1 302
+# 网页版去广告
     - >-
       ^https:\/\/api\.zhihu\.com\/distribute\/rhea\/qa_ad_card\/h5\/recommendation\? - reject-dict
     - >-
@@ -98,57 +104,57 @@ http:
 
   script:
     - match: ^https:\/\/(?:api|page-info)\.zhihu\.com\/(?:answers|articles)\/v2\/\d+
-      name: "移除回答底部卡片推广_50"
+      name: "移除回答底部卡片推广_58"
       type: response
       require-body: true
 
     - match: ^https:\/\/api\.zhihu\.com\/commercial_api\/app_float_layer
-      name: "移除回答底部卡片推广_50"
+      name: "移除回答底部卡片推广_58"
       type: response
       require-body: true
 
     - match: ^https:\/\/api\.zhihu\.com\/feed\/render\/tab\/config\?
-      name: "移除回答底部卡片推广_50"
+      name: "移除回答底部卡片推广_58"
       type: response
       require-body: true
 
     - match: ^https:\/\/api\.zhihu\.com\/(?:moments_v3|topstory\/hot-lists\/total|topstory\/recommend)
-      name: "移除回答底部卡片推广_50"
+      name: "移除回答底部卡片推广_58"
       type: response
       require-body: true
 
     - match: ^https:\/\/api\.zhihu\.com\/root\/tab
-      name: "移除回答底部卡片推广_50"
+      name: "移除回答底部卡片推广_58"
       type: response
       require-body: true
 
     - match: ^https:\/\/api\.zhihu\.com\/v2\/topstory\/hot-lists\/everyone-seeing\?
-      name: "移除回答底部卡片推广_50"
+      name: "移除回答底部卡片推广_58"
       type: response
       require-body: true
 
     - match: ^https:\/\/api\.zhihu\.com\/next-(?:bff|data|render(?!.*sub_scenes=billboard_weekly))
-      name: "移除回答底部卡片推广_50"
+      name: "移除回答底部卡片推广_58"
       type: response
       require-body: true
 
     - match: ^https:\/\/www\.zhihu\.com\/api\/v4\/(?:articles|answers)\/\d+\/recommendations?\?
-      name: "移除回答底部卡片推广_50"
+      name: "移除回答底部卡片推广_58"
       type: response
       require-body: true
 
     - match: ^https:\/\/appcloud2\.zhihu\.com\/v3\/config
-      name: "移除回答底部卡片推广_50"
+      name: "移除回答底部卡片推广_58"
       type: response
       require-body: true
 
     - match: ^https:\/\/m-cloud\.zhihu\.com\/api\/cloud\/zhihu\/config\/all\?
-      name: "移除回答底部卡片推广_50"
+      name: "移除回答底部卡片推广_58"
       type: response
       require-body: true
 
 script-providers:
-  "移除回答底部卡片推广_50":
+  "移除回答底部卡片推广_58":
     url: https://kelee.one/Resource/Script/Zhihu/Zhihu_remove_ads.js
     interval: 86400
 

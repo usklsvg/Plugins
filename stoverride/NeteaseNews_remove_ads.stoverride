@@ -20,6 +20,7 @@ date: |-
   2025-05-13 15:17:08
 
 rules:
+# 放行规则
   - DOMAIN,nex.163.com,DIRECT
   - DOMAIN,gw.m.163.com,DIRECT
 
@@ -53,22 +54,22 @@ http:
 
   script:
     - match: ^https:\/\/nex\.163\.com\/q
-      name: "移除网易新闻广告_23"
+      name: "移除网易新闻广告_24"
       type: response
       require-body: true
 
     - match: ^https:\/\/gw\.m\.163\.com\/nc\/api\/v1\/feed\/dynamic\/headline-list\?
-      name: "移除网易新闻广告_23"
+      name: "移除网易新闻广告_24"
       type: response
       require-body: true
 
     - match: ^https:\/\/gw\.m\.163\.com\/nc\/api\/v1\/search\/hot-word
-      name: "移除网易新闻广告_23"
+      name: "移除网易新闻广告_24"
       type: response
       require-body: true
 
 script-providers:
-  "移除网易新闻广告_23":
+  "移除网易新闻广告_24":
     url: https://kelee.one/Resource/Script/NeteaseNews/NeteaseNews_remove_ads.js
     interval: 86400
 

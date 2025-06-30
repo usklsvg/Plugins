@@ -26,14 +26,15 @@ http:
 
 cron:
   script:
-    - name: "Follow每日签到_16"
+# 定时签到
+    - name: "Follow每日签到_17"
       cron: {cron}
       timeout: 120
       argument: |-
         [{token},{cookie}]
 
 script-providers:
-  "Follow每日签到_16":
+  "Follow每日签到_17":
     url: https://kelee.one/Resource/Script/FollowRSS/FollowRSS_checkin.js
     interval: 86400
 
