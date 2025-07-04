@@ -17,36 +17,40 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-06-08 03:40:18
+  2025-07-04 16:36:19
 
 rules:
   - AND,((DOMAIN,spclient.wg.spotify.com),(PROTOCOL,QUIC)),REJECT
+  - AND,((DOMAIN,gae2-spclient.spotify.com),(PROTOCOL,QUIC)),REJECT
+  - AND,((DOMAIN,guc3-spclient.spotify.com),(PROTOCOL,QUIC)),REJECT
 
 http:
 
   mitm:
-    - "*.spotify.com"
+    - "gae2-spclient.spotify.com"
+    - "guc3-spclient.spotify.com"
+    - "spclient.wg.spotify.com"
 
   url-rewrite:
 # 播放广告
     - >-
-      ^https:\/\/.+\.spotify\.com\/pendragon\/ - reject-dict
+      ^https?:\/\/(?:gae2-spclient|guc3-spclient|spclient\.wg)\.spotify\.com(?::443)?\/pendragon\/ - reject-dict
 # 恢复歌手和专辑列表的正常展示
     - >-
-      ^https:\/\/(.+)\.spotify\.com(:443)?\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/(.*)platform=iphone https://$1.spotify.com$2/$3/$4platform=ipad header
+      ^https?:\/\/(gae2-spclient|guc3-spclient|spclient\.wg)\.spotify\.com(?::443)?\/artistview\/v1\/artist\/(.*)&platform=iphone https://$1.spotify.com/artistview/v1/artist/$2&platform=ipad header
 
   script:
-    - match: ^https:\/\/.+\.spotify\.com(:443)?\/(?:bootstrap|user-customization-service)
-      name: "Protobuf处理_22"
+    - match: ^https?:\/\/(?:gae2-spclient|guc3-spclient|spclient\.wg)\.spotify\.com(?::443)?\/(?:bootstrap|user-customization-service)
+      name: "Protobuf处理_24"
       type: response
       require-body: true
       binary-mode: true
-      timeout: 10
+      timeout: 5
       argument: |-
         [{tab},{useractivity}]
 
 script-providers:
-  "Protobuf处理_22":
+  "Protobuf处理_24":
     url: https://kelee.one/Resource/Script/Spotify/Spotify_remove_ads.js
     interval: 86400
 
