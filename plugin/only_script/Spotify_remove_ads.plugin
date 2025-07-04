@@ -8,14 +8,14 @@
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Spotify.png
-#!date=2025-06-08 03:40:18
+#!date=2025-07-04 16:36:19
 
 [Argument]
 tab=switch, "false", "true", tag=移除底栏创建按钮, desc=此开关控制是否移除底栏创建按钮
 useractivity=switch, "true", "false", tag=启用Apple设备接力, desc=此开关控制是否使用Apple设备接力
 
 [Script]
-http-response ^https:\/\/.+\.spotify\.com(:443)?\/(?:bootstrap|user-customization-service) script-path=https://kelee.one/Resource/Script/Spotify/Spotify_remove_ads.js, requires-body=true, binary-body-mode=true, timeout=10, argument=[{tab},{useractivity}], tag=Protobuf处理
+http-response ^https?:\/\/(?:gae2-spclient|guc3-spclient|spclient\.wg)\.spotify\.com(?::443)?\/(?:bootstrap|user-customization-service) script-path=https://kelee.one/Resource/Script/Spotify/Spotify_remove_ads.js, requires-body=true, binary-body-mode=true, timeout=5, argument=[{tab},{useractivity}], tag=Protobuf处理
 
 [MitM]
-hostname=*.spotify.com
+hostname=gae2-spclient.spotify.com, guc3-spclient.spotify.com, spclient.wg.spotify.com
