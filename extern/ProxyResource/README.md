@@ -32,7 +32,7 @@
 > 
 > **If you are an English user, please click the `Config` button, It is an example of the English configuration of Loon;**
 > 
-> 你也可以查阅[推荐的Loon功能配置图](https://kelee.one/Tool/Loon/Lcf/zh-CN/Resource/ConfigurationDiagram.png)，以便正确配置Loon的各项功能。
+> 你也可以查阅[推荐的Loon功能配置图](https://raw.githubusercontent.com/luestr/ProxyResource/main/Tool/Loon/Lcf/zh-CN/Resource/ConfigurationDiagram.png)，以便正确配置Loon的各项功能。
 
 [![最小配置](Resource/IMG/Button/Button-1.png)](https://t.me/ibilibili/135)
 [![进阶配置](Resource/IMG/Button/Button-2.png)](https://t.me/ibilibili/136)
@@ -60,7 +60,7 @@
     <th>名称</th>
   </tr>
   <tr>
-    <td rowspan="141"><strong>去广告插件</strong></td>
+    <td rowspan="144"><strong>去广告插件</strong></td>
   <tr>
     <td>001</td>
     <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Lpx/BlockAdvertisers.lpx">广告平台拦截器</a></td>
@@ -620,6 +620,18 @@
   <tr>
     <td>140</td>
     <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Lpx/ZAKER_remove_ads.lpx">ZAKER去广告</a></td>
+  </tr>
+  <tr>
+    <td>141</td>
+    <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Lpx/Yitian_remove_ads.lpx">一甜相机去广告</a></td>
+  </tr>
+  <tr>
+    <td>142</td>
+    <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Lpx/SnowCamera_remove_ads.lpx">B612咔叽去广告</a></td>
+  </tr>
+  <tr>
+    <td>143</td>
+    <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Lpx/WutaCamera_remove_ads.lpx">无他相机去广告</a></td>
   </tr>
     <td></td>
     <td></td>
