@@ -1,0 +1,34 @@
+name: |-
+  小米音箱去广告
+desc: |-
+  移除开屏广告、应用内横幅广告及弹窗广告。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/XiaomiSpeaker.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id1270594280
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://github.com/luestr/ProxyResource/blob/main/README.md
+date: |-
+  2025-07-07 19:51:31
+
+http:
+
+  mitm:
+    - "marketing-aibox.v.mitvos.com"
+
+  url-rewrite:
+# 开屏广告、首页横幅推广、音源弹窗推广
+    - >-
+      ^https:\/\/marketing-aibox\.v\.mitvos\.com\/advertise\/ - reject-dict
+# 促销弹窗
+    - >-
+      ^https:\/\/marketing-aibox\.v\.mitvos\.com\/payGuide\/halfScreenMulti\/cache\? - reject-dict
+

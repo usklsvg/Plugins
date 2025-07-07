@@ -15,7 +15,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-06-29 18:20:40
+  2025-07-07 19:27:38
 
 rules:
 # Outlook
@@ -103,7 +103,6 @@ http:
     - "us.l.qq.com"
     - "lanfanapp.com"
     - "api.xiachufang.com"
-    - "info.mina.xiaoaisound.com"
     - "api.xiangji.qq.com"
     - "video-dsp.pddpic.com"
     - "images.pinduoduo.com"
@@ -345,18 +344,4 @@ http:
       ^https?:\/\/cmds\.omesoft\.com\/HypnotistWS\.asmx response-replace-regex <GetADResult>\.\*\?<\/GetADResult> <GetADResult>{"ret":0,"msg":"正常","err_code":0,"data":{"ad":[]}}</GetADResult>
     - >-
       ^https?:\/\/api\.fenxianglife\.com\/njia\/index\/popup\/v2 response-jq .data.list=[]
-
-  script:
-# 小爱音箱 - 开屏广告和横幅 - by xream
-    - match: ^https?:\/\/info\.mina\.xiaoaisound\.com\/(advertise|payGuide)\/
-      name: "echoResponse_190"
-      type: request
-      timeout: 60
-      argument: |-
-        text=%7B%22code%22%3A0%2C%22message%22%3A%22Success%22%2C%22data%22%3A%5B%5D%7D
-
-script-providers:
-  "echoResponse_190":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/echo-response.js
-    interval: 86400
 
