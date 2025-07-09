@@ -20,7 +20,6 @@ date: |-
   2025-05-13 15:17:08
 
 rules:
-# 广告下发
   - DOMAIN,adx.zuoyebang.com,REJECT
 
 http:
@@ -30,18 +29,14 @@ http:
     - "apivip.kuaiduizuoye.com"
 
   url-rewrite:
-# 广告配置
     - >-
       ^https:\/\/www\.kuaiduizuoye\.com\/init\/ad\/ - reject-dict
-# 活动配置
     - >-
       ^https:\/\/www\.kuaiduizuoye\.com\/activity\/init\/checkappconfig$ - reject-dict
-# 首页 - 横幅推广、悬浮窗
     - >-
       ^https:\/\/www\.kuaiduizuoye\.com\/kdapi\/conf\/appbannersv3$ - reject-dict
     - >-
       ^https:\/\/www\.kuaiduizuoye\.com\/kdapi\/conf\/initbanner$ - reject-dict
-# 我的页面
     - >-
       ^https:\/\/apivip\.kuaiduizuoye\.com\/viponline\/scancode\/mycard$ - reject-dict
 

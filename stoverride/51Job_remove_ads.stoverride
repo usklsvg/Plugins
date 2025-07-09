@@ -27,22 +27,16 @@ http:
     - "cupid.51jobapp.com"
 
   url-rewrite:
-# 开屏广告
     - >-
       ^https:\/\/appapi\.51job\.com\/api\/market\/get_launch\.php\? - reject-dict
-# 职位 - 下拉二楼
     - >-
       ^https:\/\/cupid\.51job(app)?\.com\/open\/51job-activities\/secJob\/queryHomeSecondConfigV2\? - reject-dict
-# 职位 - 职位详情 - 竞争力分析
     - >-
       ^https:\/\/cupid\.51job(app)?\.com\/open\/noauth\/jobs\/detail\/sesame-competitive\/ - reject-dict
-# 简历向导
     - >-
       ^https:\/\/cupid\.51jobapp(app)?\.com\/open\/resume\/strategy\/resume-build\? - reject-dict
-# 弹窗
     - >-
       ^https:\/\/cupid\.51job(app)?\.com\/open\/noauth\/popUp\/ - reject-dict
-# 消息页面 - 无忧小助手 - 横幅推广
     - >-
       ^https:\/\/cupid\.51job(app)?\.com\/open\/operation\/get\/banner-list\? - reject-dict
 

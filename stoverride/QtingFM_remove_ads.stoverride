@@ -29,19 +29,14 @@ http:
     - "search.qtfm.cn"
 
   url-rewrite:
-# 首页 - 头图
     - >-
       ^https:\/\/app\.qtfm\.cn\/recommendapi\/v\d\/emotion$ - reject
-# 首页 - 搜索填充词
     - >-
       ^https:\/\/search\.qtfm\.cn\/v\d\/keyword\/default$ - reject
-# 我听 - 猜你喜欢
     - >-
       ^https:\/\/app\.qtfm\.cn\/m-bff\/v\d\/i_listen\/guess_you_like\? - reject-dict
-# 我听 - 收藏 - 专辑
     - >-
       ^https:\/\/recpage-c\.qtfm\.cn\/v\d\/favorites$ - reject-dict
-# 我听 - 关注 - 推荐主播
     - >-
       ^https:\/\/user\.qtfm\.cn\/u\d\/api\/v\d\/user\/following_podcaster\? - reject-dict
 

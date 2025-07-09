@@ -25,18 +25,14 @@ http:
     - "bd-api.kuwo.cn"
 
   url-rewrite:
-# 广告下发
     - >-
       ^https:\/\/bd-api\.kuwo\.cn\/api\/play\/advert\/ - reject-dict
-# 弹窗
     - >-
       ^https:\/\/bd-api\.kuwo\.cn\/api\/popup\/ - reject-dict
-# 首页和搜索页面 - 横幅推广
     - >-
       ^https:\/\/bd-api\.kuwo\.cn\/api\/service\/banner\/ - reject-dict
     - >-
       ^https:\/\/bd-api\.kuwo\.cn\/api\/service\/home\/module\?.*&moduleId=6 - reject-dict
-# 首页 - 低价会员推广文本
     - >-
       ^https:\/\/bd-api\.kuwo\.cn\/api\/pay\/vip\/lowPriceText\? - reject-dict
     - >-

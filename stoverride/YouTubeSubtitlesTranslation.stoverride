@@ -31,23 +31,22 @@ http:
     - "youtubei.googleapis.com"
 
   script:
-# YouTube字幕翻译
     - match: ^https?:\/\/(www|m|tv)\.youtube\.com\/youtubei\/v1\/player\?(.*)
-      name: "JSON·YouTube播放器请求_18"
+      name: "JSON·YouTube播放器请求_17"
       type: request
       require-body: true
       argument: |-
         [{Type},{AutoCC},{ShowOnly},{Position}]
 
     - match: ^https?:\/\/(www|m|tv)\.youtube\.com\/youtubei\/v1\/player\?(.*)
-      name: "JSON·YouTube播放器响应_19"
+      name: "JSON·YouTube播放器响应_18"
       type: response
       require-body: true
       argument: |-
         [{Type},{AutoCC},{ShowOnly},{Position}]
 
     - match: ^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/player\?(.*)
-      name: "JSON·YouTube播放器请求_18"
+      name: "JSON·YouTube播放器请求_17"
       type: request
       require-body: true
       binary-mode: true
@@ -55,7 +54,7 @@ http:
         [{Type},{AutoCC},{ShowOnly},{Position}]
 
     - match: ^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/player\?(.*)
-      name: "JSON·YouTube播放器响应_19"
+      name: "JSON·YouTube播放器响应_18"
       type: response
       require-body: true
       binary-mode: true
@@ -63,7 +62,7 @@ http:
         [{Type},{AutoCC},{ShowOnly},{Position}]
 
     - match: ^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/get_watch\?(.*)
-      name: "JSON·YouTube播放器响应_19"
+      name: "JSON·YouTube播放器响应_18"
       type: response
       require-body: true
       binary-mode: true
@@ -71,32 +70,31 @@ http:
         [{Type},{AutoCC},{ShowOnly},{Position}]
 
     - match: ^https?:\/\/(www|m)\.youtube\.com\/api\/timedtext\?(.*)
-      name: "JSON·YouTube播放器请求_18"
+      name: "JSON·YouTube播放器请求_17"
       type: request
       require-body: false
       argument: |-
         [{Type},{AutoCC},{ShowOnly},{Position}]
 
     - match: ^https?:\/\/(www|m)\.youtube\.com\/api\/timedtext\?(.*)subtype=(Official|External)
-      name: "YouTube合成定时文本响应_24"
+      name: "YouTube合成定时文本响应_23"
       type: response
       require-body: true
 
     - match: ^https?:\/\/(www|m)\.youtube\.com\/api\/timedtext\?(.*)subtype=Translate
-      name: "YouTube翻译定时文本响应_25"
+      name: "YouTube翻译定时文本响应_24"
       type: response
       require-body: true
 
-# YouTube Music歌词翻译
     - match: ^https?:\/\/music\.youtube\.com\/youtubei\/v1\/browse\?(.*)
-      name: "JSON·YouTube播放器请求_18"
+      name: "JSON·YouTube播放器请求_17"
       type: request
       require-body: true
       argument: |-
         [{Type},{AutoCC},{ShowOnly},{Position}]
 
     - match: ^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/browse\?(.*)
-      name: "JSON·YouTube播放器请求_18"
+      name: "JSON·YouTube播放器请求_17"
       type: request
       require-body: true
       binary-mode: true
@@ -104,27 +102,27 @@ http:
         [{Type},{AutoCC},{ShowOnly},{Position}]
 
     - match: ^https?:\/\/music\.youtube\.com\/youtubei\/v1\/browse\?(.*)subtype=Translate
-      name: "YouTube翻译定时文本响应_25"
+      name: "YouTube翻译定时文本响应_24"
       type: response
       require-body: true
 
     - match: ^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/browse\?(.*)subtype=Translate
-      name: "YouTube翻译定时文本响应_25"
+      name: "YouTube翻译定时文本响应_24"
       type: response
       require-body: true
       binary-mode: true
 
 script-providers:
-  "JSON·YouTube播放器请求_18":
+  "JSON·YouTube播放器请求_17":
     url: https://kelee.one/Resource/Script/YouTube/YouTube_Subtitles_Translate/YouTube_Subtitles_request.js
     interval: 86400
-  "JSON·YouTube播放器响应_19":
+  "JSON·YouTube播放器响应_18":
     url: https://kelee.one/Resource/Script/YouTube/YouTube_Subtitles_Translate/YouTube_Subtitles_response.js
     interval: 86400
-  "YouTube合成定时文本响应_24":
+  "YouTube合成定时文本响应_23":
     url: https://kelee.one/Resource/Script/YouTube/YouTube_Subtitles_Translate/YouTube_Composite_Subtitles_response.js
     interval: 86400
-  "YouTube翻译定时文本响应_25":
+  "YouTube翻译定时文本响应_24":
     url: https://kelee.one/Resource/Script/YouTube/YouTube_Subtitles_Translate/YouTube_Subtitles_Translate_response.js
     interval: 86400
 

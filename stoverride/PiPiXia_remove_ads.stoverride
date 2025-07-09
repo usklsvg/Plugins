@@ -26,13 +26,10 @@ http:
     - "api5-lq.pipix.com"
 
   url-rewrite:
-# 广告下发
     - >-
       ^https:\/\/api(5-lq)?\.pipix\.com\/api\/ad\/ - reject-dict
-# 横幅
     - >-
       ^https:\/\/api(5-lq)?\.pipix\.com\/bds\/banner\/ - reject-dict
-# 关注 - 近期热门皮友
     - >-
       ^https:\/\/api(5-lq)?\.pipix\.com\/bds\/feed\/follow_feed\/ - reject-dict
 

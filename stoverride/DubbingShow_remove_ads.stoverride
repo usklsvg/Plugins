@@ -35,14 +35,13 @@ http:
       ^https:\/\/iosapi\.peiyinxiu\.com\/api\/Union\/HomeData response-jq delpaths([["obj","data"]])
 
   script:
-# 首页 - 底部弹窗
     - match: ^https:\/\/iosapi\.peiyinxiu\.com\/Api\/Film\/GetConfigValue
-      name: "移除首页底部弹窗_22"
+      name: "移除首页底部弹窗_18"
       type: response
       require-body: true
 
 script-providers:
-  "移除首页底部弹窗_22":
+  "移除首页底部弹窗_18":
     url: https://kelee.one/Resource/Script/DubbingShow/DubbingShow_remove_ads.js
     interval: 86400
 

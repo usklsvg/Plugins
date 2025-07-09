@@ -32,10 +32,8 @@ http:
     - "az2-live.ksapisrv.com"
 
   url-rewrite:
-# 任务中心 - 挂件
     - >-
       ^https:\/\/az2-api\.ksapisrv\.com\/rest\/n\/taskCenter\/task\/report\? - reject-dict
-# 广告下发
     - >-
       ^https:\/\/az2-api\.ksapisrv\.com\/rest\/n\/ad\/ - reject-dict
 

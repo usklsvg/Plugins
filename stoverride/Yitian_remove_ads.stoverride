@@ -26,10 +26,8 @@ http:
     - "api-m2u.kuaishou.com"
 
   url-rewrite:
-# 广告下发
     - >-
       ^https:\/\/(m2u-api\.getkwai|api-m2u\.kuaishou)\.com\/api-server\/api\/v1\/ad\/ - reject-dict
-# 悬浮广告
     - >-
       ^https:\/\/(m2u-api\.getkwai|api-m2u\.kuaishou)\.com\/api-server\/api\/v4\/op\/actPositions\? - reject-dict
 

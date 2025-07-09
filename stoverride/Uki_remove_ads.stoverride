@@ -25,51 +25,42 @@ http:
     - "api.chenlongtech.cn"
 
   url-rewrite:
-# 首页悬浮窗
     - >-
       ^https:\/\/api\.chenlongtech\.cn\/v\d\/friends\/startInfo$ - reject-dict
-# 首页横幅
     - >-
       ^https:\/\/api\.chenlongtech\.cn\/v\d\/friends\/indexBanner$ - reject-dict
-# 弹窗配置
     - >-
       ^https:\/\/api\.chenlongtech\.cn\/v\d\/friends\/getPopup - reject-dict
     - >-
       ^https:\/\/api\.chenlongtech\.cn\/v\d\/friends\/allPopUpConfig$ - reject-dict
-# 广告配置
     - >-
       ^https:\/\/api\.chenlongtech\.cn\/v\d\/friends\/advConf$ - reject-dict
-# 私聊交友护航弹窗
     - >-
       ^https:\/\/api\.chenlongtech\.cn\/v\d\/user\/checkQTSheInsurance$ - reject-dict
 
   script:
-# 匹配卡横幅
     - match: ^https:\/\/api\.chenlongtech\.cn\/v\d\/lover\/productList
-      name: "移除匹配卡横幅_25"
+      name: "移除匹配卡横幅_19"
       type: response
       require-body: true
 
-# 密友横幅
     - match: ^https:\/\/api\.chenlongtech\.cn\/v\d\/friends\/closeFriend\/home
-      name: "移除匹配卡横幅_25"
+      name: "移除匹配卡横幅_19"
       type: response
       require-body: true
 
-# 娱乐页面横幅和悬浮窗配置
     - match: ^https:\/\/api\.chenlongtech\.cn\/v\d\/party\/config$
-      name: "移除匹配卡横幅_25"
+      name: "移除匹配卡横幅_19"
       type: response
       require-body: true
 
-# 广场搜索填充词
     - match: ^https:\/\/api\.chenlongtech\.cn\/v1\/post\/fetchSearchRecommend$
-      name: "移除匹配卡横幅_25"
+      name: "移除匹配卡横幅_19"
       type: response
       require-body: true
 
 script-providers:
-  "移除匹配卡横幅_25":
+  "移除匹配卡横幅_19":
     url: https://kelee.one/Resource/Script/Uki/Uki_remove_ads.js
     interval: 86400
 

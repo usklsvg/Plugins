@@ -25,7 +25,6 @@ http:
     - "mch.juhesaas.com"
 
   url-rewrite:
-# 广告下发
     - >-
       ^https:\/\/mch\.juhesaas\.com\/api\/advertisement\/ - reject-dict
 

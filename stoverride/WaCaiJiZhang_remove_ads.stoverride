@@ -25,13 +25,10 @@ http:
     - "jz.wacaijizhang.com"
 
   url-rewrite:
-# 右下角悬浮广告
     - >-
       ^https:\/\/jz\.wacaijizhang\.com\/api\/banners\/ribbon\? - reject-dict
-# 弹窗广告
     - >-
       ^https:\/\/jz\.wacaijizhang\.com\/api\/banners\/list\? - reject-dict
-# 首页 - 横幅推广语
     - >-
       ^https:\/\/jz\.wacaijizhang\.com\/api\/resource\/universal\/fetch$ - reject-dict
 

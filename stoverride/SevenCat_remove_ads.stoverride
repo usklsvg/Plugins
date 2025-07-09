@@ -34,31 +34,22 @@ http:
     - "cdn.wtzw.com"
 
   url-rewrite:
-# 开屏广告
     - >-
       ^https:\/\/api-cfg\.wtzw\.com\/v\d\/splash\/ - reject-dict
-# 腾格尔打卡喵喵歌
     - >-
       ^https:\/\/api-bc\.wtzw\.com\/api\/v4\/search\/dispose - reject-dict
-# 必读榜弹窗
     - >-
       ^https:\/\/api-bc\.wtzw\.com\/api\/v\d\/book-store\/config - reject-dict
-# 推荐书籍弹窗
     - >-
       ^https:\/\/api-bc\.wtzw\.com\/api\/v\d\/book-store\/push-book - reject-dict
-# 有声阅读界面广告横幅
     - >-
       ^https:\/\/api-bc\.wtzw\.com\/api\/v\d\/operation - reject-dict
-# 头条广告SDK
     - >-
       ^https:\/\/sf3-fe-tos\.pglstatp-toutiao\.com\/obj\/ad-pattern\/ - reject
-# 听书赚金币
     - >-
       ^https:\/\/api-gw\.wtzw\.com\/welf\/app\/v\d\/task\/red-packet - reject-dict
-# 正文底部推广
     - >-
       ^https:\/\/cdn\.wtzw\.com\/bookimg\/free\/api\/v\d\/reader\/reader-copy-paragraph-all\.json - reject-dict
-# 其他广告
     - >-
       ^https:\/\/api-cfg\.wtzw\.com\/v\d\/reward\/ - reject
     - >-

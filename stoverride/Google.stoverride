@@ -23,7 +23,6 @@ http:
     - "www.google.cn"
 
   url-rewrite:
-# ^https?:\/\/(www.)?(g|google)\.(cn|com\.hk) 307 https://www.google.com
     - >-
       ^https?:\/\/(www.)?(g|google)\.cn https://www.google.com 307
     - >-

@@ -25,13 +25,10 @@ http:
     - "marketing-aibox.v.mitvos.com"
 
   url-rewrite:
-# 开屏广告、首页横幅推广、音源弹窗推广
     - >-
       ^https:\/\/marketing-aibox\.v\.mitvos\.com\/advertise\/ - reject-dict
-# 促销弹窗
     - >-
       ^https:\/\/marketing-aibox\.v\.mitvos\.com\/payGuide\/halfScreenMulti\/(home|cache)\? - reject-dict
-# 音源标签页 - 促销横幅
     - >-
       ^https:\/\/marketing-aibox\.v\.mitvos\.com\/payGuide\/tabPage\? - reject-dict
 

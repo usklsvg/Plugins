@@ -20,7 +20,6 @@ date: |-
   2025-05-23 13:32:55
 
 rules:
-# 信息流广告
   - DOMAIN,kad.gotokeep.com,REJECT
 
 http:
@@ -29,25 +28,18 @@ http:
     - "api.gotokeep.com"
 
   url-rewrite:
-# 开屏广告
     - >-
       ^https:\/\/api\.gotokeep\.com\/op-engine-webapp\/v1\/ad\/ - reject-dict
-# 搜索填充词
     - >-
       ^https:\/\/api\.gotokeep\.com\/search\/v6\/default\/keyword\/list\? - reject-dict
-# 关注 - 关注推荐
     - >-
       ^https:\/\/api\.gotokeep\.com\/twins\/v4\/feed\/followPage\? - reject-dict
-# 弹窗
     - >-
       ^https:\/\/api\.gotokeep\.com\/guide-webapp\/v1\/popup\/getPopUp\? - reject-dict
-# 搜索 - 榜单
     - >-
       ^https:\/\/api\.gotokeep\.com\/search\/v5\/hotCourse\/list$ - reject-dict
-# 搜索 - 热门话题
     - >-
       ^https:\/\/api\.gotokeep\.com\/search\/v4\/hotHashtag\/list$ - reject-dict
-# 搜索 - 热搜推荐词
     - >-
       ^https:\/\/api\.gotokeep\.com\/search\/v4\/hotword\/list\? - reject-dict
 

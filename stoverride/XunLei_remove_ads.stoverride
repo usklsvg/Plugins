@@ -26,19 +26,17 @@ http:
     - "conf-m-ssl.xunlei.com"
 
   url-rewrite:
-# 首页 - 横幅推广
     - >-
       ^https:\/\/api-shoulei-ssl\.xunlei\.com\/flowhub\/v1\/slots:batchGet$ - reject-dict
 
   script:
-# 精简我的页面
     - match: ^https:\/\/conf-m-ssl\.xunlei\.com\/external\/
-      name: "精简我的页面_16"
+      name: "精简我的页面_14"
       type: response
       require-body: true
 
 script-providers:
-  "精简我的页面_16":
+  "精简我的页面_14":
     url: https://kelee.one/Resource/Script/XunLei/XunLei_remove_ads.js
     interval: 86400
 

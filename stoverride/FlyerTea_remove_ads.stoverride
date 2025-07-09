@@ -26,34 +26,28 @@ http:
     - "ptf.flyertrip.com"
 
   url-rewrite:
-# 全局广告配置
     - >-
       ^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?module=advis - reject
-# 我的页面 - 弹窗
     - >-
       ^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?module=vip_coupon - reject-dict
-# 我的页面 - 悬浮窗
     - >-
       ^https:\/\/ptf\.flyertrip\.com\/static\/img\/common\/ic_plate_mine_button\.png - reject-img
-# 发帖 - 横幅广告
     - >-
       ^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?module=getdata - reject-dict
 
   script:
-# 板块广告
     - match: ^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?version=5
-      name: "移除板块广告_22"
+      name: "移除板块广告_17"
       type: response
       require-body: true
 
-# 签到弹窗广告
     - match: ^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?module=plugin&id=k_misign:sign
-      name: "移除板块广告_22"
+      name: "移除板块广告_17"
       type: response
       require-body: true
 
 script-providers:
-  "移除板块广告_22":
+  "移除板块广告_17":
     url: https://kelee.one/Resource/Script/FlyerTea/FlyerTea_remove_ads.js
     interval: 86400
 

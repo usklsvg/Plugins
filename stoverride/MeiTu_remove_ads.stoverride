@@ -27,7 +27,6 @@ http:
     - "api.posters.meitu.com"
 
   url-rewrite:
-# 订阅弹窗
     - >-
       ^https:\/\/(api|tool)\.xiuxiu\.meitu\.com\/v\d\/vip\/sub_popup\.json - reject-dict
     - >-

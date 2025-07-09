@@ -20,7 +20,6 @@ date: |-
   2025-05-13 15:17:08
 
 rules:
-# 移除福利页面
   - DOMAIN,render-web.11222.cn,REJECT
 
 http:
@@ -30,27 +29,23 @@ http:
     - "huichuan.sm.cn"
 
   url-rewrite:
-# 开屏广告
     - >-
       ^https:\/\/huichuan\.sm\.cn\/nativead - reject-dict
-# 阅读页面广告
     - >-
       ^https:\/\/ocean\.shuqireader\.com\/api\/route\/iosReadPage\/adV2 - reject-dict
     - >-
       ^https:\/\/ocean\.shuqireader\.com\/api\/route\/ios\/readPage$ - reject-dict
-# 移除渲染资源 - 移除福利入口、悬浮窗资源、我的页面推广、推荐搜索词
     - >-
       ^https:\/\/ocean\.shuqireader\.com\/api\/render\/load\/resource - reject
 
   script:
-# 书城横幅和阅读广告
     - match: ^https:\/\/ocean\.shuqireader\.com\/sqios\/render\/render\/page\/bookstore$
-      name: "移除书城横幅和阅读广告_24"
+      name: "移除书城横幅和阅读广告_19"
       type: response
       require-body: true
 
 script-providers:
-  "移除书城横幅和阅读广告_24":
+  "移除书城横幅和阅读广告_19":
     url: https://kelee.one/Resource/Script/ShuQiCenterReader/ShuQiCenterReader_remove_ads.js
     interval: 86400
 

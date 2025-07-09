@@ -27,7 +27,6 @@ http:
     - "jx3comm.xoyocdn.com"
 
   url-rewrite:
-# 热点推送
     - >-
       ^https:\/\/jx3comm\.xoyocdn\.com\/jx3gc\/zhcn\/login_ad\/WebCareer\/WebCareerTab\.txt - reject
 

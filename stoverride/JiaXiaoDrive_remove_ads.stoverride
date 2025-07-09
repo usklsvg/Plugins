@@ -29,19 +29,14 @@ http:
     - "api.ksedt.com"
 
   url-rewrite:
-# 广告配置
     - >-
       ^https:\/\/richmanrules\.ksedt\.com\/serverConfig\/3\/adConfig\.json - reject-dict
-# 弹窗广告
     - >-
       ^https:\/\/gouche\.ksedt\.com\/config\/popup\/info$ - reject-dict
-# 考试 - 信息流广告、右上角免费领秘籍入口
     - >-
       ^https:\/\/richmanrules\.ksedt\.com\/intellectWaterfallBidding\/find$ - reject-dict
-# 考试 - 满分通关技巧直播课入口
     - >-
       ^https:\/\/op\.ksedt\.com\/jxedtLive\/liveIntroduceResource - reject-dict
-# 我的页面广告
     - >-
       ^https:\/\/richmanrules\.ksedt\.com\/intellectWaterfall\/find$ - reject-dict
 

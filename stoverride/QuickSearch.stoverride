@@ -25,7 +25,6 @@ http:
     - "duckduckgo.com"
 
   url-rewrite:
-# 无快捷键则默认使用Google搜索
     - >-
       ^https:\/\/duckduckgo\.com\/\?q=bd\+([^&]+).+ https://www.baidu.com/s?wd=$1 307
     - >-

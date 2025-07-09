@@ -25,7 +25,6 @@ http:
     - "app.chengfenmiao.com"
 
   url-rewrite:
-# 商品购买连接
     - >-
       ^https:\/\/app\.chengfenmiao\.com\/item\/closet\? - reject-dict
 

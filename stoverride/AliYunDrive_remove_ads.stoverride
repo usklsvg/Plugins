@@ -30,26 +30,24 @@ http:
     - "bizapi.alipan.com"
 
   url-rewrite:
-# 首页活动日历
     - >-
       ^https:\/\/member\.alipan\.com\/v2\/activity\/sign_in_luckyBottle - reject-dict
-# 首页板块入口
     - >-
       ^https:\/\/api\.alipan\.com\/adrive\/v1\/file\/getTopFolders - reject-dict
 
   script:
     - match: ^https:\/\/(biz)?api\.alipan\.com\/apps\/v\d\/users?\/home\/(news|widgets)
-      name: "移除阿里云盘广告_19"
+      name: "移除阿里云盘广告_17"
       type: response
       require-body: true
 
     - match: ^https:\/\/member\.alipan\.com\/v1\/users\/onboard_list
-      name: "移除阿里云盘广告_19"
+      name: "移除阿里云盘广告_17"
       type: response
       require-body: true
 
 script-providers:
-  "移除阿里云盘广告_19":
+  "移除阿里云盘广告_17":
     url: https://kelee.one/Resource/Script/AliYunDrive/AliYunDrive_remove_ads.js
     interval: 86400
 

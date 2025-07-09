@@ -20,7 +20,6 @@ date: |-
   2025-05-13 15:17:08
 
 rules:
-# 放行规则
   - DOMAIN,ad.12306.cn,DIRECT
 
 http:
@@ -30,22 +29,20 @@ http:
     - "mobile.12306.cn"
 
   script:
-# 移除12306开屏广告
     - match: ^https:\/\/ad\.12306\.cn\/ad\/ser\/getAdList$
-      name: "移除12306开屏广告_16"
+      name: "移除12306开屏广告_14"
       type: request
       require-body: true
 
-# 移除12306应用内广告
     - match: ^https:\/\/mobile\.12306\.cn\/otsmobile\/app\/mgs\/mgw\.htm$
-      name: "移除12306应用内广告_18"
+      name: "移除12306应用内广告_15"
       type: request
 
 script-providers:
-  "移除12306开屏广告_16":
+  "移除12306开屏广告_14":
     url: https://kelee.one/Resource/Script/12306/12306_remove_splashscreen_ads.js
     interval: 86400
-  "移除12306应用内广告_18":
+  "移除12306应用内广告_15":
     url: https://kelee.one/Resource/Script/12306/12306_remove_ads.js
     interval: 86400
 

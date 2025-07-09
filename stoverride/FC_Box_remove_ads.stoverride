@@ -26,22 +26,16 @@ http:
     - "dsp.fcbox.com"
 
   url-rewrite:
-# 首页 - 各类服务推广
     - >-
       ^https:\/\/consumer\.fcbox\.com\/fcboxactivityweb\/api\/v\d\/clientPage\/modulesAggregated\? - reject-dict
-# 首页 - 丰巢商城
     - >-
       ^https:\/\/consumer\.fcbox\.com\/v2\/home\/mallInfo$ - reject-dict
-# 广告配置及横幅推广
     - >-
       ^https:\/\/dsp\.fcbox\.com\/adSearch\/ - reject-dict
-# 生活服务
     - >-
       ^https:\/\/consumer\.fcbox\.com\/hs-portal\/app\/config\/page\/home\/v2\? - reject-dict
-# 订单页面 - 邀请开通会员横幅
     - >-
       ^https:\/\/consumer\.fcbox\.com\/post\/suggestion\/query$ - reject-dict
-# 弹窗配置
     - >-
       ^https:\/\/consumer\.fcbox\.com\/fcboxactivityweb\/marketingEntrance\/retentionPopup$ - reject-dict
     - >-

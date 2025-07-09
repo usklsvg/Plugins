@@ -20,16 +20,13 @@ date: |-
   2025-05-13 15:17:08
 
 rules:
-# 地理位置 - 影响注册账号时的属地判断
   - DOMAIN-SUFFIX,soulapp.cn,DIRECT
   - IP-CIDR,8.210.3.170/32,DIRECT,no-resolve
   - IP-CIDR,47.75.72.47/32,DIRECT,no-resolve
-# 广告下发
   - DOMAIN,ad-h5-cdn.soulapp.cn,REJECT
   - DOMAIN,ad-h5-station-cdn.soulapp.cn,REJECT
   - DOMAIN,ad-r.soulapp.cn,REJECT
   - DOMAIN,soul-ad.soulapp.cn,REJECT
-# 广告域名IP查询
   - IP-CIDR,47.56.131.76/32,REJECT,no-resolve
   - IP-CIDR,47.97.215.55/32,REJECT,no-resolve
   - IP-CIDR,47.99.42.29/32,REJECT,no-resolve
@@ -47,7 +44,6 @@ http:
     - "ssp.soulapp.cn"
 
   url-rewrite:
-# 开屏广告
     - >-
       ^https:\/\/ssp\.soulapp\.cn\/api\/q - reject-dict
     - >-
@@ -59,12 +55,12 @@ http:
 
   script:
     - match: ^https:\/\/(?:api-\w+|chat-live|post)\.soulapp\.cn\/(?:chat\/limitInfo|chatroom\/chatClassifyRoomList|homepage\/diamond\/position\/info|v2\/post\/recSquare\/subTabs|v6\/planet\/config)
-      name: "移除Soul广告_36"
+      name: "移除Soul广告_31"
       type: response
       require-body: true
 
 script-providers:
-  "移除Soul广告_36":
+  "移除Soul广告_31":
     url: https://kelee.one/Resource/Script/Soul/Soul_remove_ads.js
     interval: 86400
 

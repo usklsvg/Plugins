@@ -25,27 +25,23 @@ http:
     - "base.mkzcdn.com"
 
   url-rewrite:
-# 阅读页面视频广告
     - >-
       ^https:\/\/base\.mkzcdn\.com\/advert\/app\/read\/v\d - reject-dict
     - >-
       ^https:\/\/base\.mkzcdn\.com\/advert\/app\/story\/read\/v\d - reject-dict
-# 任务激励视频
     - >-
       ^https:\/\/base\.mkzcdn\.com\/advert\/app\/task\/motivate\/v\d - reject-dict
-# 我的页面 - 邀请好友、客栈魔法屋
     - >-
       ^https:\/\/base\.mkzcdn\.com\/advert\/app\/user\/slide\d\/v\d\/ - reject-dict
 
   script:
-# 配置修改
     - match: ^https:\/\/base\.mkzcdn\.com\/app\/config\/
-      name: "配置修改_22"
+      name: "配置修改_18"
       type: response
       require-body: true
 
 script-providers:
-  "配置修改_22":
+  "配置修改_18":
     url: https://kelee.one/Resource/Script/MKZ/MKZ_remove_ads.js
     interval: 86400
 

@@ -26,10 +26,8 @@ http:
     - "ggs.myzaker.com"
 
   url-rewrite:
-# 开屏广告
     - >-
       ^https:\/\/iphone\.myzaker\.com\/zaker\/cover\.php\? - reject-dict
-# 热点 - 信息流广告
     - >-
       ^https:\/\/iphone\.myzaker\.com\/zaker\/block_top_ad\.php\? - reject-dict
 

@@ -20,7 +20,6 @@ date: |-
   2025-05-13 15:17:08
 
 rules:
-# 广告接口
   - DOMAIN,ads.reader.yueyouxs.com,REJECT
 
 http:

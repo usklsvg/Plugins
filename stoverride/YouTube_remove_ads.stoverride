@@ -38,9 +38,8 @@ http:
       ^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad - reject-200
 
   script:
-# YouTube去广告
     - match: ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch)
-      name: "YouTube去广告_25"
+      name: "YouTube去广告_24"
       type: response
       require-body: true
       binary-mode: true
@@ -48,7 +47,7 @@ http:
         [{blockUpload},{blockShorts},{blockImmersive},{captionLang},{lyricLang},{debug}]
 
 script-providers:
-  "YouTube去广告_25":
+  "YouTube去广告_24":
     url: https://kelee.one/Resource/Script/YouTube/YouTube_remove_ads/YouTube_remove_ads_response.js
     interval: 86400
 

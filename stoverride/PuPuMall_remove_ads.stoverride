@@ -32,37 +32,37 @@ http:
 
   script:
     - match: ^https:\/\/j1\.pupuapi\.com\/client\/marketing\/banner\/v7
-      name: "移除朴朴超市广告_17"
+      name: "移除朴朴超市广告_15"
       type: response
       require-body: true
 
     - match: ^https:\/\/j1\.pupuapi\.com\/client\/marketing\/banner\/search_component_banner
-      name: "移除朴朴超市广告_17"
+      name: "移除朴朴超市广告_15"
       type: response
       require-body: true
 
     - match: ^https:\/\/j1\.pupuapi\.com\/client\/search\/hot_keywords\/v3
-      name: "移除朴朴超市广告_17"
+      name: "移除朴朴超市广告_15"
       type: response
       require-body: true
 
     - match: ^https:\/\/j1\.pupuapi\.com\/client\/app_resource\/resource_preload\/list_h5_resource
-      name: "移除朴朴超市广告_17"
+      name: "移除朴朴超市广告_15"
       type: response
       require-body: true
 
     - match: ^https:\/\/j1\.pupuapi\.com\/client\/recommendation\/interests\/products
-      name: "移除朴朴超市广告_17"
+      name: "移除朴朴超市广告_15"
       type: response
       require-body: true
 
     - match: ^https:\/\/j1\.pupuapi\.com\/client\/marketing\/advertisement\/v1
-      name: "移除朴朴超市广告_17"
+      name: "移除朴朴超市广告_15"
       type: response
       require-body: true
 
 script-providers:
-  "移除朴朴超市广告_17":
+  "移除朴朴超市广告_15":
     url: https://kelee.one/Resource/Script/PuPuMall/PuPuMall_remove_ads.js
     interval: 86400
 

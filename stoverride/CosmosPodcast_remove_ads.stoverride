@@ -25,13 +25,10 @@ http:
     - "api.xiaoyuzhoufm.com"
 
   url-rewrite:
-# 开屏广告
     - >-
       ^https:\/\/api\.xiaoyuzhoufm\.com\/v1\/flash-screen\/list$ - reject-dict
-# 移除AI总结
     - >-
       ^https:\/\/api\.xiaoyuzhoufm\.com\/v1\/ai-summary - reject-dict
-# 移除搜索框内容
     - >-
       ^https?:\/\/api\.xiaoyuzhoufm\.com\/v1\/search - reject-dict
     - >-

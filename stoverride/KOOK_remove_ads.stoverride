@@ -26,7 +26,6 @@ http:
     - "www.kookapp.cn"
 
   url-rewrite:
-# 开屏广告
     - >-
       ^https:\/\/www\.kookapp\.cn\/api\/v3\/ad\/config$ - reject-dict
 

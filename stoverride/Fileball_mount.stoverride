@@ -27,14 +27,13 @@ http:
     - "pikpak.example.com"
 
   script:
-# 阿里云盘、夸克网盘和PikPak网盘挂载
     - match: ^http:\/\/(aliyun|quark|pikpak)\.example\.com
-      name: "三合一网盘挂载_13"
+      name: "三合一网盘挂载_12"
       type: request
       require-body: true
 
 script-providers:
-  "三合一网盘挂载_13":
+  "三合一网盘挂载_12":
     url: https://kelee.one/Resource/Script/Fileball/Fileball_mount.js
     interval: 86400
 

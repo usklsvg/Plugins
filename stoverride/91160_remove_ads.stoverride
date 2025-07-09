@@ -29,27 +29,20 @@ http:
     - "patientappapi.91160.com"
 
   url-rewrite:
-# 拦截HTTPDNS
     - >-
       ^https:\/\/msglb\.91160\.com\/msg\/outer\/broker\/get$ - reject-dict
-# 广告下发
     - >-
       ^https:\/\/patientgate\.91160\.com\/advert-api\/ - reject-dict
-# 医生 - 挂号页面 - 会员推广
     - >-
       ^https:\/\/snsapi\.91160\.com\/vipmemberapi\/mbCombo\/mbComboWords\? - reject-dict
-# 我的页面 - 为您推荐
     - >-
       ^https:\/\/patientgate\.91160\.com\/rec\/homepage\/open\/getUserGoodsList\? - reject-dict
-# 搜索推广
     - >-
       ^https:\/\/snsapi\.91160\.com\/hotword\/open\/v1\/getSearchExplore\? - reject-dict
     - >-
       ^https:\/\/snsapi\.91160\.com\/hotword\/open\/v1\/getHotWordPlate\? - reject-dict
-# 搜索填充词
     - >-
       ^https:\/\/snsapi\.91160\.com\/engine\/backgroundWord\/queryForFrontend\? - reject-dict
-# 其他广告
     - >-
       ^https:\/\/patientappapi\.91160\.com\/cus_index\.php\?c=adver - reject
 

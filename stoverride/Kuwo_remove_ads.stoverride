@@ -31,7 +31,6 @@ http:
     - "tingshu.kuwo.cn"
 
   url-rewrite:
-# 广告配置
     - >-
       ^http:\/\/rich\.kuwo\.cn\/AdService\/ - reject-dict
     - >-
@@ -42,24 +41,18 @@ http:
       ^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/app\/startup\/config - reject-dict
     - >-
       ^http:\/\/rich\.kuwo\.cn\/EcomResourceServer\/ - reject-dict
-# 搜索填充词
     - >-
       ^http:\/\/searchrecterm\.kuwo\.cn\/recterm\.s - reject-dict
-# 精简我的页面侧边栏
     - >-
       ^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/app\/newMenuList\/menuListInfo - reject-dict
-# 迷你播放器横幅
     - >-
       ^http:\/\/vip\d\.kuwo\.cn\/vip\/v\d\/sysinfo\?op=getRePayAndDoPayBox - reject-dict
-# 听书页面广告
     - >-
       ^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/album\/adBar\/ - reject-dict
-# 首页 - 推广语
     - >-
       ^https:\/\/vip\d\.kuwo\.cn\/commercia\/vipconf\/projectPage\/getPageContent - reject-dict
     - >-
       ^https:\/\/tingshu\.kuwo\.cn\/v2\/api\/pay\/user\/info - reject-dict
-# 我的页面横幅
     - >-
       ^https:\/\/appi\.kuwo\.cn\/kuwopay\/personal\/cells - reject-dict
 

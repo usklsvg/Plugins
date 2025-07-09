@@ -25,12 +25,10 @@ http:
     - "gorgon.youdao.com"
 
   url-rewrite:
-# 开屏广告
     - >-
       ^https:\/\/gorgon\.youdao\.com\/gorgon\/v2\/request\.s - reject-dict
     - >-
       ^https:\/\/gorgon\.youdao\.com\/gorgon\/brand\/prefetch\.s - reject-dict
-# 首页横幅广
     - >-
       ^https:\/\/gorgon\.youdao\.com\/gorgon\/request\.s - reject-dict
 

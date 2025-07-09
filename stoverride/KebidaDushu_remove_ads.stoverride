@@ -25,7 +25,6 @@ http:
     - "g*.dushu365.com"
 
   url-rewrite:
-# 帆书移除广告
     - >-
       ^https?:\/\/popup\.dushu365\.com\/api\/v2\/sfo\/(user_)?popup_(config|display)s - reject
     - >-
@@ -47,52 +46,52 @@ http:
 
   script:
     - match: ^https?:\/\/g[a-z0-9-]+\.dushu365\.com\/chief-orch\/home\/bookPortal\/v105\/category
-      name: "帆书去广告_23"
+      name: "帆书去广告_22"
       type: response
       require-body: true
 
     - match: ^https?:\/\/g[a-z0-9-]+\.dushu365\.com\/abtest-front\/banner-modular\/get
-      name: "帆书去广告_23"
+      name: "帆书去广告_22"
       type: response
       require-body: true
 
     - match: ^https?:\/\/g[a-z0-9-]+\.dushu365\.com\/resource-orchestration-system\/book\/channel\/v100\/info
-      name: "帆书去广告_23"
+      name: "帆书去广告_22"
       type: response
       require-body: true
 
     - match: ^https?:\/\/g[a-z0-9-]+\.dushu365\.com\/fs-member\/user\/profile\/v100\/detail
-      name: "帆书去广告_23"
+      name: "帆书去广告_22"
       type: response
       require-body: true
 
     - match: ^https?:\/\/g[a-z0-9-]+\.dushu365\.com\/chief-orch\/home\/bookPortal\/v111\/forApp
-      name: "帆书去广告_23"
+      name: "帆书去广告_22"
       type: response
       require-body: true
 
     - match: ^https?:\/\/g[a-z0-9-]+\.dushu365\.com\/sns-orchestration-system\/homePage\/api\/v100\/myPage
-      name: "帆书去广告_23"
+      name: "帆书去广告_22"
       type: response
       require-body: true
 
     - match: ^https?:\/\/g[a-z0-9-]+\.dushu365\.com\/task-orchestration\/taskCenter\/api\/v101\/taskList
-      name: "帆书去广告_23"
+      name: "帆书去广告_22"
       type: response
       require-body: true
 
     - match: ^https?:\/\/g[a-z0-9-]+\.dushu365\.com\/resource-orchestration-system\/book\/v101\/content
-      name: "帆书去广告_23"
+      name: "帆书去广告_22"
       type: response
       require-body: true
 
     - match: ^https?:\/\/g[a-z0-9-]+\.dushu365\.com\/user-orchestration\/user\/api\/v101\/ceiltip
-      name: "帆书去广告_23"
+      name: "帆书去广告_22"
       type: response
       require-body: true
 
 script-providers:
-  "帆书去广告_23":
+  "帆书去广告_22":
     url: https://kelee.one/Resource/Script/KebidaDushu/KebidaDushu_remove_ads.js
     interval: 86400
 

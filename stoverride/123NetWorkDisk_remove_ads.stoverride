@@ -25,7 +25,6 @@ http:
     - "www.123pan.com"
 
   url-rewrite:
-# 横幅广告
     - >-
       ^https:\/\/www\.123pan\.com\/api\/config\/get - reject-dict
 

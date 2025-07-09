@@ -25,23 +25,21 @@ http:
     - "moapi.wps.cn"
 
   script:
-# 捕获Cookie
     - match: ^https:\/\/moapi\.wps\.cn\/app\/ios\/v1\/app$
-      name: "捕获Cookie_21"
+      name: "捕获Cookie_19"
       type: request
       require-body: true
 
 cron:
   script:
-# 定时签到
-    - name: "捕获Cookie_21"
+    - name: "捕获Cookie_19"
       cron: {CRONEXP}
       timeout: 120
       argument: |-
         [{AK},{SK},{MAX_RETRIES}]
 
 script-providers:
-  "捕获Cookie_21":
+  "捕获Cookie_19":
     url: https://kelee.one/Resource/Script/WPS/WPS_checkin.js
     interval: 86400
 

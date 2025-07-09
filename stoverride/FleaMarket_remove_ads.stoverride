@@ -1,7 +1,7 @@
 name: |-
   闲鱼去广告
 desc: |-
-  移除开屏广告、商品信息流广告、搜索栏填充词、首页签到入口、悬浮广告，精简我的页面。
+  移除开屏广告、商品信息流广告、关注推荐、搜索栏填充词、首页签到入口及悬浮广告，精简我的页面。
 author: |-
   可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
 icon: |-
@@ -17,10 +17,9 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-06-29 13:08:37
+  2025-07-09 14:29:46
 
 rules:
-# 拦截广告下发
   - AND,((URL-REGEX,"^http:\/\/.+\/amdc\/mobileDispatch"),(USER-AGENT,"%E9%97%B2%E9%B1%BC*")),REJECT
 
 http:
@@ -30,21 +29,18 @@ http:
     - "g-acs.m.goofish.com"
 
   url-rewrite:
-# 开屏广告
     - >-
       ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlecommerce\.splash\.ads\/ - reject-dict
-# 商品详情 - 为你推荐
     - >-
       ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.item\.recommend\.list\/ - reject-dict
-# 本地 - 右上角附近提示
     - >-
       ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.local\.near\.by\.corner\.info\/ - reject-dict
-# 我的页面 - 商品推广
     - >-
       ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.item\.buy\.feeds\/ - reject-dict
-# 搜索填充词
     - >-
       ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlemtopsearch\.search\.shade\/ - reject-dict
+    - >-
+      ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.playboy\.recommend\/ - reject-dict
 
   body-rewrite:
     - >-
@@ -55,6 +51,8 @@ http:
       ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.home\.whale\.modulet\/ response-jq .data.container.sections |= map(select(.template.name == "fish_home_miniapp"))
     - >-
       ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.user\.strategy\.list\/ response-jq .data.strategies |= map(select(.type | . != BIZ_IDLE_COIN_ENTRANCE_2 and . != "FLOAT_LAYER"))
+    - >-
+      ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.fun\.follow\.feed\.list\/ response-jq .data.sections|=map(select(.cardType==2001))
     - >-
       ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlehome\.home\.newitem\.page\/ response-jq .data.sections |= map(select(.data.clickParam.args.cardType as $ct | $ct != banner and $ct != "mamaAD"))
     - >-

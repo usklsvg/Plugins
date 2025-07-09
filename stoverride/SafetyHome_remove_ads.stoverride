@@ -28,7 +28,6 @@ http:
     - "app.home.360.cn"
 
   url-rewrite:
-# 商城入口
     - >-
       ^https:\/\/app\.home\.360\.cn\/v1\/config\/custom_config - reject-dict
 
