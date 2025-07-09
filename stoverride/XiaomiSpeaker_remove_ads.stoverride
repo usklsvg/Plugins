@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-07-07 19:51:31
+  2025-07-09 08:04:43
 
 http:
 
@@ -30,5 +30,8 @@ http:
       ^https:\/\/marketing-aibox\.v\.mitvos\.com\/advertise\/ - reject-dict
 # 促销弹窗
     - >-
-      ^https:\/\/marketing-aibox\.v\.mitvos\.com\/payGuide\/halfScreenMulti\/cache\? - reject-dict
+      ^https:\/\/marketing-aibox\.v\.mitvos\.com\/payGuide\/halfScreenMulti\/(home|cache)\? - reject-dict
+# 音源标签页 - 促销横幅
+    - >-
+      ^https:\/\/marketing-aibox\.v\.mitvos\.com\/payGuide\/tabPage\? - reject-dict
 

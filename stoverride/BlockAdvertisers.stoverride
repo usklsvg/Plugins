@@ -15,7 +15,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-07-05 01:13:04
+  2025-07-09 08:54:09
 
 rules:
 # 字节跳动广告
@@ -179,6 +179,7 @@ rules:
 # 友盟
   - DOMAIN,cnlogs.umeng.com,REJECT
   - DOMAIN,errlog.umeng.com,REJECT
+  - DOMAIN,resolve.umeng.com,REJECT
   - DOMAIN,errnewlog.umeng.com,REJECT
   - DOMAIN,ucc.umeng.com,REJECT
   - DOMAIN,ulogs.umeng.com,REJECT
