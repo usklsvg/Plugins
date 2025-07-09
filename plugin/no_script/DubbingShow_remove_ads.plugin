@@ -14,13 +14,10 @@
 首页 - 推荐 - 语聊横幅
 ^https:\/\/iosapi\.peiyinxiu\.com\/Api\/live\/LiveList response-body-json-del data.banners
 
-# 首页 - 推荐 - 语聊关注推荐
 ^https:\/\/iosapi\.peiyinxiu\.com\/api\/live\/FollowList response-body-json-del obj.data
 
-# 首页 - 关注推荐
 ^https:\/\/iosapi\.peiyinxiu\.com\/Api\/Friend\/GetRecommendUsers response-body-json-del obj.data
 
-# 消息 - 群聊推荐
 ^https:\/\/iosapi\.peiyinxiu\.com\/api\/Union\/HomeData response-body-json-del obj.data
 
 [MitM]

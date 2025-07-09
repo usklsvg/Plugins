@@ -19,7 +19,6 @@ lyricLang=select, "zh-Hans", "zh-Hant", "ja", "ko", "en", "off", tag=歌词翻�
 debug=switch, "false", "true", tag=启用调试模式, desc=此插件的调试模式
 
 [Script]
-# YouTube去广告
 http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) script-path=https://kelee.one/Resource/Script/YouTube/YouTube_remove_ads/YouTube_remove_ads_response.js, requires-body=true, binary-body-mode=true, argument=[{blockUpload},{blockShorts},{blockImmersive},{captionLang},{lyricLang},{debug}], tag=YouTube去广告
 
 [MitM]

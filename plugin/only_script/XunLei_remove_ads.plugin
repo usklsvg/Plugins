@@ -11,7 +11,6 @@
 #!date=2025-05-13 15:17:08
 
 [Script]
-# 精简我的页面
 http-response ^https:\/\/conf-m-ssl\.xunlei\.com\/external\/ script-path=https://kelee.one/Resource/Script/XunLei/XunLei_remove_ads.js, requires-body=true, tag=精简我的页面
 
 [MitM]

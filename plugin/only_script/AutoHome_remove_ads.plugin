@@ -11,22 +11,16 @@
 #!date=2025-05-13 15:17:08
 
 [Script]
-# 首页 - 左上角以旧换新
 http-response ^https:\/\/news\.app\.autohome\.com\.cn\/news_v\d+(?:\.\d+){2}\/news\/homenavigation script-path=https://kelee.one/Resource/Script/AutoHome/AutoHome_remove_ads.js, requires-body=true, tag=精简我的页面
 
-# 我的页面 - 精简精选服务、全部服务、添加我的爱车领券、热门活动
 http-response ^https:\/\/(a\.athm\.cn\/)?mobile\.app\.autohome\.com\.cn\/platform\/carserver\/((usercenter\/getservicecards)|(carcard\/allcard)|(carcard\/mycardv\d+)|(carcard\/cards)) script-path=https://kelee.one/Resource/Script/AutoHome/AutoHome_remove_ads.js, requires-body=true, tag=精简我的页面
 
-# 社区广场 - 广告轮播图
 http-response ^https:\/\/(a\.athm\.cn\/)?club\.app\.autohome\.com\.cn\/club_v\d+(?:\.\d+){2}\/club\/index\/businessv\d+ script-path=https://kelee.one/Resource/Script/AutoHome/AutoHome_remove_ads.js, requires-body=true, tag=社区广场去广告
 
-# 选车 - 直播浮窗
 http-response ^https:\/\/(a\.athm\.cn\/)?cars\.app\.autohome\.com\.cn\/carstreaming\/selectcarportal\/reclist script-path=https://kelee.one/Resource/Script/AutoHome/AutoHome_remove_ads.js, requires-body=true, tag=移除直播浮窗
 
-# 选车 - 新车报价页面直播内容 - 无效
 http-response ^https:\/\/(a\.athm\.cn\/)?cars\.app\.autohome\.com\.cn\/carstreaming\/selectcarportal\/seriestopwithtagscard script-path=https://kelee.one/Resource/Script/AutoHome/AutoHome_remove_ads.js, requires-body=true, tag=移除报价页面直播内容
 
-# 二手车 - 竖版轮播图 - 无效
 http-response ^https:\/\/(a\.athm\.cn\/)?apiautoappusc\.che168\.com\/apic\/v\d+\/gethomepagefeed script-path=https://kelee.one/Resource/Script/AutoHome/AutoHome_remove_ads.js, requires-body=true, tag=移除二手车竖版轮播图
 
 [MitM]

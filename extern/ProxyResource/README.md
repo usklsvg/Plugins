@@ -95,7 +95,7 @@
   </tr>
   <tr>
     <td>009</td>
-    <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Lpx/Weibo_intl_remove_ads.lpx">微博国际版去广告</a></td>
+    <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Lpx/Weibo_intl_remove_ads.lpx">微博轻享版去广告</a></td>
   </tr>
   <tr>
     <td>010</td>

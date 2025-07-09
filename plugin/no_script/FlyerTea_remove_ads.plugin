@@ -11,13 +11,9 @@
 #!date=2025-05-13 15:17:08
 
 [Rewrite]
-# 全局广告配置
 ^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?module=advis reject
-# 我的页面 - 弹窗
 ^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?module=vip_coupon reject-dict
-# 我的页面 - 悬浮窗
 ^https:\/\/ptf\.flyertrip\.com\/static\/img\/common\/ic_plate_mine_button\.png reject-img
-# 发帖 - 横幅广告
 ^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?module=getdata reject-dict
 
 [MitM]
