@@ -17,26 +17,14 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-05-13 15:17:08
+  2025-07-10 19:56:47
 
 http:
 
   mitm:
     - "api-shoulei-ssl.xunlei.com"
-    - "conf-m-ssl.xunlei.com"
 
-  url-rewrite:
+  body-rewrite:
     - >-
-      ^https:\/\/api-shoulei-ssl\.xunlei\.com\/flowhub\/v1\/slots:batchGet$ - reject-dict
-
-  script:
-    - match: ^https:\/\/conf-m-ssl\.xunlei\.com\/external\/
-      name: "精简我的页面_14"
-      type: response
-      require-body: true
-
-script-providers:
-  "精简我的页面_14":
-    url: https://kelee.one/Resource/Script/XunLei/XunLei_remove_ads.js
-    interval: 86400
+      ^https:\/\/api-shoulei-ssl\.xunlei\.com\/flowhub\/v1\/slots:batchGet$ response-jq .slots |= map(select(.id == xl_ios_mytab_vipicon or (.native.assets.title.text.value? and (.native.assets.title.text.value | . == 清理助手 or . == 云盘容量 or . == "远程设备"))))
 
