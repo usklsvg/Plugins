@@ -42,6 +42,6 @@ http:
 
 script-providers:
   "配置修改_18":
-    url: https://kelee.one/Resource/Script/MKZ/MKZ_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/MKZ/MKZ_remove_ads.js
     interval: 86400
 

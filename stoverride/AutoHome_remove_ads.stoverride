@@ -108,6 +108,6 @@ http:
 
 script-providers:
   "精简我的页面_32":
-    url: https://kelee.one/Resource/Script/AutoHome/AutoHome_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/AutoHome/AutoHome_remove_ads.js
     interval: 86400
 

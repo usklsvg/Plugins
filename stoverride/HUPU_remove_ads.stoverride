@@ -68,6 +68,6 @@ http:
 
 script-providers:
   "移除虎扑广告_21":
-    url: https://kelee.one/Resource/Script/HUPU/HUPU_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/HUPU/HUPU_remove_ads.js
     interval: 86400
 

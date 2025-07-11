@@ -48,6 +48,6 @@ http:
 
 script-providers:
   "百度输入法去广告_19":
-    url: https://kelee.one/Resource/Script/Baidu_input_method/Baidu_input_method_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/Baidu_input_method/Baidu_input_method_remove_ads.js
     interval: 86400
 

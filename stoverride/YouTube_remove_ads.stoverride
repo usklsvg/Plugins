@@ -48,6 +48,6 @@ http:
 
 script-providers:
   "YouTube去广告_24":
-    url: https://kelee.one/Resource/Script/YouTube/YouTube_remove_ads/YouTube_remove_ads_response.js
+    url: https://kelee.one/Resource/JavaScript/YouTube/YouTube_remove_ads/YouTube_remove_ads_response.js
     interval: 86400
 

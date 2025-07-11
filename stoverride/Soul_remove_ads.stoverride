@@ -61,6 +61,6 @@ http:
 
 script-providers:
   "移除Soul广告_31":
-    url: https://kelee.one/Resource/Script/Soul/Soul_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/Soul/Soul_remove_ads.js
     interval: 86400
 

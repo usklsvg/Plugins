@@ -71,6 +71,6 @@ http:
 
 script-providers:
   "移除财新数据通广告_18":
-    url: https://kelee.one/Resource/Script/CaixinMedia/CaixinMedia_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/CaixinMedia/CaixinMedia_remove_ads.js
     interval: 86400
 

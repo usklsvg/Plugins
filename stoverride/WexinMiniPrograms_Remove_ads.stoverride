@@ -430,39 +430,39 @@ http:
 
 script-providers:
   "企迈点单系统去广告_135":
-    url: https://kelee.one/Resource/Script/WexinMiniPrograms/kff/kff.js
+    url: https://kelee.one/Resource/JavaScript/WexinMiniPrograms/kff/kff.js
     interval: 86400
   "EMS中国邮政物流速递去广告_136":
-    url: https://kelee.one/Resource/Script/WexinMiniPrograms/ems/ems.js
+    url: https://kelee.one/Resource/JavaScript/WexinMiniPrograms/ems/ems.js
     interval: 86400
   "小兔充充去广告_137":
-    url: https://kelee.one/Resource/Script/WexinMiniPrograms/xiaotucc/xiaotucc.js
+    url: https://kelee.one/Resource/JavaScript/WexinMiniPrograms/xiaotucc/xiaotucc.js
     interval: 86400
   "全家微会员去广告_138":
-    url: https://kelee.one/Resource/Script/WexinMiniPrograms/FamilyMart/FamilyMart.js
+    url: https://kelee.one/Resource/JavaScript/WexinMiniPrograms/FamilyMart/FamilyMart.js
     interval: 86400
   "罗森点点去广告_139":
-    url: https://kelee.one/Resource/Script/WexinMiniPrograms/lawson/lawson.js
+    url: https://kelee.one/Resource/JavaScript/WexinMiniPrograms/lawson/lawson.js
     interval: 86400
   "茶颜悦色去广告_140":
-    url: https://kelee.one/Resource/Script/WexinMiniPrograms/chayanyuese/chayanyuese_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/WexinMiniPrograms/chayanyuese/chayanyuese_remove_ads.js
     interval: 86400
   "COCO点单去广告_141":
-    url: https://kelee.one/Resource/Script/WexinMiniPrograms/coco/coco.js
+    url: https://kelee.one/Resource/JavaScript/WexinMiniPrograms/coco/coco.js
     interval: 86400
   "滴滴青桔去广告_142":
-    url: https://kelee.one/Resource/Script/WexinMiniPrograms/qingju/qingju.js
+    url: https://kelee.one/Resource/JavaScript/WexinMiniPrograms/qingju/qingju.js
     interval: 86400
   "一点点+去广告_143":
-    url: https://kelee.one/Resource/Script/WexinMiniPrograms/alittle-tea/alittle-tea.js
+    url: https://kelee.one/Resource/JavaScript/WexinMiniPrograms/alittle-tea/alittle-tea.js
     interval: 86400
   "M Stand去广告_144":
-    url: https://kelee.one/Resource/Script/WexinMiniPrograms/M_Stand/M_Stand.js
+    url: https://kelee.one/Resource/JavaScript/WexinMiniPrograms/M_Stand/M_Stand.js
     interval: 86400
   "T3出行去广告_145":
-    url: https://kelee.one/Resource/Script/WexinMiniPrograms/T3/T3.js
+    url: https://kelee.one/Resource/JavaScript/WexinMiniPrograms/T3/T3.js
     interval: 86400
   "古茗去广告_146":
-    url: https://kelee.one/Resource/Script/WexinMiniPrograms/ming/ming.js
+    url: https://kelee.one/Resource/JavaScript/WexinMiniPrograms/ming/ming.js
     interval: 86400
 

@@ -45,6 +45,6 @@ http:
 
 script-providers:
   "移除信息流和评论区大块广告_17":
-    url: https://kelee.one/Resource/Script/MaiMai/MaiMai_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/MaiMai/MaiMai_remove_ads.js
     interval: 86400
 

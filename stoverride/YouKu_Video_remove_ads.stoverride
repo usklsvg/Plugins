@@ -87,6 +87,6 @@ http:
 
 script-providers:
   "移除首页广告_37":
-    url: https://kelee.one/Resource/Script/YouKu_Video/YouKu_Video_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/YouKu_Video/YouKu_Video_remove_ads.js
     interval: 86400
 

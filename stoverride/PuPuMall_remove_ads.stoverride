@@ -63,6 +63,6 @@ http:
 
 script-providers:
   "移除朴朴超市广告_15":
-    url: https://kelee.one/Resource/Script/PuPuMall/PuPuMall_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/PuPuMall/PuPuMall_remove_ads.js
     interval: 86400
 

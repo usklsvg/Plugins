@@ -50,6 +50,6 @@ http:
 
 script-providers:
   "移除下发广告_20":
-    url: https://kelee.one/Resource/Script/iMaiCai/iMaiCai_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/iMaiCai/iMaiCai_remove_ads.js
     interval: 86400
 

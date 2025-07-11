@@ -46,6 +46,6 @@ http:
 
 script-providers:
   "移除书城横幅和阅读广告_19":
-    url: https://kelee.one/Resource/Script/ShuQiCenterReader/ShuQiCenterReader_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/ShuQiCenterReader/ShuQiCenterReader_remove_ads.js
     interval: 86400
 

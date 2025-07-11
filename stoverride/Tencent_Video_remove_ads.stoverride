@@ -59,6 +59,6 @@ http:
 
 script-providers:
   "移除广告_31":
-    url: https://kelee.one/Resource/Script/CommonScript/replace-body.js
+    url: https://kelee.one/Resource/JavaScript/CommonScript/replace-body.js
     interval: 86400
 

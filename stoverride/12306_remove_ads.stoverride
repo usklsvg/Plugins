@@ -40,9 +40,9 @@ http:
 
 script-providers:
   "移除12306开屏广告_14":
-    url: https://kelee.one/Resource/Script/12306/12306_remove_splashscreen_ads.js
+    url: https://kelee.one/Resource/JavaScript/12306/12306_remove_splashscreen_ads.js
     interval: 86400
   "移除12306应用内广告_15":
-    url: https://kelee.one/Resource/Script/12306/12306_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/12306/12306_remove_ads.js
     interval: 86400
 

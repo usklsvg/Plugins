@@ -66,15 +66,15 @@ http:
 
 script-providers:
   "跟踪响应·JSON_12":
-    url: https://kelee.one/Resource/Script/Spotify/Spotify_response.js
+    url: https://kelee.one/Resource/JavaScript/Spotify/Spotify_response.js
     interval: 86400
   "歌词请求·JSON_13":
-    url: https://kelee.one/Resource/Script/Spotify/Spotify_request.js
+    url: https://kelee.one/Resource/JavaScript/Spotify/Spotify_request.js
     interval: 86400
   "翻译歌词响应·JSON_15":
-    url: https://kelee.one/Resource/Script/Spotify/Translate_response.js
+    url: https://kelee.one/Resource/JavaScript/Spotify/Translate_response.js
     interval: 86400
   "外部歌词响应·JSON_17":
-    url: https://kelee.one/Resource/Script/Spotify/External_Lyrics_response.js
+    url: https://kelee.one/Resource/JavaScript/Spotify/External_Lyrics_response.js
     interval: 86400
 

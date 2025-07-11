@@ -48,6 +48,6 @@ http:
 
 script-providers:
   "移除板块广告_17":
-    url: https://kelee.one/Resource/Script/FlyerTea/FlyerTea_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/FlyerTea/FlyerTea_remove_ads.js
     interval: 86400
 

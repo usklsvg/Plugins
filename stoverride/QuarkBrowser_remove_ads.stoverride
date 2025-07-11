@@ -40,6 +40,6 @@ http:
 
 script-providers:
   "精简我的页面_15":
-    url: https://kelee.one/Resource/Script/QuarkBrowser/QuarkBrowser_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/QuarkBrowser/QuarkBrowser_remove_ads.js
     interval: 86400
 

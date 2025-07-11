@@ -44,6 +44,6 @@ http:
 
 script-providers:
   "移除底栏视频标签_18":
-    url: https://kelee.one/Resource/Script/TV_Assistant/TV_Assistant_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/TV_Assistant/TV_Assistant_remove_ads.js
     interval: 86400
 

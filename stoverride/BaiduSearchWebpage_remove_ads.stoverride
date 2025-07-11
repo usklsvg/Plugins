@@ -31,6 +31,6 @@ http:
 
 script-providers:
   "移除百度搜索首页信息流广告_12":
-    url: https://kelee.one/Resource/Script/BaiduSearch/BaiduSearchHomePage_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/BaiduSearch/BaiduSearchHomePage_remove_ads.js
     interval: 86400
 

@@ -48,6 +48,6 @@ http:
 
 script-providers:
   "移除阿里云盘广告_17":
-    url: https://kelee.one/Resource/Script/AliYunDrive/AliYunDrive_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/AliYunDrive/AliYunDrive_remove_ads.js
     interval: 86400
 

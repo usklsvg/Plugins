@@ -40,6 +40,6 @@ http:
 
 script-providers:
   "捕获令牌_12":
-    url: https://kelee.one/Resource/Script/JD/JD_Price.js
+    url: https://kelee.one/Resource/JavaScript/JD/JD_Price.js
     interval: 86400
 

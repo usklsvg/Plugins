@@ -45,6 +45,6 @@ http:
 
 script-providers:
   "移除主页推广_16":
-    url: https://kelee.one/Resource/Script/PICC_Insurance/PICC_Insurance_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/PICC_Insurance/PICC_Insurance_remove_ads.js
     interval: 86400
 

@@ -15,9 +15,10 @@
 
 [Rule]
 DOMAIN,api.biliapi.com,REJECT,extended-matching,pre-matching
-DOMAIN,api.biliapi.net,REJECT,extended-matching,pre-matching
 DOMAIN,app.biliapi.com,REJECT,extended-matching,pre-matching
+DOMAIN,api.biliapi.net,REJECT,extended-matching,pre-matching
 DOMAIN,app.biliapi.net,REJECT,extended-matching,pre-matching
+DOMAIN,line3-h5-mobile-api.biligame.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,chat.bilibili.com,REJECT,extended-matching,pre-matching
 
 [Body Rewrite]
@@ -46,8 +47,8 @@ http-response-jq ^https:\/\/app\.bilibili\.com\/x\/v2\/account\/myinfo\? '.data.
 ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.view\.v1\.View\/TFInfo$ data-type=base64 data="AAAAAAIIAQ=="
 
 [Script]
-# http-request ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.community\.service\.dm\.v1\.DM\/DmSegMobile$ script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_airborne_kokoryh.js, requires-body=true, binary-body-mode=true, enable={airborne}, tag=空降助手
-ProtoBuf处理 = type=http-response, pattern=^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(app\.(dynamic\.v2\.Dynamic\/DynAll|view(unite)?\.v1\.View\/(View|ViewProgress|RelatesFeed)|playurl\.v1\.PlayURL\/PlayView|playerunite\.v1\.Player\/PlayViewUnite)|polymer\.app\.search\.v1\.Search\/SearchAll|community\.service\.dm\.v1\.DM\/(DmView|DmSegMobile)|main\.community\.reply\.v1\.Reply\/MainList|pgc\.gateway\.player\.v2\.PlayURL\/PlayView)$, script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_proto_kokoryh.js, requires-body=true, binary-body-mode=true, argument="{"showUpList":"{{{动态最常访问}}}","filterTopReplies":{{{过滤置顶评论广告}}}}", script-update-interval=-1
+# http-request ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.community\.service\.dm\.v1\.DM\/DmSegMobile$ script-path=https://kelee.one/Resource/JavaScript/Bilibili/Bilibili_airborne_kokoryh.js, requires-body=true, binary-body-mode=true, enable={airborne}, tag=空降助手
+ProtoBuf处理 = type=http-response, pattern=^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(app\.(dynamic\.v2\.Dynamic\/DynAll|view(unite)?\.v1\.View\/(View|ViewProgress|RelatesFeed)|playurl\.v1\.PlayURL\/PlayView|playerunite\.v1\.Player\/PlayViewUnite)|polymer\.app\.search\.v1\.Search\/SearchAll|community\.service\.dm\.v1\.DM\/(DmView|DmSegMobile)|main\.community\.reply\.v1\.Reply\/MainList|pgc\.gateway\.player\.v2\.PlayURL\/PlayView)$, script-path=https://kelee.one/Resource/JavaScript/Bilibili/Bilibili_proto_kokoryh.js, requires-body=true, binary-body-mode=true, argument="{"showUpList":"{{{动态最常访问}}}","filterTopReplies":{{{过滤置顶评论广告}}}}", script-update-interval=-1
 
 [MITM]
 hostname = %APPEND% grpc.biliapi.net, app.bilibili.com, api.bilibili.com, api.live.bilibili.com

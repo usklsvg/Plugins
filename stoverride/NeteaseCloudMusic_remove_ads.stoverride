@@ -97,6 +97,6 @@ http:
 
 script-providers:
   "评论区、热推、有话想说、分享一下、歌曲下的祝福等小提示_40":
-    url: https://kelee.one/Resource/Script/NeteaseCloudMusic/NeteaseCloudMusic_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/NeteaseCloudMusic/NeteaseCloudMusic_remove_ads.js
     interval: 86400
 

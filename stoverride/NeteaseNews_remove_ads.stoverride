@@ -69,6 +69,6 @@ http:
 
 script-providers:
   "移除网易新闻广告_23":
-    url: https://kelee.one/Resource/Script/NeteaseNews/NeteaseNews_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/NeteaseNews/NeteaseNews_remove_ads.js
     interval: 86400
 

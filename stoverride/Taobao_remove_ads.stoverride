@@ -73,6 +73,6 @@ http:
 
 script-providers:
   "移除淘宝开屏广告_32":
-    url: https://kelee.one/Resource/Script/Taobao/Taobao_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/Taobao/Taobao_remove_ads.js
     interval: 86400
 

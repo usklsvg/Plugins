@@ -117,6 +117,6 @@ http:
 
 script-providers:
   "移除图片和实况照片水印_24":
-    url: https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/RedPaper/RedPaper_remove_ads.js
     interval: 86400
 

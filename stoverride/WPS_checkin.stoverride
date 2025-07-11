@@ -40,6 +40,6 @@ cron:
 
 script-providers:
   "捕获Cookie_19":
-    url: https://kelee.one/Resource/Script/WPS/WPS_checkin.js
+    url: https://kelee.one/Resource/JavaScript/WPS/WPS_checkin.js
     interval: 86400
 

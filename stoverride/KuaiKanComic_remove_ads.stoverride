@@ -101,6 +101,6 @@ http:
 
 script-providers:
   "修改广告参数_36":
-    url: https://kelee.one/Resource/Script/KuaiKanComic/KuaiKanComic_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/KuaiKanComic/KuaiKanComic_remove_ads.js
     interval: 86400
 

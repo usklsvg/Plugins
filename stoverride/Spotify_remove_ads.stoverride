@@ -49,6 +49,6 @@ http:
 
 script-providers:
   "Protobuf处理_22":
-    url: https://kelee.one/Resource/Script/Spotify/Spotify_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/Spotify/Spotify_remove_ads.js
     interval: 86400
 

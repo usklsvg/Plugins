@@ -65,6 +65,6 @@ http:
 
 script-providers:
   "移除首页轮播图和视频流广告_22":
-    url: https://kelee.one/Resource/Script/Douyu/Douyu_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/Douyu/Douyu_remove_ads.js
     interval: 86400
 

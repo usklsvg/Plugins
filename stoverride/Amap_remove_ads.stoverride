@@ -144,6 +144,6 @@ http:
 
 script-providers:
   "移除路线规划推广_33":
-    url: https://kelee.one/Resource/Script/Amap/Amap_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/Amap/Amap_remove_ads.js
     interval: 86400
 

@@ -59,6 +59,6 @@ http:
 
 script-providers:
   "移除顶部标签_24":
-    url: https://kelee.one/Resource/Script/BiliComic/BiliComic_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/BiliComic/BiliComic_remove_ads.js
     interval: 86400
 

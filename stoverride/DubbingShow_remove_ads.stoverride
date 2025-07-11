@@ -42,6 +42,6 @@ http:
 
 script-providers:
   "移除首页底部弹窗_18":
-    url: https://kelee.one/Resource/Script/DubbingShow/DubbingShow_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/DubbingShow/DubbingShow_remove_ads.js
     interval: 86400
 

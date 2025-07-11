@@ -149,6 +149,6 @@ http:
 
 script-providers:
   "移除回答底部卡片推广_50":
-    url: https://kelee.one/Resource/Script/Zhihu/Zhihu_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js
     interval: 86400
 

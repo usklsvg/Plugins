@@ -46,6 +46,6 @@ http:
 
 script-providers:
   "移除京东广告_17":
-    url: https://kelee.one/Resource/Script/JD/JD_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/JD/JD_remove_ads.js
     interval: 86400
 

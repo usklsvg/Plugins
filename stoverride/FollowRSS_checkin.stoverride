@@ -34,6 +34,6 @@ cron:
 
 script-providers:
   "Follow每日签到_16":
-    url: https://kelee.one/Resource/Script/FollowRSS/FollowRSS_checkin.js
+    url: https://kelee.one/Resource/JavaScript/FollowRSS/FollowRSS_checkin.js
     interval: 86400
 

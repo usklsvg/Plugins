@@ -167,6 +167,6 @@ http:
 
 script-providers:
   "移除首页推广_35":
-    url: https://kelee.one/Resource/Script/Weibo/Weibo_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/Weibo/Weibo_remove_ads.js
     interval: 86400
 

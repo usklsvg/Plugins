@@ -55,6 +55,6 @@ http:
 
 script-providers:
   "精简首页功能栏目并移除美颜推荐_19":
-    url: https://kelee.one/Resource/Script/MeituMYXJ/MeituMYXJ_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/MeituMYXJ/MeituMYXJ_remove_ads.js
     interval: 86400
 

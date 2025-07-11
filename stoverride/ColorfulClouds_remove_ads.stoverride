@@ -46,6 +46,6 @@ http:
 
 script-providers:
   "彩云天气去广告_19":
-    url: https://kelee.one/Resource/Script/ColorfulClouds/ColorfulClouds_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/ColorfulClouds/ColorfulClouds_remove_ads.js
     interval: 86400
 

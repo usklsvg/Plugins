@@ -22,7 +22,7 @@ AND,((DOMAIN,guc3-spclient.spotify.com,extended-matching),(PROTOCOL,QUIC)),REJEC
 ^https?:\/\/(?:gae2-spclient|guc3-spclient|spclient\.wg)\.spotify\.com(?::443)?\/pendragon\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 [Script]
-Protobuf处理 = type=http-response, pattern=^https?:\/\/(?:gae2-spclient|guc3-spclient|spclient\.wg)\.spotify\.com(?::443)?\/(?:bootstrap|user-customization-service), script-path=https://kelee.one/Resource/Script/Spotify/Spotify_remove_ads.js, requires-body=true, binary-body-mode=true, timeout=5, argument=tab="{{{tab}}}"&useractivity="{{{useractivity}}}", script-update-interval=-1
+Protobuf处理 = type=http-response, pattern=^https?:\/\/(?:gae2-spclient|guc3-spclient|spclient\.wg)\.spotify\.com(?::443)?\/(?:bootstrap|user-customization-service), script-path=https://kelee.one/Resource/JavaScript/Spotify/Spotify_remove_ads.js, requires-body=true, binary-body-mode=true, timeout=5, argument=tab="{{{tab}}}"&useractivity="{{{useractivity}}}", script-update-interval=-1
 
 [MITM]
 hostname = %APPEND% gae2-spclient.spotify.com, guc3-spclient.spotify.com, spclient.wg.spotify.com

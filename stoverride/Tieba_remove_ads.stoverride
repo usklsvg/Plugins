@@ -77,6 +77,6 @@ http:
 
 script-providers:
   "ProtoBuf处理_24":
-    url: https://kelee.one/Resource/Script/Tieba/tieba-proto.js
+    url: https://kelee.one/Resource/JavaScript/Tieba/tieba-proto.js
     interval: 86400
 

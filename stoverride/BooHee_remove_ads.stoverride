@@ -71,6 +71,6 @@ http:
 
 script-providers:
   "移除广场推荐页面横幅_22":
-    url: https://kelee.one/Resource/Script/BooHee/BooHee_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/BooHee/BooHee_remove_ads.js
     interval: 86400
 

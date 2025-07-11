@@ -36,6 +36,6 @@ http:
 
 script-providers:
   "GitHub加速_17":
-    url: https://kelee.one/Resource/Script/GitHub/Switch_github_mirror.js
+    url: https://kelee.one/Resource/JavaScript/GitHub/Switch_github_mirror.js
     interval: 86400
 

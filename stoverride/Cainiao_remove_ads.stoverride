@@ -107,6 +107,6 @@ http:
 
 script-providers:
   "移除新版我的页面推广_46":
-    url: https://kelee.one/Resource/Script/Cainiao/Cainiao_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/Cainiao/Cainiao_remove_ads.js
     interval: 86400
 

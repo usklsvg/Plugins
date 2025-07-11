@@ -55,6 +55,6 @@ http:
 
 script-providers:
   "调整整体配置_18":
-    url: https://kelee.one/Resource/Script/BabyTree/BabyTree_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/BabyTree/BabyTree_remove_ads.js
     interval: 86400
 

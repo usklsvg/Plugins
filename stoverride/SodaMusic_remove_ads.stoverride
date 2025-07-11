@@ -66,6 +66,6 @@ http:
 
 script-providers:
   "移除播放页面视频流_27":
-    url: https://kelee.one/Resource/Script/SodaMusic/SodaMusic_remove_ads.js
+    url: https://kelee.one/Resource/JavaScript/SodaMusic/SodaMusic_remove_ads.js
     interval: 86400
 

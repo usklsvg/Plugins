@@ -34,6 +34,6 @@ http:
 
 script-providers:
   "三合一网盘挂载_12":
-    url: https://kelee.one/Resource/Script/Fileball/Fileball_mount.js
+    url: https://kelee.one/Resource/JavaScript/Fileball/Fileball_mount.js
     interval: 86400
 

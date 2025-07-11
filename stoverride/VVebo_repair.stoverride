@@ -49,6 +49,6 @@ http:
 
 script-providers:
   "修复时间线_12":
-    url: https://kelee.one/Resource/Script/VVebo/VVebo_repair.js
+    url: https://kelee.one/Resource/JavaScript/VVebo/VVebo_repair.js
     interval: 86400
 
