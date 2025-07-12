@@ -60,7 +60,7 @@
     <th>名称</th>
   </tr>
   <tr>
-    <td rowspan="145"><strong>去广告插件</strong></td>
+    <td rowspan="147"><strong>去广告插件</strong></td>
   <tr>
     <td>001</td>
     <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Lpx/BlockAdvertisers.lpx">广告平台拦截器</a></td>
@@ -636,6 +636,14 @@
   <tr>
     <td>144</td>
     <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Lpx/XiaomiSpeaker_remove_ads.lpx">小米音箱去广告</a></td>
+  </tr>
+  <tr>
+    <td>145</td>
+    <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Lpx/Line_remove_ads.lpx">Line去广告</a></td>
+  </tr>
+  <tr>
+    <td>146</td>
+    <td><a href="https://www.nsloon.com/openloon/import?plugin=https://kelee.one/Tool/Loon/Lpx/SuZhouCitizenCard_remove_ads.lpx">智慧苏州去广告</a></td>
   </tr>
     <td></td>
     <td></td>
