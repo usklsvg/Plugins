@@ -21,7 +21,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-07-16 00:09:32
+  2025-07-17 01:41:21
 
 rules:
   - DOMAIN,api.biliapi.com,REJECT
@@ -55,8 +55,6 @@ http:
       ^https:\/\/app\.bilibili\.com\/x\/v2\/feed\/index\? response-jq if .data.items then .data.items |= map(select((.banner_item == null) and (.ad_info == null) and (.card_goto == "av") and (.card_type | IN("small_cover_v2", "large_cover_single_v9", "large_cover_v1")))) end
     - >-
       ^https:\/\/api\.bilibili\.com\/pgc\/view\/v2\/app\/season\? response-jq del(.data.payment)
-    - >-
-      ^https:\/\/api\.bilibili\.com\/pgc\/page\/(bangumi|cinema\/tab)\? response-jq .result.modules |= if . then map(if (.style | startswith("tip")) or (.module_id | IN(241, 1283, 1441, 1284)) then .items = [] elif .style | startswith("banner") then .items |= if . then map(select(.link | contains("play"))) else [] end elif .style | startswith("function") then .items |= if . then map(select(.blink | startswith("bilibili"))) else [] end end) end
     - >-
       ^https:\/\/app\.bilibili\.com\/x\/v2\/feed\/index\/story\? response-jq if .data.items then .data.items |= map(select((.ad_info == null) and (.card_goto | startswith("ad") | not)) | del(.story_cart_icon, .free_flow_toast)) end
     - >-
@@ -111,9 +109,16 @@ http:
       argument: |-
         base64=AAAAAAIIAQ%3D%3D
 
-# http-request ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.community\.service\.dm\.v1\.DM\/DmSegMobile$ script-path=https://kelee.one/Resource/JavaScript/Bilibili/Bilibili_airborne_kokoryh.js, requires-body=true, binary-body-mode=true, enable={airborne}, argument=[{logLevel}], tag=空降助手
-    - match: ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(app\.(dynamic\.v2\.Dynamic\/DynAll|view(unite)?\.v1\.View\/(View|ViewProgress|RelatesFeed)|playurl\.v1\.PlayURL\/PlayView|playerunite\.v1\.Player\/PlayViewUnite)|polymer\.app\.search\.v1\.Search\/SearchAll|community\.service\.dm\.v1\.DM\/(DmView|DmSegMobile)|main\.community\.reply\.v1\.Reply\/MainList|pgc\.gateway\.player\.v2\.PlayURL\/PlayView)$
-      name: "ProtoBuf处理_44"
+    - match: ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.community\.service\.dm\.v1\.DM\/DmSegMobile$
+      name: "空降助手_42"
+      type: request
+      require-body: true
+      binary-mode: true
+      argument: |-
+        [{logLevel}]
+
+    - match: ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(app\.(dynamic\.v2\.Dynamic\/DynAll|view(unite)?\.v1\.View\/(View|ViewProgress|RelatesFeed)|playurl\.v1\.PlayURL\/PlayView|playerunite\.v1\.Player\/PlayViewUnite)|polymer\.app\.search\.v1\.Search\/SearchAll|main\.community\.reply\.v1\.Reply\/MainList|pgc\.gateway\.player\.v2\.PlayURL\/PlayView)$
+      name: "ProtoBuf处理_43"
       type: response
       require-body: true
       binary-mode: true
@@ -124,7 +129,10 @@ script-providers:
   "echoResponse_28":
     url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/echo-response.js
     interval: 86400
-  "ProtoBuf处理_44":
-    url: https://kelee.one/Resource/JavaScript/Bilibili/Bilibili_proto_kokoryh.js
+  "空降助手_42":
+    url: https://kelee.one/Resource/JavaScript/Bilibili/Bilibili_proto_request_kokoryh.js
+    interval: 86400
+  "ProtoBuf处理_43":
+    url: https://kelee.one/Resource/JavaScript/Bilibili/Bilibili_proto_response_kokoryh.js
     interval: 86400
 
