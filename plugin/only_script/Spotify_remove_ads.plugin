@@ -11,8 +11,8 @@
 #!date=2025-07-04 16:36:19
 
 [Argument]
-tab=switch, "false", "true", tag=移除底栏创建按钮, desc=此开关控制是否移除底栏创建按钮
-useractivity=switch, "true", "false", tag=启用Apple设备接力, desc=此开关控制是否使用Apple设备接力
+tab=switch, false, true, tag=移除底栏创建按钮, desc=此开关控制是否移除底栏创建按钮
+useractivity=switch, true, false, tag=启用Apple设备接力, desc=此开关控制是否使用Apple设备接力
 
 [Script]
 http-response ^https?:\/\/(?:gae2-spclient|guc3-spclient|spclient\.wg)\.spotify\.com(?::443)?\/(?:bootstrap|user-customization-service) script-path=https://kelee.one/Resource/JavaScript/Spotify/Spotify_remove_ads.js, requires-body=true, binary-body-mode=true, timeout=5, argument=[{tab},{useractivity}], tag=Protobuf处理
