@@ -94,7 +94,7 @@ http:
     - >-
       ^https:\/\/api\.zhihu\.com\/search\/recommend_query\/v2\? response-replace-regex "recommend_queries":\{.+\} "recommend_queries":{}
     - >-
-      ^https:\/\/api\.zhihu\.com\/questions\/\d+(?:\/answers|\/feeds|\?include=) response-jq del(.ad_info, .data.ad_info?, .query_info) | if (.data | type) == array then .data |= map(select(.target?.answer_type?// "" | tostring | contains("paid") | not)) else . end
+      ^https:\/\/api\.zhihu\.com\/questions\/\d+(?:\/answers|\/feeds|\?include=) response-jq del(.ad_info, .data.ad_info?, .query_info) | if (.data | type) == "array" then .data |= map(select(.target?.answer_type?// "" | tostring | contains("paid") | not)) else . end
 
   script:
     - match: ^https:\/\/(?:api|page-info)\.zhihu\.com\/(?:answers|articles)\/v2\/\d+

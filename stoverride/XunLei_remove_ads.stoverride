@@ -33,5 +33,5 @@ http:
     - >-
       ^https:\/\/conf-m-ssl\.xunlei\.com\/external\/ response-jq delpaths([["values","me_config","banner_service_list"]])
     - >-
-      ^https:\/\/api-shoulei-ssl\.xunlei\.com\/flowhub\/v1\/slots:batchGet$ response-jq .slots |= map(select(.id == xl_ios_mytab_vipicon or (.native.assets.title.text.value? and (.native.assets.title.text.value | . == 清理助手 or . == 云盘容量 or . == "远程设备"))))
+      ^https:\/\/api-shoulei-ssl\.xunlei\.com\/flowhub\/v1\/slots:batchGet$ response-jq .slots |= map(select(.id == "xl_ios_mytab_vipicon" or (.native.assets.title.text.value? and (.native.assets.title.text.value | . == "清理助手" or . == "云盘容量" or . == "远程设备"))))
 

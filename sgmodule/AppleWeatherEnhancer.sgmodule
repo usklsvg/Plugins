@@ -10,16 +10,16 @@
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
 #!date=2025-05-13 15:17:08
-#!arguments=API.ColorfulClouds.Token, API.QWeather.Host, API.QWeather.Token, API.WAQI.Token, AQI.Local.ConvertUnits, AQI.Local.ReplaceScales, AQI.Local.Scale, AQI.Provider, AQI.ReplaceProviders, NextHour.Provider
+#!arguments=NextHour.Provider:"ColorfulClouds",AQI.Provider:"ColorfulClouds",AQI.ReplaceProviders:"",AQI.Local.Scale:"WAQI_InstantCast",AQI.Local.ReplaceScales:"HJ6332012",AQI.Local.ConvertUnits:false,API.ColorfulClouds.Token:"",API.QWeather.Host:"devapi.qweather.com",API.QWeather.Token:"",API.WAQI.Token:""
 
 [Rule]
 DOMAIN,weather-analytics-events.apple.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tthr.apple.com,REJECT,extended-matching,pre-matching
 
 [Script]
-Availability响应处理 = type=http-response, pattern=^https?:\/\/weatherkit\.apple\.com\/api\/v1\/availability\/, script-path=https://github.com/NSRingo/WeatherKit/releases/download/v1.8.17/response.bundle.js, requires-body=true, argument=NextHour.Provider="{{{NextHour.Provider}}}"&AQI.Provider="{{{AQI.Provider}}}"&AQI.ReplaceProviders="{{{AQI.ReplaceProviders}}}"&AQI.Local.Scale="{{{AQI.Local.Scale}}}"&AQI.Local.ReplaceScales="{{{AQI.Local.ReplaceScales}}}"&AQI.Local.ConvertUnits="{{{AQI.Local.ConvertUnits}}}"&API.ColorfulClouds.Token="{{{API.ColorfulClouds.Token}}}"&API.QWeather.Host="{{{API.QWeather.Host}}}"&API.QWeather.Token="{{{API.QWeather.Token}}}"&API.WAQI.Token="{{{API.WAQI.Token}}}", script-update-interval=-1
+Availability响应处理 = type=http-response, pattern=^https?:\/\/weatherkit\.apple\.com\/api\/v1\/availability\/, script-path=https://github.com/NSRingo/WeatherKit/releases/download/v1.8.17/response.bundle.js, requires-body=true, argument={{NextHour.Provider}}="{{{{{NextHour.Provider}}}}}"&{{AQI.Provider}}="{{{{{AQI.Provider}}}}}"&{{AQI.ReplaceProviders}}="{{{{{AQI.ReplaceProviders}}}}}"&{{AQI.Local.Scale}}="{{{{{AQI.Local.Scale}}}}}"&{{AQI.Local.ReplaceScales}}="{{{{{AQI.Local.ReplaceScales}}}}}"&{{AQI.Local.ConvertUnits}}="{{{{{AQI.Local.ConvertUnits}}}}}"&{{API.ColorfulClouds.Token}}="{{{{{API.ColorfulClouds.Token}}}}}"&{{API.QWeather.Host}}="{{{{{API.QWeather.Host}}}}}"&{{API.QWeather.Token}}="{{{{{API.QWeather.Token}}}}}"&{{API.WAQI.Token}}="{{{{{API.WAQI.Token}}}}}", script-update-interval=-1
 
-Weather响应处理 = type=http-response, pattern=^https?:\/\/weatherkit\.apple\.com\/api\/v2\/weather\/, script-path=https://github.com/NSRingo/WeatherKit/releases/download/v1.8.17/response.bundle.js, requires-body=true, binary-body-mode=true, argument=NextHour.Provider="{{{NextHour.Provider}}}"&AQI.Provider="{{{AQI.Provider}}}"&AQI.ReplaceProviders="{{{AQI.ReplaceProviders}}}"&AQI.Local.Scale="{{{AQI.Local.Scale}}}"&AQI.Local.ReplaceScales="{{{AQI.Local.ReplaceScales}}}"&AQI.Local.ConvertUnits="{{{AQI.Local.ConvertUnits}}}"&API.ColorfulClouds.Token="{{{API.ColorfulClouds.Token}}}"&API.QWeather.Host="{{{API.QWeather.Host}}}"&API.QWeather.Token="{{{API.QWeather.Token}}}"&API.WAQI.Token="{{{API.WAQI.Token}}}", script-update-interval=-1
+Weather响应处理 = type=http-response, pattern=^https?:\/\/weatherkit\.apple\.com\/api\/v2\/weather\/, script-path=https://github.com/NSRingo/WeatherKit/releases/download/v1.8.17/response.bundle.js, requires-body=true, binary-body-mode=true, argument={{NextHour.Provider}}="{{{{{NextHour.Provider}}}}}"&{{AQI.Provider}}="{{{{{AQI.Provider}}}}}"&{{AQI.ReplaceProviders}}="{{{{{AQI.ReplaceProviders}}}}}"&{{AQI.Local.Scale}}="{{{{{AQI.Local.Scale}}}}}"&{{AQI.Local.ReplaceScales}}="{{{{{AQI.Local.ReplaceScales}}}}}"&{{AQI.Local.ConvertUnits}}="{{{{{AQI.Local.ConvertUnits}}}}}"&{{API.ColorfulClouds.Token}}="{{{{{API.ColorfulClouds.Token}}}}}"&{{API.QWeather.Host}}="{{{{{API.QWeather.Host}}}}}"&{{API.QWeather.Token}}="{{{{{API.QWeather.Token}}}}}"&{{API.WAQI.Token}}="{{{{{API.WAQI.Token}}}}}", script-update-interval=-1
 
 [MITM]
 hostname = %APPEND% weatherkit.apple.com

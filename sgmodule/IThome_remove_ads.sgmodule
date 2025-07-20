@@ -8,14 +8,14 @@
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
 #!date=2025-05-13 15:17:08
-#!arguments=removeBannerSwitch, removeTopSwitch
+#!arguments=removeTopSwitch:true,removeBannerSwitch:true
 
 [URL Rewrite]
 ^https?:\/\/api\.zuihuimai\.com\/static\/.*\/hongbao - reject
 ^https?:\/\/dat\.ruanmei\.com\/ithome\/money\/acd\.json$ - reject
 
 [Script]
-IT之家去广告 = type=http-response, pattern=^https:\/\/napi\.ithome\.com\/api\/(?:news\/index|topmenu\/getfeeds\?|api\/douyin\/GetLiveInfo), script-path=https://kelee.one/Resource/JavaScript/IThome/IThome_remove_ads.js, requires-body=true, argument=removeTopSwitch="{{{removeTopSwitch}}}"&removeBannerSwitch="{{{removeBannerSwitch}}}", script-update-interval=-1
+IT之家去广告 = type=http-response, pattern=^https:\/\/napi\.ithome\.com\/api\/(?:news\/index|topmenu\/getfeeds\?|api\/douyin\/GetLiveInfo), script-path=https://kelee.one/Resource/JavaScript/IThome/IThome_remove_ads.js, requires-body=true, argument={{removeTopSwitch}}="{{{{{removeTopSwitch}}}}}"&{{removeBannerSwitch}}="{{{{{removeBannerSwitch}}}}}", script-update-interval=-1
 
 [MITM]
 hostname = %APPEND% napi.ithome.com, api.zuihuimai.com, dat.ruanmei.com

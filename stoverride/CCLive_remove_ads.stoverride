@@ -39,9 +39,9 @@ http:
 
   body-rewrite:
     - >-
-      ^https:\/\/api\.cc\.163\.com\/v\d\/mgamenavigation\/navigation_list\? response-jq .data.info_list |= map(select(.name == 关注 or .name == 推荐 or .name == 视频 or .name == "全部"))
+      ^https:\/\/api\.cc\.163\.com\/v\d\/mgamenavigation\/navigation_list\? response-jq .data.info_list |= map(select(.name == "关注" or .name == "推荐" or .name == "视频" or .name == "全部"))
     - >-
       ^https:\/\/api\.cc\.163\.com\/v\d\/mgamerecpage\/recommend_page\? response-jq .data.plugins|=map(select(.module_type!="banner"))|.data.plugins|=map(select(.module_type!="show_list"))|.data.plugins|=map(select(.title!="推荐品类"))
     - >-
-      ^https:\/\/api\.cc\.163\.com\/v\d\/entpage\/live_navbar_mobile\/ios\? response-jq .data.top_nav |= map(select(.cn_name == 推荐 or .cn_name == 星秀 or .cn_name == "心动交友"))
+      ^https:\/\/api\.cc\.163\.com\/v\d\/entpage\/live_navbar_mobile\/ios\? response-jq .data.top_nav |= map(select(.cn_name == "推荐" or .cn_name == "星秀" or .cn_name == "心动交友"))
 

@@ -41,5 +41,5 @@ http:
     - >-
       ^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/page\/v2\/conf\.do$ response-jq delpaths([["data","activityTabInfoList"]])
     - >-
-      ^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/config\/function\.do$ response-jq .data.config[] |= if .result.tools then .result.tools |= map(select(.name == 邮件追踪 or .name == "替身邮箱")) else . end | del(.data.config[] | select(.functionName == "Function-AD"))
+      ^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/config\/function\.do$ response-jq .data.config[] |= if .result.tools then .result.tools |= map(select(.name == "邮件追踪" or .name == "替身邮箱")) else . end | del(.data.config[] | select(.functionName == "Function-AD"))
 

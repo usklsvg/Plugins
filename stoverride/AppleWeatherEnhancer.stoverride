@@ -38,7 +38,7 @@ http:
       type: response
       require-body: true
       argument: |-
-        [{NextHour.Provider},{AQI.Provider},{AQI.ReplaceProviders},{AQI.Local.Scale},{AQI.Local.ReplaceScales},{AQI.Local.ConvertUnits},{API.ColorfulClouds.Token},{API.QWeather.Host},{API.QWeather.Token},{API.WAQI.Token}]
+        [ "ColorfulClouds", "ColorfulClouds", "", "WAQI_InstantCast", "HJ6332012", false, "", "devapi.qweather.com", "", ""]
 
     - match: ^https?:\/\/weatherkit\.apple\.com\/api\/v2\/weather\/
       name: "Availability响应处理_26"
@@ -46,7 +46,7 @@ http:
       require-body: true
       binary-mode: true
       argument: |-
-        [{NextHour.Provider},{AQI.Provider},{AQI.ReplaceProviders},{AQI.Local.Scale},{AQI.Local.ReplaceScales},{AQI.Local.ConvertUnits},{API.ColorfulClouds.Token},{API.QWeather.Host},{API.QWeather.Token},{API.WAQI.Token}]
+        [ "ColorfulClouds", "ColorfulClouds", "", "WAQI_InstantCast", "HJ6332012", false, "", "devapi.qweather.com", "", ""]
 
 script-providers:
   "Availability响应处理_26":

@@ -64,7 +64,7 @@ http:
     - >-
       ^https:\/\/app\.missevan\.com\/site\/tabs\? response-jq .info.tabs |= map(select(.title as $t | ["直播", "发现", "广播剧", "听书", "分类"] | index($t) != null))
     - >-
-      ^https:\/\/app\.missevan\.com\/site\/icons\? response-jq .info.icons |= map(select(.title as $t | $t == 直播 or $t == 必听剧 or $t == 免费榜 or $t == 夜猫子 or $t == "启动音"))
+      ^https:\/\/app\.missevan\.com\/site\/icons\? response-jq .info.icons |= map(select(.title as $t | $t == "直播" or $t == "必听剧" or $t == "免费榜" or $t == "夜猫子" or $t == "启动音"))
     - >-
       ^https:\/\/app\.missevan\.com\/discovery\/list$ response-jq .info |= map(map(select(.title != "免流服务")))
     - >-

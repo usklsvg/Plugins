@@ -36,14 +36,14 @@ http:
       type: request
       require-body: true
       argument: |-
-        [{Type},{AutoCC},{ShowOnly},{Position}]
+        [ "Official", true, true, "Forward"]
 
     - match: ^https?:\/\/(www|m|tv)\.youtube\.com\/youtubei\/v1\/player\?(.*)
       name: "JSON·YouTube播放器响应_18"
       type: response
       require-body: true
       argument: |-
-        [{Type},{AutoCC},{ShowOnly},{Position}]
+        [ "Official", true, true, "Forward"]
 
     - match: ^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/player\?(.*)
       name: "JSON·YouTube播放器请求_17"
@@ -51,7 +51,7 @@ http:
       require-body: true
       binary-mode: true
       argument: |-
-        [{Type},{AutoCC},{ShowOnly},{Position}]
+        [ "Official", true, true, "Forward"]
 
     - match: ^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/player\?(.*)
       name: "JSON·YouTube播放器响应_18"
@@ -59,7 +59,7 @@ http:
       require-body: true
       binary-mode: true
       argument: |-
-        [{Type},{AutoCC},{ShowOnly},{Position}]
+        [ "Official", true, true, "Forward"]
 
     - match: ^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/get_watch\?(.*)
       name: "JSON·YouTube播放器响应_18"
@@ -67,14 +67,14 @@ http:
       require-body: true
       binary-mode: true
       argument: |-
-        [{Type},{AutoCC},{ShowOnly},{Position}]
+        [ "Official", true, true, "Forward"]
 
     - match: ^https?:\/\/(www|m)\.youtube\.com\/api\/timedtext\?(.*)
       name: "JSON·YouTube播放器请求_17"
       type: request
       require-body: false
       argument: |-
-        [{Type},{AutoCC},{ShowOnly},{Position}]
+        [ "Official", true, true, "Forward"]
 
     - match: ^https?:\/\/(www|m)\.youtube\.com\/api\/timedtext\?(.*)subtype=(Official|External)
       name: "YouTube合成定时文本响应_23"
@@ -91,7 +91,7 @@ http:
       type: request
       require-body: true
       argument: |-
-        [{Type},{AutoCC},{ShowOnly},{Position}]
+        [ "Official", true, true, "Forward"]
 
     - match: ^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/browse\?(.*)
       name: "JSON·YouTube播放器请求_17"
@@ -99,7 +99,7 @@ http:
       require-body: true
       binary-mode: true
       argument: |-
-        [{Type},{AutoCC},{ShowOnly},{Position}]
+        [ "Official", true, true, "Forward"]
 
     - match: ^https?:\/\/music\.youtube\.com\/youtubei\/v1\/browse\?(.*)subtype=Translate
       name: "YouTube翻译定时文本响应_24"

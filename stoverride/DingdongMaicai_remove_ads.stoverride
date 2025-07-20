@@ -73,5 +73,5 @@ http:
     - >-
       ^https?:\/\/maicai\.api\.ddxq\.mobi\/homeApi\/bottomNavi response-jq del(.data.adId?) | if (.data.bottom_list? | length > 0) then .data.bottom_list |= map(select(.type != "eatwhat")) else . end
     - >-
-      ^https?:\/\/maicai\.api\.ddxq\.mobi\/homeApi\/homeFlowDetail response-jq walk(if type == object and has("list") then .list |= map(if type == object and has("multi_advertise_data_list") then del(.multi_advertise_data_list) else . end) else . end)
+      ^https?:\/\/maicai\.api\.ddxq\.mobi\/homeApi\/homeFlowDetail response-jq walk(if type == "object" and has("list") then .list |= map(if type == "object" and has("multi_advertise_data_list") then del(.multi_advertise_data_list) else . end) else . end)
 

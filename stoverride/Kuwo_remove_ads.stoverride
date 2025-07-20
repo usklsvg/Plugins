@@ -58,5 +58,5 @@ http:
 
   body-rewrite:
     - >-
-      http-response ^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/tingshu\/index\/radio response-jq walk(if type == object and .type == stripAdvert then del(.child) else . end)
+      http-response ^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/tingshu\/index\/radio response-jq walk(if type == "object" and .type == "stripAdvert" then del(.child) else . end)
 

@@ -33,10 +33,10 @@ http:
 cron:
   script:
     - name: "捕获Cookie_19"
-      cron: {CRONEXP}
+      cron:  "0 8 * * *"
       timeout: 120
       argument: |-
-        [{AK},{SK},{MAX_RETRIES}]
+        [ "", "", "5"]
 
 script-providers:
   "捕获Cookie_19":

@@ -45,7 +45,7 @@ http:
       binary-mode: true
       timeout: 5
       argument: |-
-        [{tab},{useractivity}]
+        [ false, true]
 
 script-providers:
   "Protobuf处理_22":

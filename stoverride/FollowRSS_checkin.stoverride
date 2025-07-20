@@ -27,10 +27,10 @@ http:
 cron:
   script:
     - name: "Follow每日签到_16"
-      cron: {cron}
+      cron:  "0 1 * * *"
       timeout: 120
       argument: |-
-        [{token},{cookie}]
+        [ "", ""]
 
 script-providers:
   "Follow每日签到_16":

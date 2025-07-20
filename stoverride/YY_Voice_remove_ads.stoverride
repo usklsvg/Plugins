@@ -44,11 +44,11 @@ http:
 
   body-rewrite:
     - >-
-      ^https:\/\/yyapp-idx\.yy\.com\/mobyy\/nav\/index\/idx\? response-jq .data[].modules |= map(select(.name != 新版本滚动条 and .name != 通栏轮播 and .name != "新静默位"))
+      ^https:\/\/yyapp-idx\.yy\.com\/mobyy\/nav\/index\/idx\? response-jq .data[].modules |= map(select(.name != "新版本滚动条" and .name != "通栏轮播" and .name != "新静默位"))
     - >-
       ^https:\/\/tab\.yy\.com\/tabs\? response-jq delpaths([["data","tabsForSelect"]])
     - >-
-      ^https:\/\/tab\.yy\.com\/tabs\? response-jq .data.tabs |= map(select(.alias == follow or .alias == im or .alias == "me"))
+      ^https:\/\/tab\.yy\.com\/tabs\? response-jq .data.tabs |= map(select(.alias == "follow" or .alias == "im" or .alias == "me"))
     - >-
       ^https:\/\/personal-center\.yy\.com\/personalCenter\/list\? response-jq .data.modules |= map(select(.moduleName != "Banner轮播")) | .data.modules |= map(if has("entrances") then .entrances |= map(select(.bizCode|IN("jishijiedaikuan","duxiaoman2","chongzhi","freeData")|not)) else . end)
 

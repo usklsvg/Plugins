@@ -38,7 +38,7 @@ http:
       type: response
       require-body: true
       argument: |-
-        [{removeTopSwitch},{removeBannerSwitch}]
+        [ true, true]
 
 script-providers:
   "IT之家去广告_18":

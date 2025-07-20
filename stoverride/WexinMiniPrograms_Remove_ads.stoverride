@@ -355,9 +355,9 @@ http:
     - >-
       ^https:\/\/rms\.meituan\.com\/api\/v1\/rmsmina\/c\/queryShopPortalInfo\? response-jq delpaths([["data","popUpWindows"]])
     - >-
-      ^https:\/\/chong\.qq\.com\/tws\/wxmobile\/GetProduct4App\? response-jq del(.respInfo.reserveProductList) | .respInfo.shortcut |= map(select(.name != 充流量 and .name != "领话费券"))
+      ^https:\/\/chong\.qq\.com\/tws\/wxmobile\/GetProduct4App\? response-jq del(.respInfo.reserveProductList) | .respInfo.shortcut |= map(select(.name != "充流量" and .name != "领话费券"))
     - >-
-      ^https:\/\/chong\.qq\.com\/tws\/wxmobile4app\/GetSecondProduct\? response-jq del(.respInfo.productList) | .respInfo.shortcut |= map(select(.name != 充流量 and .name != "领话费券"))
+      ^https:\/\/chong\.qq\.com\/tws\/wxmobile4app\/GetSecondProduct\? response-jq del(.respInfo.productList) | .respInfo.shortcut |= map(select(.name != "充流量" and .name != "领话费券"))
     - >-
       ^https:\/\/chong\.qq\.com\/tws\/usernumberinfo\/GetUserInfo\? response-jq delpaths([["data","request","number","markSeat","servicehallOperList"]])
     - >-

@@ -63,7 +63,7 @@ http:
       binary-mode: true
       timeout: 20
       argument: |-
-        [{PRGG},{PRRK},{PRDRD},{PRSCVPT},{PRST},{PRRR},{HMPR},{PRMST},{PRCN}]
+        [ false, false, false, false, false, false, false, false, false]
 
     - match: ^https?:\/\/interface\d?\.music\.163\.com\/eapi\/link\/home\/framework\/tab
       name: "评论区、热推、有话想说、分享一下、歌曲下的祝福等小提示_40"
@@ -72,7 +72,7 @@ http:
       binary-mode: true
       timeout: 20
       argument: |-
-        [{MY},{DT},{FX}]
+        [ false, false, false]
 
     - match: ^https?:\/\/interface\d?\.music\.163\.com\/eapi\/link\/page\/discovery\/resource\/show
       name: "评论区、热推、有话想说、分享一下、歌曲下的祝福等小提示_40"

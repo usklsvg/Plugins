@@ -30,7 +30,7 @@ cron:
   script:
 # BiliBili每日等级任务
     - name: "B站每日等级任务_21"
-      cron: {RunTime}
+      cron: "30 7 * * *"
       timeout: 15
 
 script-providers:

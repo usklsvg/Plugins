@@ -44,7 +44,7 @@ http:
       require-body: true
       binary-mode: true
       argument: |-
-        [{blockUpload},{blockShorts},{blockImmersive},{captionLang},{lyricLang},{debug}]
+        [ false, false, false, "zh-Hans", "zh-Hans", false]
 
 script-providers:
   "YouTube去广告_24":
