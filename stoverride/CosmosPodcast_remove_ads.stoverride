@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://github.com/luestr/ProxyResource/blob/main/README.md
 date: |-
-  2025-05-13 15:17:08
+  2025-07-21 18:21:13
 
 http:
 
@@ -26,11 +26,15 @@ http:
 
   url-rewrite:
     - >-
-      ^https:\/\/api\.xiaoyuzhoufm\.com\/v1\/flash-screen\/list$ - reject-dict
+      ^https:\/\/api\.xiaoyuzhoufm\.com\/v\d\/flash - reject-dict
     - >-
-      ^https:\/\/api\.xiaoyuzhoufm\.com\/v1\/ai-summary - reject-dict
+      ^https:\/\/api\.xiaoyuzhoufm\.com\/v\d\/ai - reject-dict
     - >-
-      ^https?:\/\/api\.xiaoyuzhoufm\.com\/v1\/search - reject-dict
+      ^https:\/\/api\.xiaoyuzhoufm\.com\/v\d\/search\/get - reject-dict
     - >-
-      ^https?:\/\/api\.xiaoyuzhoufm\.com\/v1\/category\/list-daily-suggestion$ - reject-dict
+      ^https?:\/\/api\.xiaoyuzhoufm\.com\/v\d\/category - reject-dict
+
+  body-rewrite:
+    - >-
+      ^https:\/\/api\.xiaoyuzhoufm\.com\/v1\/discovery-feed\/list response-jq .data |= map(select(.type != "DISCOVERY_HEADER" and .type != "DISCOVERY_BANNER"))
 
