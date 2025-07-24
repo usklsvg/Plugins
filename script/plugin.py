@@ -168,19 +168,27 @@ def save_plugin_jqs(plugin_name: str, data: list[str]):
 
 
 def colllect_files():
-    readme = get_url_text_content(
-        "https://raw.githubusercontent.com/luestr/ProxyResource/refs/heads/main/README.md"
-    )
-    save_content(readme, os.path.join(extern_dir, "README.md"))
+    from time import time
 
-    filenames = []
+    timestamp = int(time() * 1000)
+    readme = get_url_text_content(
+        f"https://kelee.one/Tool/Loon/Lpx_list.json?_={timestamp}"
+    )
+    save_content(readme, os.path.join(extern_dir, "Lpx_list.json"))
+
+    import json
+
+    with open(os.path.join(extern_dir, "Lpx_list.json"), "r", encoding="utf-8") as f:
+        content = json.load(f)
+    plugin_url_list = [item["url"][21:] for item in content["lists"]]
+
     recreate_path(extern_plugin_dir)
-    for item in readme.split('"'):
-        if not (item.endswith(".lpx") or item.endswith(".plugin")):
+    filenames = []
+    for plugin_url in plugin_url_list:
+        if not (plugin_url.endswith(".lpx") or plugin_url.endswith(".plugin")):
             continue
 
-        plugin_url = item[46:]
-        plugin_name = item.split("/")[-1]
+        plugin_name = plugin_url.split("/")[-1]
         plugin_name = plugin_name[: plugin_name.rfind(".")] + ".plugin"
         plugin_filename = os.path.join(extern_plugin_dir, plugin_name)
         download_url_file(plugin_url, plugin_filename)
