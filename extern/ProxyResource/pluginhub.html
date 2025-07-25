@@ -54,8 +54,19 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            -webkit-tap-highlight-color: transparent; /* 移除点击高亮 */
+            font-family: system-ui, -apple-system, BlinkMacSystemFont,
+                /* 中文优化字体 */
+                "PingFang SC", "SF Pro SC", "SF Pro Text", "SF Pro Icons",
+                /* 英文系统字体 */
+                "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* 针对Safari浏览器的字体优化 */
+        @supports (font: -apple-system-body) and (-webkit-appearance: none) {
+            * {
+                font-family: system-ui, "PingFang SC", "SF Pro SC", -apple-system;
+            }
         }
 
         body {
@@ -1168,7 +1179,7 @@
                     <div class="plugin-description">过滤哔哩哔哩广告、移除青少年模式弹窗和交互式弹幕、移除无用功能和链接跟踪参数，增加空降助手以便跳过视频中插入的广告。此插件仅建议iOS 15以上设备使用，且必须启用MitM-over-HTTP/2功能。
 空降助手是第三方提供的功能，依赖于Android版空降助手的服务器数据运作，可能会存在不准确或者失效的问题，此功能与哔哩哔哩官方无关。</div>
                     <div class="plugin-footer"></div>
-                    <div class="plugin-date">更新于 2025-07-25 16:19:39</div>
+                    <div class="plugin-date">更新于 2025-07-25 22:30:48</div>
                     <a href="loon://import?plugin=https://kelee.one/Tool/Loon/Lpx/Bilibili_remove_ads.lpx" class="plugin-install">安装</a>
                 </div><div class="plugin-card">
                     <div class="plugin-header">

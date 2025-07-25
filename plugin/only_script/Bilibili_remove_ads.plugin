@@ -8,7 +8,7 @@
 #!loon_version=3.2.9(837)
 #!homepage=https://pluginhub.kelee.one
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Bilibili.png
-#!date=2025-07-25 16:19:39
+#!date=2025-07-25 22:30:48
 
 [Argument]
 showUpList=select, "auto", "show", "hide", tag=[动态]中[最常访问]的显示方式, desc=auto：仅当列表中存在直播状态时显示；show：始终显示；hide：始终隐藏。
@@ -21,7 +21,7 @@ http-request ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.commu
 
 http-response ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(app\.(dynamic\.v2\.Dynamic\/DynAll|view(unite)?\.v1\.View\/(View|ViewProgress|RelatesFeed)|playurl\.v1\.PlayURL\/PlayView|playerunite\.v1\.Player\/PlayViewUnite)|polymer\.app\.search\.v1\.Search\/SearchAll|main\.community\.reply\.v1\.Reply\/MainList|pgc\.gateway\.player\.v2\.PlayURL\/PlayView)$ script-path=https://kelee.one/Resource/JavaScript/Bilibili/Bilibili_proto_response_kokoryh.js, requires-body=true, binary-body-mode=true, argument=[{showUpList}, {filterTopReplies}, {airborneDm}, {logLevel}], tag=ProtoBuf处理
 
-http-response ^https:\/\/live\.bilibili\.com\/blackboard/era/.+\.html\?is_live_half_webview=1 script-path=https://kelee.one/Resource/JavaScript/Bilibili/webpage_Bilibili_remove_ads_kokoryh.js, requires-body=true, tag=移除直播间网页广告
+http-response ^https:\/\/live\.bilibili\.com\/blackboard/era/.+\.html\? script-path=https://kelee.one/Resource/JavaScript/Bilibili/webpage_Bilibili_remove_ads_kokoryh.js, requires-body=true, tag=移除直播间网页广告
 
 [MitM]
 hostname=grpc.biliapi.net, app.bilibili.com, api.bilibili.com, api.live.bilibili.com, live.bilibili.com, line3-h5-mobile-api.biligame.com

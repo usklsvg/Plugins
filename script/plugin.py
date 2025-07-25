@@ -2,6 +2,7 @@ import os
 import shutil
 import requests
 import time
+from tqdm import tqdm
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
@@ -19,13 +20,9 @@ plugin_only_script_dir = os.path.join(current_dir, "plugin", "only_script")
 
 
 def get_url_text_content(url: str):
-    proxies = {
-        "http": "http://127.0.0.1:6152",
-        "https": "http://127.0.0.1:6152",
-    }
     content = ""
     try:
-        response = requests.get(url, proxies=proxies, stream=True)
+        response = requests.get(url, stream=True)
         content = response.text
     except requests.exceptions.RequestException as e:
         print(f"error : {e}")
@@ -34,23 +31,20 @@ def get_url_text_content(url: str):
 
 def download_url_file(url: str, filename: str):
     headers = {"User-Agent": "script-hub/1.0.0"}
-    proxies = {
-        "http": "http://127.0.0.1:6152",
-        "https": "http://127.0.0.1:6152",
-    }
     while True:
         try:
-            response = requests.get(url, headers=headers, proxies=proxies, stream=True)
-            if response.status_code != 200:
+            response = requests.get(url, headers=headers, stream=True)
+            if response.status_code == 200:
+                with open(filename, "wb") as f:
+                    for chunk in response.iter_content(chunk_size=1024):
+                        if chunk:
+                            f.write(chunk)
+                            f.flush()
+            else:
                 print(
                     f'status code {response.status_code} when downloading from "{url}"'
                 )
-                return
-            with open(filename, "wb") as f:
-                for chunk in response.iter_content(chunk_size=1024):
-                    if chunk:
-                        f.write(chunk)
-                        f.flush()
+            return
         except requests.exceptions.RequestException as e:
             continue
         except Exception as e:
@@ -64,7 +58,6 @@ def download_rendered_webpage(url, output_filename, wait_time):
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--window-size=1920,1080")
-    chrome_options.add_argument("--proxy-server=127.0.0.1:6152")
 
     driver = None
 
@@ -236,7 +229,7 @@ def colllect_files():
 
     recreate_path(extern_plugin_dir)
     filenames = []
-    for plugin_url in plugin_url_list:
+    for plugin_url in tqdm(plugin_url_list):
         if not (plugin_url.endswith(".lpx") or plugin_url.endswith(".plugin")):
             continue
 
