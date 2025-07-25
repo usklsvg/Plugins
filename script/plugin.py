@@ -19,9 +19,13 @@ plugin_only_script_dir = os.path.join(current_dir, "plugin", "only_script")
 
 
 def get_url_text_content(url: str):
+    proxies = {
+        "http": "http://127.0.0.1:6152",
+        "https": "http://127.0.0.1:6152",
+    }
     content = ""
     try:
-        response = requests.get(url, stream=True)
+        response = requests.get(url, proxies=proxies, stream=True)
         content = response.text
     except requests.exceptions.RequestException as e:
         print(f"error : {e}")
@@ -29,31 +33,29 @@ def get_url_text_content(url: str):
 
 
 def download_url_file(url: str, filename: str):
-    headers = {
-        "User-Agent": "Loon/877 CFNetwork/3826.500.131 Darwin/24.5.0",
-        "accept-language": "zh-CN,zh-Hans;q=0.0",
-        "accept-encoding": "gzip, defalte, br",
+    headers = {"User-Agent": "script-hub/1.0.0"}
+    proxies = {
+        "http": "http://127.0.0.1:6152",
+        "https": "http://127.0.0.1:6152",
     }
-    err_info = None
-    for _ in range(3):
+    while True:
         try:
-            response = requests.get(url, headers=headers, stream=True)
+            response = requests.get(url, headers=headers, proxies=proxies, stream=True)
             if response.status_code != 200:
                 print(
                     f'status code {response.status_code} when downloading from "{url}"'
                 )
-                continue
+                return
             with open(filename, "wb") as f:
                 for chunk in response.iter_content(chunk_size=1024):
                     if chunk:
                         f.write(chunk)
                         f.flush()
         except requests.exceptions.RequestException as e:
-            err_info = e
-        err_info = None
-        break
-    if err_info:
-        print(f"error : {err_info}")
+            continue
+        except Exception as e:
+            print(f"error: {e}")
+            exit(1)
 
 
 def download_rendered_webpage(url, output_filename, wait_time):
@@ -62,6 +64,7 @@ def download_rendered_webpage(url, output_filename, wait_time):
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--window-size=1920,1080")
+    chrome_options.add_argument("--proxy-server=127.0.0.1:6152")
 
     driver = None
 
@@ -96,14 +99,13 @@ def download_rendered_webpage(url, output_filename, wait_time):
 
 
 def recreate_path(pathname: str):
-    os.makedirs(pathname, exist_ok=True)
-    # try:
-    #     if os.path.exists(pathname):
-    #         shutil.rmtree(pathname)
-    #     os.makedirs(pathname)
-    # except Exception as e:
-    #     print(f"error when recreate path '{pathname}': {e}")
-    #     exit(1)
+    try:
+        if os.path.exists(pathname):
+            shutil.rmtree(pathname)
+        os.makedirs(pathname)
+    except Exception as e:
+        print(f"error when recreate path '{pathname}': {e}")
+        exit(1)
 
 
 def save_content(content: str, filename: str):
