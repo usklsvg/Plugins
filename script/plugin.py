@@ -6,7 +6,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import WebDriverException
-from webdriver_manager.chrome import ChromeDriverManager
 
 
 current_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
@@ -49,7 +48,7 @@ def download_url_file(url: str, filename: str):
         print(f"error : {err_info}")
 
 
-def download_rendered_webpage(url, output_filename, wait_time=5):
+def download_rendered_webpage(url, output_filename, wait_time):
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-gpu")
@@ -60,8 +59,7 @@ def download_rendered_webpage(url, output_filename, wait_time=5):
 
     try:
         print(f"Initialize with chromedriver path")
-        driver_path = ChromeDriverManager().install()
-        service = Service(executable_path=driver_path)
+        service = Service()
 
         print(f"Opening URL: {url}")
         driver = webdriver.Chrome(service=service, options=chrome_options)
@@ -69,6 +67,13 @@ def download_rendered_webpage(url, output_filename, wait_time=5):
         driver.get(url)
         print(f"Waiting for {wait_time} seconds for JavaScript to execute...")
         time.sleep(wait_time)
+
+        if (
+            "cloudflare.com/challenge" in driver.current_url
+            or "captcha" in driver.page_source.lower()
+        ):
+            print("need process manually for Cloudflare challenge")
+            return
 
         rendered_html = driver.page_source
         with open(output_filename, "w", encoding="utf-8") as f:
@@ -212,7 +217,7 @@ def save_plugin_jqs(plugin_name: str, data: list[str]):
 def colllect_files():
     content_path = os.path.join(extern_dir, "pluginhub.html")
     download_rendered_webpage(
-        "https://pluginhub.kelee.one/", output_filename=content_path, wait_time=5
+        "https://pluginhub.kelee.one/", output_filename=content_path, wait_time=15
     )
     with open(content_path, "r", encoding="utf-8") as f:
         lines = f.readlines()
