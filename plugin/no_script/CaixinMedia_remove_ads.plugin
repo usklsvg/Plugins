@@ -1,0 +1,24 @@
+#!name=财新去广告
+#!desc=过滤财新广告
+#!openUrl=https://apps.apple.com/app/id356023612
+#!author=RuCu6[https://github.com/RuCu6]
+#!tag=去广告
+#!system=
+#!system_version=
+#!loon_version=3.2.4(787)
+#!homepage=https://pluginhub.kelee.one
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/CaixinMedia.png
+#!date=2025-05-13 15:17:08
+
+[Rewrite]
+^https:\/\/entities\.caixin\.com\/api\/(dataplus\/promotionHints|public\/push\/appIndex|public\/recommendNews) reject-dict
+
+^https:\/\/gateway\.caixin\.com\/api\/app-api\/cxAdInfo\/selectIndexAdInfo reject-dict
+^https:\/\/mappsv5\.caixin\.com\/channelv5\/article_ad_ios_info\.json reject-dict
+
+^https:\/\/gg\.caixin\.com\/s\?z=caixin&slot=\d+ reject-dict
+
+^https:\/\/msgapi\.caixin\.com\/msg_api\/annmsg\/annlist reject-dict
+
+[MitM]
+hostname=e*.caixin.com, g*.caixin.com, m*.caixin.com

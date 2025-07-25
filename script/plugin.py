@@ -34,12 +34,16 @@ def download_url_file(url: str, filename: str):
     for _ in range(3):
         try:
             response = requests.get(url, headers=headers, stream=True)
-            if response.status_code == 200:
-                with open(filename, "wb") as f:
-                    for chunk in response.iter_content(chunk_size=1024):
-                        if chunk:
-                            f.write(chunk)
-                            f.flush()
+            if response.status_code != 200:
+                print(
+                    f'status code {response.status_code} when downloading from "{url}"'
+                )
+                continue
+            with open(filename, "wb") as f:
+                for chunk in response.iter_content(chunk_size=1024):
+                    if chunk:
+                        f.write(chunk)
+                        f.flush()
         except requests.exceptions.RequestException as e:
             err_info = e
         err_info = None
@@ -88,13 +92,14 @@ def download_rendered_webpage(url, output_filename, wait_time):
 
 
 def recreate_path(pathname: str):
-    try:
-        if os.path.exists(pathname):
-            shutil.rmtree(pathname)
-        os.makedirs(pathname)
-    except Exception as e:
-        print(f"error when recreate path '{pathname}': {e}")
-        exit(1)
+    os.makedirs(pathname, exist_ok=True)
+    # try:
+    #     if os.path.exists(pathname):
+    #         shutil.rmtree(pathname)
+    #     os.makedirs(pathname)
+    # except Exception as e:
+    #     print(f"error when recreate path '{pathname}': {e}")
+    #     exit(1)
 
 
 def save_content(content: str, filename: str):
