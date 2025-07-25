@@ -233,8 +233,12 @@ def colllect_files():
         plugin_name = plugin_url.split("/")[-1]
         plugin_name = plugin_name[: plugin_name.rfind(".")] + ".plugin"
         plugin_filename = os.path.join(extern_plugin_dir, plugin_name)
+        download_url_file(plugin_url, plugin_filename)
+        if not os.path.exists(filename):
+            print(f'Error when downloading "{filename}" from "{plugin_url}".')
+            continue
+
         try:
-            download_url_file(plugin_url, plugin_filename)
             with open(plugin_filename, mode="r", encoding="utf-8") as f:
                 content = f.readlines()
         except IOError as e:
