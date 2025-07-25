@@ -19,7 +19,13 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install requests
+        python -m pip install --upgrade pip
+        pip install selenium webdriver-manager
+
+    - name: Install Google Chrome
+      run: |
+        sudo apt-get update
+        sudo apt-get install google-chrome-stable
 
     - name: Run Python script
       run: |

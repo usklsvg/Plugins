@@ -1,6 +1,12 @@
 import os
 import shutil
 import requests
+import time
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import WebDriverException
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 current_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
@@ -23,7 +29,7 @@ def get_url_text_content(url: str):
     return content
 
 
-def download_url_file(url: str, filename: str):
+def download_url_file(url: str, filename: str, user_agent):
     headers = {"User-Agent": "script-hub/1.0.0"}
     err_info = None
     for _ in range(3):
@@ -41,6 +47,42 @@ def download_url_file(url: str, filename: str):
         break
     if err_info:
         print(f"error : {err_info}")
+
+
+def download_rendered_webpage(url, output_filename, wait_time=5):
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--window-size=1920,1080")
+
+    driver = None
+
+    try:
+        print(f"Initialize with chromedriver path")
+        driver_path = ChromeDriverManager().install()
+        service = Service(executable_path=driver_path)
+
+        print(f"Opening URL: {url}")
+        driver = webdriver.Chrome(service=service, options=chrome_options)
+
+        driver.get(url)
+        print(f"Waiting for {wait_time} seconds for JavaScript to execute...")
+        time.sleep(wait_time)
+
+        rendered_html = driver.page_source
+        with open(output_filename, "w", encoding="utf-8") as f:
+            f.write(rendered_html)
+        print(f"Webpage successfully downloaded to {output_filename}")
+
+    except WebDriverException as e:
+        print(f"An error occurred with the WebDriver: {e}")
+        print("Please ensure ChromeDriver is correctly installed and its path is set.")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+    finally:
+        if driver:
+            driver.quit()
 
 
 def recreate_path(pathname: str):
@@ -168,19 +210,17 @@ def save_plugin_jqs(plugin_name: str, data: list[str]):
 
 
 def colllect_files():
-    from time import time
-
-    timestamp = int(time() * 1000)
-    readme = get_url_text_content(
-        f"https://kelee.one/Tool/Loon/Lpx_list.json?_={timestamp}"
+    content_path = os.path.join(extern_dir, "pluginhub.html")
+    download_rendered_webpage(
+        "https://pluginhub.kelee.one/", output_filename=content_path, wait_time=5
     )
-    save_content(readme, os.path.join(extern_dir, "Lpx_list.json"))
-
-    import json
-
-    with open(os.path.join(extern_dir, "Lpx_list.json"), "r", encoding="utf-8") as f:
-        content = json.load(f)
-    plugin_url_list = [item["url"][21:] for item in content["lists"]]
+    with open(content_path, "r", encoding="utf-8") as f:
+        lines = f.readlines()
+    plugin_url_list = [
+        item.split('"')[1][21:]
+        for item in lines
+        if item.find("loon://import?plugin=") != -1
+    ]
 
     recreate_path(extern_plugin_dir)
     filenames = []
