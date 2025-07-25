@@ -68,10 +68,7 @@ def download_rendered_webpage(url, output_filename, wait_time):
         print(f"Waiting for {wait_time} seconds for JavaScript to execute...")
         time.sleep(wait_time)
 
-        if (
-            "cloudflare.com/challenge" in driver.current_url
-            or "captcha" in driver.page_source.lower()
-        ):
+        if not "loon://import?plugin=" in driver.page_source.lower():
             print("need process manually for Cloudflare challenge")
             return
 
@@ -217,7 +214,7 @@ def save_plugin_jqs(plugin_name: str, data: list[str]):
 def colllect_files():
     content_path = os.path.join(extern_dir, "pluginhub.html")
     download_rendered_webpage(
-        "https://pluginhub.kelee.one/", output_filename=content_path, wait_time=15
+        "https://pluginhub.kelee.one/", output_filename=content_path, wait_time=45
     )
     with open(content_path, "r", encoding="utf-8") as f:
         lines = f.readlines()
