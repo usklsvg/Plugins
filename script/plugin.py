@@ -29,7 +29,7 @@ def get_url_text_content(url: str):
     return content
 
 
-def download_url_file(url: str, filename: str, user_agent):
+def download_url_file(url: str, filename: str):
     headers = {"User-Agent": "script-hub/1.0.0"}
     err_info = None
     for _ in range(3):
