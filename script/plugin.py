@@ -214,7 +214,7 @@ def save_plugin_jqs(plugin_name: str, data: list[str]):
 def colllect_files():
     content_path = os.path.join(extern_dir, "pluginhub.html")
     download_rendered_webpage(
-        "https://pluginhub.kelee.one/", output_filename=content_path, wait_time=45
+        "https://pluginhub.kelee.one/", output_filename=content_path, wait_time=5
     )
     with open(content_path, "r", encoding="utf-8") as f:
         lines = f.readlines()
@@ -233,12 +233,15 @@ def colllect_files():
         plugin_name = plugin_url.split("/")[-1]
         plugin_name = plugin_name[: plugin_name.rfind(".")] + ".plugin"
         plugin_filename = os.path.join(extern_plugin_dir, plugin_name)
-        download_url_file(plugin_url, plugin_filename)
         try:
+            download_url_file(plugin_url, plugin_filename)
             with open(plugin_filename, mode="r", encoding="utf-8") as f:
                 content = f.readlines()
         except IOError as e:
             print(f"Error when reading content from {plugin_filename}: {e}")
+            continue
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
             continue
         filenames.append(plugin_filename)
         data: dict[str, list[str]] = extract_components(content)
