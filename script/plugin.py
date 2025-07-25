@@ -69,13 +69,12 @@ def download_rendered_webpage(url, output_filename, wait_time):
     driver = None
 
     try:
-        print(f"Initialize with chromedriver path")
         service = Service()
-
-        print(f"Opening URL: {url}")
         driver = webdriver.Chrome(service=service, options=chrome_options)
 
+        print(f"Opening URL: {url}")
         driver.get(url)
+
         print(f"Waiting for {wait_time} seconds for JavaScript to execute...")
         time.sleep(wait_time)
 
