@@ -21,7 +21,7 @@ loon_version: |-
 homepage: |-
   https://pluginhub.kelee.one
 date: |-
-  2025-07-18 23:42:24
+  2025-07-25 22:30:48
 
 rules:
   - DOMAIN,api.biliapi.com,REJECT
@@ -38,6 +38,7 @@ http:
     - "app.bilibili.com"
     - "api.bilibili.com"
     - "api.live.bilibili.com"
+    - "live.bilibili.com"
     - "line3-h5-mobile-api.biligame.com"
 
   url-rewrite:
@@ -56,7 +57,7 @@ http:
     - >-
       ^https:\/\/api\.bilibili\.com\/pgc\/view\/v2\/app\/season\? response-jq del(.data.payment)
     - >-
-      ^https:\/\/app\.bilibili\.com\/x\/v2\/feed\/index\/story\? response-jq if .data.items then .data.items |= map(select((.ad_info == null) and (.card_goto | startswith("ad") | not)) | del(.story_cart_icon, .free_flow_toast)) end
+      ^https:\/\/app\.bilibili\.com\/x\/v2\/feed\/index\/story\? response-jq if .data.items then .data.items |= map(select((.ad_info == null) and (.card_goto | IN("vertical_ad_av", "vertical_ad_live", "vertical_ad_picture") | not)) | del(.story_cart_icon, .free_flow_toast, .image_infos, .course_info, .game_info)) end
     - >-
       ^https:\/\/api\.live\.bilibili\.com\/xlive\/(app-interface\/v2\/index\/feed|app-room\/v1\/index\/getInfoBy(Room|User))\? response-jq .data |= (del(.play_together_info, .play_together_info_v2, .activity_banner_info) | if .function_card then .function_card[] = null end | if .new_tab_info.outer_list then .new_tab_info.outer_list |= map(select(.biz_id != 33)) end | if .card_list then .card_list |= map(select(.card_type | IN("banner_v2", "activity_card_v1") | not)) end | reduce ([["show_reserve_status"], false], [["reserve_info", "show_reserve_status"], false], [["shopping_info", "is_show"], 0]) as [$path, $value] (.; if getpath($path) then setpath($path; $value) end))
     - >-
@@ -125,6 +126,11 @@ http:
       argument: |-
         [ "auto",  true, {airborneDm},  "off"]
 
+    - match: ^https:\/\/live\.bilibili\.com\/blackboard/era/.+\.html\?
+      name: "移除直播间网页广告_44"
+      type: response
+      require-body: true
+
 script-providers:
   "echoResponse_28":
     url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/echo-response.js
@@ -134,5 +140,8 @@ script-providers:
     interval: 86400
   "ProtoBuf处理_43":
     url: https://kelee.one/Resource/JavaScript/Bilibili/Bilibili_proto_response_kokoryh.js
+    interval: 86400
+  "移除直播间网页广告_44":
+    url: https://kelee.one/Resource/JavaScript/Bilibili/webpage_Bilibili_remove_ads_kokoryh.js
     interval: 86400
 

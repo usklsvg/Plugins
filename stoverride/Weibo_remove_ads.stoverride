@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://pluginhub.kelee.one
 date: |-
-  2025-07-14 22:11:40
+  2025-07-25 15:49:44
 
 rules:
   - DOMAIN-SUFFIX,uve.weibo.com,DIRECT
@@ -110,7 +110,7 @@ http:
       type: response
       require-body: true
 
-    - match: ^https:\/\/api\.weibo\.cn\/2\/statuses\/(?:container_timeline(?:_hot|_topic|_topicpage|_unread)?|repost_timeline|unread_hot_timeline)
+    - match: ^https:\/\/api\.weibo\.cn\/2\/statuses\/(?:container_detail(_comment)?|container_timeline(?:_hot|_topic|_topicpage|_unread)?|repost_timeline|unread_hot_timeline)
       name: "移除首页推广_35"
       type: response
       require-body: true
@@ -161,6 +161,11 @@ http:
       require-body: true
 
     - match: ^https:\/\/wbapp\.uve\.weibo\.com\/(?:preload\/get_ad|wbapplua\/wbpullad\.lua)
+      name: "移除首页推广_35"
+      type: response
+      require-body: true
+
+    - match: ^https:\/\/new\.vip\.weibo\.cn\/aj\/appicon\/list\?
       name: "移除首页推广_35"
       type: response
       require-body: true
