@@ -110,54 +110,65 @@ def modify_content_common(content: str, file_ext: str):
         return ""
 
     data = extract_components(lines)
-    if not "[Script]" in data:
-        return content
 
-    arguments: set[str] = set([])
-    for i, line in enumerate(data["[Script]"]):
-        if line.startswith("#") or line.find("script-path") == -1:
-            continue
-        if file_ext == "sgmodule":
-            line = line.strip()
-            arg_pos_begin = line.find("argument=")
-            if arg_pos_begin != -1:
-                arg_pos_end = line.find("}]", arg_pos_begin)
-                if arg_pos_end != -1:
-                    arg_pos_end += 2
-                    args = line[arg_pos_begin + 11 : arg_pos_end - 1]
-                    pos_temp = line[:arg_pos_begin].rfind(",")
-                    if arg_pos_end < len(line) and line[arg_pos_end] == '"':
-                        arg_pos_end += 1
-                    line = line[:pos_temp] + line[arg_pos_end:] + ", argument="
-                    args = [item.strip()[1:-1] for item in args.split(",")]
-                    for arg_idx in range(0, len(args)):
-                        arguments.add(args[arg_idx])
-                        if arg_idx > 0:
-                            line = f"{line}&"
-                        line = f'{line}{args[arg_idx]}="{{{{{{{args[arg_idx]}}}}}}}"'
-            data["[Script]"][i] = f"{line}, script-update-interval=-1\n"
+    data["title"] = [
+        item
+        for item in data["title"]
+        if (
+            item.find("system=") == -1
+            and item.find("system_version=") == -1
+            and item.find("loon_version=") == -1
+        )
+    ]
 
-    if len(arguments) > 0:
-        arg_exist = False
-        for line in data["title"]:
-            if line.startswith("#!arguments"):
-                arg_exist = True
-                break
-        if not arg_exist:
-            line_arg = "#!arguments="
-            for i, arg in enumerate(sorted(list(arguments))):
-                if i == 0:
-                    line_arg += arg
-                else:
-                    line_arg += f", {arg}"
-            line_arg += "\n"
-            for i, line in enumerate(data["title"]):
-                if (
-                    i == len(data["title"]) - 1
-                    or len(data["title"][i + 1].strip()) == 0
-                ):
-                    data["title"][i] = line + line_arg
+    if "[Script]" in data:
+        arguments: set[str] = set([])
+        for i, line in enumerate(data["[Script]"]):
+            if line.startswith("#") or line.find("script-path") == -1:
+                continue
+            if file_ext == "sgmodule":
+                line = line.strip()
+                arg_pos_begin = line.find("argument=")
+                if arg_pos_begin != -1:
+                    arg_pos_end = line.find("}]", arg_pos_begin)
+                    if arg_pos_end != -1:
+                        arg_pos_end += 2
+                        args = line[arg_pos_begin + 11 : arg_pos_end - 1]
+                        pos_temp = line[:arg_pos_begin].rfind(",")
+                        if arg_pos_end < len(line) and line[arg_pos_end] == '"':
+                            arg_pos_end += 1
+                        line = line[:pos_temp] + line[arg_pos_end:] + ", argument="
+                        args = [item.strip()[1:-1] for item in args.split(",")]
+                        for arg_idx in range(0, len(args)):
+                            arguments.add(args[arg_idx])
+                            if arg_idx > 0:
+                                line = f"{line}&"
+                            line = (
+                                f'{line}{args[arg_idx]}="{{{{{{{args[arg_idx]}}}}}}}"'
+                            )
+                data["[Script]"][i] = f"{line}, script-update-interval=-1\n"
+
+        if len(arguments) > 0:
+            arg_exist = False
+            for line in data["title"]:
+                if line.startswith("#!arguments"):
+                    arg_exist = True
                     break
+            if not arg_exist:
+                line_arg = "#!arguments="
+                for i, arg in enumerate(sorted(list(arguments))):
+                    if i == 0:
+                        line_arg += arg
+                    else:
+                        line_arg += f", {arg}"
+                line_arg += "\n"
+                for i, line in enumerate(data["title"]):
+                    if (
+                        i == len(data["title"]) - 1
+                        or len(data["title"][i + 1].strip()) == 0
+                    ):
+                        data["title"][i] = line + line_arg
+                        break
 
     ret = ""
     for key, sub_data in data.items():
@@ -172,6 +183,16 @@ def modify_content_common(content: str, file_ext: str):
 def modify_content_bilibili(content: str):
     lines = content.splitlines()
     data = extract_components(lines)
+
+    data["title"] = [
+        item
+        for item in data["title"]
+        if (
+            item.find("system=") == -1
+            and item.find("system_version=") == -1
+            and item.find("loon_version=") == -1
+        )
+    ]
 
     for i, line in enumerate(data["[Body Rewrite]"]):
         if line.startswith("http-response-jq #"):
