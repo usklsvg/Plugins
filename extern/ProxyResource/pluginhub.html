@@ -103,12 +103,14 @@
         .banner-wrapper {
             display: flex;
             transition: transform 0.5s ease;
-            min-height: 120px; /* 确保即使在加载过程中也有最小高度 */
+            min-height: 120px;
+            /* 保持原有样式，不修改宽度 */
         }
 
         .banner-slide {
-            min-width: 100%;
+            min-width: 100%; /* 保持原有的100%宽度 */
             position: relative;
+            flex-shrink: 0;
         }
 
         .banner-slide img {
@@ -178,6 +180,33 @@
         @media (max-width: 768px) {
             .banner-prev, .banner-next {
                 display: none;
+            }
+            
+            /* 确保轮播图容器在移动端正确显示 */
+            .banner-container {
+                width: 100%;
+                margin-left: 0;
+                margin-right: 0;
+                border-radius: 10px;
+                overflow: hidden; /* 确保超出部分被隐藏 */
+            }
+            
+            .banner-wrapper {
+                width: 100%; /* 确保wrapper宽度正确 */
+                display: flex;
+            }
+            
+            .banner-slide {
+                min-width: 100%; /* 确保每个slide占满容器宽度 */
+                width: 100%;
+                flex-shrink: 0;
+            }
+            
+            .banner-slide img {
+                width: 100%;
+                height: auto;
+                display: block;
+                object-fit: cover; /* 确保图片正确缩放 */
             }
         }
 
@@ -690,6 +719,17 @@
             .banner-container {
                 margin-top: 20px;
                 margin-bottom: 20px;
+                overflow: hidden; /* 确保在小屏幕上也正确隐藏超出部分 */
+            }
+            
+            /* 确保轮播图在小屏幕上的尺寸正确 */
+            .banner-wrapper {
+                min-height: 100px; /* 适当减小最小高度 */
+            }
+            
+            .banner-slide {
+                min-width: 100%;
+                width: 100%;
             }
             
             .announcement {
@@ -858,7 +898,7 @@
     <div class="container">
         <!-- 轮播图 -->
         <div class="banner-container" style="display: block;">
-            <div class="banner-wrapper" id="bannerWrapper" style="transition: transform 0.5s; transform: translateX(0%);"><div class="banner-slide"><a href="https://github.com/luestr/IconResource" target="_blank"><img src="https://pluginhub.kelee.one/IMG/Banner/Banner-1.png" alt="banner-1"></a></div><div class="banner-slide"><a href="https://github.com/luestr/IconResource" target="_blank"><img src="https://pluginhub.kelee.one/IMG/Banner/Banner-1.png" alt="banner-2"></a></div></div>
+            <div class="banner-wrapper" id="bannerWrapper" style="transition: transform 0.5s; transform: translateX(-100%);"><div class="banner-slide"><a href="https://github.com/luestr/IconResource" target="_blank"><img src="https://pluginhub.kelee.one/IMG/Banner/Banner-1.png" alt="banner-1"></a></div><div class="banner-slide"><a href="https://apps.apple.com/app/loon/id1373567447" target="_blank"><img src="https://pluginhub.kelee.one/IMG/Banner/Loon_ad.png" alt="Loon"></a></div><div class="banner-slide"><a href="https://github.com/luestr/IconResource" target="_blank"><img src="https://pluginhub.kelee.one/IMG/Banner/Banner-1.png" alt="banner-1"></a></div><div class="banner-slide"><a href="https://apps.apple.com/app/loon/id1373567447" target="_blank"><img src="https://pluginhub.kelee.one/IMG/Banner/Loon_ad.png" alt="Loon"></a></div></div>
             <div class="banner-dots" id="bannerDots"><div class="banner-dot active"></div><div class="banner-dot "></div></div>
             <div class="banner-prev" id="bannerPrev">❮</div>
             <div class="banner-next" id="bannerNext">❯</div>
@@ -1530,7 +1570,7 @@
                     </div>
                     <div class="plugin-description">移除开屏广告、商品信息流广告、关注推荐、搜索栏填充词、首页签到入口及悬浮广告，精简我的页面。</div>
                     <div class="plugin-footer"></div>
-                    <div class="plugin-date">更新于 2025-07-16 03:29:43</div>
+                    <div class="plugin-date">更新于 2025-07-26 02:03:33</div>
                     <a href="loon://import?plugin=https://kelee.one/Tool/Loon/Lpx/FleaMarket_remove_ads.lpx" class="plugin-install">安装</a>
                 </div><div class="plugin-card">
                     <div class="plugin-header">
@@ -3306,6 +3346,10 @@
         let selectedCategory = 'all';
         let lastTouchTime = 0; // 用于检测双击
         
+        // 无限循环轮播图变量
+        let isTransitioning = false;
+        let realIndex = 0; // 真实的图片索引
+        
         // 防止页面缩放和处理触摸事件
         (function preventZoomAndHandleTouch() {
             // 阻止双击缩放
@@ -3759,45 +3803,95 @@
             // 按index排序轮播图
             const sortedBanners = [...pluginsData.banners].sort((a, b) => a.index - b.index);
             
-            // 创建一个文档片段，用于一次性添加所有轮播图内容
+            // 如果只有一张图片，使用简单模式
+            if (sortedBanners.length === 1) {
+                const fragment = document.createDocumentFragment();
+                const dotsFragment = document.createDocumentFragment();
+                
+                const slide = document.createElement('div');
+                slide.className = 'banner-slide';
+                slide.innerHTML = `<a href="${sortedBanners[0].url}" target="_blank"><img src="${sortedBanners[0].img}" alt="${sortedBanners[0].name}"></a>`;
+                fragment.appendChild(slide);
+                
+                const dot = document.createElement('div');
+                dot.className = 'banner-dot active';
+                dotsFragment.appendChild(dot);
+                
+                bannerWrapper.innerHTML = '';
+                bannerWrapper.appendChild(fragment);
+                bannerDots.innerHTML = '';
+                bannerDots.appendChild(dotsFragment);
+                
+                currentBannerIndex = 0;
+                realIndex = 0;
+                bannerWrapper.style.transform = 'translateX(0%)';
+                
+                // 为单张图片也设置触摸事件
+                initializeTouchSwipe();
+                return;
+            }
+            
+            // 多张图片使用无限循环模式
+            initializeInfiniteBanner(sortedBanners);
+        }
+        
+        // 初始化无限循环轮播图
+        function initializeInfiniteBanner(banners) {
+            const slidesCount = banners.length;
+            
+            // 创建无限循环结构：最后一张 + 所有图片 + 第一张
             const fragment = document.createDocumentFragment();
             const dotsFragment = document.createDocumentFragment();
             
-            // 创建轮播图内容
-            sortedBanners.forEach((banner, index) => {
+            // 添加最后一张图片作为第一个slide（用于无限循环）
+            const lastSlideClone = document.createElement('div');
+            lastSlideClone.className = 'banner-slide';
+            lastSlideClone.innerHTML = `<a href="${banners[slidesCount - 1].url}" target="_blank"><img src="${banners[slidesCount - 1].img}" alt="${banners[slidesCount - 1].name}"></a>`;
+            fragment.appendChild(lastSlideClone);
+            
+            // 添加所有原始图片
+            banners.forEach((banner, index) => {
                 const slide = document.createElement('div');
                 slide.className = 'banner-slide';
                 slide.innerHTML = `<a href="${banner.url}" target="_blank"><img src="${banner.img}" alt="${banner.name}"></a>`;
                 fragment.appendChild(slide);
                 
-                // 创建轮播图指示点
+                // 创建指示点
                 const dot = document.createElement('div');
                 dot.className = `banner-dot ${index === 0 ? 'active' : ''}`;
                 dot.addEventListener('click', () => {
-                    goToSlide(index);
+                    goToSlideInfinite(index);
                 });
                 dotsFragment.appendChild(dot);
             });
             
-            // 一次性替换轮播图内容，减少重绘次数
+            // 添加第一张图片作为最后一个slide（用于无限循环）
+            const firstSlideClone = document.createElement('div');
+            firstSlideClone.className = 'banner-slide';
+            firstSlideClone.innerHTML = `<a href="${banners[0].url}" target="_blank"><img src="${banners[0].img}" alt="${banners[0].name}"></a>`;
+            fragment.appendChild(firstSlideClone);
+            
+            // 更新DOM
             bannerWrapper.innerHTML = '';
             bannerWrapper.appendChild(fragment);
             bannerDots.innerHTML = '';
             bannerDots.appendChild(dotsFragment);
             
-            // 确保轮播图位于第一张
-            currentBannerIndex = 0;
+            // 设置初始位置（第二个slide，即第一张真实图片）
+            currentBannerIndex = 1;
+            realIndex = 0;
             bannerWrapper.style.transition = 'none';
-            bannerWrapper.style.transform = 'translateX(0%)';
-            // 强制重绘
-            void bannerWrapper.offsetWidth;
-            // 恢复过渡效果
-            bannerWrapper.style.transition = 'transform 0.5s ease';
+            bannerWrapper.style.transform = `translateX(-100%)`; // 显示第二个slide（第一张真实图片）
             
-            // 添加触摸滑动功能
+            // 重新启用过渡效果
+            setTimeout(() => {
+                bannerWrapper.style.transition = 'transform 0.5s ease';
+            }, 50);
+            
+            // 设置触摸事件
             initializeTouchSwipe();
             
-            // 启动自动轮播
+            // 启动自动播放
             startBannerInterval();
         }
         
@@ -3821,6 +3915,19 @@
             
             // 定义新的事件处理函数
             const touchStartHandler = function(e) {
+                // 获取轮播图数量
+                let slidesCount = 1;
+                if (pluginsData && pluginsData.banners && pluginsData.banners.length > 0) {
+                    slidesCount = pluginsData.banners.length;
+                } else {
+                    slidesCount = bannerWrapper.children.length || 1;
+                }
+                
+                // 如果只有一张图片，不处理滑动
+                if (slidesCount <= 1) {
+                    return;
+                }
+                
                 startX = e.touches[0].clientX;
                 isSwiping = true;
                 // 暂停自动轮播
@@ -3829,12 +3936,6 @@
             
             const touchMoveHandler = function(e) {
                 if (!isSwiping) return;
-                
-                endX = e.touches[0].clientX;
-                const diffX = endX - startX;
-                
-                // 计算当前应该移动的距离
-                const translateX = -currentBannerIndex * 100 + (diffX / bannerWrapper.offsetWidth * 100);
                 
                 // 获取轮播图数量
                 let slidesCount = 1; // 默认至少有一张（占位图）
@@ -3845,20 +3946,51 @@
                     slidesCount = bannerWrapper.children.length || 1;
                 }
                 
-                // 应用拖动效果，但限制拖动范围
-                const maxTranslate = 0;
-                const minTranslate = -(slidesCount - 1) * 100;
+                // 如果只有一张图片，不处理滑动
+                if (slidesCount <= 1) {
+                    return;
+                }
                 
-                // 移除限制条件，允许在任何情况下都能拖动
+                endX = e.touches[0].clientX;
+                const diffX = endX - startX;
+                
+                // 计算当前应该移动的距离
+                let translateX;
+                if (slidesCount > 1 && bannerWrapper.children.length > slidesCount) {
+                    // 无限循环模式
+                    translateX = -currentBannerIndex * 100 + (diffX / bannerWrapper.offsetWidth * 100);
+                } else {
+                    // 普通模式
+                    translateX = -currentBannerIndex * 100 + (diffX / bannerWrapper.offsetWidth * 100);
+                }
+                
+                // 应用拖动效果
                 bannerWrapper.style.transition = 'none';
                 bannerWrapper.style.transform = `translateX(${translateX}%)`;
                 
-                // 防止页面滚动
-                e.preventDefault();
+                // 防止页面滚动（仅在轮播图区域内）
+                const bannerContainer = e.target.closest('.banner-container');
+                if (bannerContainer) {
+                    e.preventDefault();
+                }
             };
             
             const touchEndHandler = function() {
                 if (!isSwiping) return;
+                
+                // 获取轮播图数量
+                let slidesCount = 1;
+                if (pluginsData && pluginsData.banners && pluginsData.banners.length > 0) {
+                    slidesCount = pluginsData.banners.length;
+                } else {
+                    slidesCount = bannerWrapper.children.length || 1;
+                }
+                
+                // 如果只有一张图片，不处理滑动
+                if (slidesCount <= 1) {
+                    isSwiping = false;
+                    return;
+                }
                 
                 isSwiping = false;
                 const diffX = endX - startX;
@@ -3869,18 +4001,21 @@
                 // 降低滑动阈值，使轮播图更容易切换
                 const lowerThreshold = 30;
                 
-                // 判断是否需要切换轮播图
+                // 判断是否需要切换轮播图 - 修改为单方向切换
                 if (Math.abs(diffX) > lowerThreshold) {
-                    if (diffX > 0) {
-                        // 向右滑动，显示上一张
-                        prevSlide();
+                    // 无论向哪个方向滑动，都只向前切换（单方向无限循环）
+                    if (slidesCount > 1 && bannerWrapper.children.length > slidesCount) {
+                        nextSlideInfinite();
                     } else {
-                        // 向左滑动，显示下一张
                         nextSlide();
                     }
                 } else {
                     // 滑动距离不够，恢复到当前轮播图
-                    goToSlide(currentBannerIndex);
+                    if (slidesCount > 1 && bannerWrapper.children.length > slidesCount) {
+                        bannerWrapper.style.transform = `translateX(-${currentBannerIndex * 100}%)`;
+                    } else {
+                        goToSlide(currentBannerIndex);
+                    }
                 }
                 
                 // 重新启动自动轮播
@@ -3890,13 +4025,31 @@
             const touchCancelHandler = function() {
                 if (!isSwiping) return;
                 
+                // 获取轮播图数量
+                let slidesCount = 1;
+                if (pluginsData && pluginsData.banners && pluginsData.banners.length > 0) {
+                    slidesCount = pluginsData.banners.length;
+                } else {
+                    slidesCount = bannerWrapper.children.length || 1;
+                }
+                
+                // 如果只有一张图片，不处理滑动
+                if (slidesCount <= 1) {
+                    isSwiping = false;
+                    return;
+                }
+                
                 isSwiping = false;
                 
                 // 恢复过渡效果
                 bannerWrapper.style.transition = 'transform 0.5s ease';
                 
                 // 恢复到当前轮播图
-                goToSlide(currentBannerIndex);
+                if (slidesCount > 1 && bannerWrapper.children.length > slidesCount) {
+                    bannerWrapper.style.transform = `translateX(-${currentBannerIndex * 100}%)`;
+                } else {
+                    goToSlide(currentBannerIndex);
+                }
                 
                 // 重新启动自动轮播
                 startBannerInterval();
@@ -3918,9 +4071,24 @@
         // 启动轮播图自动播放
         function startBannerInterval() {
             clearInterval(bannerInterval);
-            bannerInterval = setInterval(() => {
-                nextSlide();
-            }, 5000);
+            
+            // 获取轮播图数量
+            let slidesCount = 1;
+            if (pluginsData && pluginsData.banners && pluginsData.banners.length > 0) {
+                slidesCount = pluginsData.banners.length;
+            }
+            
+            // 只有多张图片时才启动自动播放
+            if (slidesCount > 1) {
+                bannerInterval = setInterval(() => {
+                    // 如果是无限循环模式
+                    if (slidesCount > 1 && bannerWrapper.children.length > slidesCount) {
+                        nextSlideInfinite();
+                    } else {
+                        nextSlide();
+                    }
+                }, 5000);
+            }
         }
 
         // 切换到下一张轮播图
@@ -3937,8 +4105,13 @@
             // 如果没有轮播图或只有一张，则不切换
             if (slidesCount <= 1) return;
             
-            currentBannerIndex = (currentBannerIndex + 1) % slidesCount;
-            goToSlide(currentBannerIndex);
+            // 如果是无限循环模式
+            if (slidesCount > 1 && bannerWrapper.children.length > slidesCount) {
+                nextSlideInfinite();
+            } else {
+                currentBannerIndex = (currentBannerIndex + 1) % slidesCount;
+                goToSlide(currentBannerIndex);
+            }
         }
 
         // 切换到上一张轮播图
@@ -3955,8 +4128,13 @@
             // 如果没有轮播图或只有一张，则不切换
             if (slidesCount <= 1) return;
             
-            currentBannerIndex = (currentBannerIndex - 1 + slidesCount) % slidesCount;
-            goToSlide(currentBannerIndex);
+            // 如果是无限循环模式
+            if (slidesCount > 1 && bannerWrapper.children.length > slidesCount) {
+                prevSlideInfinite();
+            } else {
+                currentBannerIndex = (currentBannerIndex - 1 + slidesCount) % slidesCount;
+                goToSlide(currentBannerIndex);
+            }
         }
 
         // 切换到指定轮播图
@@ -3975,6 +4153,102 @@
             
             // 重置自动轮播计时器
             startBannerInterval();
+        }
+        
+        // 无限循环下一张
+        function nextSlideInfinite() {
+            if (isTransitioning) return;
+            
+            const slidesCount = pluginsData.banners.length;
+            if (slidesCount <= 1) return;
+            
+            isTransitioning = true;
+            currentBannerIndex++;
+            
+            bannerWrapper.style.transform = `translateX(-${currentBannerIndex * 100}%)`;
+            
+            // 检查是否到达克隆的第一张图片
+            if (currentBannerIndex === slidesCount + 1) {
+                setTimeout(() => {
+                    bannerWrapper.style.transition = 'none';
+                    currentBannerIndex = 1; // 跳回真实的第一张
+                    bannerWrapper.style.transform = `translateX(-100%)`;
+                    setTimeout(() => {
+                        bannerWrapper.style.transition = 'transform 0.5s ease';
+                        isTransitioning = false;
+                    }, 50);
+                }, 500);
+                realIndex = 0;
+            } else {
+                setTimeout(() => {
+                    isTransitioning = false;
+                }, 500);
+                realIndex = (realIndex + 1) % slidesCount;
+            }
+            
+            updateDots();
+        }
+        
+        // 无限循环上一张
+        function prevSlideInfinite() {
+            if (isTransitioning) return;
+            
+            const slidesCount = pluginsData.banners.length;
+            if (slidesCount <= 1) return;
+            
+            isTransitioning = true;
+            currentBannerIndex--;
+            
+            bannerWrapper.style.transform = `translateX(-${currentBannerIndex * 100}%)`;
+            
+            // 检查是否到达克隆的最后一张图片
+            if (currentBannerIndex === 0) {
+                setTimeout(() => {
+                    bannerWrapper.style.transition = 'none';
+                    currentBannerIndex = slidesCount; // 跳回真实的最后一张
+                    bannerWrapper.style.transform = `translateX(-${slidesCount * 100}%)`;
+                    setTimeout(() => {
+                        bannerWrapper.style.transition = 'transform 0.5s ease';
+                        isTransitioning = false;
+                    }, 50);
+                }, 500);
+                realIndex = slidesCount - 1;
+            } else {
+                setTimeout(() => {
+                    isTransitioning = false;
+                }, 500);
+                realIndex = (realIndex - 1 + slidesCount) % slidesCount;
+            }
+            
+            updateDots();
+        }
+        
+        // 跳转到指定slide（无限循环版本）
+        function goToSlideInfinite(index) {
+            if (isTransitioning) return;
+            
+            const slidesCount = pluginsData.banners.length;
+            
+            isTransitioning = true;
+            realIndex = index;
+            currentBannerIndex = index + 1; // 加1是因为第一个是克隆的最后一张
+            
+            bannerWrapper.style.transform = `translateX(-${currentBannerIndex * 100}%)`;
+            
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 500);
+            
+            updateDots();
+            startBannerInterval();
+        }
+        
+        // 更新指示点
+        function updateDots() {
+            const dots = bannerDots.querySelectorAll('.banner-dot');
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === realIndex);
+            });
         }
 
         // 初始化筛选选项
@@ -4114,9 +4388,35 @@
 
         // 添加事件监听器
         function addEventListeners() {
-            // 轮播图控制
-            bannerPrev.addEventListener('click', prevSlide);
-            bannerNext.addEventListener('click', nextSlide);
+            // 轮播图控制 - 使用无限循环版本
+            bannerPrev.addEventListener('click', () => {
+                // 获取轮播图数量
+                let slidesCount = 1;
+                if (pluginsData && pluginsData.banners && pluginsData.banners.length > 0) {
+                    slidesCount = pluginsData.banners.length;
+                }
+                
+                // 如果是无限循环模式
+                if (slidesCount > 1 && bannerWrapper.children.length > slidesCount) {
+                    prevSlideInfinite();
+                } else {
+                    prevSlide();
+                }
+            });
+            bannerNext.addEventListener('click', () => {
+                // 获取轮播图数量
+                let slidesCount = 1;
+                if (pluginsData && pluginsData.banners && pluginsData.banners.length > 0) {
+                    slidesCount = pluginsData.banners.length;
+                }
+                
+                // 如果是无限循环模式
+                if (slidesCount > 1 && bannerWrapper.children.length > slidesCount) {
+                    nextSlideInfinite();
+                } else {
+                    nextSlide();
+                }
+            });
             
             // 搜索功能
             searchInput.addEventListener('input', function() {
@@ -4214,7 +4514,7 @@
                 
                 bannerWrapper.appendChild(placeholderSlide);
                 
-                // 即使在数据加载前也初始化触摸滑动功能
+                // 为占位轮播图也初始化触摸滑动功能（虽然单张图片不会响应滑动）
                 initializeTouchSwipe();
                 
                 // 创建一个占位点
