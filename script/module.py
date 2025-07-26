@@ -172,12 +172,19 @@ def modify_content_common(content: str, file_ext: str):
 def modify_content_bilibili(content: str):
     lines = content.splitlines()
     data = extract_components(lines)
+
+    for i, line in enumerate(data["[Body Rewrite]"]):
+        if line.startswith("http-response-jq #"):
+            data["[Body Rewrite]"][i] = line.replace(
+                "http-response-jq #", "# http-response-jq"
+            )
+
     for i, line in enumerate(data["[Script]"]):
         if line.startswith("#") or line.find("script-path") == -1:
             continue
         line = line.strip()
         arg_pos_begin = line.find("argument=")
-        if arg_pos_begin != -1:
+        if arg_pos_begin != -1 and line.find("Bilibili_proto_response_kokoryh") != -1:
             arg_pos_end = line.find("}]", arg_pos_begin)
             if arg_pos_end != -1:
                 arg_pos_end += 2
@@ -187,12 +194,14 @@ def modify_content_bilibili(content: str):
                 line = (
                     line[:pos_temp]
                     + line[arg_pos_end:]
-                    + ', argument="{"showUpList":"{{{动态最常访问}}}","filterTopReplies":{{{过滤置顶评论广告}}}}"'
+                    + ', argument="{"showUpList":"{{{动态最常访问}}}","filterTopReplies":{{{过滤置顶评论广告}}}","airborne":{{{空降助手}}}","logLevel":{{{日志等级}}}}"'
                 )
         data["[Script]"][i] = f"{line}, script-update-interval=-1\n"
 
-    line_arg = "#!arguments=动态最常访问:auto,过滤置顶评论广告:1\n"
-    line_arg += "#!arguments-desc=动态最常访问: [true, false, auto]\\n- true: 始终显示\\n- false: 始终隐藏\\n- auto: 仅当列表中存在直播状态时显示\\n\\n过滤置顶评论广告: [1, 0]\\n- 1: 开启\\n- 0: 关闭\n"
+    line_arg = (
+        "#!arguments=动态最常访问:auto,过滤置顶评论广告:1,空降助手:false,日志等级:off\n"
+    )
+    line_arg += "#!arguments-desc=动态最常访问: [true, false, auto]\\n- true: 始终显示\\n- false: 始终隐藏\\n- auto: 仅当列表中存在直播状态时显示\\n\\n过滤置顶评论广告: [1, 0]\\n- 1: 开启\\n- 0: 关闭\\n\\n空降助手: [false, true]\\n- 1: 开启\\n- 0: 关闭\\n\\n日志等级: [off, error, warn, info, debug]\n"
     for i, line in enumerate(data["title"]):
         if i == len(data["title"]) - 1 or len(data["title"][i + 1].strip()) == 0:
             data["title"][i] = line + line_arg
