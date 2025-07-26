@@ -26,6 +26,7 @@ def get_url_text_content(url: str):
         content = response.text
     except requests.exceptions.RequestException as e:
         print(f"error : {e}")
+        exit(1)
     return content
 
 
@@ -83,8 +84,10 @@ def download_rendered_webpage(url, output_filename, wait_time):
     except WebDriverException as e:
         print(f"An error occurred with the WebDriver: {e}")
         print("Please ensure ChromeDriver is correctly installed and its path is set.")
+        exit(1)
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
+        exit(1)
     finally:
         if driver:
             driver.quit()
@@ -107,6 +110,7 @@ def save_content(content: str, filename: str):
             f.write(content)
     except IOError as e:
         print(f"Error when saving content to {filename}: {e}")
+        exit(1)
 
 
 def extract_components(lines: list[str]):
@@ -239,17 +243,17 @@ def colllect_files():
         download_url_file(plugin_url, plugin_filename)
         if not os.path.exists(plugin_filename):
             print(f'Error when downloading "{plugin_filename}" from "{plugin_url}".')
-            continue
+            exit(1)
 
         try:
             with open(plugin_filename, mode="r", encoding="utf-8") as f:
                 content = f.readlines()
         except IOError as e:
             print(f"Error when reading content from {plugin_filename}: {e}")
-            continue
+            exit(1)
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
-            continue
+            exit(1)
         filenames.append(plugin_filename)
         data: dict[str, list[str]] = extract_components(content)
 
