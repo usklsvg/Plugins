@@ -8,7 +8,7 @@
 #!loon_version=3.2.4(787)
 #!homepage=https://pluginhub.kelee.one
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Weibo.png
-#!date=2025-07-25 15:49:44
+#!date=2025-07-28 21:20:12
 
 [Script]
 http-response ^https:\/\/api\.weibo\.cn\/2\/(?:checkin\/show|client\/publisher_list|push\/active) script-path=https://kelee.one/Resource/JavaScript/Weibo/Weibo_remove_ads.js, requires-body=true, tag=移除首页推广
@@ -20,7 +20,6 @@ http-response ^https:\/\/api\.weibo\.cn\/2\/(?:cardlist|page) script-path=https:
 http-response ^https:\/\/api\.weibo\.cn\/2\/comments\/build_comments\? script-path=https://kelee.one/Resource/JavaScript/Weibo/Weibo_remove_ads.js, requires-body=true, tag=移除评论区广告
 
 http-response ^https:\/\/api\.weibo\.cn\/2\/(?:container\/asyn|flowlist|flowpage) script-path=https://kelee.one/Resource/JavaScript/Weibo/Weibo_remove_ads.js, requires-body=true, tag=移除个人微博详情页广告
-
 
 http-response ^https:\/\/api\.weibo\.cn\/2\/friendships\/(?:create|destroy) script-path=https://kelee.one/Resource/JavaScript/Weibo/Weibo_remove_ads.js, requires-body=true, tag=移除关注、取消关注弹窗
 
@@ -49,8 +48,6 @@ http-response ^https:\/\/bootpreload\.uve\.weibo\.com\/v[12]\/ad\/preload script
 http-response ^https:\/\/sdkapp\.uve\.weibo\.com\/interface\/sdk\/sdkad\.php script-path=https://kelee.one/Resource/JavaScript/Weibo/Weibo_remove_ads.js, requires-body=true, tag=移除开屏广告 sdkad
 
 http-response ^https:\/\/wbapp\.uve\.weibo\.com\/(?:preload\/get_ad|wbapplua\/wbpullad\.lua) script-path=https://kelee.one/Resource/JavaScript/Weibo/Weibo_remove_ads.js, requires-body=true, tag=移除开屏广告 wbapplua
-
-http-response ^https:\/\/new\.vip\.weibo\.cn\/aj\/appicon\/list\? script-path=https://kelee.one/Resource/JavaScript/Weibo/Weibo_remove_ads.js, requires-body=true, tag=会员图标
 
 [MitM]
 hostname=*.weibo.cn, *.weibo.com, weibo.com
