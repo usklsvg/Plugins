@@ -65,7 +65,6 @@ DOMAIN,open-pixon.ads-pixiv.net,REJECT,extended-matching,pre-matching
 ^https:\/\/app\.10099\.com\.cn\/contact-web\/api\/version\/getFlashScreenPage - reject
 
 [Body Rewrite]
-http-response-jq ^https:\/\/home\.mi\.com\/cgi-op\/api\/v1\/recommendation\/myTab\? 'delpaths([["data","banners"]])'
 http-response ^https?:\/\/cmds\.omesoft\.com\/HypnotistWS\.asmx <GetADResult>\.\*\?<\/GetADResult> <GetADResult>{"ret":0,"msg":"正常","err_code":0,"data":{"ad":[]}}</GetADResult>
 http-response-jq ^https?:\/\/api\.fenxianglife\.com\/njia\/index\/popup\/v2 '.data.list=[]'
 

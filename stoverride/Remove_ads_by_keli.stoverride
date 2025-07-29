@@ -279,8 +279,6 @@ http:
 
   body-rewrite:
     - >-
-      ^https:\/\/home\.mi\.com\/cgi-op\/api\/v1\/recommendation\/myTab\? response-jq delpaths([["data","banners"]])
-    - >-
       ^https?:\/\/cmds\.omesoft\.com\/HypnotistWS\.asmx response-replace-regex <GetADResult>\.\*\?<\/GetADResult> <GetADResult>{"ret":0,"msg":"正常","err_code":0,"data":{"ad":[]}}</GetADResult>
     - >-
       ^https?:\/\/api\.fenxianglife\.com\/njia\/index\/popup\/v2 response-jq .data.list=[]
