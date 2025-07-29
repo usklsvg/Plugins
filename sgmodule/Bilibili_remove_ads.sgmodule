@@ -1,13 +1,13 @@
 #!name=哔哩哔哩去广告
-#!desc=过滤哔哩哔哩广告、移除青少年模式弹窗和交互式弹幕、移除无用功能和链接跟踪参数，增加空降助手以便跳过视频中插入的广告。此插件仅建议iOS 15以上设备使用，且必须启用MitM-over-HTTP/2功能。\n空降助手是第三方提供的功能，依赖于Android版空降助手的服务器数据运作，可能会存在不准确或者失效的问题，此功能与哔哩哔哩官方无关。
+#!desc=过滤哔哩哔哩广告、移除青少年模式弹窗和交互式弹幕、移除无用功能和链接跟踪参数，增加空降助手以便跳过视频中插入的广告。此插件仅建议iOS 15以上设备使用，且必须启用MitM-over-HTTP/2功能。\n\n空降助手是第三方提供的功能，依赖于Android版空降助手的服务器数据运作，可能会存在不准确或者失效的问题，此功能与哔哩哔哩官方无关。
 #!author=kokoryh[https://github.com/kokoryh]
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Bilibili.png
 #!category=iKeLee
 #!openUrl=https://apps.apple.com/app/id736536022
 #!tag=去广告
 #!homepage=https://pluginhub.kelee.one
-#!date=2025-07-25 22:30:48
-#!arguments=showUpList:"auto",filterTopReplies:true,airborne:false,logLevel:"off"
+#!date=2025-07-28 21:49:48
+#!arguments=showUpList:"auto",filterTopReplies:true,purifyWebpage:true,airborne:false,logLevel:"off"
 #!arguments=动态最常访问:auto,过滤置顶评论广告:1,空降助手:false,日志等级:off
 #!arguments-desc=动态最常访问: [true, false, auto]\n- true: 始终显示\n- false: 始终隐藏\n- auto: 仅当列表中存在直播状态时显示\n\n过滤置顶评论广告: [1, 0]\n- 1: 开启\n- 0: 关闭\n\n空降助手: [false, true]\n- 1: 开启\n- 0: 关闭\n\n日志等级: [off, error, warn, info, debug]
 
