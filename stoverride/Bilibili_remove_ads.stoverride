@@ -21,7 +21,7 @@ loon_version: |-
 homepage: |-
   https://pluginhub.kelee.one
 date: |-
-  2025-07-28 21:49:48
+  2025-07-30 23:00:52
 
 rules:
   - DOMAIN,api.biliapi.com,REJECT
@@ -56,6 +56,8 @@ http:
       ^https:\/\/app\.bilibili\.com\/x\/v2\/feed\/index\? response-jq if .data.items then .data.items |= map(select((.banner_item == null) and (.ad_info == null) and (.card_goto == "av") and (.card_type | IN("small_cover_v2", "large_cover_single_v9", "large_cover_v1")))) end
     - >-
       ^https:\/\/api\.bilibili\.com\/pgc\/view\/v2\/app\/season\? response-jq del(.data.payment)
+    - >-
+      ^https:\/\/api\.bilibili\.com\/pgc\/page\/channel\? response-jq if .data.modules then .data.modules |= map(select(.type != "TIP")) end
     - >-
       ^https:\/\/app\.bilibili\.com\/x\/v2\/feed\/index\/story\? response-jq if .data.items then .data.items |= map(select((.ad_info == null) and (.card_goto | IN("vertical_ad_av", "vertical_ad_live", "vertical_ad_picture") | not)) | del(.story_cart_icon, .free_flow_toast, .image_infos, .course_info, .game_info)) end
     - >-
@@ -111,7 +113,7 @@ http:
         base64=AAAAAAIIAQ%3D%3D
 
     - match: ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.community\.service\.dm\.v1\.DM\/DmSegMobile$
-      name: "空降助手_43"
+      name: "空降助手_44"
       type: request
       require-body: true
       binary-mode: true
@@ -119,7 +121,7 @@ http:
         [ "off"]
 
     - match: ^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(app\.(dynamic\.v2\.Dynamic\/DynAll|view(unite)?\.v1\.View\/(View|ViewProgress|RelatesFeed)|playurl\.v1\.PlayURL\/PlayView|playerunite\.v1\.Player\/PlayViewUnite)|polymer\.app\.search\.v1\.Search\/SearchAll|main\.community\.reply\.v1\.Reply\/MainList|pgc\.gateway\.player\.v2\.PlayURL\/PlayView)$
-      name: "ProtoBuf处理_44"
+      name: "ProtoBuf处理_45"
       type: response
       require-body: true
       binary-mode: true
@@ -127,7 +129,7 @@ http:
         [ "auto",  true, {airborneDm},  "off"]
 
     - match: ^https:\/\/live\.bilibili\.com\/blackboard/era/.+\.html\?
-      name: "移除直播间网页广告_45"
+      name: "移除直播间网页广告_46"
       type: response
       require-body: true
 
@@ -135,13 +137,13 @@ script-providers:
   "echoResponse_29":
     url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/echo-response.js
     interval: 86400
-  "空降助手_43":
+  "空降助手_44":
     url: https://kelee.one/Resource/JavaScript/Bilibili/Bilibili_proto_request_kokoryh.js
     interval: 86400
-  "ProtoBuf处理_44":
+  "ProtoBuf处理_45":
     url: https://kelee.one/Resource/JavaScript/Bilibili/Bilibili_proto_response_kokoryh.js
     interval: 86400
-  "移除直播间网页广告_45":
+  "移除直播间网页广告_46":
     url: https://kelee.one/Resource/JavaScript/Bilibili/webpage_Bilibili_remove_ads_kokoryh.js
     interval: 86400
 
