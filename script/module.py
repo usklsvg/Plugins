@@ -1,7 +1,7 @@
 import os
 import requests
 import shutil
-from tqdm import tqdm
+
 
 current_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 plugin_all_dir = os.path.join(current_dir, "extern", "ProxyResource", "plugin")
@@ -323,7 +323,7 @@ if __name__ == "__main__":
     for file_ext in ["sgmodule", "stoverride"]:
         dst_dir = os.path.join(current_dir, file_ext)
         recreate_path(dst_dir)
-        for filename in tqdm(os.listdir(plugin_all_dir)):
+        for filename in os.listdir(plugin_all_dir):
             process_file(
                 filename,
                 file_ext,
