@@ -4,7 +4,7 @@ import shutil
 
 
 current_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
-plugin_all_dir = os.path.join(current_dir, "plugin", "raw")
+plugin_all_dir = os.path.join(current_dir, "extern", "ProxyResource", "plugin")
 
 
 def recreate_path(pathname: str):
