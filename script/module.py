@@ -201,24 +201,28 @@ def modify_content_bilibili(content: str):
                     "http-response-jq #", "# http-response-jq"
                 )
 
-    for i, line in enumerate(data["[Script]"]):
-        if line.startswith("#") or line.find("script-path") == -1:
-            continue
-        line = line.strip()
-        arg_pos_begin = line.find("argument=")
-        if arg_pos_begin != -1 and line.find("Bilibili_proto_response_kokoryh") != -1:
-            arg_pos_end = line.find("}]", arg_pos_begin)
-            if arg_pos_end != -1:
-                arg_pos_end += 2
-                pos_temp = line[:arg_pos_begin].rfind(",")
-                if arg_pos_end < len(line) and line[arg_pos_end] == '"':
-                    arg_pos_end += 1
-                line = (
-                    line[:pos_temp]
-                    + line[arg_pos_end:]
-                    + ', argument="{"showUpList":"{{{动态最常访问}}}","filterTopReplies":{{{过滤置顶评论广告}}}","airborne":{{{空降助手}}}","logLevel":{{{日志等级}}}}"'
-                )
-        data["[Script]"][i] = f"{line}, script-update-interval=-1\n"
+    if "[Script]" in data:
+        for i, line in enumerate(data["[Script]"]):
+            if line.startswith("#") or line.find("script-path") == -1:
+                continue
+            line = line.strip()
+            arg_pos_begin = line.find("argument=")
+            if (
+                arg_pos_begin != -1
+                and line.find("Bilibili_proto_response_kokoryh") != -1
+            ):
+                arg_pos_end = line.find("}]", arg_pos_begin)
+                if arg_pos_end != -1:
+                    arg_pos_end += 2
+                    pos_temp = line[:arg_pos_begin].rfind(",")
+                    if arg_pos_end < len(line) and line[arg_pos_end] == '"':
+                        arg_pos_end += 1
+                    line = (
+                        line[:pos_temp]
+                        + line[arg_pos_end:]
+                        + ', argument="{"showUpList":"{{{动态最常访问}}}","filterTopReplies":{{{过滤置顶评论广告}}}","airborne":{{{空降助手}}}","logLevel":{{{日志等级}}}}"'
+                    )
+            data["[Script]"][i] = f"{line}, script-update-interval=-1\n"
 
     line_arg = (
         "#!arguments=动态最常访问:auto,过滤置顶评论广告:1,空降助手:false,日志等级:off\n"
