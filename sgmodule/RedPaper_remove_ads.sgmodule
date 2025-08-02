@@ -6,7 +6,7 @@
 #!openUrl=https://apps.apple.com/app/id741292507
 #!tag=去广告
 #!homepage=https://pluginhub.kelee.one
-#!date=2025-06-09 23:56:53
+#!date=2025-08-01 19:57:10
 
 [Rule]
 AND,((PROTOCOL,QUIC),(DOMAIN-SUFFIX,xiaohongshu.com,extended-matching)),REJECT

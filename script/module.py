@@ -1,6 +1,7 @@
 import os
 import requests
 import shutil
+from tqdm import tqdm
 
 current_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 plugin_all_dir = os.path.join(current_dir, "extern", "ProxyResource", "plugin")
@@ -193,12 +194,12 @@ def modify_content_bilibili(content: str):
             and item.find("loon_version=") == -1
         )
     ]
-
-    for i, line in enumerate(data["[Body Rewrite]"]):
-        if line.startswith("http-response-jq #"):
-            data["[Body Rewrite]"][i] = line.replace(
-                "http-response-jq #", "# http-response-jq"
-            )
+    if "[Body Rewrite]" in data:
+        for i, line in enumerate(data["[Body Rewrite]"]):
+            if line.startswith("http-response-jq #"):
+                data["[Body Rewrite]"][i] = line.replace(
+                    "http-response-jq #", "# http-response-jq"
+                )
 
     for i, line in enumerate(data["[Script]"]):
         if line.startswith("#") or line.find("script-path") == -1:
@@ -322,7 +323,7 @@ if __name__ == "__main__":
     for file_ext in ["sgmodule", "stoverride"]:
         dst_dir = os.path.join(current_dir, file_ext)
         recreate_path(dst_dir)
-        for filename in os.listdir(plugin_all_dir):
+        for filename in tqdm(os.listdir(plugin_all_dir)):
             process_file(
                 filename,
                 file_ext,
