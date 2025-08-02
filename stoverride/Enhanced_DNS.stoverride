@@ -1,0 +1,9 @@
+name: |-
+  Enhanced DNS
+desc: |-
+  使用系统 DNS 解析一部分苹果，微软，以及内地常见域名
+icon: |-
+  https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
+category: |-
+  iKeLee
+
