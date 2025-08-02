@@ -282,7 +282,7 @@ def process_file(
     filename: str, file_ext: str, dst_dir: str, url_dir: str, categoty: str
 ):
     url = f"https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/{url_dir}/{filename}"
-    request_url = f"http://localhost:9100/file/_start_/{url}/_end_/sample.sgmodule.txt?type=loon-plugin&del=true&nore=true&category={categoty}"
+    request_url = f"http://localhost:9100/file/_start_/{url}/_end_/sample.txt?type=loon-plugin&del=true&nore=true&category={categoty}"
     if file_ext == "sgmodule":
         request_url = (
             f"{request_url}&target=surge-module&sni=REJECT&pm=REJECT&jqEnabled=true"
