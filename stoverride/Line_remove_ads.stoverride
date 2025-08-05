@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://pluginhub.kelee.one
 date: |-
-  2025-07-11 22:57:49
+  2025-08-05 11:22:36
 
 http:
 
@@ -74,7 +74,7 @@ http:
     - >-
       ^https:\/\/ad\.line-scdn\.net\/0h - reject
     - >-
-      ^https:\/\/ec-bot-obs\.line-scdn\.net\/0h[0-9a-zA-Z_-]{50,} - reject-img
+      ^https:\/\/ec-bot-obs\.line-scdn\.net\/0h[-0-9a-zA-Z_]{50,} - reject-img
     - >-
       ^https:\/\/gw\.line\.naver\.jp\/ext\/lgfp\/lad\/v1$ - reject
     - >-
