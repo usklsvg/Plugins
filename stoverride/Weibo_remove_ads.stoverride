@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://pluginhub.kelee.one
 date: |-
-  2025-07-29 20:01:48
+  2025-08-07 02:09:48
 
 rules:
   - DOMAIN-SUFFIX,uve.weibo.com,DIRECT
