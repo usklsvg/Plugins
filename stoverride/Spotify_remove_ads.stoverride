@@ -17,29 +17,26 @@ loon_version: |-
 homepage: |-
   https://pluginhub.kelee.one
 date: |-
-  2025-07-04 16:36:19
+  2025-08-08 02:13:43
 
 rules:
-  - AND,((DOMAIN,spclient.wg.spotify.com),(PROTOCOL,QUIC)),REJECT
-  - AND,((DOMAIN,gae2-spclient.spotify.com),(PROTOCOL,QUIC)),REJECT
-  - AND,((DOMAIN,guc3-spclient.spotify.com),(PROTOCOL,QUIC)),REJECT
+  - AND,((DOMAIN-SUFFIX,spotify.com),(PROTOCOL,QUIC)),REJECT
 
 http:
 
   mitm:
-    - "gae2-spclient.spotify.com"
-    - "guc3-spclient.spotify.com"
+    - "*-spclient.spotify.com"
     - "spclient.wg.spotify.com"
 
   url-rewrite:
     - >-
-      ^https?:\/\/(?:gae2-spclient|guc3-spclient|spclient\.wg)\.spotify\.com(?::443)?\/pendragon\/ - reject-dict
+      ^https:\/\/(?:\w+-spclient|spclient\.wg)\.spotify\.com(?::443)?\/pendragon\/ - reject-dict
     - >-
-      ^https?:\/\/(gae2-spclient|guc3-spclient|spclient\.wg)\.spotify\.com(?::443)?\/artistview\/v1\/artist\/(.*)&platform=iphone https://$1.spotify.com/artistview/v1/artist/$2&platform=ipad header
+      ^https:\/\/(?:\w+-spclient|spclient\.wg)\.spotify\.com(?::443)?\/artistview\/v1\/artist\/(.*)&platform=iphone https://$1.spotify.com/artistview/v1/artist/$2&platform=ipad header
 
   script:
-    - match: ^https?:\/\/(?:gae2-spclient|guc3-spclient|spclient\.wg)\.spotify\.com(?::443)?\/(?:bootstrap|user-customization-service)
-      name: "Protobuf处理_22"
+    - match: ^https:\/\/(?:\w+-spclient|spclient\.wg)\.spotify\.com(?::443)?\/(?:bootstrap|user-customization-service)
+      name: "Protobuf处理_20"
       type: response
       require-body: true
       binary-mode: true
@@ -48,7 +45,7 @@ http:
         [ false, true]
 
 script-providers:
-  "Protobuf处理_22":
+  "Protobuf处理_20":
     url: https://kelee.one/Resource/JavaScript/Spotify/Spotify_remove_ads.js
     interval: 86400
 

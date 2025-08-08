@@ -21,7 +21,7 @@ loon_version: |-
 homepage: |-
   https://pluginhub.kelee.one
 date: |-
-  2025-08-03 20:32:32
+  2025-08-08 02:16:05
 
 rules:
   - DOMAIN,api.biliapi.com,REJECT
@@ -121,7 +121,7 @@ http:
       require-body: true
       binary-mode: true
       argument: |-
-        [ "auto",  true, {airborneDm},  "off"]
+        [ "auto",  true,  false,  "off"]
 
     - match: ^https:\/\/live\.bilibili\.com\/blackboard\/era\/.+\.html\?
       name: "移除直播间网页广告_46"

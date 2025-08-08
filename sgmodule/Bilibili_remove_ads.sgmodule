@@ -6,7 +6,7 @@
 #!openUrl=https://apps.apple.com/app/id736536022
 #!tag=去广告
 #!homepage=https://pluginhub.kelee.one
-#!date=2025-08-03 20:32:32
+#!date=2025-08-08 02:16:05
 #!arguments=showUpList:"auto",purifyTopReplies:true,purifyWebpage:true,airborne:false,logLevel:"off"
 #!arguments=动态最常访问:auto,过滤置顶评论广告:1,空降助手:false,日志等级:off
 #!arguments-desc=动态最常访问: [true, false, auto]\n- true: 始终显示\n- false: 始终隐藏\n- auto: 仅当列表中存在直播状态时显示\n\n过滤置顶评论广告: [1, 0]\n- 1: 开启\n- 0: 关闭\n\n空降助手: [false, true]\n- 1: 开启\n- 0: 关闭\n\n日志等级: [off, error, warn, info, debug]
