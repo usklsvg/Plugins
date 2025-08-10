@@ -8,7 +8,7 @@
 #!loon_version=3.2.4(787)
 #!homepage=https://pluginhub.kelee.one
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Spotify.png
-#!date=2025-08-08 02:13:43
+#!date=2025-08-10 15:30:17
 
 [Argument]
 tab=switch, false, true, tag=移除底栏创建按钮, desc=此开关控制是否移除底栏创建按钮

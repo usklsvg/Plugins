@@ -392,6 +392,7 @@ steampipe.steamcontent.tnkjmec.com = server:system
 *.qunar.com = server:system
 *.qunarzz.com = server:system
 *.qupu123.com = server:system
+*.qwen.ai = server:system
 *.qy.net = server:system
 *.realme.com = server:system
 *.repaik.com = server:system
