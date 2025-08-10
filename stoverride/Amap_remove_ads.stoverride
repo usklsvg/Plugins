@@ -3,7 +3,7 @@ name: |-
 desc: |-
   过滤高德地图开屏广告、各页面推广，精简我的页面。
 author: |-
-  RuCu6[https://github.com/RuCu6], kokoryh[https://github.com/kokoryh]
+  RuCu6[https://github.com/RuCu6]
 icon: |-
   https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Amap.png
 category: |-
@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://pluginhub.kelee.one
 date: |-
-  2025-05-22 21:41:32
+  2025-08-10 11:02:38
 
 rules:
   - AND,((URL-REGEX,"^http:\/\/.+\/amdc\/mobileDispatch"),(USER-AGENT,"AMapiPhone*")),REJECT
@@ -32,6 +32,7 @@ http:
     - "m5-zb.amap.com"
     - "oss.amap.com"
     - "sns.amap.com"
+    - "ai.amap.com"
 
   url-rewrite:
     - >-
@@ -55,6 +56,8 @@ http:
     - >-
       ^https:\/\/sns\.amap\.com\/ws\/msgbox\/pull_mp\? - reject-dict
     - >-
+      ^https:\/\/ai\.amap\.com\/v1\/ai_rec\/home_qs\? - reject-dict
+    - >-
       ^https:\/\/m5-zb\.amap\.com\/ws\/boss\/(?:order\/car\/(?:feedback\/get_card_questions|feedback\/viptips|king_toolbox_car_bubble|remark\/satisfactionConf|rights_information)|tips\/onscene_visual_optimization) - reject-dict
     - >-
       ^https:\/\/m5-zb\.amap\.com\/ws\/boss\/pay\/web\/paySuccess\/info\/request - reject-dict
@@ -73,77 +76,77 @@ http:
 
   script:
     - match: ^https:\/\/m5\.amap\.com\/ws\/aos\/perception\/publicTravel\/beforeNavi\?
-      name: "移除路线规划推广_33"
+      name: "移除路线规划推广_34"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5\.amap\.com\/ws\/bus\/plan\/integrate\?
-      name: "移除路线规划推广_33"
+      name: "移除路线规划推广_34"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5\.amap\.com\/ws\/c3frontend\/(?:af-(?:hotel|launch)\/page\/main|af-nearby\/nearby)
-      name: "移除路线规划推广_33"
+      name: "移除路线规划推广_34"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5\.amap\.com\/ws\/perception\/drive\/(?:routeInfo|routePlan)
-      name: "移除路线规划推广_33"
+      name: "移除路线规划推广_34"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5\.amap\.com\/ws\/shield\/search_bff\/hotword\?
-      name: "移除路线规划推广_33"
+      name: "移除路线规划推广_34"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5\.amap\.com\/ws\/shield\/search_poi\/(?:mps|search\/sp|sug|tips_operation_location)
-      name: "移除路线规划推广_33"
+      name: "移除路线规划推广_34"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5\.amap\.com\/ws\/faas\/amap-navigation\/(?:card-service-plan-home|main-page)
-      name: "移除路线规划推广_33"
+      name: "移除路线规划推广_34"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5\.amap\.com\/ws\/shield\/frogserver\/aocs\/updatable\/1\?
-      name: "移除路线规划推广_33"
+      name: "移除路线规划推广_34"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5\.amap\.com\/ws\/shield\/dsp\/profile\/index\/nodefaasv3\?
-      name: "移除路线规划推广_33"
+      name: "移除路线规划推广_34"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5\.amap\.com\/ws\/shield\/search\/nearbyrec_smart\?
-      name: "移除路线规划推广_33"
+      name: "移除路线规划推广_34"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5\.amap\.com\/ws\/valueadded\/alimama\/splash_screen\?
-      name: "移除路线规划推广_33"
+      name: "移除路线规划推广_34"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5-zb\.amap\.com\/ws\/boss\/(?:car\/order\/content_info|order_web\/friendly_information)
-      name: "移除路线规划推广_33"
+      name: "移除路线规划推广_34"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5-zb\.amap\.com\/ws\/promotion-web\/resource(\/home)?\?
-      name: "移除路线规划推广_33"
+      name: "移除路线规划推广_34"
       type: response
       require-body: true
 
     - match: ^https:\/\/(?:info|m5)\.amap\.com\/ws\/shield\/search\/(?:common\/coupon\/info|poi\/detail)
-      name: "移除路线规划推广_33"
+      name: "移除路线规划推广_34"
       type: response
       require-body: true
 
 script-providers:
-  "移除路线规划推广_33":
+  "移除路线规划推广_34":
     url: https://kelee.one/Resource/JavaScript/Amap/Amap_remove_ads.js
     interval: 86400
 
