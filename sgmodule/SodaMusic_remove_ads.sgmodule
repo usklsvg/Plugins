@@ -5,8 +5,8 @@
 #!category=iKeLee
 #!openUrl=https://apps.apple.com/app/id1605585211
 #!tag=去广告
-#!homepage=https://pluginhub.kelee.one
-#!date=2025-05-18 01:29:34
+#!homepage=https://hub.kelee.one
+#!date=2025-08-12 13:09:47
 
 [Body Rewrite]
 http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/me\? 'delpaths([["reward_ad_banner"]])'
@@ -33,6 +33,8 @@ http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/more-panel\? '.blocks 
 ^https:\/\/beta-luna\.douyin\.com\/luna\/commerce\/upsells\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 ^https:\/\/beta-luna\.douyin\.com\/luna\/commerce\/v2\/commerce_info\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+^https:\/\/beta-luna\.douyin\.com\/luna\/listen-video\/reminder\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 [Script]
 移除播放页面视频流 = type=http-response, pattern=^https:\/\/beta-luna\.douyin\.com\/luna\/me\/recently-played-media\?, script-path=https://kelee.one/Resource/JavaScript/SodaMusic/SodaMusic_remove_ads.js, requires-body=true, script-update-interval=-1

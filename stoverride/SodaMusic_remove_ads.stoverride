@@ -15,9 +15,9 @@ tag: |-
 loon_version: |-
   3.2.4(787)
 homepage: |-
-  https://pluginhub.kelee.one
+  https://hub.kelee.one
 date: |-
-  2025-05-18 01:29:34
+  2025-08-12 13:09:47
 
 http:
 
@@ -45,6 +45,8 @@ http:
       ^https:\/\/beta-luna\.douyin\.com\/luna\/commerce\/upsells\? - reject-dict
     - >-
       ^https:\/\/beta-luna\.douyin\.com\/luna\/commerce\/v2\/commerce_info\? - reject-dict
+    - >-
+      ^https:\/\/beta-luna\.douyin\.com\/luna\/listen-video\/reminder\? - reject-dict
 
   body-rewrite:
     - >-
@@ -60,12 +62,12 @@ http:
 
   script:
     - match: ^https:\/\/beta-luna\.douyin\.com\/luna\/me\/recently-played-media\?
-      name: "移除播放页面视频流_27"
+      name: "移除播放页面视频流_28"
       type: response
       require-body: true
 
 script-providers:
-  "移除播放页面视频流_27":
+  "移除播放页面视频流_28":
     url: https://kelee.one/Resource/JavaScript/SodaMusic/SodaMusic_remove_ads.js
     interval: 86400
 
