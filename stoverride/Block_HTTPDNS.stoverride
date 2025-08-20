@@ -15,18 +15,13 @@ loon_version: |-
 homepage: |-
   https://hub.kelee.one
 date: |-
-  2025-06-16 12:29:05
+  2025-08-20 00:30:31
 
 rules:
   - DOMAIN,yyapp-httpdns.gslb.yy.com,REJECT
   - DOMAIN,union-httpdns.gslb.yy.com,REJECT
   - DOMAIN,httpdns-v6.gslb.yy.com,REJECT
   - DOMAIN,dns2.q2cdn.com,REJECT
-  - IP-CIDR,8.134.241.67/32,REJECT,no-resolve
-  - DOMAIN,httpdns.volcengineapi.com,REJECT
-  - DOMAIN,dig.bdurl.net,REJECT
-  - DOMAIN,dig.zjurl.cn,REJECT
-  - AND,((DOMAIN-KEYWORD,tnc),(AND,((OR,((DOMAIN-KEYWORD,-bjlgy),(DOMAIN-KEYWORD,-alisc),(DOMAIN-KEYWORD,-aliec),(DOMAIN-KEYWORD,-alisg))),(OR,((DOMAIN-SUFFIX,snssdk.com),(DOMAIN-SUFFIX,isnssdk.com),(DOMAIN-SUFFIX,toutiaoapi.com),(DOMAIN-SUFFIX,bytedance.com),(DOMAIN-SUFFIX,zijieapi.com)))))),REJECT
   - DOMAIN,dns.weixin.qq.com,REJECT
   - DOMAIN,dns.weixin.qq.com.cn,REJECT
   - DOMAIN,aedns.weixin.qq.com,REJECT
