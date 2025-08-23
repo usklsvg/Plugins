@@ -1,45 +1,7 @@
-name: |-
-  网易邮箱大师去广告
-desc: |-
-  移除网易邮箱大师开屏广告、签到任务提醒，精简侧拉抽屉和我的页面。
-author: |-
-  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
-icon: |-
-  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/MailMaster.png
-category: |-
-  iKeLee
-openUrl: |-
-  https://apps.apple.com/app/id897003024
-tag: |-
-  去广告
-loon_version: |-
-  3.2.4(787)
-homepage: |-
-  https://hub.kelee.one
-date: |-
-  2025-05-13 15:17:08
-
-http:
-
-  mitm:
-    - "appconf.mail.163.com"
-    - "dashi.163.com"
-
-  url-rewrite:
-    - >-
-      ^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/http\/urlConfig\.do$ - reject-dict
-    - >-
-      ^https:\/\/dashi\.163\.com\/task-center-api\/fapi\/task\/list$ - reject-dict
-    - >-
-      ^https:\/\/appconf\.mail\.163\.com\/mailoperating\/mailmaster\/api\/operator\/get$ - reject-dict
-
-  body-rewrite:
-    - >-
-      ^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/page\/v2\/conf\.do$ response-jq delpaths([["data","functionOperatorInfoList"]])
-    - >-
-      ^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/page\/v2\/conf\.do$ response-jq delpaths([["data","memberOperator"]])
-    - >-
-      ^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/page\/v2\/conf\.do$ response-jq delpaths([["data","activityTabInfoList"]])
-    - >-
-      ^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/config\/function\.do$ response-jq .data.config[] |= if .result.tools then .result.tools |= map(select(.name == "邮件追踪" or .name == "替身邮箱")) else . end | del(.data.config[] | select(.functionName == "Function-AD"))
-
+<html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx/1.29.1</center>
+</body>
+</html>

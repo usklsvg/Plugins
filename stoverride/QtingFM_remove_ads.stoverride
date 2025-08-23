@@ -1,56 +1,7 @@
-name: |-
-  蜻蜓FM去广告
-desc: |-
-  移除开屏广告、信息流广告、各类相关内容推荐，精简我的页面。
-author: |-
-  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
-icon: |-
-  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/QtingFM.png
-category: |-
-  iKeLee
-openUrl: |-
-  https://apps.apple.com/app/id506685538
-tag: |-
-  去广告
-loon_version: |-
-  3.2.4(787)
-homepage: |-
-  https://hub.kelee.one
-date: |-
-  2025-05-13 15:17:08
-
-http:
-
-  mitm:
-    - "app.qtfm.cn"
-    - "entry.qtfm.cn"
-    - "recpage-c.qtfm.cn"
-    - "user.qtfm.cn"
-    - "search.qtfm.cn"
-
-  url-rewrite:
-    - >-
-      ^https:\/\/app\.qtfm\.cn\/recommendapi\/v\d\/emotion$ - reject
-    - >-
-      ^https:\/\/search\.qtfm\.cn\/v\d\/keyword\/default$ - reject
-    - >-
-      ^https:\/\/app\.qtfm\.cn\/m-bff\/v\d\/i_listen\/guess_you_like\? - reject-dict
-    - >-
-      ^https:\/\/recpage-c\.qtfm\.cn\/v\d\/favorites$ - reject-dict
-    - >-
-      ^https:\/\/user\.qtfm\.cn\/u\d\/api\/v\d\/user\/following_podcaster\? - reject-dict
-
-  body-rewrite:
-    - >-
-      ^https:\/\/app\.qtfm\.cn\/m-bff\/v\d\/signin\/show_homepage_icon$ response-jq if (getpath(["data"]) | has("display_icon")) then (setpath(["data","display_icon"]; false)) else . end
-    - >-
-      ^https:\/\/app\.qtfm\.cn\/recommendapi\/v\d\/hotpage\? response-jq del(.data.head[].data[] | select(.title == "超级会员")) | del(.data.head[].data[] | select(.link.type == "RadioStation")) | del(.data.head[] | select(.title == "听头条")) | del(.data.feeds[] | select(.type == "ListenListRadio"))
-    - >-
-      ^https:\/\/app\.qtfm\.cn\/m-bff\/v\d\/channel\/\d{6}\/playpage\/\d{8} response-jq delpaths([["data","related_recommend"]])
-    - >-
-      ^https:\/\/app\.qtfm\.cn\/m-bff\/v\d\/mylistenpage response-jq delpaths([["data","banner"]])
-    - >-
-      ^https:\/\/app\.qtfm\.cn\/m-bff\/v\d\/subscribed_channels\? response-jq delpaths([["data","recommends"]])
-    - >-
-      ^https:\/\/entry\.qtfm\.cn\/api\/v\d\/personal\/\?carrier response-jq delpaths([["data", "membership"], ["data", "level_info"]]) | .data.discovery.entries |= map(select(.title != "借钱"))
-
+<html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx/1.29.1</center>
+</body>
+</html>

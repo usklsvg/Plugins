@@ -1,30 +1,7 @@
-name: |-
-  向日葵去广告
-desc: |-
-  移除开屏广告、广告横幅。
-author: |-
-  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
-icon: |-
-  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/OraySunlogin.png
-category: |-
-  iKeLee
-openUrl: |-
-  https://apps.apple.com/app/id551941458
-tag: |-
-  去广告
-loon_version: |-
-  3.2.4(787)
-homepage: |-
-  https://hub.kelee.one
-date: |-
-  2025-05-13 15:17:08
-
-http:
-
-  mitm:
-    - "client-api-v2.oray.com"
-
-  url-rewrite:
-    - >-
-      ^https:\/\/client-api-v2\.oray\.com\/materials\/SLCC_iOS_DEVICE_FREE\? - reject-dict
-
+<html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx/1.29.1</center>
+</body>
+</html>

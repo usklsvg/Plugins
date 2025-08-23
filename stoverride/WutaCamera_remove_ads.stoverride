@@ -1,42 +1,7 @@
-name: |-
-  无他相机去广告
-desc: |-
-  移除开屏广告、拍摄页面广告、右小角广告，精简底栏。
-author: |-
-  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
-icon: |-
-  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/WutaCamera.png
-category: |-
-  iKeLee
-openUrl: |-
-  https://apps.apple.com/app/id1061534032
-tag: |-
-  去广告
-loon_version: |-
-  3.2.4(787)
-homepage: |-
-  https://hub.kelee.one
-date: |-
-  2025-07-05 02:22:08
-
-http:
-
-  mitm:
-    - "api-release.wuta-cam.com"
-
-  body-rewrite:
-    - >-
-      ^https:\/\/api-release\.wuta-cam\.com\/ad_tree$ response-jq delpaths([["regular","splash"]])
-    - >-
-      ^https:\/\/api-release\.wuta-cam\.com\/ad_tree$ response-jq delpaths([["big_day"]])
-    - >-
-      ^https:\/\/api-release\.wuta-cam\.com\/ad_tree$ response-jq delpaths([["big_day_overrides"]])
-    - >-
-      ^https:\/\/api-release\.wuta-cam\.com\/ad_tree$ response-jq delpaths([["regular","home_bottom_right_entry_v2"]])
-    - >-
-      ^https:\/\/api-release\.wuta-cam\.com\/ad_tree$ response-jq delpaths([["regular","pic_upload_alert"]])
-    - >-
-      ^https:\/\/api-release\.wuta-cam\.com\/ad_tree$ response-jq delpaths([["regular","retouching_before_icon"]])
-    - >-
-      ^https:\/\/api-release\.wuta-cam\.com\/ad_tree$ response-jq .regular.homepage_25_bottom_nav_bar|=map(.button_list|=map(select(.name|IN("home","me"))))
-
+<html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx/1.29.1</center>
+</body>
+</html>

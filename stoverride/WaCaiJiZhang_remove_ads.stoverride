@@ -1,34 +1,7 @@
-name: |-
-  挖财记账去广告
-desc: |-
-  移除弹窗广告、推广语横幅和右下角悬浮广告。
-author: |-
-  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
-icon: |-
-  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/WaCaiJiZhang.png
-category: |-
-  iKeLee
-openUrl: |-
-  https://apps.apple.com/app/id1544045905
-tag: |-
-  去广告
-loon_version: |-
-  3.2.4(787)
-homepage: |-
-  https://hub.kelee.one
-date: |-
-  2025-06-30 21:53:43
-
-http:
-
-  mitm:
-    - "jz.wacaijizhang.com"
-
-  url-rewrite:
-    - >-
-      ^https:\/\/jz\.wacaijizhang\.com\/api\/banners\/ribbon\? - reject-dict
-    - >-
-      ^https:\/\/jz\.wacaijizhang\.com\/api\/banners\/list\? - reject-dict
-    - >-
-      ^https:\/\/jz\.wacaijizhang\.com\/api\/resource\/universal\/fetch$ - reject-dict
-
+<html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx/1.29.1</center>
+</body>
+</html>
