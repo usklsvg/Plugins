@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://hub.kelee.one
 date: |-
-  2025-08-07 02:09:48
+  2025-08-24 19:27:15
 
 rules:
   - DOMAIN-SUFFIX,uve.weibo.com,DIRECT
@@ -57,7 +57,7 @@ http:
     - >-
       ^https:\/\/api\.weibo\.cn\/2\/video\/redpacket\? - reject-dict
     - >-
-      ^https:\/\/api\.weibo\.cn\/!\/(sug\/list\/finderchange|was\/finder\/searchbarchange)\? - reject-dict
+      ^https:\/\/api\.weibo\.cn\/!\/(?:sug\/list\/finderchange|was\/finder\/searchbarchange)\? - reject-dict
     - >-
       ^https:\/\/api\.weibo\.cn\/2\/video\/tiny_video_info_show\? - reject-dict
     - >-

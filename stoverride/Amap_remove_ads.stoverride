@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://hub.kelee.one
 date: |-
-  2025-08-10 11:02:38
+  2025-08-24 16:05:54
 
 rules:
   - AND,((URL-REGEX,"^http:\/\/.+\/amdc\/mobileDispatch"),(USER-AGENT,"AMapiPhone*")),REJECT
@@ -28,11 +28,7 @@ rules:
 http:
 
   mitm:
-    - "m5.amap.com"
-    - "m5-zb.amap.com"
-    - "oss.amap.com"
-    - "sns.amap.com"
-    - "ai.amap.com"
+    - "*.amap.com"
 
   url-rewrite:
     - >-
@@ -46,7 +42,7 @@ http:
     - >-
       ^https:\/\/m5\.amap\.com\/ws\/aos\/main\/page\/product\/list\? - reject-dict
     - >-
-      ^https:\/\/m5\.amap\.com\/ws\/faas\/amap-navigation\/(?:main-page-assets|main-page-location|ridewalk-end-fc) - reject-dict
+      ^https:\/\/m5\.amap\.com\/ws\/faas\/amap-navigation\/(?:main-page-assets|main-page-location|ridewalk-end-fc|usr-profile-fc\/homeV2) - reject-dict
     - >-
       ^https:\/\/m5\.amap\.com\/ws\/(?:mapapi\/hint_text\/offline_data|message\/notice\/list|shield\/search\/new_hotword) - reject-dict
     - >-
@@ -56,11 +52,9 @@ http:
     - >-
       ^https:\/\/sns\.amap\.com\/ws\/msgbox\/pull_mp\? - reject-dict
     - >-
-      ^https:\/\/ai\.amap\.com\/v1\/ai_rec\/home_qs\? - reject-dict
-    - >-
       ^https:\/\/m5-zb\.amap\.com\/ws\/boss\/(?:order\/car\/(?:feedback\/get_card_questions|feedback\/viptips|king_toolbox_car_bubble|remark\/satisfactionConf|rights_information)|tips\/onscene_visual_optimization) - reject-dict
     - >-
-      ^https:\/\/m5-zb\.amap\.com\/ws\/boss\/pay\/web\/paySuccess\/info\/request - reject-dict
+      ^https:\/\/m5-zb\.amap\.com\/ws\/boss\/(?:pay\/web\/paySuccess\/info\/request|transportation\/diversion\/resource\/driving) - reject-dict
 
   body-rewrite:
     - >-
@@ -76,77 +70,77 @@ http:
 
   script:
     - match: ^https:\/\/m5\.amap\.com\/ws\/aos\/perception\/publicTravel\/beforeNavi\?
-      name: "移除路线规划推广_34"
+      name: "移除路线规划推广_33"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5\.amap\.com\/ws\/bus\/plan\/integrate\?
-      name: "移除路线规划推广_34"
+      name: "移除路线规划推广_33"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5\.amap\.com\/ws\/c3frontend\/(?:af-(?:hotel|launch)\/page\/main|af-nearby\/nearby)
-      name: "移除路线规划推广_34"
+      name: "移除路线规划推广_33"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5\.amap\.com\/ws\/perception\/drive\/(?:routeInfo|routePlan)
-      name: "移除路线规划推广_34"
+      name: "移除路线规划推广_33"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5\.amap\.com\/ws\/shield\/search_bff\/hotword\?
-      name: "移除路线规划推广_34"
+      name: "移除路线规划推广_33"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5\.amap\.com\/ws\/shield\/search_poi\/(?:mps|search\/sp|sug|tips_operation_location)
-      name: "移除路线规划推广_34"
+      name: "移除路线规划推广_33"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5\.amap\.com\/ws\/faas\/amap-navigation\/(?:card-service-plan-home|main-page)
-      name: "移除路线规划推广_34"
+      name: "移除路线规划推广_33"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5\.amap\.com\/ws\/shield\/frogserver\/aocs\/updatable\/1\?
-      name: "移除路线规划推广_34"
+      name: "移除路线规划推广_33"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5\.amap\.com\/ws\/shield\/dsp\/profile\/index\/nodefaasv3\?
-      name: "移除路线规划推广_34"
+      name: "移除路线规划推广_33"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5\.amap\.com\/ws\/shield\/search\/nearbyrec_smart\?
-      name: "移除路线规划推广_34"
+      name: "移除路线规划推广_33"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5\.amap\.com\/ws\/valueadded\/alimama\/splash_screen\?
-      name: "移除路线规划推广_34"
+      name: "移除路线规划推广_33"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5-zb\.amap\.com\/ws\/boss\/(?:car\/order\/content_info|order_web\/friendly_information)
-      name: "移除路线规划推广_34"
+      name: "移除路线规划推广_33"
       type: response
       require-body: true
 
     - match: ^https:\/\/m5-zb\.amap\.com\/ws\/promotion-web\/resource(\/home)?\?
-      name: "移除路线规划推广_34"
+      name: "移除路线规划推广_33"
       type: response
       require-body: true
 
     - match: ^https:\/\/(?:info|m5)\.amap\.com\/ws\/shield\/search\/(?:common\/coupon\/info|poi\/detail)
-      name: "移除路线规划推广_34"
+      name: "移除路线规划推广_33"
       type: response
       require-body: true
 
 script-providers:
-  "移除路线规划推广_34":
+  "移除路线规划推广_33":
     url: https://kelee.one/Resource/JavaScript/Amap/Amap_remove_ads.js
     interval: 86400
 
