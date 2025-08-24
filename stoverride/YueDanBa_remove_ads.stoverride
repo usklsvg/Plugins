@@ -1,7 +1,40 @@
-<html>
-<head><title>502 Bad Gateway</title></head>
-<body>
-<center><h1>502 Bad Gateway</h1></center>
-<hr><center>nginx/1.29.1</center>
-</body>
-</html>
+name: |-
+  省钱快报去广告
+desc: |-
+  移除开屏广告、横幅广告、商品推荐，精简我的页面。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/YueDanBa.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id1116025300
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://hub.kelee.one
+date: |-
+  2025-06-01 19:49:56
+
+http:
+
+  mitm:
+    - "api.17gwx.com"
+
+  url-rewrite:
+    - >-
+      ^https:\/\/api\.17gwx\.com\/v2\/base\/app\/ad\? - reject-dict
+    - >-
+      ^https:\/\/api\.17gwx\.com\/v2\/growth\/popup\/remind$ - reject-dict
+    - >-
+      ^https:\/\/api\.17gwx\.com\/v2\/recommend\/feed\/list\? - reject-dict
+    - >-
+      ^https:\/\/api\.17gwx\.com\/v2\/homepage\/feed\/similarList\? - reject-dict
+
+  body-rewrite:
+    - >-
+      ^https:\/\/api\.17gwx\.com\/operate\/elements\? response-jq .data |= with_entries(select(.key | test("home_mid_many|home_mid_banner_multi|user_center_slide_show_pic|newfeed_detail_oper_middle|main_rebate_banner|zhekou_coupon_detail_oper|zhekou_jdcoupon_detail_oper|zhekou_vipcoupon_detail_oper|zhekou_pddcoupon_detail_oper") | not))
+

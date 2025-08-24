@@ -1,7 +1,55 @@
-<html>
-<head><title>502 Bad Gateway</title></head>
-<body>
-<center><h1>502 Bad Gateway</h1></center>
-<hr><center>nginx/1.29.1</center>
-</body>
-</html>
+name: |-
+  堆糖去广告
+desc: |-
+  移除开屏广告、信息流广告、热搜排行榜广告、我的页面横幅广告，移除关注推荐。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/DuiTang.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id533415763
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://hub.kelee.one
+date: |-
+  2025-05-13 15:17:08
+
+http:
+
+  mitm:
+    - "api.duitang.com"
+    - "www.duitang.com"
+
+  body-rewrite:
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","REWARD_AD_PLACES"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","SPLASH_SWING_OPEN"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","REWARD_AD_PHOTO_EDITOR"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","REWARD_AD_PAG_EDITOR"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","AD_PRICE_SHOW"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","AD_SCREEN_WAKEUP_TIME"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","REWARD_AD_CUTOUT_NUM"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","AD_HOME_ENTER_POP_COUNT"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","SHARE_BANNER"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","AD_MENU_SELECTIONS"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","ME_TAB","ANNOUNCEMENT"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","ME_TAB","MEMBERSHIP"]])
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","ME_TAB","MEMBERSHIP2"]])
+

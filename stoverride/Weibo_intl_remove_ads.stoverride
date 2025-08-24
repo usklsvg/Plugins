@@ -1,7 +1,68 @@
-<html>
-<head><title>502 Bad Gateway</title></head>
-<body>
-<center><h1>502 Bad Gateway</h1></center>
-<hr><center>nginx/1.29.1</center>
-</body>
-</html>
+name: |-
+  微博轻享版去广告
+desc: |-
+  移除开屏广告、时间线广告及评论区广告，移除发现页面横幅推广、最常访问、主页访客及热门视频，移除搜索填充词。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Weibo_intl.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id1215210046
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://hub.kelee.one
+date: |-
+  2025-07-09 14:07:46
+
+http:
+
+  mitm:
+    - "bootpreload.uve.weibo.com"
+    - "weibointl.api.weibo.cn"
+    - "api.weibo.cn"
+
+  url-rewrite:
+    - >-
+      ^https:\/\/bootpreload\.uve\.weibo\.com\/v1\/ad\/preload$ - reject-dict
+    - >-
+      ^https:\/\/api\.weibo\.cn\/2\/cardlist\?v_f=2 - reject-dict
+    - >-
+      ^https:\/\/api\.weibo\.cn\/2\/ad\/ - reject-dict
+    - >-
+      ^https:\/\/weibointl\.api\.weibo\.cn\/portal\.php\?a=get_searching_info - reject-dict
+
+  body-rewrite:
+    - >-
+      ^https:\/\/weibointl\.api\.weibo\.cn\/portal\.php\?a=trends response-jq delpaths([["data","banner"]])
+    - >-
+      ^https:\/\/weibointl\.api\.weibo\.cn\/portal\.php\?a=trends response-jq delpaths([["data","user_footprint"]])
+    - >-
+      ^https:\/\/weibointl\.api\.weibo\.cn\/portal\.php\?a=trends response-jq delpaths([["data","profile_accessrecord"]])
+    - >-
+      ^https:\/\/weibointl\.api\.weibo\.cn\/portal\.php\?a=trends response-jq delpaths([["data","native_content"]])
+    - >-
+      ^https:\/\/weibointl\.api\.weibo\.cn\/portal\.php\?a=trends response-jq .data.discover |= map(select(.schema != "尊享会员"))
+    - >-
+      ^https:\/\/api\.weibo\.cn\/2\/statuses\/friends\/timeline$ response-jq delpaths([["advertises"]])
+    - >-
+      ^https:\/\/api\.weibo\.cn\/2\/statuses\/friends\/timeline$ response-jq delpaths([["ad"]])
+    - >-
+      ^https:\/\/api\.weibo\.cn\/2\/statuses\/friends\/timeline$ response-jq delpaths([["ad_version_2_weibo"]])
+    - >-
+      ^https:\/\/api\.weibo\.cn\/2\/statuses\/friends\/timeline$ response-jq .statuses|=map(select(.ad_marked!=true))
+    - >-
+      ^https:\/\/api\.weibo\.cn\/2\/statuses\/unread_hot_timeline$ response-jq delpaths([["ad"]])
+    - >-
+      ^https:\/\/api\.weibo\.cn\/2\/statuses\/unread_hot_timeline$ response-jq delpaths([["ad_version_2_weibo"]])
+    - >-
+      ^https:\/\/api\.weibo\.cn\/2\/statuses\/unread_hot_timeline$ response-jq .statuses|=map(select(.ad_marked!=true))
+    - >-
+      ^https:\/\/api\.weibo\.cn\/2\/comments\/build_comments\? response-jq .datas[].data.ad_from_comment? = true
+    - >-
+      ^https:\/\/api\.weibo\.cn\/2\/cardlist\?aid= response-jq .cards |= map(select((.mblog?|(.ad_marked?|type=="boolean")and.ad_marked==true)or(.card_group?|type=="array"and any(.[]?;.mblog?|(.ad_marked?|type=="boolean")and.ad_marked==true))|not))
+

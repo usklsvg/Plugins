@@ -1,7 +1,73 @@
-<html>
-<head><title>502 Bad Gateway</title></head>
-<body>
-<center><h1>502 Bad Gateway</h1></center>
-<hr><center>nginx/1.29.1</center>
-</body>
-</html>
+name: |-
+  虎扑去广告
+desc: |-
+  移除虎扑开屏广告、首页顶部推广、我的页面多余模块及各类横幅推广。
+author: |-
+  ZenmoFeiShi[https://github.com/ZenmoFeiShi]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/HUPU.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id906632439
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://hub.kelee.one
+date: |-
+  2025-05-13 15:17:08
+
+http:
+
+  mitm:
+    - "games.mobileapi.hupu.com"
+    - "fairy.mobileapi.hupu.com"
+    - "bbs.mobileapi.hupu.com"
+    - "goblin.hupu.com"
+
+  url-rewrite:
+    - >-
+      ^https:\/\/games\.mobileapi\.hupu\.com\/\d\/\d\.\d\.\d+\/bplapi\/reddot\/v1\/app\/getReddot - reject-dict
+    - >-
+      ^https:\/\/bbs\.mobileapi\.hupu\.com\/\d\/\d\.\d\.\d+\/(bbsallapi\/tag\/v1\/heatTag|bbsrankapi\/v1\/rating\/list) - reject-dict
+    - >-
+      ^https:\/\/games\.mobileapi\.hupu\.com\/\d\/\d\.\d\.\d+\/search\/v2\/(hintkeylist|hotkeylist) - reject-dict
+    - >-
+      ^https:\/\/goblin\.hupu\.com\/\d\/\d\.\d\.\d+\/interfaceAd\/getOther\/v\d - reject-dict
+    - >-
+      ^https:\/\/goblin\.hupu\.com\/\d\/\d\.\d\.\d+\/interfaceAd\/getOther\/batch - reject-dict
+    - >-
+      ^https:\/\/fairy\.mobileapi\.hupu\.com\/gallery\/getmod2 - reject-200
+    - >-
+      ^https:\/\/games\.mobileapi\.hupu\.com\/3\/8\.0\.86\/bplcommentapi\/bpl\/score_tab\/groups - reject-dict
+    - >-
+      ^https:\/\/games\.mobileapi\.hupu\.com\/3\/8\.0\.86\/bplapi\/banner\/getLocationBanners - reject-dict
+
+  script:
+    - match: ^https:\/\/fairy\.mobileapi\.hupu\.com\/mang\/preview\/banners
+      name: "移除虎扑广告_21"
+      type: response
+      require-body: true
+
+    - match: ^https:\/\/bbs\.mobileapi\.hupu\.com\/\d\/\d\.\d\.\d+\/bbsallapi\/lego\/data
+      name: "移除虎扑广告_21"
+      type: response
+      require-body: true
+
+    - match: ^https:\/\/games\.mobileapi\.hupu\.com\/\d\/\d\.\d\.\d+\/buffer\/hotList
+      name: "移除虎扑广告_21"
+      type: response
+      require-body: true
+
+    - match: ^https:\/\/games\.mobileapi\.hupu\.com\/\d\/\d\.\d\.\d+\/bplapi\/user\/v1\/more
+      name: "移除虎扑广告_21"
+      type: response
+      require-body: true
+
+script-providers:
+  "移除虎扑广告_21":
+    url: https://kelee.one/Resource/JavaScript/HUPU/HUPU_remove_ads.js
+    interval: 86400
+

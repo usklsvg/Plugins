@@ -1,7 +1,62 @@
-<html>
-<head><title>502 Bad Gateway</title></head>
-<body>
-<center><h1>502 Bad Gateway</h1></center>
-<hr><center>nginx/1.29.1</center>
-</body>
-</html>
+name: |-
+  Script-Hub
+desc: |-
+  将其他工具的Rewrite、Rule和JavaScript资源转换为Loon能识别的格式，使用前请在本插件的详情页面为[PROXY]项分配代理策略。在插件列表中点击此插件上的链接查看使用方法。
+author: |-
+  xream[https://github.com/xream], Keywos[https://github.com/Keywos], CKYB[https://github.com/CKYB], 小白脸
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/Other_icon/120px/Script-Hub.png
+category: |-
+  iKeLee
+openUrl: |-
+  http://127.0.0.1:9100/
+tag: |-
+  资源转换
+loon_version: |-
+  3.2.1(749)
+homepage: |-
+  https://hub.kelee.one
+date: |-
+  2025-05-13 15:17:08
+
+http:
+
+  mitm:
+    - "script.hub"
+    - "*.script.hub"
+
+  script:
+    - match: ^https?:\/\/script\.hub\/($|edit\/|reload)
+      name: "前端界面_17"
+      type: request
+      timeout: 120
+
+    - match: ^https?:\/\/script\.hub\/file\/_start_\/.+type=(?:qx-rewrite|surge-module|loon-plugin|all-module)
+      name: "Rewrite转换_18"
+      type: request
+      timeout: 120
+
+    - match: ^https?:\/\/script\.hub\/file\/_start_\/.+type=rule-set
+      name: "Rule转换_19"
+      type: request
+      timeout: 120
+
+    - match: ^https?:\/\/script\.hub\/convert\/
+      name: "JavaScript转换_20"
+      type: request
+      timeout: 120
+
+script-providers:
+  "前端界面_17":
+    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/script-hub.beta.js
+    interval: 86400
+  "Rewrite转换_18":
+    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/Rewrite-Parser.beta.js
+    interval: 86400
+  "Rule转换_19":
+    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/rule-parser.beta.js
+    interval: 86400
+  "JavaScript转换_20":
+    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/script-converter.beta.js
+    interval: 86400
+

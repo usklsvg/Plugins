@@ -1,7 +1,39 @@
-<html>
-<head><title>502 Bad Gateway</title></head>
-<body>
-<center><h1>502 Bad Gateway</h1></center>
-<hr><center>nginx/1.29.1</center>
-</body>
-</html>
+name: |-
+  KOOK去广告
+desc: |-
+  移除开屏广告、房间横幅推广、精简我的页面，移除底栏商城入口。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/KOOK.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id1501289327
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://hub.kelee.one
+date: |-
+  2025-05-13 15:17:08
+
+http:
+
+  mitm:
+    - "m.kookapp.cn"
+    - "www.kookapp.cn"
+
+  url-rewrite:
+    - >-
+      ^https:\/\/www\.kookapp\.cn\/api\/v3\/ad\/config$ - reject-dict
+
+  body-rewrite:
+    - >-
+      ^https:\/\/(m|www)\.kookapp\.cn\/api\/v\d\/user\/settings$ response-jq delpaths([["ad_banner"]])
+    - >-
+      ^https:\/\/(m|www)\.kookapp\.cn\/api\/v\d\/user\/settings$ response-jq delpaths([["advertise_on_off"]])
+    - >-
+      ^https:\/\/(m|www)\.kookapp\.cn\/api\/v\d\/user\/settings$ response-jq if (getpath([]) | has("ios_mall_switch")) then (setpath(["ios_mall_switch"]; false)) else . end
+

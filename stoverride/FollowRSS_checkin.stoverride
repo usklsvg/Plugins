@@ -1,7 +1,39 @@
-<html>
-<head><title>502 Bad Gateway</title></head>
-<body>
-<center><h1>502 Bad Gateway</h1></center>
-<hr><center>nginx/1.29.1</center>
-</body>
-</html>
+name: |-
+  Follow每日签到
+desc: |-
+  Follow每日签到，需要进入此插件的主页链接，阅读使用说明操作。
+author: |-
+  gideonsenku[https://github.com/gideonsenku], 可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/FollowRSS.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://follow.is
+tag: |-
+  签到
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://github.com/luestr/ProxyResource/blob/main/Resource/Markdown/FollowRSS/README.md
+date: |-
+  2025-05-13 15:17:08
+
+http:
+
+  mitm:
+    - "api.follow.is"
+
+cron:
+  script:
+    - name: "Follow每日签到_16"
+      cron:  "0 1 * * *"
+      timeout: 120
+      argument: |-
+        [ "", ""]
+
+script-providers:
+  "Follow每日签到_16":
+    url: https://kelee.one/Resource/JavaScript/FollowRSS/FollowRSS_checkin.js
+    interval: 86400
+

@@ -1,7 +1,55 @@
-<html>
-<head><title>502 Bad Gateway</title></head>
-<body>
-<center><h1>502 Bad Gateway</h1></center>
-<hr><center>nginx/1.29.1</center>
-</body>
-</html>
+name: |-
+  Apple天气增强
+desc: |-
+  解锁Apple天气的全部功能、替换空气质量数据源、添加下一小时降水数据，仅支持iOS 18和iPadOS 18。
+author: |-
+  VirgilClyne[https://github.com/VirgilClyne], WordlessEcho[https://github.com/WordlessEcho]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/AppleWeather.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://itunes.apple.com/app/id1069513131
+tag: |-
+  功能增强
+system: |-
+  iOS, iPadOS
+system_version: |-
+  18
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://hub.kelee.one
+date: |-
+  2025-05-13 15:17:08
+
+rules:
+  - DOMAIN,weather-analytics-events.apple.com,REJECT
+  - DOMAIN-SUFFIX,tthr.apple.com,REJECT
+
+http:
+
+  mitm:
+    - "weatherkit.apple.com"
+
+  script:
+    - match: ^https?:\/\/weatherkit\.apple\.com\/api\/v1\/availability\/
+      name: "Availability响应处理_26"
+      type: response
+      require-body: true
+      argument: |-
+        [ "ColorfulClouds", "ColorfulClouds", "", "WAQI_InstantCast", "HJ6332012", false, "", "devapi.qweather.com", "", ""]
+
+    - match: ^https?:\/\/weatherkit\.apple\.com\/api\/v2\/weather\/
+      name: "Availability响应处理_26"
+      type: response
+      require-body: true
+      binary-mode: true
+      argument: |-
+        [ "ColorfulClouds", "ColorfulClouds", "", "WAQI_InstantCast", "HJ6332012", false, "", "devapi.qweather.com", "", ""]
+
+script-providers:
+  "Availability响应处理_26":
+    url: https://github.com/NSRingo/WeatherKit/releases/download/v1.8.17/response.bundle.js
+    interval: 86400
+

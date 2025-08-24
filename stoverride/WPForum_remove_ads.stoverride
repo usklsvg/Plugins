@@ -1,7 +1,34 @@
-<html>
-<head><title>502 Bad Gateway</title></head>
-<body>
-<center><h1>502 Bad Gateway</h1></center>
-<hr><center>nginx/1.29.1</center>
-</body>
-</html>
+name: |-
+  威锋去广告
+desc: |-
+  移除开屏广告、信息流广告、文末广告、首页轮播图推广。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/WPForum.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id1411932809
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://hub.kelee.one
+date: |-
+  2025-07-16 02:49:51
+
+http:
+
+  mitm:
+    - "api.wfdata.club"
+
+  url-rewrite:
+    - >-
+      ^https:\/\/api\.wfdata\.club\/v2\/yesfeng\/yesList\? - reject-dict
+
+  body-rewrite:
+    - >-
+      ^https:\/\/api\.wfdata\.club\/v2\/yesfeng\/slideshow\? response-jq .data |= map(select(.protocolId == 1))
+
