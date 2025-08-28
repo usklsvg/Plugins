@@ -1,4 +1,4 @@
-sample：TypeError: Cannot read properties of undefined (reading 'replace')
+sample：Error: 请求超时(20 秒)
 
 
 

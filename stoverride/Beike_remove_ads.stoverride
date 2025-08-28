@@ -1,0 +1,48 @@
+name: |-
+  贝壳找房去广告
+desc: |-
+  移除开屏广告、弹窗广告、悬浮广告、信息流推广、我家页面的装修推荐。移除我的页面的专属推荐、游戏入口、钱包入口。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Beike.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id1347663353
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://hub.kelee.one
+date: |-
+  2025-08-10 13:18:43
+
+http:
+
+  mitm:
+    - "apps.api.ke.com"
+
+  url-rewrite:
+    - >-
+      ^https:\/\/apps\.api\.ke\.com\/config\/config\/bootpage\? - reject-dict
+    - >-
+      ^https:\/\/apps\.api\.ke\.com\/platform\/shellapp\/userCenter\/feed\? - reject-dict
+    - >-
+      ^https:\/\/apps\.api\.ke\.com\/config\/config\/getactivityconfig\? - reject-dict
+
+  body-rewrite:
+    - >-
+      ^https:\/\/apps\.api\.ke\.com\/platform\/shellapp\/homepage\/initData\/mini\? response-jq delpaths([["data","bootpage"]])
+    - >-
+      ^https:\/\/apps\.api\.ke\.com\/platform\/shellapp\/homepage\/initData\/mini\? response-jq delpaths([["data","bottom_bar_activity"]])
+    - >-
+      ^https:\/\/apps\.api\.ke\.com\/platform\/shellapp\/userCenter\/info\? response-jq delpaths([["data","islandModule"]])
+    - >-
+      ^https:\/\/apps\.api\.ke\.com\/platform\/shellapp\/userCenter\/info\? response-jq del(.data.mainIcons.list[] | select(.indexKey == "coupon"))
+    - >-
+      ^https:\/\/apps\.api\.ke\.com\/platform\/shellapp\/myhome\/pagedetail\? response-jq .data.moduleList |= map(select(.tab != "myHomeDecorV4"))
+    - >-
+      ^https:\/\/apps\.api\.ke\.com\/platform\/shellapp\/homepage\/feed\? response-jq .data.list |= map(select(.cardType == "houseContainer" or .cardType == "houseV2" or .cardType == "houseV3" or .cardType == "rentHouseDiscount" or .cardType == "decorationCase"))
+

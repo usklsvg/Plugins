@@ -6,7 +6,7 @@
 #!openUrl=https://apps.apple.com/app/id1541981555
 #!tag=去广告
 #!homepage=https://hub.kelee.one
-#!date=2025-05-23 14:49:53
+#!date=2025-08-27 03:06:07
 
 [Body Rewrite]
 http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/search\/topic\/word\/list\? 'delpaths([["data","hotTopic"]])'
@@ -15,9 +15,13 @@ http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/search\/topic\/word\/list\? '
 http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/search\/topic\/word\/list\? 'delpaths([["data","hotWord"]])'
 
 [Map Local]
-^https:\/\/bd-api\.kuwo\.cn\/api\/play\/advert\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/bd-api\.kuwo\.cn\/api\/(play|service|advert)\/advert\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 ^https:\/\/bd-api\.kuwo\.cn\/api\/popup\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+^https:\/\/bd-api\.kuwo\.cn\/api\/pay\/vip\/invitation\/assist\/popup\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+^https:\/\/bd-api\.kuwo\.cn\/api\/ucenter\/vip\/give\/config\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 ^https:\/\/bd-api\.kuwo\.cn\/api\/service\/banner\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
