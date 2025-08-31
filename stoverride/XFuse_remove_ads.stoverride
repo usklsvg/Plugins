@@ -1,32 +1,7 @@
-name: |-
-  磁力宅播放器去广告
-desc: |-
-  移除开屏广告、弹窗和文件列表广告。
-author: |-
-  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
-icon: |-
-  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/XFuse.png
-category: |-
-  iKeLee
-openUrl: |-
-  https://apps.apple.com/app/id6497060674
-tag: |-
-  去广告
-loon_version: |-
-  3.2.4(787)
-homepage: |-
-  https://hub.kelee.one
-date: |-
-  2025-05-13 15:17:08
-
-http:
-
-  mitm:
-    - "cili.xfuse.fun"
-    - "i.micecube.com"
-    - "img.mofyi.com"
-
-  url-rewrite:
-    - >-
-      ^https:\/\/cili\.xfuse\.fun\/s\/ - reject
-
+<html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx/1.29.1</center>
+</body>
+</html>

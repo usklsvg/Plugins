@@ -1,41 +1,7 @@
-name: |-
-  航旅纵横去广告
-desc: |-
-  过滤航旅纵横广告
-author: |-
-  佚名
-icon: |-
-  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Umetrip.png
-category: |-
-  iKeLee
-openUrl: |-
-  https://apps.apple.com/app/id480161784
-tag: |-
-  去广告
-loon_version: |-
-  3.2.4(787)
-homepage: |-
-  https://hub.kelee.one
-date: |-
-  2025-05-13 15:17:08
-
-http:
-
-  mitm:
-    - "114.115.217.129"
-    - "home.umetrip.com"
-
-  url-rewrite:
-    - >-
-      ^http?:\/\/(discardrp|startup)\.umetrip\.com\/gateway\/api\/umetrip\/native - reject
-
-  script:
-    - match: ^http?:\/\/(114\.115\.217\.129)|(home\.umetrip\.com)\/gateway\/api\/umetrip\/native$
-      name: "移除首页广告_14"
-      type: response
-
-script-providers:
-  "移除首页广告_14":
-    url: https://kelee.one/Resource/JavaScript/Umetrip/Umetrip_remove_ads.js
-    interval: 86400
-
+<html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx/1.29.1</center>
+</body>
+</html>

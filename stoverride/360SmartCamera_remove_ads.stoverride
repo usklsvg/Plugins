@@ -1,38 +1,7 @@
-name: |-
-  360摄像机去广告
-desc: |-
-  移除开屏广告、首页推广、底栏商城入口及我的页面推广。
-author: |-
-  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
-icon: |-
-  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/360SmartCamera.png
-category: |-
-  iKeLee
-openUrl: |-
-  https://apps.apple.com/app/id958068931
-tag: |-
-  去广告
-loon_version: |-
-  3.2.4(787)
-homepage: |-
-  https://hub.kelee.one
-date: |-
-  2025-05-13 15:17:08
-
-rules:
-  - DOMAIN,ad.jia.360.cn,REJECT
-  - DOMAIN,ad.iot.360.cn,REJECT
-
-http:
-
-  mitm:
-    - "jia.360.cn"
-
-  body-rewrite:
-    - >-
-      ^https:\/\/jia\.360\.cn\/conf\/v1\.json response-jq delpaths([["tab_conf"]])
-    - >-
-      ^https:\/\/jia\.360\.cn\/conf\/v1\.json response-jq delpaths([["ad_conf"]])
-    - >-
-      ^https:\/\/jia\.360\.cn\/conf\/v1\.json response-jq delpaths([["activity"]])
-
+<html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx/1.29.1</center>
+</body>
+</html>

@@ -1,45 +1,7 @@
-name: |-
-  ZAKER去广告
-desc: |-
-  移除开屏广告、置顶轮播图广告和文末广告。
-author: |-
-  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
-icon: |-
-  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/ZAKER.png
-category: |-
-  iKeLee
-openUrl: |-
-  https://apps.apple.com/app/id462149227
-tag: |-
-  去广告
-loon_version: |-
-  3.2.4(787)
-homepage: |-
-  https://hub.kelee.one
-date: |-
-  2025-06-30 23:34:19
-
-http:
-
-  mitm:
-    - "iphone.myzaker.com"
-    - "ggs.myzaker.com"
-
-  url-rewrite:
-    - >-
-      ^https:\/\/iphone\.myzaker\.com\/zaker\/cover\.php\? - reject-dict
-    - >-
-      ^https:\/\/iphone\.myzaker\.com\/zaker\/block_top_ad\.php\? - reject-dict
-
-  body-rewrite:
-    - >-
-      ^https:\/\/iphone\.myzaker\.com\/zaker\/article_mongo_sec\.php\? response-jq delpaths([["data","ad_url"]])
-    - >-
-      ^https:\/\/ggs\.myzaker\.com\/zk_article_ad\.php\? response-jq delpaths([["data","article_bottom"]])
-    - >-
-      ^https:\/\/ggs\.myzaker\.com\/zk_article_ad\.php\? response-jq delpaths([["data","recommend_ad"]])
-    - >-
-      ^https:\/\/iphone\.myzaker\.com\/zaker\/follow_promote\.php\? response-jq .data.list |= map(select(.type != "web"))
-    - >-
-      ^https:\/\/iphone\.myzaker\.com\/zaker\/car_tab\/index\.php\? response-jq .data.gallery |= map(select(.type != "web"))
-
+<html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx/1.29.1</center>
+</body>
+</html>

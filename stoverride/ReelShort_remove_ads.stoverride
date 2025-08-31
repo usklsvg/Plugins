@@ -1,41 +1,7 @@
-name: |-
-  ReelShort去广告
-desc: |-
-  移除开屏广告、为你推荐及各类弹窗，移除搜索栏填充词。
-author: |-
-  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
-icon: |-
-  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/ReelShort.png
-category: |-
-  iKeLee
-openUrl: |-
-  https://apps.apple.com/app/id1636235979
-tag: |-
-  去广告
-loon_version: |-
-  3.2.4(787)
-homepage: |-
-  https://hub.kelee.one
-date: |-
-  2025-07-31 06:11:54
-
-http:
-
-  mitm:
-    - "v-api.crazymaplestudios.com"
-    - "d1k8g7qaebqd28.cloudfront.net"
-
-  url-rewrite:
-    - >-
-      ^https:\/\/(v-api\.crazymaplestudios\.com|d1k8g7qaebqd28\.cloudfront\.net)\/api\/video\/app\/getSplashScreenConfig$ - reject-dict
-    - >-
-      ^https:\/\/(v-api\.crazymaplestudios\.com|d1k8g7qaebqd28\.cloudfront\.net)\/api\/video\/hall\/landingPage$ - reject-dict
-    - >-
-      ^https:\/\/(v-api\.crazymaplestudios\.com|d1k8g7qaebqd28\.cloudfront\.net)\/api\/video\/book\/getPayModeV2$ - reject-dict
-
-  body-rewrite:
-    - >-
-      ^https:\/\/(v-api\.crazymaplestudios\.com|d1k8g7qaebqd28\.cloudfront\.net)\/api\/video\/book\/getBookDetailV2$ response-jq delpaths([["data","ad_vip"]])
-    - >-
-      ^https:\/\/(v-api\.crazymaplestudios\.com|d1k8g7qaebqd28\.cloudfront\.net)\/api\/video\/hall\/infoV3$ response-jq delpaths([["data","search_keyword_list"]])
-
+<html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx/1.29.1</center>
+</body>
+</html>

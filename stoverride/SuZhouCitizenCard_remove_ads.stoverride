@@ -1,46 +1,7 @@
-name: |-
-  智慧苏州去广告
-desc: |-
-  移除开屏广告、横幅，移除信息流推广。
-author: |-
-  xream[https://github.com/xream]
-icon: |-
-  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/SuZhouCitizenCard.png
-category: |-
-  iKeLee
-openUrl: |-
-  https://apps.apple.com/app/id897076369
-tag: |-
-  去广告
-loon_version: |-
-  3.2.4(787)
-homepage: |-
-  https://hub.kelee.one
-date: |-
-  2025-05-13 15:17:08
-
-http:
-
-  mitm:
-    - "newapp2.szsmk.com"
-
-  script:
-    - match: ^https?:\/\/newapp2\.szsmk\.com\/app\/config\/queryMainAd
-      name: "echoResponse_12"
-      type: request
-      timeout: 60
-      argument: |-
-        text=%7B%22message%22%3A%22%E6%93%8D%E4%BD%9C%E6%88%90%E5%8A%9F%22%2C%22main_ad_list%22%3A%5B%5D%2C%22code%22%3A%22000000%22%7D
-
-    - match: ^https?:\/\/newapp2\.szsmk\.com\/app\/config\/(queryCarousel|queryRecommendation)\/
-      name: "echoResponse_12"
-      type: request
-      timeout: 60
-      argument: |-
-        text=%7B%22code%22%3A%22000000%22%2C%22message%22%3A%22%E6%93%8D%E4%BD%9C%E6%88%90%E5%8A%9F%22%2C%22list%22%3A%5B%5D%7D
-
-script-providers:
-  "echoResponse_12":
-    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/echo-response.js
-    interval: 86400
-
+<html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx/1.29.1</center>
+</body>
+</html>

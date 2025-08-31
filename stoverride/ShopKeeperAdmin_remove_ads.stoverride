@@ -1,30 +1,7 @@
-name: |-
-  小店掌柜去广告
-desc: |-
-  移除开屏广告、活动推广和页面跳转。
-author: |-
-  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
-icon: |-
-  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/ShopKeeperAdmin.png
-category: |-
-  iKeLee
-openUrl: |-
-  https://apps.apple.com/app/id1579610611
-tag: |-
-  去广告
-loon_version: |-
-  3.2.4(787)
-homepage: |-
-  https://hub.kelee.one
-date: |-
-  2025-05-28 21:48:03
-
-http:
-
-  mitm:
-    - "mch.juhesaas.com"
-
-  url-rewrite:
-    - >-
-      ^https:\/\/mch\.juhesaas\.com\/api\/advertisement\/ - reject-dict
-
+<html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx/1.29.1</center>
+</body>
+</html>
