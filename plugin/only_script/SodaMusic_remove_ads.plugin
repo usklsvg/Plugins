@@ -8,10 +8,10 @@
 #!loon_version=3.2.4(787)
 #!homepage=https://hub.kelee.one
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/SodaMusic.png
-#!date=2025-08-12 13:09:47
+#!date=2025-08-31 05:46:14
 
 [Script]
-http-response ^https:\/\/beta-luna\.douyin\.com\/luna\/me\/recently-played-media\? script-path=https://kelee.one/Resource/JavaScript/SodaMusic/SodaMusic_remove_ads.js, requires-body=true, tag=移除播放页面视频流
+http-response ^https:\/\/(beta-luna\.douyin|api5-lq\.qishui)\.com\/luna\/me\/recently-played-media\? script-path=https://kelee.one/Resource/JavaScript/SodaMusic/SodaMusic_remove_ads.js, requires-body=true, tag=移除播放页面视频流
 
 [MitM]
-hostname=webcast-open.douyin.com, beta-luna.douyin.com, api.qishui.com
+hostname=webcast-open.douyin.com, beta-luna.douyin.com, api.qishui.com, api5-lq.qishui.com, tnc*-*.zijieapi.com

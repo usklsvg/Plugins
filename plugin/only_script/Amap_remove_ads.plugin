@@ -1,14 +1,14 @@
 #!name=高德地图去广告
 #!desc=过滤高德地图开屏广告、各页面推广，精简我的页面。
 #!openUrl=https://apps.apple.com/app/id461703208
-#!author=RuCu6[https://github.com/RuCu6]
+#!author=RuCu6[https://github.com/RuCu6], kelv1n1n[https://github.com/kelv1n1n]
 #!tag=去广告
 #!system=
 #!system_version=
 #!loon_version=3.2.4(787)
 #!homepage=https://hub.kelee.one
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Amap.png
-#!date=2025-08-24 16:05:54
+#!date=2025-08-31 07:30:19
 
 [Script]
 http-response ^https:\/\/m5\.amap\.com\/ws\/aos\/perception\/publicTravel\/beforeNavi\? script-path=https://kelee.one/Resource/JavaScript/Amap/Amap_remove_ads.js, requires-body=true, tag=移除路线规划推广
