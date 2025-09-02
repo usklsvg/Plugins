@@ -1,7 +1,48 @@
-<html>
-<head><title>502 Bad Gateway</title></head>
-<body>
-<center><h1>502 Bad Gateway</h1></center>
-<hr><center>nginx/1.29.1</center>
-</body>
-</html>
+name: |-
+  12306去广告
+desc: |-
+  过滤12306应用内广告及开屏广告
+author: |-
+  RuCu6[https://github.com/RuCu6]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/12306.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id564818797
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://hub.kelee.one
+date: |-
+  2025-05-13 15:17:08
+
+rules:
+  - DOMAIN,ad.12306.cn,DIRECT
+
+http:
+
+  mitm:
+    - "ad.12306.cn"
+    - "mobile.12306.cn"
+
+  script:
+    - match: ^https:\/\/ad\.12306\.cn\/ad\/ser\/getAdList$
+      name: "移除12306开屏广告_14"
+      type: request
+      require-body: true
+
+    - match: ^https:\/\/mobile\.12306\.cn\/otsmobile\/app\/mgs\/mgw\.htm$
+      name: "移除12306应用内广告_15"
+      type: request
+
+script-providers:
+  "移除12306开屏广告_14":
+    url: https://kelee.one/Resource/JavaScript/12306/12306_remove_splashscreen_ads.js
+    interval: 86400
+  "移除12306应用内广告_15":
+    url: https://kelee.one/Resource/JavaScript/12306/12306_remove_ads.js
+    interval: 86400
+

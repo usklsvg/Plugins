@@ -1,7 +1,32 @@
-<html>
-<head><title>502 Bad Gateway</title></head>
-<body>
-<center><h1>502 Bad Gateway</h1></center>
-<hr><center>nginx/1.29.1</center>
-</body>
-</html>
+name: |-
+  Dlabel云标签去广告
+desc: |-
+  移除开屏广告及首页横幅。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Dlabel.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id1397719437
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://hub.kelee.one
+date: |-
+  2025-07-22 04:45:08
+
+http:
+
+  mitm:
+    - "dlabel.ctaiot.com"
+
+  url-rewrite:
+    - >-
+      ^https:\/\/dlabel\.ctaiot\.com\/api\/spreadstart\/list\.json\? - reject-dict
+    - >-
+      ^https:\/\/dlabel\.ctaiot\.com\/api\/spread\/journey\/select\.json\? - reject-dict
+

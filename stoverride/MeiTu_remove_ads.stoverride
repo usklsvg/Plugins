@@ -1,7 +1,30 @@
-<html>
-<head><title>502 Bad Gateway</title></head>
-<body>
-<center><h1>502 Bad Gateway</h1></center>
-<hr><center>nginx/1.29.1</center>
-</body>
-</html>
+name: |-
+  美图秀秀去广告
+desc: |-
+  移除开屏广告、横幅推广，精简我的页面。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/MeiTu.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id416048305
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://hub.kelee.one
+date: |-
+  2025-08-31 18:06:06
+
+http:
+
+  mitm:
+    - "api.posters.meitu.com"
+
+  body-rewrite:
+    - >-
+      ^https:\/\/api\.posters\.meitu\.com\/common\/init\.json response-jq delpaths([["data","vip"]])
+

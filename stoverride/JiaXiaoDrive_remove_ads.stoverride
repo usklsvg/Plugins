@@ -1,7 +1,68 @@
-<html>
-<head><title>502 Bad Gateway</title></head>
-<body>
-<center><h1>502 Bad Gateway</h1></center>
-<hr><center>nginx/1.29.1</center>
-</body>
-</html>
+name: |-
+  驾校一点通去广告
+desc: |-
+  移除开屏广告、各页面广告横幅、弹窗广告，移除社区广告。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/JiaXiaoDrive.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id620262310
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://hub.kelee.one
+date: |-
+  2025-05-13 15:17:08
+
+http:
+
+  mitm:
+    - "richmanrules.ksedt.com"
+    - "gouche.ksedt.com"
+    - "muses.ksedt.com"
+    - "op.ksedt.com"
+    - "api.ksedt.com"
+
+  url-rewrite:
+    - >-
+      ^https:\/\/richmanrules\.ksedt\.com\/serverConfig\/3\/adConfig\.json - reject-dict
+    - >-
+      ^https:\/\/gouche\.ksedt\.com\/config\/popup\/info$ - reject-dict
+    - >-
+      ^https:\/\/richmanrules\.ksedt\.com\/intellectWaterfallBidding\/find$ - reject-dict
+    - >-
+      ^https:\/\/op\.ksedt\.com\/jxedtLive\/liveIntroduceResource - reject-dict
+    - >-
+      ^https:\/\/richmanrules\.ksedt\.com\/intellectWaterfall\/find$ - reject-dict
+
+  body-rewrite:
+    - >-
+      http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ response-jq delpaths([["result","homead"]])
+    - >-
+      http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ response-jq delpaths([["result","h5_promotion_page"]])
+    - >-
+      http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ response-jq delpaths([["result","advert_interval"]])
+    - >-
+      http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ response-jq delpaths([["result","abtest_h5url"]])
+    - >-
+      http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ response-jq delpaths([["result","launchApp"]])
+    - >-
+      http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ response-jq delpaths([["result","goucheConfig"]])
+    - >-
+      http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ response-jq delpaths([["result","gouche"]])
+    - >-
+      http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ response-jq delpaths([["result","mainLiveConfig"]])
+    - >-
+      http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ response-jq delpaths([["result","discover"]])
+    - >-
+      http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ response-jq delpaths([["result","adSdkSwitch4testPointVideo"]])
+    - >-
+      http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ response-jq delpaths([["result","adSdkSwitch4simulationExam"]])
+    - >-
+      http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ response-jq delpaths([["result","examPageLoadADSwitch"]])
+

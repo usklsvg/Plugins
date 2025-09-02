@@ -1,7 +1,39 @@
-<html>
-<head><title>502 Bad Gateway</title></head>
-<body>
-<center><h1>502 Bad Gateway</h1></center>
-<hr><center>nginx/1.29.1</center>
-</body>
-</html>
+name: |-
+  智联招聘去广告
+desc: |-
+  移除开屏广告、弹窗、职位页面推广和各类横幅推广。此插件需要IPA签名方可使用，App Store用户请勿使用此插件，务必点击下方主页链接查看详细教程。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/ZhiLianZhaoPin.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id488033535
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://getupnote.com/share/notes/zSn1ShBmzNYISKcTgjXE5oHMrNf2/34bf3aad-7872-497d-b239-198e27e8c84c
+date: |-
+  2025-05-13 15:17:08
+
+http:
+
+  mitm:
+    - "ask.zhaopin.com"
+    - "cgate.zhaopin.com"
+
+  url-rewrite:
+    - >-
+      ^https:\/\/(ask|cgate)\.zhaopin\.com\/operation\/ad\/ - reject
+    - >-
+      ^https:\/\/cgate\.zhaopin\.com\/resumeapi\/resumeCheck\/positionDetailBottomTipCheck$ - reject-dict
+    - >-
+      ^https:\/\/cgate\.zhaopin\.com\/bdp\/commercial\/queryLinkData$ - reject
+
+  body-rewrite:
+    - >-
+      ^https:\/\/ask\.zhaopin\.com\/plat-zqa-server\/home\/\d\.\d\.\d\/getHomeContents\? response-jq delpaths([["data","templates",0,"data","banner"]])
+

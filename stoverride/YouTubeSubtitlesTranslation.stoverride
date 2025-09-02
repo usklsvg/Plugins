@@ -1,7 +1,128 @@
-<html>
-<head><title>502 Bad Gateway</title></head>
-<body>
-<center><h1>502 Bad Gateway</h1></center>
-<hr><center>nginx/1.29.1</center>
-</body>
-</html>
+name: |-
+  YouTube双语翻译
+desc: |-
+  字幕增强及双语翻译，支持Youtube Music歌词翻译。此插件需要置于YouTube去广告插件之下，且和YouTube去广告插件的歌词翻译冲突，不支持tvOS设备。
+author: |-
+  VirgilClyne[https://github.com/VirgilClyne]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/YouTube.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id544007664
+tag: |-
+  功能增强
+system_version: |-
+  15
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://hub.kelee.one
+date: |-
+  2025-05-13 15:17:08
+
+http:
+
+  mitm:
+    - "www.youtube.com"
+    - "m.youtube.com"
+    - "tv.youtube.com"
+    - "music.youtube.com"
+    - "youtubei.googleapis.com"
+
+  script:
+    - match: ^https?:\/\/(www|m|tv)\.youtube\.com\/youtubei\/v1\/player\?(.*)
+      name: "JSON·YouTube播放器请求_17"
+      type: request
+      require-body: true
+      argument: |-
+        [ "Official", true, true, "Forward"]
+
+    - match: ^https?:\/\/(www|m|tv)\.youtube\.com\/youtubei\/v1\/player\?(.*)
+      name: "JSON·YouTube播放器响应_18"
+      type: response
+      require-body: true
+      argument: |-
+        [ "Official", true, true, "Forward"]
+
+    - match: ^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/player\?(.*)
+      name: "JSON·YouTube播放器请求_17"
+      type: request
+      require-body: true
+      binary-mode: true
+      argument: |-
+        [ "Official", true, true, "Forward"]
+
+    - match: ^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/player\?(.*)
+      name: "JSON·YouTube播放器响应_18"
+      type: response
+      require-body: true
+      binary-mode: true
+      argument: |-
+        [ "Official", true, true, "Forward"]
+
+    - match: ^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/get_watch\?(.*)
+      name: "JSON·YouTube播放器响应_18"
+      type: response
+      require-body: true
+      binary-mode: true
+      argument: |-
+        [ "Official", true, true, "Forward"]
+
+    - match: ^https?:\/\/(www|m)\.youtube\.com\/api\/timedtext\?(.*)
+      name: "JSON·YouTube播放器请求_17"
+      type: request
+      require-body: false
+      argument: |-
+        [ "Official", true, true, "Forward"]
+
+    - match: ^https?:\/\/(www|m)\.youtube\.com\/api\/timedtext\?(.*)subtype=(Official|External)
+      name: "YouTube合成定时文本响应_23"
+      type: response
+      require-body: true
+
+    - match: ^https?:\/\/(www|m)\.youtube\.com\/api\/timedtext\?(.*)subtype=Translate
+      name: "YouTube翻译定时文本响应_24"
+      type: response
+      require-body: true
+
+    - match: ^https?:\/\/music\.youtube\.com\/youtubei\/v1\/browse\?(.*)
+      name: "JSON·YouTube播放器请求_17"
+      type: request
+      require-body: true
+      argument: |-
+        [ "Official", true, true, "Forward"]
+
+    - match: ^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/browse\?(.*)
+      name: "JSON·YouTube播放器请求_17"
+      type: request
+      require-body: true
+      binary-mode: true
+      argument: |-
+        [ "Official", true, true, "Forward"]
+
+    - match: ^https?:\/\/music\.youtube\.com\/youtubei\/v1\/browse\?(.*)subtype=Translate
+      name: "YouTube翻译定时文本响应_24"
+      type: response
+      require-body: true
+
+    - match: ^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/browse\?(.*)subtype=Translate
+      name: "YouTube翻译定时文本响应_24"
+      type: response
+      require-body: true
+      binary-mode: true
+
+script-providers:
+  "JSON·YouTube播放器请求_17":
+    url: https://kelee.one/Resource/JavaScript/YouTube/YouTube_Subtitles_Translate/YouTube_Subtitles_request.js
+    interval: 86400
+  "JSON·YouTube播放器响应_18":
+    url: https://kelee.one/Resource/JavaScript/YouTube/YouTube_Subtitles_Translate/YouTube_Subtitles_response.js
+    interval: 86400
+  "YouTube合成定时文本响应_23":
+    url: https://kelee.one/Resource/JavaScript/YouTube/YouTube_Subtitles_Translate/YouTube_Composite_Subtitles_response.js
+    interval: 86400
+  "YouTube翻译定时文本响应_24":
+    url: https://kelee.one/Resource/JavaScript/YouTube/YouTube_Subtitles_Translate/YouTube_Subtitles_Translate_response.js
+    interval: 86400
+
