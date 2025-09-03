@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://hub.kelee.one
 date: |-
-  2025-07-29 19:10:57
+  2025-09-03 01:29:26
 
 rules:
   - AND,((URL-REGEX,"^http:\/\/.+\/amdc\/mobileDispatch"),(USER-AGENT,"%E9%97%B2%E9%B1%BC*")),REJECT
@@ -73,4 +73,6 @@ http:
       ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlemtopsearch\.search\.discover\/ response-jq .data.resultList |= map(select(.type != "MarketHotSpot"))
     - >-
       ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlemtopsearch\.item\.search\.activate\/ response-jq .data.cardList |= map(if has("cardData") and (.cardData | has("hotwords")) then .cardData |= del(.hotwords) else . end)
+    - >-
+      ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.trade\.full\.info\/ response-jq .data.components |= map(select(.render | . == "orderStatusVO" or . == "addressInfoVO" or . == "orderInfoVO"))
 
