@@ -7,8 +7,8 @@
 #!tag=去广告
 #!homepage=https://hub.kelee.one
 #!date=2025-08-28 23:53:54
-#!arguments=动态最常访问:auto,移除评论区置顶广告:1,空降助手:0,日志等级:off
-#!arguments-desc=动态最常访问: [show, hide, auto]\n- show: 始终显示\n- hide: 始终隐藏\n- auto: 仅当列表中存在直播状态时显示\n\n移除评论区置顶广告: [1, 0]\n- 1: 开启\n- 0: 关闭\n\n空降助手: [1, 0]\n- 1: 开启\n- 0: 关闭\n\日志等级: [off, error, warn, info, debug]
+#!arguments=动态最常访问:auto,移除评论区置顶广告:1,空降助手:0,日志等级:"off"
+#!arguments-desc=动态最常访问: [show, hide, auto]\n- show: 始终显示\n- hide: 始终隐藏\n- auto: 仅当列表中存在直播状态时显示\n\n移除评论区置顶广告: [1, 0]\n- 1: 开启\n- 0: 关闭\n\n日志等级: ["off", "error", "warn", "info", "debug"]
 
 [Rule]
 DOMAIN,api.biliapi.com,REJECT,extended-matching,pre-matching
