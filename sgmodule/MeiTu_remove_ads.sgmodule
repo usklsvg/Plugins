@@ -8,6 +8,9 @@
 #!homepage=https://hub.kelee.one
 #!date=2025-08-31 18:06:06
 
+[Rule]
+DOMAIN,adui.tg.meitu.com,REJECT,extended-matching,pre-matching
+
 [Body Rewrite]
 http-response-jq ^https:\/\/api\.posters\.meitu\.com\/common\/init\.json 'delpaths([["data","vip"]])'
 
