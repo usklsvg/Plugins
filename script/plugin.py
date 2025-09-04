@@ -14,9 +14,7 @@ extern_dir = os.path.join(current_dir, "extern", "ProxyResource")
 extern_plugin_dir = os.path.join(extern_dir, "plugin")
 extern_script_dir = os.path.join(extern_dir, "script")
 extern_jq_dir = os.path.join(extern_dir, "jq")
-plugin_raw_dir = os.path.join(current_dir, "plugin", "raw")
-plugin_no_script_dir = os.path.join(current_dir, "plugin", "no_script")
-plugin_only_script_dir = os.path.join(current_dir, "plugin", "only_script")
+plugin_dir = os.path.join(current_dir, "plugin")
 
 
 def get_url_text_content(url: str):
@@ -238,7 +236,7 @@ def colllect_files():
             continue
 
         plugin_name = plugin_url.split("/")[-1]
-        plugin_name = plugin_name[: plugin_name.rfind(".")] + ".plugin"
+        plugin_name = plugin_name[: plugin_name.rfind(".")] + ".lpx"
         plugin_filename = os.path.join(extern_plugin_dir, plugin_name)
         download_url_file(plugin_url, plugin_filename)
         if not os.path.exists(plugin_filename):
@@ -349,42 +347,11 @@ def process_file(filename: str):
     elif filename.endswith("Zhihu_remove_ads.plugin"):
         lines = modify_content_zhihu(lines)
 
-    data: dict[str, str] = {}
-    for key, sub_data in extract_components(lines).items():
-        str_tmp = f"{key}\n" if key != "title" else ""
-        for line in sub_data:
-            str_tmp = str_tmp + line
-        data[key] = str_tmp
-
     content_raw = ""
-    for key in data:
-        content_raw += f"{data[key]}"
-    output_filename_raw = os.path.join(plugin_raw_dir, filename)
+    for line in lines:
+        content_raw += f"{line}"
+    output_filename_raw = os.path.join(plugin_dir, filename)
     save_content(content_raw, output_filename_raw)
-
-    has_content = False
-    content_without_script = data["title"]
-    for key in data:
-        if key == "title" or str(key).lower() == "[script]":
-            continue
-        elif str(key).lower() != "[argument]" and str(key).lower() != "[mitm]":
-            has_content = True
-        content_without_script += f"{data[key]}"
-    if has_content:
-        output_filename_without_scripts = os.path.join(plugin_no_script_dir, filename)
-        save_content(content_without_script, output_filename_without_scripts)
-
-    has_script = False
-    content_scripts = data["title"]
-    for key in data:
-        if str(key).lower() == "[script]":
-            has_script = True
-            content_scripts += f"{data[key]}"
-        elif str(key).lower() == "[argument]" or str(key).lower() == "[mitm]":
-            content_scripts += f"{data[key]}"
-    if has_script:
-        output_filename_scripts = os.path.join(plugin_only_script_dir, filename)
-        save_content(content_scripts, output_filename_scripts)
 
 
 ###############################################################################
@@ -598,7 +565,7 @@ def create_dns_plugin():
     for keyword in rules_ms.domain_keywords:
         content_plugin = f"{content_plugin}*{keyword}* = server:system\n"
 
-    module_path = os.path.join(current_dir, "plugin", "raw", "Enhanced_DNS.plugin")
+    module_path = os.path.join(plugin_dir, "Enhanced_DNS.plugin")
     with open(module_path, "w", encoding="utf-8") as f:
         f.write(content_plugin)
 
@@ -608,9 +575,7 @@ if __name__ == "__main__":
     recreate_path(extern_jq_dir)
     filenames = colllect_files()
 
-    recreate_path(plugin_raw_dir)
-    recreate_path(plugin_no_script_dir)
-    recreate_path(plugin_only_script_dir)
+    recreate_path(plugin_dir)
     for filename in filenames:
         process_file(filename)
     create_dns_plugin()
