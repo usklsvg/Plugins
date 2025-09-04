@@ -30,10 +30,10 @@ IP-CIDR6, 2402:4e00:1200:ed00:0:9089:6dac:96b6/128, REJECT, no-resolve
 ^https:\/\/api\.zhihu\.com\/(?:bazaar\/float_window|market\/popovers_v2) reject-dict
 ^https:\/\/api\.zhihu\.com\/bazaar\/vip_tab\/header\? response-body-json-del activity_banner activity_window vip_tip
 
-^https:\/\/api\.zhihu\.com\/me\/guides reject-dict
-^https:\/\/api\.zhihu\.com\/people\/homepage_entry_v2 reject-dict
-^https:\/\/api\.zhihu\.com\/unlimited\/go\/my_card reject
-^https:\/\/www\.zhihu\.com\/appview\/v3\/zhmore reject
+# ^https:\/\/api\.zhihu\.com\/me\/guides reject-dict
+# ^https:\/\/api\.zhihu\.com\/people\/homepage_entry_v2 reject-dict
+# ^https:\/\/api\.zhihu\.com\/unlimited\/go\/my_card reject
+# ^https:\/\/www\.zhihu\.com\/appview\/v3\/zhmore reject
 
 ^https:\/\/api\.zhihu\.com\/search\/(hot_search|preset_words) reject-dict
 ^https:\/\/api\.zhihu\.com\/search\/recommend_query\/v2\? response-body-replace-regex "recommend_queries":\{.+\} "recommend_queries":{}
@@ -63,7 +63,7 @@ http-response ^https:\/\/api\.zhihu\.com\/feed\/render\/tab\/config\? script-pat
 http-response ^https:\/\/api\.zhihu\.com\/(?:moments_v3|topstory\/hot-lists\/total|topstory\/recommend) script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true, tag=移除推荐信息流推广
 http-response ^https:\/\/api\.zhihu\.com\/root\/tab script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true, tag=精简顶部标签
 http-response ^https:\/\/api\.zhihu\.com\/v2\/topstory\/hot-lists\/everyone-seeing\? script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true, tag=移除热榜信息流推广
-http-response ^https:\/\/api\.zhihu\.com\/next-(?:bff|data|render) script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true, tag=移除下一个回答推广、评论区顶部推广
+http-response ^https:\/\/api\.zhihu\.com\/next-(?:bff|data|render(?!.*sub_scenes=billboard_weekly)) script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true, tag=移除下一个回答推广、评论区顶部推广
 http-response ^https:\/\/www\.zhihu\.com\/api\/v4\/(?:articles|answers)\/\d+\/recommendations?\? script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true, tag=移除回答详情页推广
 http-response ^https:\/\/appcloud2\.zhihu\.com\/v3\/config script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true, tag=拦截服务器推送配置 config
 http-response ^https:\/\/m-cloud\.zhihu\.com\/api\/cloud\/zhihu\/config\/all\? script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true, tag=拦截服务器推送配置 config all

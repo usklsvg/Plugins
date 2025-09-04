@@ -342,9 +342,9 @@ def process_file(filename: str):
         return
 
     filename = (filename.split("/")[-1]).split("\\")[-1]
-    if filename.endswith("Bilibili_remove_ads.plugin"):
+    if filename.endswith("Bilibili_remove_ads.lpx"):
         lines = modify_content_bilibili(lines)
-    elif filename.endswith("Zhihu_remove_ads.plugin"):
+    elif filename.endswith("Zhihu_remove_ads.lpx"):
         lines = modify_content_zhihu(lines)
 
     content_raw = ""
@@ -565,7 +565,7 @@ def create_dns_plugin():
     for keyword in rules_ms.domain_keywords:
         content_plugin = f"{content_plugin}*{keyword}* = server:system\n"
 
-    module_path = os.path.join(plugin_dir, "Enhanced_DNS.plugin")
+    module_path = os.path.join(plugin_dir, "Enhanced_DNS.lpx")
     with open(module_path, "w", encoding="utf-8") as f:
         f.write(content_plugin)
 
