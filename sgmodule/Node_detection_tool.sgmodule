@@ -1,0 +1,18 @@
+#!name=节点检测工具
+#!desc=节点检测工具，可进行地理位置、节点解锁、入口落地等查询。
+#!author=xream[https://github.com/xream], Keywos[https://github.com/Keywos], KOP-XIAO[https://github.com/KOP-XIAO], dcpengx[https://github.com/dcpengx]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/Other_icon/120px/Node_detection_tool.png
+#!category=iKeLee
+#!tag=节点检测
+#!homepage=https://hub.kelee.one
+#!date=2025-06-10 23:31:23
+
+[Panel]
+入口落地查询 = script-name=入口落地查询, title="入口落地查询", content="请刷新面板"
+地理位置查询 = script-name=地理位置查询, title="地理位置查询", content="请刷新面板"
+节点解锁查询 = script-name=节点解锁查询, title="节点解锁查询", content="请刷新面板"
+
+[Script]
+入口落地查询 = type=generic, script-path=https://kelee.one/Resource/JavaScript/Node_detection_tool/NetworkEntryAndExitQueries.js, script-update-interval=-1
+地理位置查询 = type=generic, script-path=https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/LocationDetection.js, script-update-interval=-1
+节点解锁查询 = type=generic, script-path=https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/NodeUnlockDetection.js, script-update-interval=-1

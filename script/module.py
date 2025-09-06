@@ -1,9 +1,10 @@
 import os
 import requests
 import shutil
+from tqdm import tqdm
 
 
-current_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+current_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)))
 plugin_all_dir = os.path.join(current_dir, "extern", "ProxyResource", "plugin")
 
 
@@ -122,78 +123,6 @@ def modify_content_common(content: str, file_ext: str):
         )
     ]
 
-    if "[Script]" in data:
-        arguments: set[str] = set([])
-        for i, line in enumerate(data["[Script]"]):
-            if line.startswith("#") or line.find("script-path") == -1:
-                continue
-            if file_ext == "sgmodule":
-                line = line.strip()
-                arg_pos_begin = line.find("argument=")
-                if arg_pos_begin != -1:
-                    arg_pos_end = line.find("}]", arg_pos_begin)
-                    if arg_pos_end != -1:
-                        arg_pos_end += 2
-                        args = line[arg_pos_begin + 11 : arg_pos_end - 1]
-                        pos_temp = line[:arg_pos_begin].rfind(",")
-                        if arg_pos_end < len(line) and line[arg_pos_end] == '"':
-                            arg_pos_end += 1
-                        line = line[:pos_temp] + line[arg_pos_end:] + ", argument="
-                        args = [item.strip()[1:-1] for item in args.split(",")]
-                        for arg_idx in range(0, len(args)):
-                            arguments.add(args[arg_idx])
-                            if arg_idx > 0:
-                                line = f"{line}&"
-                            line = (
-                                f'{line}{args[arg_idx]}="{{{{{{{args[arg_idx]}}}}}}}"'
-                            )
-                data["[Script]"][i] = f"{line}, script-update-interval=-1\n"
-
-        if len(arguments) > 0:
-            arg_exist = False
-            for line in data["title"]:
-                if line.startswith("#!arguments"):
-                    arg_exist = True
-                    break
-            if not arg_exist:
-                line_arg = "#!arguments="
-                for i, arg in enumerate(sorted(list(arguments))):
-                    if i == 0:
-                        line_arg += arg
-                    else:
-                        line_arg += f", {arg}"
-                line_arg += "\n"
-                for i, line in enumerate(data["title"]):
-                    if (
-                        i == len(data["title"]) - 1
-                        or len(data["title"][i + 1].strip()) == 0
-                    ):
-                        data["title"][i] = line + line_arg
-                        break
-
-    ret = ""
-    for key, sub_data in data.items():
-        str_tmp = f"{key}\n" if key != "title" else ""
-        for line in sub_data:
-            str_tmp = str_tmp + line
-        ret = ret + str_tmp
-
-    return ret
-
-
-def modify_content_bilibili(content: str):
-    lines = content.splitlines()
-    data = extract_components(lines)
-
-    data["title"] = [
-        item
-        for item in data["title"]
-        if (
-            item.find("system=") == -1
-            and item.find("system_version=") == -1
-            and item.find("loon_version=") == -1
-        )
-    ]
     if "[Body Rewrite]" in data:
         for i, line in enumerate(data["[Body Rewrite]"]):
             if line.startswith("http-response-jq #"):
@@ -205,33 +134,9 @@ def modify_content_bilibili(content: str):
         for i, line in enumerate(data["[Script]"]):
             if line.startswith("#") or line.find("script-path") == -1:
                 continue
-            line = line.strip()
-            arg_pos_begin = line.find("argument=")
-            if (
-                arg_pos_begin != -1
-                and line.find("Bilibili_proto_response_kokoryh") != -1
-            ):
-                arg_pos_end = line.find("}]", arg_pos_begin)
-                if arg_pos_end != -1:
-                    arg_pos_end += 2
-                    pos_temp = line[:arg_pos_begin].rfind(",")
-                    if arg_pos_end < len(line) and line[arg_pos_end] == '"':
-                        arg_pos_end += 1
-                    line = (
-                        line[:pos_temp]
-                        + line[arg_pos_end:]
-                        + ', argument="{"showUpList":"{{{动态最常访问}}}","filterTopReplies":{{{过滤置顶评论广告}}}","airborne":{{{空降助手}}}","logLevel":{{{日志等级}}}}"'
-                    )
-            data["[Script]"][i] = f"{line}, script-update-interval=-1\n"
-
-    line_arg = (
-        "#!arguments=动态最常访问:auto,过滤置顶评论广告:1,空降助手:false,日志等级:off\n"
-    )
-    line_arg += "#!arguments-desc=动态最常访问: [true, false, auto]\\n- true: 始终显示\\n- false: 始终隐藏\\n- auto: 仅当列表中存在直播状态时显示\\n\\n过滤置顶评论广告: [1, 0]\\n- 1: 开启\\n- 0: 关闭\\n\\n空降助手: [false, true]\\n- 1: 开启\\n- 0: 关闭\\n\\n日志等级: [off, error, warn, info, debug]\n"
-    for i, line in enumerate(data["title"]):
-        if i == len(data["title"]) - 1 or len(data["title"][i + 1].strip()) == 0:
-            data["title"][i] = line + line_arg
-            break
+            if file_ext == "sgmodule":
+                line = line.strip()
+                data["[Script]"][i] = f"{line}, script-update-interval=-1\n"
 
     ret = ""
     for key, sub_data in data.items():
@@ -260,21 +165,57 @@ def modify_content_taobao(content: str):
     return ret
 
 
-def modify_content_zhihu(content: str):
+def modify_content_bilibili(content: str):
     lines = content.splitlines()
-    i = 0
-    while i < len(lines):
-        lines[i] = lines[i].replace(
-            "https://kelee.one/Resource/Script/Zhihu/Zhihu_remove_ads.js",
-            "https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/Zhihu_remove_ads.js",
+    data = extract_components(lines)
+
+    for i, line in enumerate(data["title"]):
+        if line.startswith("#!arguments"):
+            data["title"][
+                i
+            ] = '#!arguments=动态最常访问:show,移除评论区置顶广告:1,空降助手:0,日志等级:"off"\n'
+            data["title"][
+                i
+            ] += "#!arguments-desc=动态最常访问: [show, hide, auto]\\n- show: 始终显示\\n- hide: 始终隐藏\\n- auto: 仅当列表中存在直播状态时显示"
+            data["title"][
+                i
+            ] += "\\n\\n移除评论区置顶广告: [1, 0]\\n- 1: 开启\\n- 0: 关闭"
+            # data["title"][i] += "\\n\\n空降助手: [1, 0]\\n- 1: 开启\\n- 0: 关闭"
+            data["title"][
+                i
+            ] += '\\n\\n日志等级: ["off", "error", "warn", "info", "debug"]\n'
+
+    for i, line in enumerate(data["[Script]"]):
+        if line.startswith("#") or line.find("script-path") == -1:
+            continue
+        if line.find("Bilibili_proto_request_kokoryh") != -1:
+            data["[Script]"][i] = f"# {data["[Script]"][i]}"
+            continue
+        line = line.strip()
+        arg_pos_begin = line.find("argument=")
+        if arg_pos_begin == -1:
+            continue
+        arg_pos_end = line.find("}]", arg_pos_begin)
+        if arg_pos_end == -1:
+            continue
+        arg_pos_end += 2
+        pos_temp = line[:arg_pos_begin].rfind(",")
+        if arg_pos_end < len(line) and line[arg_pos_end] == '"':
+            arg_pos_end += 1
+        line = (
+            line[:pos_temp]
+            + line[arg_pos_end:]
+            + ', argument="{"showUpList":"{{{动态最常访问}}}","purifyTopReplies":{{{移除评论区置顶广告}}},"airborne":0,"logLevel":{{{日志等级}}}}"'
         )
-        i += 1
+        data["[Script]"][i] = f"{line}\n"
 
     ret = ""
-    i = 0
-    while i < len(lines):
-        ret += f"{lines[i]}\n"
-        i += 1
+    for key, sub_data in data.items():
+        str_tmp = f"{key}\n" if key != "title" else ""
+        for line in sub_data:
+            str_tmp = str_tmp + line
+        ret = ret + str_tmp
+
     return ret
 
 
@@ -293,15 +234,12 @@ def process_file(
     content = get_url_text_content(request_url)
     if len(content.strip()) != 0:
         if file_ext == "sgmodule":
-            if filename == "Bilibili_remove_ads.plugin":
-                content = modify_content_bilibili(content)
-            else:
-                content = modify_content_common(content, file_ext)
+            content = modify_content_common(content, file_ext)
 
-            if filename == "Taobao_remove_ads.plugin":
+            if filename.find("Taobao_remove_ads.") != -1:
                 content = modify_content_taobao(content)
-            if filename == "Zhihu_remove_ads.plugin":
-                content = modify_content_zhihu(content)
+            if filename.find("Bilibili_remove_ads.") != -1:
+                content = modify_content_bilibili(content)
 
             if len(content.strip()) != 0:
                 save_content(
@@ -327,11 +265,37 @@ if __name__ == "__main__":
     for file_ext in ["sgmodule", "stoverride"]:
         dst_dir = os.path.join(current_dir, file_ext)
         recreate_path(dst_dir)
-        for filename in os.listdir(plugin_all_dir):
+        for filename in tqdm(os.listdir(plugin_all_dir)):
             process_file(
                 filename,
                 file_ext,
                 dst_dir=dst_dir,
-                url_dir="plugin/raw",
+                url_dir="plugin",
                 categoty="iKeLee",
             )
+        if file_ext == "sgmodule":
+            with open(
+                os.path.join(dst_dir, "Node_detection_tool.sgmodule"),
+                mode="w",
+                encoding="utf-8",
+            ) as f:
+                f.write(
+                    """#!name=节点检测工具
+#!desc=节点检测工具，可进行地理位置、节点解锁、入口落地等查询。
+#!author=xream[https://github.com/xream], Keywos[https://github.com/Keywos], KOP-XIAO[https://github.com/KOP-XIAO], dcpengx[https://github.com/dcpengx]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/Other_icon/120px/Node_detection_tool.png
+#!category=iKeLee
+#!tag=节点检测
+#!homepage=https://hub.kelee.one
+#!date=2025-06-10 23:31:23
+
+[Panel]
+入口落地查询 = script-name=入口落地查询, title="入口落地查询", content="请刷新面板"
+地理位置查询 = script-name=地理位置查询, title="地理位置查询", content="请刷新面板"
+节点解锁查询 = script-name=节点解锁查询, title="节点解锁查询", content="请刷新面板"
+
+[Script]
+入口落地查询 = type=generic, script-path=https://kelee.one/Resource/JavaScript/Node_detection_tool/NetworkEntryAndExitQueries.js, script-update-interval=-1
+地理位置查询 = type=generic, script-path=https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/LocationDetection.js, script-update-interval=-1
+节点解锁查询 = type=generic, script-path=https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/NodeUnlockDetection.js, script-update-interval=-1"""
+                )
