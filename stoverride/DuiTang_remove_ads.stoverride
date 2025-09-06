@@ -25,6 +25,14 @@ http:
     - "api.duitang.com"
     - "www.duitang.com"
 
+  url-rewrite:
+    - >-
+      ^https:\/\/(www|api)\.duitang\.com\/napi\/(ad|ads)\/ - reject-dict
+    - >-
+      ^https:\/\/api\.duitang\.com\/napi\/infra\/settings\/ - reject-dict
+    - >-
+      ^https:\/\/api\.duitang\.com\/napi\/vienna\/daren\/daren\/recommend\/ - reject-dict
+
   body-rewrite:
     - >-
       ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ response-jq delpaths([["data","REWARD_AD_PLACES"]])

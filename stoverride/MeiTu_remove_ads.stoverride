@@ -19,6 +19,9 @@ homepage: |-
 date: |-
   2025-08-31 18:06:06
 
+rules:
+  - DOMAIN,adui.tg.meitu.com,REJECT
+
 http:
 
   mitm:
