@@ -153,7 +153,7 @@ def modify_content_taobao(content: str):
     i = 0
     while i < len(lines):
         lines[i] = lines[i].replace(
-            "https://kelee.one/Resource/Script/Taobao/Taobao_remove_ads.js",
+            "https://kelee.one/Resource/JavaScript/Taobao/Taobao_remove_ads.js",
             "https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/script/Taobao_remove_ads.js",
         )
         i += 1
