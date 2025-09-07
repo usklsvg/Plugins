@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://hub.kelee.one
 date: |-
-  2025-05-23 13:32:55
+  2025-09-07 18:09:57
 
 rules:
   - DOMAIN,kad.gotokeep.com,REJECT
@@ -134,4 +134,6 @@ http:
       ^https:\/\/api\.gotokeep\.com\/twins\/v4\/feed\/entryDetail\? response-jq if (getpath([]) | has("data")) then (setpath(["data"]; {})) else . end
     - >-
       ^https:\/\/api\.gotokeep\.com\/config\/v3\/basic\? response-jq .data.bottomBarControl.tabs |= map(select(.tabType | . == "home" or . == "dynamic_sports" or . == "personal")) | .data.homeTabs |= map(select(.type | . == "socialTab" or . == "union_feed_all" or . == "homeRecommend" or . == "suitTab" or . == "union_feed_route"))
+    - >-
+      ^https:\/\/api\.gotokeep\.com\/pencil-webapp\/play\/v1\/games\? response-jq .data.games[].microGames[] |= if .leftIcon? and .leftIcon.type == "aiMode" then del(.leftIcon) else . end
 
