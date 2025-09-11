@@ -21,11 +21,13 @@ loon_version: |-
 homepage: |-
   https://hub.kelee.one
 date: |-
-  2025-09-05 22:07:11
+  2025-09-11 15:47:00
 
 rules:
   - DOMAIN,weather-analytics-events.apple.com,REJECT
+  - DOMAIN,tether.edge.apple,REJECT
   - DOMAIN-SUFFIX,tthr.apple.com,REJECT
+  - AND,((OR,((IP-CIDR,17.0.0.0/8,no-resolve),(IP-CIDR6,2620:149::/32,no-resolve))),(PROTOCOL,QUIC)),REJECT
 
 http:
 
@@ -34,20 +36,20 @@ http:
 
   script:
     - match: ^https?:\/\/weatherkit\.apple\.com\/api\/v1\/availability\/
-      name: "Availability响应处理_30"
+      name: "Availability响应处理_32"
       type: response
       require-body: true
       argument: |-
         [ "airQuality, "WeatherKit", "ColorfulClouds", "ColorfulClouds", "QWeather", "Auto", "HJ6332012", "EPA_NowCast", false, "", "devapi.qweather.com", "", "", "WARN"]
 
     - match: ^https?:\/\/weatherkit\.apple\.com\/api\/v2\/weather\/
-      name: "Weather请求处理_31"
+      name: "Weather请求处理_33"
       type: request
       argument: |-
         [ "airQuality, "WeatherKit", "ColorfulClouds", "ColorfulClouds", "QWeather", "Auto", "HJ6332012", "EPA_NowCast", false, "", "devapi.qweather.com", "", "", "WARN"]
 
     - match: ^https?:\/\/weatherkit\.apple\.com\/api\/v2\/weather\/
-      name: "Availability响应处理_30"
+      name: "Availability响应处理_32"
       type: response
       require-body: true
       binary-mode: true
@@ -55,10 +57,10 @@ http:
         [ "airQuality, "WeatherKit", "ColorfulClouds", "ColorfulClouds", "QWeather", "Auto", "HJ6332012", "EPA_NowCast", false, "", "devapi.qweather.com", "", "", "WARN"]
 
 script-providers:
-  "Availability响应处理_30":
-    url: https://github.com/NSRingo/WeatherKit/releases/download/v2.0.3/response.bundle.js
+  "Availability响应处理_32":
+    url: https://github.com/NSRingo/WeatherKit/releases/download/v2.0.6/response.bundle.js
     interval: 86400
-  "Weather请求处理_31":
-    url: https://github.com/NSRingo/WeatherKit/releases/download/v2.0.3/request.bundle.js
+  "Weather请求处理_33":
+    url: https://github.com/NSRingo/WeatherKit/releases/download/v2.0.6/request.bundle.js
     interval: 86400
 
