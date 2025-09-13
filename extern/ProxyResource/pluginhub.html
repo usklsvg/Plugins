@@ -17,29 +17,51 @@
     <!-- Web App Manifest -->
     <link rel="manifest" href="./manifest.json">
     
-    <!-- 添加下拉刷新库 -->
-    <script src="https://cdn.jsdelivr.net/npm/pulltorefreshjs@0.1.22/dist/index.umd.min.js"></script>
+  
     <style>
-        /* CSS变量定义 */
+        /* CSS变量定义 - 优化后的设计系统 */
         :root {
-            /* 浅色模式 */
+            /* 颜色系统 - 浅色模式 */
             --bg-color: #f5f5f7;
             --text-color: #1d1d1f;
             --text-secondary: #6e6e73;
             --text-tertiary: #8e8e93;
             --card-bg: #fff;
             --border-color: #e5e5ea;
-            --shadow-light: rgba(0, 0, 0, 0.05);
-            --shadow-medium: rgba(0, 0, 0, 0.1);
-            --shadow-heavy: rgba(0, 0, 0, 0.2);
+            --accent-color: #007aff;
+            --accent-hover: #0062cc;
+            
+            /* 背景色系统 */
             --announcement-bg: #FFF9DE;
             --loading-bg: #f0f0f0;
             --loading-bg-alt: #e0e0e0;
             --filter-bg: #f2f2f7;
             --filter-hover: #e5e5ea;
-            --accent-color: #007aff;
-            --accent-hover: #0062cc;
             --icon-bg: #f5f5f5;
+            
+            /* 阴影系统 */
+            --shadow-light: rgba(0, 0, 0, 0.05);
+            --shadow-medium: rgba(0, 0, 0, 0.1);
+            --shadow-heavy: rgba(0, 0, 0, 0.2);
+            --shadow-card: 0 2px 8px var(--shadow-light);
+            --shadow-hover: 0 4px 16px var(--shadow-medium);
+            
+            /* 尺寸系统 */
+            --border-radius-sm: 8px;
+            --border-radius-md: 10px;
+            --border-radius-lg: 12px;
+            --border-radius-xl: 14px;
+            --border-radius-round: 50%;
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 12px;
+            --spacing-lg: 16px;
+            --spacing-xl: 24px;
+            
+            /* 动画系统 */
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
         }
 
         /* 深色模式变量 */
@@ -83,14 +105,13 @@
             -webkit-user-select: none;
         }
         
-        /* 允许特定元素文本选择 */
+        /* 文本选择和触摸控制 */
         input, textarea, [contenteditable] {
             user-select: text !important;
             -webkit-user-select: text !important;
             touch-action: manipulation !important;
         }
         
-        /* 轮播图区域允许水平滑动 */
         .banner-container, .banner-wrapper {
             touch-action: pan-x pan-y !important;
         }
@@ -133,13 +154,25 @@
             box-sizing: border-box;
         }
 
+        /* 通用卡片样式 */
+        .card-base {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-card);
+            transition: var(--transition-normal);
+        }
+        
+        .card-base:hover {
+            box-shadow: var(--shadow-hover);
+        }
+        
         /* 轮播图样式 */
         .banner-container {
             width: 100%;
             overflow: hidden;
             position: relative;
-            border-radius: 12px;
-            margin: 20px 0;
+            border-radius: var(--border-radius-lg);
+            margin: var(--spacing-lg) 0;
             box-shadow: 0 4px 12px var(--shadow-medium);
             min-height: 120px;
         }
@@ -160,7 +193,7 @@
             width: 100%;
             height: auto;
             display: block;
-            transition: opacity 0.3s ease;
+            transition: opacity var(--transition-fast);
         }
         
         .banner-slide img[src*="data:image/svg+xml"] {
@@ -194,16 +227,39 @@
         .banner-dot {
             width: 8px;
             height: 8px;
-            border-radius: 50%;
+            border-radius: var(--border-radius-round);
             background-color: rgba(255, 255, 255, 0.5);
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color var(--transition-fast);
         }
 
         .banner-dot.active {
             background-color: #fff;
         }
 
+        /* 通用按钮样式 */
+        .btn-base {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            border-radius: var(--border-radius-md);
+            transition: var(--transition-fast);
+            font-family: inherit;
+            outline: none;
+        }
+        
+        .btn-round {
+            border-radius: var(--border-radius-round);
+        }
+        
+        .btn-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+        }
+        
         .banner-prev, .banner-next {
             position: absolute;
             top: 50%;
@@ -211,14 +267,14 @@
             width: 40px;
             height: 40px;
             background-color: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
+            border-radius: var(--border-radius-round);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             font-size: 20px;
             color: #333;
-            transition: background-color 0.3s ease;
+            transition: var(--transition-fast);
         }
         .banner-prev {
             left: 15px;
@@ -242,19 +298,19 @@
         /* 公告横幅样式 */
         .announcement {
             background-color: var(--announcement-bg);
-            padding: 12px 20px;
-            border-radius: 10px;
-            margin: 20px 0;
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-radius: var(--border-radius-md);
+            margin: var(--spacing-lg) 0;
             display: flex;
             align-items: center;
-            box-shadow: 0 2px 8px var(--shadow-light);
+            box-shadow: var(--shadow-card);
             width: 100%;
             box-sizing: border-box;
             max-width: 100%;
         }
 
         .announcement-icon {
-            margin-right: 12px;
+            margin-right: var(--spacing-md);
             font-size: 20px;
             flex-shrink: 0;
         }
@@ -263,11 +319,11 @@
             font-size: 14px;
             color: var(--text-color);
             flex-grow: 1;
-            transition: opacity 0.3s ease;
+            transition: opacity var(--transition-fast);
             overflow: hidden;
             white-space: nowrap;
             position: relative;
-            min-height: 20px; /* 确保容器有最小高度 */
+            min-height: 20px;
         }
         
         .announcement-text-content {
@@ -294,9 +350,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 20px 0;
+            margin: var(--spacing-lg) 0;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: var(--spacing-sm);
             width: 100%;
             box-sizing: border-box;
             max-width: 100%;
@@ -312,28 +368,30 @@
 
         .search-input {
             width: 100%;
-            padding: 12px 20px 12px 40px;
-            padding-right: 50px; /* 为筛选按钮留出空间 */
-            border: none;
-            border-radius: 10px !important; /* 强制使用圆角 */
+            padding: var(--spacing-sm) var(--spacing-lg) var(--spacing-sm) 38px;
+            padding-right: 48px;
+            border: 2px solid transparent;
+            border-radius: var(--border-radius-md);
             background-color: var(--card-bg);
             color: var(--text-color);
-            font-size: 16px; /* 保持16px或更大，防止iOS缩放 */
-            line-height: 1.4; /* 明确设置行高 */
-            text-align: left; /* 明确设置文本对齐 */
-            vertical-align: top; /* 设置垂直对齐 */
-            box-shadow: 0 2px 8px var(--shadow-light);
-            transition: box-shadow 0.3s ease;
-            -webkit-appearance: none; /* 移除iOS默认样式 */
+            font-size: 16px;
+            line-height: 1.5;
+            box-shadow: var(--shadow-card);
+            transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+            -webkit-appearance: none;
             appearance: none;
-            /* 移除硬件加速，避免光标定位问题 */
-            position: relative;
-            z-index: 1;
+            height: 48px;
+            box-sizing: border-box;
+            caret-color: var(--text-color);
+            -webkit-user-select: text;
+            user-select: text;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .search-input:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
+            border: 2px solid rgba(0, 122, 255, 0.6);
+            box-shadow: 0 2px 8px var(--shadow-light);
         }
 
         .search-icon {
@@ -357,16 +415,16 @@
             height: 36px;
             background-color: var(--card-bg);
             border: none;
-            border-radius: 50% !important; /* 强制使用圆形 */
+            border-radius: var(--border-radius-round);
             font-size: 16px;
             color: var(--accent-color);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background-color 0.3s ease;
+            transition: background-color var(--transition-fast);
             z-index: 2;
-            -webkit-appearance: none; /* 移除iOS默认样式 */
+            -webkit-appearance: none;
             appearance: none;
         }
 
@@ -386,11 +444,13 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
+            pointer-events: auto;
+            opacity: 1;
         }
 
         .filter-modal-content {
             background-color: var(--card-bg);
-            border-radius: 14px;
+            border-radius: var(--border-radius-xl);
             padding: 20px;
             width: 90%;
             max-width: 500px;
@@ -399,27 +459,10 @@
             box-shadow: 0 10px 25px var(--shadow-heavy);
             position: relative;
             z-index: 1001;
+            pointer-events: auto;
         }
         
-        @media (max-width: 480px) {
-            .filter-modal-content {
-                width: 95%;
-                padding: 15px;
-            }
-            
-            .filter-modal-title {
-                font-size: 16px;
-            }
-            
-            .filter-options {
-                gap: 8px;
-            }
-            
-            .filter-option {
-                padding: 6px 12px;
-                font-size: 14px;
-            }
-        }
+
 
         .filter-modal-header {
             display: flex;
@@ -459,7 +502,6 @@
             font-size: 14px;
             color: var(--text-color);
             cursor: pointer;
-            transition: all 0.3s ease;
             border: 1px solid transparent;
         }
 
@@ -489,7 +531,6 @@
             font-size: 16px;
             cursor: pointer;
             border: none;
-            transition: background-color 0.3s ease;
         }
 
         .filter-cancel {
@@ -521,18 +562,19 @@
 
         .plugin-card {
             background-color: var(--card-bg);
-            border-radius: 12px;
+            border-radius: var(--border-radius-lg);
             padding: 20px;
             display: flex;
             flex-direction: column;
             box-shadow: 0 2px 8px var(--shadow-light);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: box-shadow var(--transition-fast), border var(--transition-fast);
             position: relative;
+            border: 2px solid transparent;
         }
 
         .plugin-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px var(--shadow-medium);
+            border-color: rgba(0, 122, 255, 0.1);
+            box-shadow: 0 4px 12px var(--shadow-medium);
         }
 
         .plugin-header {
@@ -543,7 +585,7 @@
         .plugin-icon {
             width: 60px;
             height: 60px;
-            border-radius: 14px;
+            border-radius: var(--border-radius-xl);
             overflow: hidden;
             margin-right: 20px;
             flex-shrink: 0;
@@ -568,7 +610,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: opacity 0.3s ease;
+            transition: opacity var(--transition-fast);
             opacity: 0;
             position: relative;
             z-index: 1;
@@ -584,8 +626,8 @@
         }
         
         .lazy-icon {
-            background-color: #f0f0f0;
-            border-radius: 14px;
+            background-color: var(--loading-bg);
+            border-radius: var(--border-radius-xl);
         }
 
         .plugin-info {
@@ -711,88 +753,7 @@
             }
         }
 
-        @media (max-width: 480px) {
-            .plugins-grid {
-                grid-template-columns: 1fr;
-                width: 100%;
-                margin-top: 20px;
-                margin-bottom: 20px;
-            }
-            
-            .search-input {
-                font-size: 14px;
-                line-height: 1.4; /* 确保行高一致 */
-                padding: 10px 15px 10px 35px;
-                padding-right: 45px;
-                width: 100%;
-                text-align: left; /* 确保文本左对齐 */
-                vertical-align: top; /* 确保垂直对齐 */
-            }
-            
-            .search-icon {
-                left: 12px;
-                font-size: 14px;
-                z-index: 2;
-                pointer-events: none;
-                display: block;
-            }
-            
-            .filter-button {
-                width: 32px;
-                height: 32px;
-                font-size: 14px;
-            }
-            
-            .container {
-                padding: 0 8px;
-                width: 100%;
-            }
-            
-            .banner-container,
-            .announcement,
-            .search-filter-container {
-                width: 100%;
-                margin-left: 0;
-                margin-right: 0;
-                border-radius: 8px;
-            }
-            
-            .banner-container {
-                margin-top: 20px;
-                margin-bottom: 20px;
-                overflow: hidden; /* 确保在小屏幕上也正确隐藏超出部分 */
-            }
-            
-            /* 确保轮播图在小屏幕上的尺寸正确 */
-            .banner-wrapper {
-                min-height: 100px; /* 适当减小最小高度 */
-            }
-            
-            .banner-slide img {
-                min-height: 100px;
-            }
-            
-            .banner-slide {
-                min-width: 100%;
-                width: 100%;
-            }
-            
-            .announcement {
-                padding: 10px 15px;
-                margin-top: 20px;
-                margin-bottom: 20px;
-            }
 
-            /* 移除与三列布局不一致的样式，保持卡片布局一致 */
-            /* .plugin-header 保持与三列布局相同的水平布局 */
-            /* .plugin-icon 保持与三列布局相同的右边距 */
-            /* .plugin-card 保持与三列布局相同的内边距 */
-
-            /* 移除与三列布局不一致的样式，保持日期和安装按钮的布局一致 */
-            /* .plugin-date 保持与三列布局相同的样式 */
-            /* .plugin-install 保持与三列布局相同的样式 */
-            /* .plugin-footer 保持与三列布局相同的样式 */
-        }
         
         /* 页面底部版权信息样式 */
         .footer {
@@ -832,94 +793,55 @@
             text-decoration: underline;
         }
         
+        /* 响应式设计 - 移动端优化（合并所有480px媒体查询） */
         @media (max-width: 480px) {
-            .footer .container {
-                padding: 0 15px;
-            }
+            /* 容器和布局 */
+            .container { padding: 0 8px; width: 100%; }
             
-            .copyright {
-                font-size: 12px;
-            }
+            /* 筛选模态框 */
+            .filter-modal-content { width: 95%; padding: 15px; }
+            .filter-modal-title { font-size: 16px; }
+            .filter-options { gap: 8px; }
+            .filter-option { padding: 6px 12px; font-size: 14px; }
             
-            .footer-link {
-                font-size: 12px;
+            /* 插件网格和搜索 */
+            .plugins-grid { grid-template-columns: 1fr; width: 100%; margin: 20px 0; }
+            .search-input {
+                font-size: 14px;
+                line-height: 1.4;
+                padding: 10px 15px 10px 35px;
+                padding-right: 45px;
+                width: 100%;
+                text-align: left;
+                vertical-align: top;
             }
-        }
-        
-        /* 下拉刷新样式 */
-        .ptr--ptr {
-            box-shadow: inset 0 -3px 5px rgba(0, 0, 0, 0.12);
-            pointer-events: none;
-            font-size: 0.85em;
-            font-weight: bold;
-            top: 0;
-            height: 0;
-            transition: height 0.3s, min-height 0.3s;
-            text-align: center;
-            width: 100%;
-            overflow: hidden;
-            display: flex;
-            align-items: flex-end;
-            align-content: stretch;
-        }
-        
-        .ptr--box {
-            padding: 10px;
-            flex-basis: 100%;
-        }
-        
-        .ptr--pull {
-            transition: none;
-        }
-        
-        .ptr--text {
-            margin-top: 0.5em;
-            color: #007aff;
-        }
-        
-        .ptr--icon {
-            color: #007aff;
-            transition: transform 0.3s;
-        }
-        
-        /* 下拉刷新动画 */
-        @keyframes ptr-loading {
-            0% {
-                transform: rotate(0);
+            .search-icon { left: 12px; font-size: 14px; z-index: 2; pointer-events: none; display: block; }
+            .filter-button { width: 32px; height: 32px; font-size: 14px; }
+            
+            /* 轮播图和公告 */
+            .banner-container,
+            .announcement,
+            .search-filter-container {
+                width: 100%;
+                margin-left: 0;
+                margin-right: 0;
+                border-radius: 8px;
             }
-            100% {
-                transform: rotate(360deg);
-            }
+            .banner-container { margin: 20px 0; overflow: hidden; }
+            .banner-wrapper { min-height: 100px; }
+            .banner-slide img { min-height: 100px; }
+            .banner-slide { min-width: 100%; width: 100%; }
+            .announcement { padding: 10px 15px; margin: 20px 0; }
+            
+            /* 页脚 */
+            .footer .container { padding: 0 15px; }
+            .copyright, .footer-link { font-size: 12px; }
         }
         
-        .ptr--loading .ptr--icon {
-            animation: ptr-loading 1s linear infinite;
-        }
+
         
-        /* 刷新提示样式 */
-        .refresh-toast {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(-100px);
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 14px;
-            z-index: 9999;
-            opacity: 0;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-        
-        .refresh-toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
-        
-        .refresh-toast.error {
-            background-color: rgba(255, 59, 48, 0.9);
-        }
+
+
         
         .footer,
         .banner-container,
@@ -947,154 +869,82 @@
         /* 搜索框特定样式优先级更高 */
         .search-input {
             border-radius: 10px !important; /* 确保搜索框保持圆角 */
-        }
-        
-        /* 完全重写弹窗样式 - 不使用z-index */
-        .filter-modal {
-            display: none !important;
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100vw !important;
-            height: 100vh !important;
-            background: rgba(0, 0, 0, 0.5) !important;
-            justify-content: center !important;
-            align-items: center !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            border: none !important;
-            outline: none !important;
-            /* 创建新的层叠上下文 */
-            isolation: isolate !important;
-            /* 确保在所有内容之上 */
-            contain: layout style paint !important;
-        }
-        
-        .filter-modal.show {
-            display: flex !important;
-        }
-        
-        .filter-modal-content {
-            background: #ffffff !important;
-            border-radius: 14px !important;
-            padding: 20px !important;
-            width: 90% !important;
-            max-width: 500px !important;
-            max-height: 80vh !important;
-            overflow-y: auto !important;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
-            position: relative !important;
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            margin: 0 !important;
+            /* 修复光标位置偏移问题 - 确保行高一致性 */
+            line-height: 1.4 !important;
+            /* 重置可能影响光标位置的属性 */
             transform: none !important;
             will-change: auto !important;
-            color: #333333 !important;
-            /* 创建独立的层叠上下文 */
-            isolation: isolate !important;
+            /* 确保光标正确显示 */
+            caret-color: var(--text-color) !important;
+            /* 修复垂直对齐问题 */
+            vertical-align: baseline !important;
+            /* 确保文本基线对齐 */
+            text-align: left !important;
         }
         
-        .filter-modal-header {
-            display: flex !important;
-            justify-content: space-between !important;
-            align-items: center !important;
-            margin-bottom: 15px !important;
-            transform: none !important;
+
+
+        
+        /* 确保弹窗内容使用正确的深色模式样式 */
+        .filter-modal-content {
+            background-color: var(--card-bg) !important;
+            color: var(--text-color) !important;
         }
         
         .filter-modal-title {
-            font-size: 18px !important;
-            font-weight: bold !important;
-            color: #333333 !important;
-            margin: 0 !important;
-            transform: none !important;
+            color: var(--text-color) !important;
         }
         
         .filter-modal-close {
-            background: none !important;
-            border: none !important;
-            font-size: 24px !important;
-            cursor: pointer !important;
-            color: #666666 !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            width: 30px !important;
-            height: 30px !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            transform: none !important;
-            position: relative !important;
-        }
-        
-        .filter-options {
-            display: flex !important;
-            flex-wrap: wrap !important;
-            gap: 10px !important;
-            transform: none !important;
+            color: var(--text-tertiary) !important;
         }
         
         .filter-option {
-            padding: 8px 16px !important;
-            border: 1px solid #ddd !important;
-            border-radius: 20px !important;
-            cursor: pointer !important;
-            background: #f5f5f5 !important;
-            color: #333333 !important;
-            font-size: 14px !important;
-            transition: all 0.3s ease !important;
-            transform: none !important;
-            position: relative !important;
-        }
-        
-        .filter-option.active {
-            background: #007AFF !important;
-            color: #ffffff !important;
-            border-color: #007AFF !important;
+            background-color: var(--filter-bg) !important;
+            color: var(--text-color) !important;
+            border: 1px solid var(--border-color) !important;
         }
         
         .filter-option:hover {
-            background: #e0e0e0 !important;
+            background-color: var(--filter-hover) !important;
+        }
+        
+        .filter-option.active {
+            background-color: var(--accent-color) !important;
+            color: #ffffff !important;
+            border-color: var(--accent-color) !important;
         }
         
         .filter-option.active:hover {
-            background: #0056CC !important;
-        }
-        
-        /* 确保所有弹窗内元素不受全局样式影响 */
-        .filter-modal * {
-            transform: none !important;
-            will-change: auto !important;
-            box-sizing: border-box !important;
+            background-color: var(--accent-hover) !important;
         }
     </style>
 <style>
-                * {
-                    touch-action: pan-y !important;
-                    -webkit-touch-callout: none !important;
-                    -webkit-user-select: none !important;
-                    -khtml-user-select: none !important;
-                    -moz-user-select: none !important;
-                    -ms-user-select: none !important;
-                    user-select: none !important;
-                }
-                input, textarea {
-                    -webkit-user-select: text !important;
-                    -khtml-user-select: text !important;
-                    -moz-user-select: text !important;
-                    -ms-user-select: text !important;
-                    user-select: text !important;
-                }
-                .banner-container {
-                    touch-action: pan-x pan-y !important;
-                }
-            </style></head>
+            * {
+                touch-action: pan-y !important;
+                -webkit-touch-callout: none !important;
+                -webkit-user-select: none !important;
+                -khtml-user-select: none !important;
+                -moz-user-select: none !important;
+                -ms-user-select: none !important;
+                user-select: none !important;
+            }
+            input, textarea {
+                -webkit-user-select: text !important;
+                -khtml-user-select: text !important;
+                -moz-user-select: text !important;
+                -ms-user-select: text !important;
+                user-select: text !important;
+            }
+            .banner-container {
+                touch-action: pan-x pan-y !important;
+            }
+        </style></head>
 <body>
     <div class="container">
         <!-- 轮播图 -->
         <div class="banner-container" style="display: block;">
-            <div class="banner-wrapper" id="bannerWrapper" style="transition: transform 0.5s; transform: translateX(-100%);"><div class="banner-slide"><a href="https://apps.apple.com/app/loon/id1373567447" target="_blank"><img alt="Loon" src="IMG/Banner/Loon_ad.png" style=""></a></div><div class="banner-slide"><a href="https://github.com/luestr/IconResource" target="_blank"><img alt="PluginHub" src="IMG/Banner/PluginHub.png" style=""></a></div><div class="banner-slide"><a href="https://apps.apple.com/app/loon/id1373567447" target="_blank"><img alt="Loon" src="IMG/Banner/Loon_ad.png" style=""></a></div><div class="banner-slide"><a href="https://github.com/luestr/IconResource" target="_blank"><img alt="PluginHub" src="IMG/Banner/PluginHub.png" style=""></a></div></div>
+            <div class="banner-wrapper" id="bannerWrapper" style="transition: transform 0.5s; transform: translateX(-100%);"><div class="banner-slide"><a attributes="[object Object]"><img alt="Loon" src="IMG/Banner/Loon_ad.png" style=""></a></div><div class="banner-slide"><a attributes="[object Object]"><img alt="PluginHub" src="IMG/Banner/PluginHub.png" style=""></a></div><div class="banner-slide"><a attributes="[object Object]"><img alt="Loon" src="IMG/Banner/Loon_ad.png" style=""></a></div><div class="banner-slide"><a attributes="[object Object]"><img alt="PluginHub" src="IMG/Banner/PluginHub.png" style=""></a></div></div>
             <div class="banner-dots" id="bannerDots"><div class="banner-dot active"></div><div class="banner-dot "></div></div>
             <div class="banner-prev" id="bannerPrev">❮</div>
             <div class="banner-next" id="bannerNext">❯</div>
@@ -1138,11 +988,9 @@
                             <div class="plugin-name">广告平台拦截器</div>
                         </div>
                     </div>
-                    <div class="plugin-description">此插件是所有去广告插件的基础，只针对广告平台处理。你依然需要安装其他去广告插件来搭配使用，并确保此插件始终排序在顶部。
-
-支持拦截腾讯、字节跳动、快手、百度、邑盟、倍孜、艾狄墨搏、袤博、极光、个推、友盟、阿里、优比客思、秒针、网易、美团、小米、京东、天目、讯飞、泛连、锐讯灵通、聚次方、美数、嗨量、维快网络、变现猫、章鱼、分秒、泰之菩、翼信、快易、数萤技术、方麟、益起、上量优选、新义互联、腾云天下、布里奇、塔酷、丽声、推啊、旺脉、新度博望、新多广告、快易科技、封狐信息、互裕科技、旺脉信息、佳量动力、享点科技、游昆信息、小川科技、Google、SupersonicAds、APPSAD、Adjust、Sigmob、TradPlus、Fancy、MedPro、AppLovin、Unity3D、Tapjoy、Liftoff、Vungle等广告平台的广告请求，更适合iOS平台的应用。</div>
+                    <div class="plugin-description">此插件是所有去广告插件的基础，只针对广告平台处理。你依然需要安装其他去广告插件来搭配使用，并确保此插件始终排序在顶部。<br><br>支持拦截腾讯、字节跳动、快手、百度、邑盟、倍孜、艾狄墨搏、袤博、极光、个推、友盟、阿里、超级汇川、优比客思、秒针、网易、美团、小米、京东、天目、讯飞、泛连、锐讯灵通、聚次方、美数、嗨量、维快网络、变现猫、章鱼、分秒、泰之菩、翼信、快易、数萤技术、方麟、益起、上量优选、新义互联、腾云天下、布里奇、塔酷、丽声、推啊、旺脉、新度博望、新多广告、快易科技、封狐信息、互裕科技、旺脉信息、佳量动力、享点科技、游昆信息、小川科技、Google、SupersonicAds、APPSAD、Adjust、Sigmob、TradPlus、Fancy、MedPro、AppLovin、Unity3D、Tapjoy、Liftoff、Vungle等广告平台的广告请求，更适合iOS平台的应用。</div>
                     <div class="plugin-footer"></div>
-                    <div class="plugin-date">更新于 2025-08-31 04:23:37</div>
+                    <div class="plugin-date">更新于 2025-09-04 21:47:00</div>
                     <a href="loon://import?plugin=https://kelee.one/Tool/Loon/Lpx/BlockAdvertisers.lpx" class="plugin-install">安装</a>
                 </div><div class="plugin-card">
                     <div class="plugin-header">
@@ -1231,9 +1079,9 @@
                             <div class="plugin-name">Apple天气增强</div>
                         </div>
                     </div>
-                    <div class="plugin-description">解锁Apple天气的全部功能、替换空气质量数据源、添加下一小时降水数据，仅支持iOS 18和iPadOS 18。</div>
+                    <div class="plugin-description">解锁Apple天气的全部功能、替换空气质量数据源、添加下一小时降水数据、添加天气数据。</div>
                     <div class="plugin-footer"></div>
-                    <div class="plugin-date">更新于 2025-05-13 15:17:08</div>
+                    <div class="plugin-date">更新于 2025-09-11 15:47:00</div>
                     <a href="loon://import?plugin=https://kelee.one/Tool/Loon/Lpx/AppleWeatherEnhancer.lpx" class="plugin-install">安装</a>
                 </div><div class="plugin-card">
                     <div class="plugin-header">
@@ -1389,7 +1237,7 @@
                     </div>
                     <div class="plugin-description">移除开屏广告、搜索推荐和弹窗广告，精简底栏和首页标签。移除关注推荐、文章相关推荐和信息流中的课程推广。</div>
                     <div class="plugin-footer"></div>
-                    <div class="plugin-date">更新于 2025-05-23 13:32:55</div>
+                    <div class="plugin-date">更新于 2025-09-07 18:09:57</div>
                     <a href="loon://import?plugin=https://kelee.one/Tool/Loon/Lpx/Keep_remove_ads.lpx" class="plugin-install">安装</a>
                 </div><div class="plugin-card">
                     <div class="plugin-header">
@@ -1816,11 +1664,9 @@
                             <div class="plugin-name">哔哩哔哩去广告</div>
                         </div>
                     </div>
-                    <div class="plugin-description">过滤哔哩哔哩广告、移除青少年模式弹窗和交互式弹幕、移除无用功能和链接跟踪参数，增加空降助手以便跳过视频中插入的广告。此插件仅建议iOS 15以上设备使用，且必须启用MitM-over-HTTP/2功能。
-
-空降助手是第三方提供的功能，依赖于Android版空降助手的服务器数据运作，可能会存在不准确或者失效的问题，此功能与哔哩哔哩官方无关。</div>
+                    <div class="plugin-description">过滤哔哩哔哩广告、移除青少年模式弹窗和交互式弹幕、移除无用功能和链接跟踪参数，增加空降助手以便跳过视频中插入的广告。此插件仅建议iOS 15以上设备使用，且必须启用MitM-over-HTTP/2功能。<br><br>空降助手是第三方提供的功能，依赖于Android版空降助手的服务器数据运作，可能会存在不准确或者失效的问题，此功能与哔哩哔哩官方无关。</div>
                     <div class="plugin-footer"></div>
-                    <div class="plugin-date">更新于 2025-08-28 23:53:54</div>
+                    <div class="plugin-date">更新于 2025-09-04 23:44:49</div>
                     <a href="loon://import?plugin=https://kelee.one/Tool/Loon/Lpx/Bilibili_remove_ads.lpx" class="plugin-install">安装</a>
                 </div><div class="plugin-card">
                     <div class="plugin-header">
@@ -1942,6 +1788,19 @@
                 </div><div class="plugin-card">
                     <div class="plugin-header">
                         <div class="plugin-icon">
+                            <img data-src="https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/iReaderDejian.png" alt="得间小说去广告" class="lazy-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60' width='60' height='60'%3E%3Crect width='60' height='60' fill='%23f0f0f0' rx='14'/%3E%3C/svg%3E">
+                        </div>
+                        <div class="plugin-info">
+                            <div class="plugin-name">得间小说去广告</div>
+                        </div>
+                    </div>
+                    <div class="plugin-description">移除开屏广告、章末广告，移除扉页广告提示、听书界面广告提示、搜索栏填充词。</div>
+                    <div class="plugin-footer"></div>
+                    <div class="plugin-date">更新于 2025-09-04 22:36:17</div>
+                    <a href="loon://import?plugin=https://kelee.one/Tool/Loon/Lpx/iReaderDejian_remove_ads.lpx" class="plugin-install">安装</a>
+                </div><div class="plugin-card">
+                    <div class="plugin-header">
+                        <div class="plugin-icon">
                             <img data-src="https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/DiDi.png" alt="滴滴出行去广告" class="lazy-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60' width='60' height='60'%3E%3Crect width='60' height='60' fill='%23f0f0f0' rx='14'/%3E%3C/svg%3E">
                         </div>
                         <div class="plugin-info">
@@ -1950,7 +1809,7 @@
                     </div>
                     <div class="plugin-description">移除开屏广告、精简首页、底栏和我的页面。</div>
                     <div class="plugin-footer"></div>
-                    <div class="plugin-date">更新于 2025-07-25 17:23:52</div>
+                    <div class="plugin-date">更新于 2025-09-10 09:50:58</div>
                     <a href="loon://import?plugin=https://kelee.one/Tool/Loon/Lpx/DiDi_remove_ads.lpx" class="plugin-install">安装</a>
                 </div><div class="plugin-card">
                     <div class="plugin-header">
@@ -2067,7 +1926,7 @@
                     </div>
                     <div class="plugin-description">移除弹窗，精简首页和生活服务。此插件需要IPA签名方可使用，App Store用户请勿使用此插件，务必点击下方主页链接查看详细教程。</div>
                     <div class="plugin-footer"></div>
-                    <div class="plugin-date">更新于 2025-05-13 15:17:08</div>
+                    <div class="plugin-date">更新于 2025-09-06 20:21:02</div>
                     <a href="loon://import?plugin=https://kelee.one/Tool/Loon/Lpx/FC_Box_remove_ads.lpx" class="plugin-install">安装</a>
                 </div><div class="plugin-card">
                     <div class="plugin-header">
@@ -2106,7 +1965,7 @@
                     </div>
                     <div class="plugin-description">过滤高德地图开屏广告、各页面推广，精简我的页面。</div>
                     <div class="plugin-footer"></div>
-                    <div class="plugin-date">更新于 2025-08-31 07:30:19</div>
+                    <div class="plugin-date">更新于 2025-09-04 23:46:49</div>
                     <a href="loon://import?plugin=https://kelee.one/Tool/Loon/Lpx/Amap_remove_ads.lpx" class="plugin-install">安装</a>
                 </div><div class="plugin-card">
                     <div class="plugin-header">
@@ -2327,7 +2186,7 @@
                     </div>
                     <div class="plugin-description">移除开屏广告、视频流广告、底栏皮肤、右下角悬浮推广，精简我的页面。</div>
                     <div class="plugin-footer"></div>
-                    <div class="plugin-date">更新于 2025-09-01 01:59:30</div>
+                    <div class="plugin-date">更新于 2025-09-06 00:53:21</div>
                     <a href="loon://import?plugin=https://kelee.one/Tool/Loon/Lpx/KuaiShou_remove_ads.lpx" class="plugin-install">安装</a>
                 </div><div class="plugin-card">
                     <div class="plugin-header">
@@ -3380,7 +3239,7 @@
                     </div>
                     <div class="plugin-description">移除开屏广告、弹窗、信息流推广，精简我的页面。</div>
                     <div class="plugin-footer"></div>
-                    <div class="plugin-date">更新于 2025-05-13 15:17:08</div>
+                    <div class="plugin-date">更新于 2025-09-06 20:56:43</div>
                     <a href="loon://import?plugin=https://kelee.one/Tool/Loon/Lpx/EtouchEcalendar_remove_ads.lpx" class="plugin-install">安装</a>
                 </div><div class="plugin-card">
                     <div class="plugin-header">
@@ -3450,7 +3309,35 @@
     </div>
 
     <script>
-        // 图标懒加载管理器
+        const CACHE_CONFIG = {
+            CACHE_NAME: 'pwa-static-v6',
+            DATA_FILE: 'list.json',
+            IMAGE_LOAD_TIMEOUT: 1000
+        };
+        
+        const CacheManager = {
+            elements: new Map(),
+            
+            async getCached(url) {
+                try {
+                    const cache = await caches.open(CACHE_CONFIG.CACHE_NAME);
+                    const cachedResponse = await cache.match(url);
+                    if (cachedResponse) {
+                        const blob = await cachedResponse.blob();
+                        return URL.createObjectURL(blob);
+                    }
+                } catch (cacheError) {
+                    console.warn('从缓存获取资源失败:', cacheError);
+                }
+                return null;
+            },
+            
+            getDefaultIcon: () => 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 60 60\' width=\'60\' height=\'60\'%3E%3Crect width=\'60\' height=\'60\' fill=\'%23f0f0f0\' rx=\'14\'/%3E%3C/svg%3E',
+            getDefaultBanner: () => 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200"%3E%3Crect width="400" height="200" fill="%23f0f0f0"/%3E%3C/svg%3E'
+        };
+        
+
+        
         class IconLazyLoader {
             constructor() {
                 this.observer = null;
@@ -3460,17 +3347,15 @@
             }
             
             initObserver() {
-                // 检查浏览器是否支持 Intersection Observer
                 if (!('IntersectionObserver' in window)) {
-                    // 不支持则回退到立即加载
                     this.fallbackLoad = true;
                     return;
                 }
                 
                 const options = {
-                    root: null, // 使用视口作为根
-                    rootMargin: '50px', // 提前50px开始加载
-                    threshold: 0.1 // 当10%的元素可见时触发
+                    root: null,
+                    rootMargin: '50px',
+                    threshold: 0.1
                 };
                 
                 this.observer = new IntersectionObserver((entries) => {
@@ -3483,10 +3368,8 @@
                 }, options);
             }
             
-            // 观察图标元素
             observe(imgElement) {
                 if (this.fallbackLoad) {
-                    // 不支持懒加载，直接加载
                     this.loadIcon(imgElement);
                     return;
                 }
@@ -3496,7 +3379,6 @@
                 }
             }
             
-            // 加载图标
             loadIcon(imgElement) {
                 const iconUrl = imgElement.dataset.src;
                 if (!iconUrl || this.loadingQueue.has(imgElement) || this.loadedIcons.has(imgElement)) {
@@ -3505,11 +3387,9 @@
                 
                 this.loadingQueue.add(imgElement);
                 
-                // 创建新的图片对象进行预加载
                 const img = new Image();
                 
                 img.onload = () => {
-                    // 加载成功，设置实际src
                     imgElement.src = iconUrl;
                     imgElement.classList.add('loaded');
                     this.loadingQueue.delete(imgElement);
@@ -3517,44 +3397,16 @@
                 };
                 
                 img.onerror = async () => {
-                    // 加载失败，尝试从缓存获取图标
-                    const cachedIcon = await this.getCachedIcon(iconUrl);
-                    if (cachedIcon) {
-                        imgElement.src = cachedIcon;
-                    } else {
-                        // 如果缓存也没有，显示默认图标
-                        imgElement.src = this.getDefaultIcon();
-                    }
+                    const cachedIcon = await CacheManager.getCached(iconUrl);
+                    imgElement.src = cachedIcon || CacheManager.getDefaultIcon();
                     imgElement.classList.add('loaded');
                     this.loadingQueue.delete(imgElement);
                     this.loadedIcons.add(imgElement);
                 };
                 
-                // 开始加载
                 img.src = iconUrl;
             }
             
-            // 从缓存获取图标
-            async getCachedIcon(iconUrl) {
-                try {
-                    const cache = await caches.open(CACHE_CONFIG.CACHE_NAME);
-                    const cachedResponse = await cache.match(iconUrl);
-                    if (cachedResponse) {
-                        const blob = await cachedResponse.blob();
-                        return URL.createObjectURL(blob);
-                    }
-                } catch (cacheError) {
-                    console.warn('从缓存获取图标失败:', cacheError);
-                }
-                return null;
-            }
-            
-            // 获取默认图标
-            getDefaultIcon() {
-                return 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 60 60\' width=\'60\' height=\'60\'%3E%3Crect width=\'60\' height=\'60\' fill=\'%23f0f0f0\' rx=\'14\'/%3E%3C/svg%3E';
-            }
-            
-            // 清理观察器
             disconnect() {
                 if (this.observer) {
                     this.observer.disconnect();
@@ -3563,10 +3415,8 @@
             }
         }
         
-        // 创建全局懒加载实例
         const iconLazyLoader = new IconLazyLoader();
 
-        // 全局变量
         let pluginsData = null;
         let currentFilter = 'all';
         let currentBannerIndex = 0;
@@ -3575,367 +3425,563 @@
         let announcementInterval;
         let announcementScrollTimeout;
         let announcementSwitchTimeout;
-        // 检测是否为PWA模式
         const isPWAMode = window.matchMedia('(display-mode: standalone)').matches || 
                          window.navigator.standalone === true || 
                          document.referrer.includes('android-app://');
         
-        // 根据PWA模式调整公告栏时间参数
-        const ANNOUNCEMENT_INTERVAL = isPWAMode ? 6000 : 8000; // PWA模式下缩短切换间隔
-        const SCROLL_SPEED = isPWAMode ? 60 : 50; // PWA模式下稍微加快滚动速度
-        const WAIT_BEFORE_SCROLL = isPWAMode ? 400 : 500; // PWA模式下缩短等待时间
-        const WAIT_AFTER_SCROLL = isPWAMode ? 2500 : 3000; // PWA模式下缩短等待时间
+        const ANNOUNCEMENT_INTERVAL = isPWAMode ? 6000 : 8000;
+        const SCROLL_SPEED = isPWAMode ? 60 : 50;
+        const WAIT_BEFORE_SCROLL = isPWAMode ? 400 : 500;
+        const WAIT_AFTER_SCROLL = isPWAMode ? 2500 : 3000;
         let selectedCategory = 'all';
-        let lastTouchTime = 0; // 用于检测双击
+        let lastTouchTime = 0;
         
-        // 无限循环轮播图变量
         let isTransitioning = false;
-        let realIndex = 0; // 真实的图片索引
+        let realIndex = 0;
+
+        const Utils = {
+            dom: {
+                get(selector, parent = document) {
+                    if (parent === document && !selector.startsWith('.') && !selector.startsWith('#') && !selector.includes(' ')) {
+                        if (!CacheManager.elements.has(selector)) {
+                            CacheManager.elements.set(selector, document.getElementById(selector));
+                        }
+                        return CacheManager.elements.get(selector);
+                    }
+                    return parent.querySelector(selector);
+                },
+                
+                create(tag, options = {}) {
+                    const element = document.createElement(tag);
+                    Object.entries(options).forEach(([key, value]) => {
+                        if (key === 'className') {
+                            element.className = value;
+                        } else if (key === 'textContent') {
+                            element.textContent = value;
+                        } else if (key === 'innerHTML') {
+                            element.innerHTML = value;
+                        } else {
+                            element.setAttribute(key, value);
+                        }
+                    });
+                    return element;
+                },
+                
+                clear(element) {
+                    if (typeof element === 'string') {
+                        element = this.get(element);
+                    }
+                    if (element) {
+                        element.innerHTML = '';
+                    }
+                }
+            },
+            
+            image: {
+                preload(src) {
+                    return new Promise((resolve) => {
+                        const img = new Image();
+                        img.onload = () => resolve(img);
+                        img.onerror = () => resolve(null);
+                        img.src = src;
+                    });
+                }
+            },
+            
+            format: {
+                date(dateString) {
+                    if (!dateString) return '';
+                    const date = new Date(dateString);
+                    const year = date.getFullYear();
+                    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                    const day = date.getDate().toString().padStart(2, '0');
+                    const hours = date.getHours().toString().padStart(2, '0');
+                    const minutes = date.getMinutes().toString().padStart(2, '0');
+                    const seconds = date.getSeconds().toString().padStart(2, '0');
+                    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+                },
+                
+                description(desc) {
+                    if (!desc) return '';
+                    return desc.replace(/\\n/g, '<br>');
+                }
+            },
+            
+            style: {
+                applyStyles(element, styles) {
+                    Object.assign(element.style, styles);
+                },
+                
+                createStyleSheet(css) {
+                    const style = document.createElement('style');
+                    style.textContent = css;
+                    document.head.appendChild(style);
+                    return style;
+                },
+                
+                getScrollbarWidth() {
+                    return window.innerWidth - document.documentElement.clientWidth;
+                },
+                
+                disablePageScroll(scrollY) {
+                    const isMobile = window.innerWidth <= 768;
+                    
+                    if (isMobile) {
+                        this.applyStyles(document.body, { overflow: 'hidden' });
+                        this.applyStyles(document.documentElement, {
+                            overscrollBehavior: 'none',
+                            overscrollBehaviorY: 'none',
+                            touchAction: 'none'
+                        });
+                    } else {
+                        const scrollbarWidth = this.getScrollbarWidth();
+                        const bodyStyles = {
+                            overflow: 'hidden',
+                            position: 'fixed',
+                            top: `-${scrollY}px`,
+                            width: '100%',
+                            height: '100%',
+                            overscrollBehavior: 'none',
+                            overscrollBehaviorY: 'none',
+                            touchAction: 'none'
+                        };
+                        
+                        if (scrollbarWidth > 0) {
+                            bodyStyles.paddingRight = `${scrollbarWidth}px`;
+                        }
+                        
+                        this.applyStyles(document.body, bodyStyles);
+                        this.applyStyles(document.documentElement, {
+                            overscrollBehavior: 'none',
+                            overscrollBehaviorY: 'none',
+                            touchAction: 'none'
+                        });
+                    }
+                },
+                
+                enablePageScroll(scrollY) {
+                    const isMobile = window.innerWidth <= 768;
+                    
+                    if (isMobile) {
+                        this.applyStyles(document.body, { overflow: '' });
+                        this.applyStyles(document.documentElement, {
+                            overscrollBehavior: '',
+                            overscrollBehaviorY: '',
+                            touchAction: ''
+                        });
+                    } else {
+                        if (scrollY && scrollY !== '0') {
+                            const targetY = parseInt(scrollY);
+                            if (!isNaN(targetY) && targetY >= 0) {
+                                document.body.style.position = '';
+                                document.body.style.top = '';
+                                window.scrollTo(0, targetY);
+                            }
+                        }
+                        
+                        const resetStyles = {
+                            overflow: '', position: '', top: '', width: '', height: '',
+                            paddingRight: '', overscrollBehavior: '', overscrollBehaviorY: '', touchAction: ''
+                        };
+                        
+                        this.applyStyles(document.body, resetStyles);
+                        this.applyStyles(document.documentElement, {
+                            overscrollBehavior: '', overscrollBehaviorY: '', touchAction: ''
+                        });
+                    }
+                }
+            },
+            
+            touch: {
+                getDistance(touches) {
+                    if (touches.length < 2) return 0;
+                    const dx = touches[0].clientX - touches[1].clientX;
+                    const dy = touches[0].clientY - touches[1].clientY;
+                    return Math.sqrt(dx * dx + dy * dy);
+                },
+                
+                preventZoom(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
+                    return false;
+                },
+                
+                createTouchHandler(config) {
+                    let startX = 0, startY = 0, endX = 0, endY = 0;
+                    let touchMoved = false, isSwiping = false;
+                    
+                    return {
+                        start: (e) => {
+                            if (config.onStart && !config.onStart(e)) return;
+                            
+                            startX = e.touches[0].clientX;
+                            startY = e.touches[0].clientY;
+                            touchMoved = false;
+                            isSwiping = true;
+                        },
+                        
+                        move: (e) => {
+                            if (!isSwiping) return;
+                            
+                            endX = e.touches[0].clientX;
+                            endY = e.touches[0].clientY;
+                            
+                            const deltaX = Math.abs(endX - startX);
+                            const deltaY = Math.abs(endY - startY);
+                            
+                            if (deltaX > (config.threshold || 10) || deltaY > (config.threshold || 10)) {
+                                touchMoved = true;
+                            }
+                            
+                            if (config.onMove) {
+                                config.onMove(e, { startX, startY, endX, endY, deltaX, deltaY });
+                            }
+                        },
+                        
+                        end: (e) => {
+                            if (!isSwiping) return;
+                            
+                            isSwiping = false;
+                            
+                            if (config.onEnd) {
+                                config.onEnd(e, { startX, startY, endX, endY, touchMoved });
+                            }
+                        },
+                        
+                        cancel: (e) => {
+                            isSwiping = false;
+                            if (config.onCancel) {
+                                config.onCancel(e);
+                            }
+                        }
+                    };
+                },
+                
+                addSwipeListener(element, config) {
+                    const handlers = this.createTouchHandler(config);
+                    
+                    element.addEventListener('touchstart', handlers.start, { passive: config.passive !== false });
+                    element.addEventListener('touchmove', handlers.move, { passive: config.passive !== false });
+                    element.addEventListener('touchend', handlers.end, { passive: config.passive !== false });
+                    element.addEventListener('touchcancel', handlers.cancel, { passive: config.passive !== false });
+                    
+                    return handlers;
+                }
+            },
+            
+            image: {
+                preload(src) {
+                    return new Promise((resolve) => {
+                        const img = new Image();
+                        img.onload = () => resolve(img);
+                        img.onerror = () => resolve(null);
+                        img.src = src;
+                    });
+                },
+                
+                setLoadingStyle(element) {
+                    element.style.backgroundColor = 'var(--loading-bg)';
+                    element.style.minHeight = '120px';
+                },
+                
+                clearLoadingStyle(element) {
+                    element.style.backgroundColor = '';
+                    element.style.minHeight = '';
+                },
+                
+                async handleImageError(img, fallbackSrc, useFallbackStyle = false) {
+                    // 使用统一缓存管理器
+                    const cachedImage = await CacheManager.getCached(img.src);
+                    if (cachedImage) {
+                        img.src = cachedImage;
+                    } else {
+                        img.src = fallbackSrc;
+                        if (useFallbackStyle) {
+                            this.setLoadingStyle(img);
+                        }
+                    }
+                }
+            }
+        };
         
-        // 强力防止页面缩放和处理触摸事件
+        // 防缩放和触摸处理初始化
         (function preventZoomAndHandleTouch() {
             let lastTouchEnd = 0;
             let touchStartTime = 0;
             let initialDistance = 0;
             let isMultiTouch = false;
             
-            // 计算两点间距离
-            function getDistance(touches) {
-                if (touches.length < 2) return 0;
-                const dx = touches[0].clientX - touches[1].clientX;
-                const dy = touches[0].clientY - touches[1].clientY;
-                return Math.sqrt(dx * dx + dy * dy);
-            }
-            
-            // 强力阻止所有可能的缩放操作
-            function preventZoom(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                e.stopImmediatePropagation();
-                return false;
-            }
-            
-            // 触摸开始事件
-            document.addEventListener('touchstart', function(e) {
-                touchStartTime = Date.now();
-                isMultiTouch = e.touches.length > 1;
-                
-                // 立即阻止多指触摸
-                if (e.touches.length > 1) {
-                    initialDistance = getDistance(e.touches);
-                    return preventZoom(e);
-                }
-                
-                // 防止双击缩放
-                const now = Date.now();
-                if (now - lastTouchEnd <= 300) {
-                    return preventZoom(e);
-                }
-            }, { passive: false, capture: true });
-            
-            // 触摸移动事件
-            document.addEventListener('touchmove', function(e) {
-                // 强力阻止多指触摸
-                if (e.touches.length > 1) {
-                    return preventZoom(e);
-                }
-                
-                // 如果之前检测到多指触摸，继续阻止
-                if (isMultiTouch) {
-                    return preventZoom(e);
-                }
-                
-                // 检查是否在轮播图区域内
-                const bannerContainer = e.target.closest('.banner-container');
-                if (bannerContainer) {
-                    // 在轮播图区域内允许单指滑动
-                    return;
-                }
-                
-                // 其他区域允许垂直滚动
-            }, { passive: false, capture: true });
-            
-            // 触摸结束事件
-            document.addEventListener('touchend', function(e) {
-                lastTouchEnd = Date.now();
-                
-                // 如果是多指触摸结束，阻止事件
-                if (isMultiTouch || e.touches.length > 0) {
+            // 防缩放触摸处理
+            Utils.touch.addSwipeListener(document, {
+                passive: false,
+                onStart: (e) => {
+                    touchStartTime = Date.now();
                     isMultiTouch = e.touches.length > 1;
-                    if (isMultiTouch) {
-                        return preventZoom(e);
+                    
+                    if (e.touches.length > 1) {
+                        initialDistance = Utils.touch.getDistance(e.touches);
+                        return !Utils.touch.preventZoom(e);
+                    }
+                    
+                    const now = Date.now();
+                    if (now - lastTouchEnd <= 300) {
+                        return !Utils.touch.preventZoom(e);
+                    }
+                    return true;
+                },
+                onMove: (e) => {
+                    if (e.touches.length > 1 || isMultiTouch) {
+                        return Utils.touch.preventZoom(e);
+                    }
+                    
+                    const bannerContainer = e.target.closest('.banner-container');
+                    if (bannerContainer) {
+                        return;
+                    }
+                },
+                onEnd: (e) => {
+                    lastTouchEnd = Date.now();
+                    
+                    if (isMultiTouch || e.touches.length > 0) {
+                        isMultiTouch = e.touches.length > 1;
+                        if (isMultiTouch) {
+                            return Utils.touch.preventZoom(e);
+                        }
+                    }
+                    
+                    if (e.touches.length === 0) {
+                        isMultiTouch = false;
+                    }
+                },
+                onCancel: (e) => {
+                    isMultiTouch = false;
+                    if (e.touches.length > 1) {
+                        return Utils.touch.preventZoom(e);
                     }
                 }
-                
-                // 重置多指触摸标志
-                if (e.touches.length === 0) {
-                    isMultiTouch = false;
-                }
-            }, { passive: false, capture: true });
-            
-            // 触摸取消事件
-            document.addEventListener('touchcancel', function(e) {
-                isMultiTouch = false;
-                if (e.touches.length > 1) {
-                    return preventZoom(e);
-                }
-            }, { passive: false, capture: true });
+            });
             
             // 阻止双击缩放
-            document.addEventListener('dblclick', preventZoom, { passive: false, capture: true });
+            document.addEventListener('dblclick', Utils.touch.preventZoom, { passive: false, capture: true });
             
             // 阻止鼠标滚轮缩放（Ctrl+滚轮）
             document.addEventListener('wheel', function(e) {
                 if (e.ctrlKey) {
-                    return preventZoom(e);
+                    return Utils.touch.preventZoom(e);
                 }
             }, { passive: false, capture: true });
             
             // 阻止键盘缩放（Ctrl + +/-）
             document.addEventListener('keydown', function(e) {
                 if (e.ctrlKey && (e.key === '+' || e.key === '-' || e.key === '=' || e.key === '0')) {
-                    return preventZoom(e);
+                    return Utils.touch.preventZoom(e);
                 }
             }, { passive: false, capture: true });
             
             // 阻止Safari手势缩放
-            document.addEventListener('gesturestart', preventZoom, { passive: false, capture: true });
-            document.addEventListener('gesturechange', preventZoom, { passive: false, capture: true });
-            document.addEventListener('gestureend', preventZoom, { passive: false, capture: true });
-            
-            // 强制设置CSS防缩放
-            const style = document.createElement('style');
-            style.textContent = `
-                * {
-                    touch-action: pan-y !important;
-                    -webkit-touch-callout: none !important;
-                    -webkit-user-select: none !important;
-                    -khtml-user-select: none !important;
-                    -moz-user-select: none !important;
-                    -ms-user-select: none !important;
-                    user-select: none !important;
-                }
-                input, textarea {
-                    -webkit-user-select: text !important;
-                    -khtml-user-select: text !important;
-                    -moz-user-select: text !important;
-                    -ms-user-select: text !important;
-                    user-select: text !important;
-                }
-                .banner-container {
-                    touch-action: pan-x pan-y !important;
-                }
-            `;
-            document.head.appendChild(style);
-            
-            // 搜索框键盘隐藏逻辑（简化版）
-            let searchTouchStartX = 0;
-            let searchTouchStartY = 0;
-            let searchTouchMoved = false;
-            
-            // 简化的搜索框触摸处理
-            document.addEventListener('touchstart', function(e) {
-                if (e.touches && e.touches.length === 1 && !e.target.closest('.banner-container')) {
-                    searchTouchStartX = e.touches[0].clientX;
-                    searchTouchStartY = e.touches[0].clientY;
-                    searchTouchMoved = false;
-                }
-            }, { passive: true });
-            
-            document.addEventListener('touchmove', function(e) {
-                if (e.touches && e.touches.length === 1 && !e.target.closest('.banner-container')) {
-                    const deltaX = Math.abs(e.touches[0].clientX - searchTouchStartX);
-                    const deltaY = Math.abs(e.touches[0].clientY - searchTouchStartY);
-                    if (deltaX > 10 || deltaY > 10) {
-                        searchTouchMoved = true;
-                    }
-                }
-            }, { passive: true });
-            
-            document.addEventListener('touchend', function(e) {
-                if (!e.target.closest('.banner-container') && !searchTouchMoved) {
+            document.addEventListener('gesturestart', Utils.touch.preventZoom, { passive: false, capture: true });
+            document.addEventListener('gesturechange', Utils.touch.preventZoom, { passive: false, capture: true });
+            document.addEventListener('gestureend', Utils.touch.preventZoom, { passive: false, capture: true });
+        })();
+        
+        // 样式初始化
+        Utils.style.createStyleSheet(`
+            * {
+                touch-action: pan-y !important;
+                -webkit-touch-callout: none !important;
+                -webkit-user-select: none !important;
+                -khtml-user-select: none !important;
+                -moz-user-select: none !important;
+                -ms-user-select: none !important;
+                user-select: none !important;
+            }
+            input, textarea {
+                -webkit-user-select: text !important;
+                -khtml-user-select: text !important;
+                -moz-user-select: text !important;
+                -ms-user-select: text !important;
+                user-select: text !important;
+            }
+            .banner-container {
+                touch-action: pan-x pan-y !important;
+            }
+        `);
+        
+        // 搜索框键盘隐藏逻辑（使用触摸管理器）
+        Utils.touch.addSwipeListener(document, {
+            passive: true,
+            threshold: 10,
+            onStart: (e) => {
+                return e.touches && e.touches.length === 1 && !e.target.closest('.banner-container');
+            },
+            onEnd: (e, { touchMoved }) => {
+                if (!e.target.closest('.banner-container') && !touchMoved) {
+                    const searchInput = Utils.dom.get('searchInput');
                     const isSearchRelated = e.target.closest('.search-container') || e.target.closest('.search-wrapper') || e.target === searchInput;
                     if (!isSearchRelated && document.activeElement === searchInput) {
                         searchInput.blur();
                     }
                 }
-            }, { passive: true });
+            }
+        });
+        
+        document.addEventListener('click', function(e) {
+            const searchInput = Utils.dom.get('searchInput');
+            if (e.target === searchInput || searchInput.contains(e.target)) {
+                e.stopPropagation();
+                return;
+            }
             
-            // 点击页面其他区域时隐藏键盘（非触摸设备）
-            document.addEventListener('click', function(e) {
-                // 如果点击的是搜索框或其子元素，确保它保持聚焦状态
-                if (e.target === searchInput || searchInput.contains(e.target)) {
-                    // 阻止事件冒泡，确保搜索框保持聚焦
-                    e.stopPropagation();
-                    return;
-                }
-                
-                // 检查是否点击的是搜索相关元素
-                const isSearchRelated = e.target.closest('.search-container') || e.target.closest('.search-wrapper');
-                if (isSearchRelated) {
-                    // 如果是搜索相关元素，阻止事件冒泡，保持聚焦
-                    e.stopPropagation();
-                    return;
-                }
-                
-                // 如果点击的不是搜索框或其子元素，且搜索框处于聚焦状态
-                if (document.activeElement === searchInput) {
-                    // 隐藏键盘
-                    searchInput.blur();
-                }
-            });
-        })();
-
-        // 缓存配置常量
-        const CACHE_CONFIG = {
-            CACHE_NAME: 'pwa-static-v6',
-            DATA_FILE: 'list.json',
-            IMAGE_LOAD_TIMEOUT: 1000
-        };
-
-        // DOM元素缓存
+            const isSearchRelated = e.target.closest('.search-container') || e.target.closest('.search-wrapper');
+            if (isSearchRelated) {
+                e.stopPropagation();
+                return;
+            }
+            
+            if (document.activeElement === searchInput) {
+                searchInput.blur();
+            }
+        });
+        
         const DOM = {
-            bannerWrapper: document.getElementById('bannerWrapper'),
-            bannerDots: document.getElementById('bannerDots'),
-            bannerPrev: document.getElementById('bannerPrev'),
-            bannerNext: document.getElementById('bannerNext'),
-            announcementText: document.getElementById('announcementText'),
-            searchInput: document.getElementById('searchInput'),
-            filterButton: document.getElementById('filterButton'),
-            filterModal: document.getElementById('filterModal'),
-            filterClose: document.getElementById('filterClose'),
-            filterOptions: document.getElementById('filterOptions'),
-            pluginsGrid: document.getElementById('pluginsGrid')
+            _cache: {},
+            
+            _get(id) {
+                if (!this._cache[id]) {
+                    this._cache[id] = Utils.dom.get(id);
+                }
+                return this._cache[id];
+            },
+            
+            get bannerWrapper() { return this._get('bannerWrapper'); },
+            get bannerDots() { return this._get('bannerDots'); },
+            get bannerPrev() { return this._get('bannerPrev'); },
+            get bannerNext() { return this._get('bannerNext'); },
+            get announcementText() { return this._get('announcementText'); },
+            get searchInput() { return this._get('searchInput'); },
+            get filterButton() { return this._get('filterButton'); },
+            get filterModal() { return this._get('filterModal'); },
+            get filterClose() { return this._get('filterClose'); },
+            get filterOptions() { return this._get('filterOptions'); },
+            get pluginsGrid() { return this._get('pluginsGrid'); }
         };
 
-        // 统一数据获取函数
-        async function getDataResponse() {
-            try {
-                // 首先尝试正常请求（会触发Service Worker的ETag检查）
-                const response = await fetch(CACHE_CONFIG.DATA_FILE);
-                if (!response.ok) {
-                    throw new Error('网络响应不正常');
+        // 数据管理器
+        const DataManager = {
+            // 错误消息配置
+            errorMessages: {
+                networkError: '网络响应不正常',
+                cacheError: '网络不可用且缓存中无数据',
+                loadingError: '加载数据失败，请重试。'
+            },
+            
+            // 获取数据响应
+            async getResponse() {
+                try {
+                    const response = await fetch(CACHE_CONFIG.DATA_FILE);
+                    if (!response.ok) {
+                        throw new Error(this.errorMessages.networkError);
+                    }
+                    return response;
+                } catch (networkError) {
+                    console.warn('网络请求失败，尝试从缓存获取数据:', networkError);
+                    return await this.getCachedResponse();
                 }
-                return response;
-            } catch (networkError) {
-                console.warn('网络请求失败，尝试从缓存获取数据:', networkError);
-                // 网络失败时，尝试从缓存获取
+            },
+            
+            // 从缓存获取响应
+            async getCachedResponse() {
                 const cache = await caches.open(CACHE_CONFIG.CACHE_NAME);
                 const response = await cache.match(CACHE_CONFIG.DATA_FILE) || 
                                await cache.match('./' + CACHE_CONFIG.DATA_FILE);
                 if (!response) {
-                    throw new Error('网络不可用且缓存中无数据');
+                    throw new Error(this.errorMessages.cacheError);
                 }
                 return response;
-            }
-        }
-
-        // 缓存图片获取辅助函数
-        async function getCachedImage(imageUrl) {
-            try {
-                const cache = await caches.open(CACHE_CONFIG.CACHE_NAME);
-                const cachedResponse = await cache.match(imageUrl);
-                if (cachedResponse) {
-                    const blob = await cachedResponse.blob();
-                    return URL.createObjectURL(blob);
-                }
-            } catch (cacheError) {
-                console.warn('从缓存获取图片失败:', cacheError);
-            }
-            return null;
-        }
-
-        // 获取默认轮播图
-        function getDefaultBannerImage() {
-            return 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200"%3E%3Crect width="400" height="200" fill="%23f0f0f0"/%3E%3C/svg%3E';
-        }
-
-        // 获取JSON数据
-        async function fetchData() {
-            try {
-                // 显示加载提示（仅在刷新操作时）
+            },
+            
+            // 预加载轮播图图片
+            async preloadBannerImages(banners) {
+                if (!banners || banners.length === 0) return;
+                
+                const imagePromises = banners.map(banner => 
+                    Utils.image.preload(banner.img)
+                );
+                
+                await Promise.race([
+                    Promise.all(imagePromises),
+                    new Promise(resolve => setTimeout(resolve, CACHE_CONFIG.IMAGE_LOAD_TIMEOUT))
+                ]);
+            },
+            
+            clearExistingData() {
+                Utils.dom.clear(DOM.bannerWrapper);
+                Utils.dom.clear(DOM.bannerDots);
+                Utils.dom.clear(DOM.filterOptions);
+            },
+            
+            showState(message, isError = false) {
+                Utils.dom.clear(DOM.pluginsGrid);
+                const stateElement = Utils.dom.create('div', {
+                    className: isError ? 'no-results error-state' : 'no-results',
+                    textContent: message
+                });
+                DOM.pluginsGrid.appendChild(stateElement);
+            },
+            
+            showLoadingState() {
                 if (pluginsData) {
-                    DOM.pluginsGrid.innerHTML = `<div class="no-results">数据加载中...</div>`;
+                    this.showState('数据加载中...');
                 }
+            },
+            
+            showErrorState() {
+                this.showState(this.errorMessages.loadingError, true);
+            },
+            
+            async fetchData() {
+                const operations = [
+                    () => this.showLoadingState(),
+                    async () => {
+                        const response = await this.getResponse();
+                        return await response.json();
+                    },
+                    async (data) => {
+                        pluginsData = data;
+                        await this.preloadBannerImages(data.banners);
+                    },
+                    () => this.clearExistingData(),
+                    () => initializeApp()
+                ];
                 
-                // 获取数据响应
-                const response = await getDataResponse();
-                
-                // 加载新数据
-                pluginsData = await response.json();
-                
-                // 预加载轮播图图片
-                if (pluginsData.banners && pluginsData.banners.length > 0) {
-                    // 创建一个Promise数组来跟踪所有图片的加载
-                    const imagePromises = pluginsData.banners.map(banner => {
-                        return new Promise((resolve) => {
-                            const img = new Image();
-                            img.onload = () => resolve();
-                            img.onerror = () => resolve(); // 即使加载失败也继续
-                            img.src = banner.img;
-                        });
-                    });
-                    
-                    // 等待所有图片加载完成或超时
-                    await Promise.race([
-                        Promise.all(imagePromises),
-                        new Promise(resolve => setTimeout(resolve, CACHE_CONFIG.IMAGE_LOAD_TIMEOUT))
-                    ]);
+                try {
+                    let result = null;
+                    for (const operation of operations) {
+                        result = await operation(result);
+                    }
+                    return true;
+                } catch (error) {
+                    console.error('获取数据失败:', error);
+                    this.showErrorState();
+                    return false;
                 }
-                
-                // 清除现有数据
-                DOM.bannerWrapper.innerHTML = '';
-                DOM.bannerDots.innerHTML = '';
-                DOM.filterOptions.innerHTML = '';
-                
-                
-                // 初始化应用
-                await initializeApp();
-                
-                return true; // 返回成功标志
-            } catch (error) {
-                console.error('获取数据失败:', error);
-                DOM.pluginsGrid.innerHTML = `<div class="no-results">加载数据失败，请下拉刷新重试。</div>`;
-                return false;
             }
+        };
+        
+        async function fetchData() {
+            return await DataManager.fetchData();
         }
 
-        // 初始化应用
         async function initializeApp() {
-            // 设置网站标题
-            document.title = pluginsData.name;
-            
-            // 初始化公告轮播
-            initializeAnnouncement();
-            
-            // 初始化轮播图
-            await initializeBanner();
-            
-            // 初始化筛选选项
-            initializeFilterOptions();
-            
-            // 渲染插件列表
-            renderPlugins();
-            
-            // 添加事件监听器
-            addEventListeners();
-            
-            // 初始化下拉刷新
-            initPullToRefresh();
-            
-            // 处理iOS键盘弹出问题
-            handleIOSKeyboard();
+            await AppInitializer.mainInit();
         }
         
-        // 初始化公告轮播
         function initializeAnnouncement() {
-            // 检查是否有公告数据
             if (pluginsData.notice && Array.isArray(pluginsData.notice) && pluginsData.notice.length > 0) {
-                // 显示第一条公告
                 displayAnnouncement(0);
                 currentAnnouncementIndex = 0;
                 
-                // 添加点击公告文本显示下一条公告的功能
                 DOM.announcementText.style.cursor = 'pointer';
                 DOM.announcementText.addEventListener('click', function() {
                     if (pluginsData.notice.length > 1) {
@@ -3946,15 +3992,12 @@
                     }
                 });
                 
-                // 如果有多条公告，启动自动切换
                 if (pluginsData.notice.length > 1) {
                     startAnnouncementCycle();
                 }
             } else if (pluginsData.description) {
-                // 兼容旧版本：如果notice不是数组但有description字段，使用description
                 displayAnnouncement(0, pluginsData.description);
             } else {
-                // 如果没有公告数据，显示默认文本
                 displayAnnouncement(0, "欢迎使用插件中心");
             }
         }
@@ -3965,9 +4008,10 @@
             
             DOM.announcementText.innerHTML = '';
             
-            const textContent = document.createElement('span');
-            textContent.className = 'announcement-text-content';
-            textContent.textContent = text;
+            const textContent = Utils.dom.create('span', {
+                className: 'announcement-text-content',
+                textContent: text
+            });
             DOM.announcementText.appendChild(textContent);
             
             DOM.announcementText.style.opacity = 1;
@@ -3976,22 +4020,17 @@
             textContent.style.transform = 'translateX(0)';
             textContent.style.transitionDuration = '0ms';
             
-            // 检查文字是否超出容器宽度
             setTimeout(() => {
                 const containerWidth = announcementText.offsetWidth;
                 const textWidth = textContent.offsetWidth;
                 
-                // PWA模式下增加额外的检查和调试
                 if (isPWAMode) {
                     console.log('PWA模式 - 容器宽度:', containerWidth, '文字宽度:', textWidth);
                 }
                 
                 if (textWidth > containerWidth && containerWidth > 0) {
-                    // 文字超出容器，需要滚动
                     startTextScroll(textContent, containerWidth, textWidth);
                 } else {
-                    // 文字未超出容器，不需要滚动
-                    // 如果有多条公告，等待后切换到下一条
                     if (pluginsData.notice && pluginsData.notice.length > 1 && !customText) {
                         announcementSwitchTimeout = setTimeout(() => {
                             currentAnnouncementIndex = (currentAnnouncementIndex + 1) % pluginsData.notice.length;
@@ -3999,12 +4038,10 @@
                         }, WAIT_AFTER_SCROLL);
                     }
                 }
-            }, isPWAMode ? 100 : 50); // PWA模式下增加等待时间
+            }, isPWAMode ? 100 : 50);
         }
         
-        // 开始文字滚动
         function startTextScroll(textElement, containerWidth, textWidth) {
-            // 清除之前的定时器
             clearTimeout(announcementScrollTimeout);
             clearTimeout(announcementSwitchTimeout);
             
@@ -4013,7 +4050,6 @@
                 const scrollDistance = textWidth - containerWidth;
                 const scrollDuration = Math.max((scrollDistance / SCROLL_SPEED) * 1000, 1000); // 最少1秒滚动时间
                 
-                // PWA模式下的调试信息
                 if (isPWAMode) {
                     console.log('PWA模式 - 滚动距离:', scrollDistance, '滚动时长:', scrollDuration);
                 }
@@ -4041,79 +4077,16 @@
             // 实际的循环逻辑在displayAnnouncement函数中处理
         }
         
-        // 初始化下拉刷新功能
-        function initPullToRefresh() {
-            if (typeof PullToRefresh !== 'undefined') {
-                PullToRefresh.init({
-                    mainElement: 'body',
-                    instructionsPullToRefresh: '下拉刷新',
-                    instructionsReleaseToRefresh: '释放刷新',
-                    instructionsRefreshing: '刷新中',
-                    distThreshold: 60, // 触发刷新的距离阈值
-                    distMax: 80, // 最大下拉距离
-                    distReload: 50, // 刷新距离
-                    iconArrow: '↓', // 下拉箭头图标
-                    iconRefreshing: '↻', // 刷新中图标
-                    refreshTimeout: 1000, // 刷新超时时间
-                    onRefresh() {
-                        return new Promise((resolve) => {
-                            // 重新获取数据
-                            fetchData().then((success) => {
-                                if (success) {
-                                    // 显示刷新成功提示
-                                    showRefreshToast('刷新成功');
-                                } else {
-                                    // 显示刷新失败提示
-                                    showRefreshToast('刷新失败，请重试', true);
-                                }
-                                resolve();
-                            }).catch(() => {
-                                // 显示刷新失败提示
-                                showRefreshToast('刷新失败，请重试', true);
-                                resolve();
-                            });
-                        });
-                    }
-                });
-            }
-        }
+
         
-        // 显示刷新提示
-        function showRefreshToast(message, isError = false) {
-            // 创建提示元素
-            const toast = document.createElement('div');
-            toast.className = 'refresh-toast';
-            if (isError) {
-                toast.classList.add('error');
-            }
-            toast.textContent = message;
-            
-            // 添加到页面
-            document.body.appendChild(toast);
-            
-            // 显示提示
-            setTimeout(() => {
-                toast.classList.add('show');
-            }, 10);
-            
-            // 自动隐藏
-            setTimeout(() => {
-                toast.classList.remove('show');
-                setTimeout(() => {
-                    document.body.removeChild(toast);
-                }, 300);
-            }, 2000);
-        }
+
         
         // 处理iOS键盘弹出问题
         function handleIOSKeyboard() {
             // 检测是否为iOS设备
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-            // 检测是否为移动设备
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             
-            // 移除了所有与键盘相关的逻辑
-                
+            if (isIOS) {
                 // 阻止iOS上输入框聚焦时的页面缩放
                 document.addEventListener('touchstart', function(e) {
                     if (e.target === searchInput) {
@@ -4123,56 +4096,43 @@
                             e.preventDefault();
                         }
                         lastTouchTime = now;
-                        
-                        // 确保搜索框保持聚焦状态
                         e.stopPropagation();
                     }
                 }, false);
                 
-                // 防止搜索框在滚动时失焦
                 searchInput.addEventListener('touchmove', function(e) {
-                    // 阻止事件冒泡，防止触发页面的touchmove事件
                     e.stopPropagation();
                 });
             }
+        }
 
-        // 创建轮播图片元素的辅助函数
+        // 图片样式工具函数已合并到Utils.image中
+        
         async function createBannerSlide(banner) {
-            const slide = document.createElement('div');
-            slide.className = 'banner-slide';
+            const slide = Utils.dom.create('div', {
+                className: 'banner-slide'
+            });
             
-            const link = document.createElement('a');
-            link.href = banner.url;
-            link.target = '_blank';
+            const link = Utils.dom.create('a', {
+                attributes: {
+                    href: banner.url,
+                    target: '_blank'
+                }
+            });
             
-            const img = document.createElement('img');
+            const img = Utils.dom.create('img');
             img.alt = banner.name;
             
-            // 添加加载状态样式
-            img.style.backgroundColor = '#f0f0f0';
-            img.style.minHeight = '120px';
+            Utils.image.setLoadingStyle(img);
             
-            // 图片加载成功处理
             img.onload = function() {
-                this.style.backgroundColor = '';
-                this.style.minHeight = '';
+                Utils.image.clearLoadingStyle(this);
             };
             
-            // 图片加载失败处理
             img.onerror = async function() {
-                // 尝试从缓存获取图片
-                const cachedImage = await getCachedImage(banner.img);
-                if (cachedImage) {
-                    this.src = cachedImage;
-                } else {
-                    // 如果缓存也没有，显示默认图片
-                    this.src = getDefaultBannerImage();
-                    this.style.backgroundColor = '#f0f0f0';
-                    this.style.minHeight = '120px';
-                }
+                await Utils.image.handleImageError(this, CacheManager.getDefaultBanner(), true);
             };
             
-            // 优先尝试正常加载，失败时会触发onerror处理缓存逻辑
             img.src = banner.img;
             
             link.appendChild(img);
@@ -4202,8 +4162,9 @@
                     const slide = await createBannerSlide(sortedBanners[0]);
                     fragment.appendChild(slide);
                     
-                    const dot = document.createElement('div');
-                    dot.className = 'banner-dot active';
+                    const dot = Utils.dom.create('div', {
+                        className: 'banner-dot active'
+                    });
                     dotsFragment.appendChild(dot);
                     
                     DOM.bannerWrapper.innerHTML = '';
@@ -4215,7 +4176,6 @@
                     realIndex = 0;
                     DOM.bannerWrapper.style.transform = 'translateX(0%)';
                     
-                    // 为单张图片也设置触摸事件
                     initializeTouchSwipe();
                 } catch (error) {
                     console.error('创建轮播图失败:', error);
@@ -4223,7 +4183,6 @@
                 return;
             }
             
-            // 多张图片使用无限循环模式
             try {
                 await initializeInfiniteBanner(sortedBanners);
             } catch (error) {
@@ -4249,7 +4208,6 @@
                 const slide = await createBannerSlide(banner);
                 fragment.appendChild(slide);
                 
-                // 创建指示点
                 const dot = document.createElement('div');
                 dot.className = `banner-dot ${index === 0 ? 'active' : ''}`;
                 dot.addEventListener('click', () => {
@@ -4268,11 +4226,11 @@
             DOM.bannerDots.innerHTML = '';
             DOM.bannerDots.appendChild(dotsFragment);
             
-            // 设置初始位置（第二个slide，即第一张真实图片）
+            // 设置初始位置为第一张真实图片
             currentBannerIndex = 1;
             realIndex = 0;
             DOM.bannerWrapper.style.transition = 'none';
-            DOM.bannerWrapper.style.transform = `translateX(-100%)`; // 显示第二个slide（第一张真实图片）
+            DOM.bannerWrapper.style.transform = `translateX(-100%)`;
             
             // 重新启用过渡效果
             setTimeout(() => {
@@ -4284,179 +4242,6 @@
             
             // 启动自动播放
             startBannerInterval();
-        }
-        
-        // 初始化触摸滑动功能
-        function initializeTouchSwipe() {
-            // 如果已经初始化过，先清理旧的事件监听器
-            if (DOM.bannerWrapper._touchInitialized) {
-                const oldHandlers = DOM.bannerWrapper._touchHandlers;
-                if (oldHandlers) {
-                    DOM.bannerWrapper.removeEventListener('touchstart', oldHandlers.start);
-                    DOM.bannerWrapper.removeEventListener('touchmove', oldHandlers.move);
-                    DOM.bannerWrapper.removeEventListener('touchend', oldHandlers.end);
-                    DOM.bannerWrapper.removeEventListener('touchcancel', oldHandlers.cancel);
-                }
-            }
-            
-            let startX = 0;
-            let endX = 0;
-            let threshold = 50;
-            let isSwiping = false;
-            
-            // 定义新的事件处理函数
-            const touchStartHandler = function(e) {
-                // 获取轮播图数量
-                let slidesCount = 1;
-                if (pluginsData && pluginsData.banners && pluginsData.banners.length > 0) {
-                    slidesCount = pluginsData.banners.length;
-                } else {
-                    slidesCount = DOM.bannerWrapper.children.length || 1;
-                }
-                
-                // 如果只有一张图片，不处理滑动
-                if (slidesCount <= 1) {
-                    return;
-                }
-                
-                startX = e.touches[0].clientX;
-                isSwiping = true;
-                // 暂停自动轮播
-                clearInterval(bannerInterval);
-            };
-            
-            const touchMoveHandler = function(e) {
-                if (!isSwiping) return;
-                
-                const slidesCount = getBannerSlidesCount();
-                
-                // 如果只有一张图片，不处理滑动
-                if (slidesCount <= 1) {
-                    return;
-                }
-                
-                endX = e.touches[0].clientX;
-                const diffX = endX - startX;
-                
-                // 计算当前应该移动的距离
-                const translateX = -currentBannerIndex * 100 + (diffX / DOM.bannerWrapper.offsetWidth * 100);
-                
-                // 应用拖动效果
-                DOM.bannerWrapper.style.transition = 'none';
-                DOM.bannerWrapper.style.transform = `translateX(${translateX}%)`;
-                
-                // 防止页面滚动（仅在轮播图区域内）
-                const bannerContainer = e.target.closest('.banner-container');
-                if (bannerContainer) {
-                    e.preventDefault();
-                }
-            };
-            
-            const touchEndHandler = function() {
-                if (!isSwiping) return;
-                
-                const slidesCount = getBannerSlidesCount();
-                
-                // 如果只有一张图片，不处理滑动
-                if (slidesCount <= 1) {
-                    isSwiping = false;
-                    return;
-                }
-                
-                isSwiping = false;
-                const diffX = endX - startX;
-                
-                // 恢复过渡效果
-                DOM.bannerWrapper.style.transition = 'transform 0.5s ease';
-                
-                // 降低滑动阈值，使轮播图更容易切换
-                const lowerThreshold = 30;
-                
-                // 判断是否需要切换轮播图 - 修复为双向切换
-                if (Math.abs(diffX) > lowerThreshold) {
-                    if (diffX > 0) {
-                        // 向右滑动，显示上一张
-                        if (isInfiniteMode()) {
-                            prevSlideInfinite();
-                        } else {
-                            prevSlide();
-                        }
-                    } else {
-                        // 向左滑动，显示下一张
-                        if (isInfiniteMode()) {
-                            nextSlideInfinite();
-                        } else {
-                            nextSlide();
-                        }
-                    }
-                } else {
-                    // 滑动距离不够，恢复到当前轮播图
-                    if (isInfiniteMode()) {
-                        DOM.bannerWrapper.style.transform = `translateX(-${currentBannerIndex * 100}%)`;
-                    } else {
-                        goToSlide(currentBannerIndex);
-                    }
-                }
-                
-                // 重新启动自动轮播
-                startBannerInterval();
-            };
-            
-            const touchCancelHandler = function() {
-                if (!isSwiping) return;
-                
-                const slidesCount = getBannerSlidesCount();
-                
-                // 如果只有一张图片，不处理滑动
-                if (slidesCount <= 1) {
-                    isSwiping = false;
-                    return;
-                }
-                
-                isSwiping = false;
-                
-                // 恢复过渡效果
-                DOM.bannerWrapper.style.transition = 'transform 0.5s ease';
-                
-                // 恢复到当前轮播图
-                if (isInfiniteMode()) {
-                    DOM.bannerWrapper.style.transform = `translateX(-${currentBannerIndex * 100}%)`;
-                } else {
-                    goToSlide(currentBannerIndex);
-                }
-                
-                // 重新启动自动轮播
-                startBannerInterval();
-            };
-            
-            // 添加新的事件监听器
-            DOM.bannerWrapper.addEventListener('touchstart', touchStartHandler, { passive: false });
-            DOM.bannerWrapper.addEventListener('touchmove', touchMoveHandler, { passive: false });
-            DOM.bannerWrapper.addEventListener('touchend', touchEndHandler, { passive: false });
-            DOM.bannerWrapper.addEventListener('touchcancel', touchCancelHandler, { passive: false });
-            
-            // 保存事件处理函数的引用和初始化状态
-            DOM.bannerWrapper._touchHandlers = {
-                start: touchStartHandler,
-                move: touchMoveHandler,
-                end: touchEndHandler,
-                cancel: touchCancelHandler
-            };
-            DOM.bannerWrapper._touchInitialized = true;
-        }
-
-        // 获取轮播图数量的统一函数
-        function getBannerSlidesCount() {
-            if (pluginsData && pluginsData.banners && pluginsData.banners.length > 0) {
-                return pluginsData.banners.length;
-            }
-            return DOM.bannerWrapper.children.length || 1;
-        }
-        
-        // 检查是否为无限循环模式
-        function isInfiniteMode() {
-            const slidesCount = getBannerSlidesCount();
-            return slidesCount > 1 && DOM.bannerWrapper.children.length > slidesCount;
         }
         
         // 启动轮播图自动播放
@@ -4477,122 +4262,206 @@
             }
         }
 
-        // 切换到下一张轮播图
-        function nextSlide() {
-            const slidesCount = getBannerSlidesCount();
+        // 轮播图切换控制器
+        const BannerController = {
+            // 切换到下一张
+            next() {
+                const slidesCount = this.getSlidesCount();
+                if (slidesCount <= 1) return;
+                
+                if (this.isInfiniteMode()) {
+                    nextSlideInfinite();
+                } else {
+                    currentBannerIndex = (currentBannerIndex + 1) % slidesCount;
+                    this.goToSlide(currentBannerIndex);
+                }
+            },
             
-            // 如果没有轮播图或只有一张，则不切换
+            // 切换到上一张
+            prev() {
+                const slidesCount = this.getSlidesCount();
+                if (slidesCount <= 1) return;
+                
+                if (this.isInfiniteMode()) {
+                    prevSlideInfinite();
+                } else {
+                    currentBannerIndex = (currentBannerIndex - 1 + slidesCount) % slidesCount;
+                    this.goToSlide(currentBannerIndex);
+                }
+            },
+            
+            // 跳转到指定位置
+            goTo(index) {
+                if (this.isInfiniteMode()) {
+                    goToSlideInfinite(index);
+                } else {
+                    this.goToSlide(index);
+                }
+            },
+            
+            // 获取轮播图数量
+            getSlidesCount() {
+                if (pluginsData && pluginsData.banners && pluginsData.banners.length > 0) {
+                    return pluginsData.banners.length;
+                }
+                return DOM.bannerWrapper.children.length || 1;
+            },
+            
+            // 检查是否为无限循环模式
+            isInfiniteMode() {
+                return this.getSlidesCount() > 1 && DOM.bannerWrapper.children.length > this.getSlidesCount();
+            },
+            
+            // 切换到指定轮播图
+            goToSlide(index) {
+                currentBannerIndex = index;
+                
+                // 确保过渡效果已启用
+                DOM.bannerWrapper.style.transition = 'transform 0.5s ease';
+                DOM.bannerWrapper.style.transform = `translateX(-${index * 100}%)`;
+                
+                // 更新指示点状态
+                updateDots(index);
+                
+                // 重置自动轮播计时器
+                startBannerInterval();
+            },
+            
+            // 初始化触摸滑动（使用触摸管理器）
+            initializeTouchSwipe() {
+                // 如果已经初始化过，先清理旧的事件监听器
+                if (DOM.bannerWrapper._touchHandlers) {
+                    // 清理旧的触摸处理器（假设有清理方法）
+                    DOM.bannerWrapper._touchHandlers = null;
+                }
+                
+                // 使用新的触摸管理器
+                const handlers = Utils.touch.addSwipeListener(DOM.bannerWrapper, {
+                    passive: false,
+                    threshold: 30,
+                    onStart: (e) => {
+                        const slidesCount = this.getSlidesCount();
+                        if (slidesCount <= 1) return false;
+                        
+                        clearInterval(bannerInterval);
+                        return true;
+                    },
+                    
+                    onMove: (e, { startX, endX }) => {
+                        if (this.getSlidesCount() <= 1) return;
+                        
+                        const diffX = endX - startX;
+                        const translateX = -currentBannerIndex * 100 + (diffX / DOM.bannerWrapper.offsetWidth * 100);
+                        
+                        DOM.bannerWrapper.style.transition = 'none';
+                        DOM.bannerWrapper.style.transform = `translateX(${translateX}%)`;
+                        
+                        if (e.target.closest('.banner-container')) {
+                            e.preventDefault();
+                        }
+                    },
+                    
+                    onEnd: (e, { startX, endX, touchMoved }) => {
+                        if (this.getSlidesCount() <= 1) return;
+                        
+                        const diffX = endX - startX;
+                        DOM.bannerWrapper.style.transition = 'transform 0.5s ease';
+                        
+                        if (touchMoved && Math.abs(diffX) > 30) {
+                            if (diffX > 0) {
+                                this.prev();
+                            } else {
+                                this.next();
+                            }
+                        } else {
+                            if (this.isInfiniteMode()) {
+                                DOM.bannerWrapper.style.transform = `translateX(-${currentBannerIndex * 100}%)`;
+                            } else {
+                                this.goToSlide(currentBannerIndex);
+                            }
+                        }
+                        
+                        startBannerInterval();
+                    },
+                    
+                    onCancel: () => {
+                        if (this.getSlidesCount() <= 1) return;
+                        
+                        DOM.bannerWrapper.style.transition = 'transform 0.5s ease';
+                        
+                        if (this.isInfiniteMode()) {
+                            DOM.bannerWrapper.style.transform = `translateX(-${currentBannerIndex * 100}%)`;
+                        } else {
+                            this.goToSlide(currentBannerIndex);
+                        }
+                        
+                        startBannerInterval();
+                    }
+                });
+                
+                // 保存引用
+                DOM.bannerWrapper._touchHandlers = handlers;
+            }
+        };
+        
+        // 保持向后兼容的函数
+        function nextSlide() { BannerController.next(); }
+        function prevSlide() { BannerController.prev(); }
+        function goToSlide(index) { BannerController.goToSlide(index); }
+        function getBannerSlidesCount() { return BannerController.getSlidesCount(); }
+        function isInfiniteMode() { return BannerController.isInfiniteMode(); }
+        function initializeTouchSwipe() { BannerController.initializeTouchSwipe(); }
+        
+        // 无限循环切换的通用处理函数
+        function handleInfiniteSlide(direction) {
+            if (isTransitioning) return;
+            
+            const slidesCount = getBannerSlidesCount();
             if (slidesCount <= 1) return;
             
-            // 如果是无限循环模式
-            if (isInfiniteMode()) {
-                nextSlideInfinite();
+            isTransitioning = true;
+            currentBannerIndex += direction;
+            
+            DOM.bannerWrapper.style.transform = `translateX(-${currentBannerIndex * 100}%)`;
+            
+            // 检查边界条件
+            const isAtEnd = (direction > 0 && currentBannerIndex === slidesCount + 1) ||
+                           (direction < 0 && currentBannerIndex === 0);
+            
+            if (isAtEnd) {
+                setTimeout(() => {
+                    DOM.bannerWrapper.style.transition = 'none';
+                    if (direction > 0) {
+                        currentBannerIndex = 1;
+                        realIndex = 0;
+                    } else {
+                        currentBannerIndex = slidesCount;
+                        realIndex = slidesCount - 1;
+                    }
+                    DOM.bannerWrapper.style.transform = `translateX(-${currentBannerIndex * 100}%)`;
+                    setTimeout(() => {
+                        DOM.bannerWrapper.style.transition = 'transform 0.5s ease';
+                        isTransitioning = false;
+                    }, 50);
+                }, 500);
             } else {
-                currentBannerIndex = (currentBannerIndex + 1) % slidesCount;
-                goToSlide(currentBannerIndex);
+                setTimeout(() => {
+                    isTransitioning = false;
+                }, 500);
+                realIndex = (realIndex + direction + slidesCount) % slidesCount;
             }
-        }
-
-        // 切换到上一张轮播图
-        function prevSlide() {
-            const slidesCount = getBannerSlidesCount();
             
-            // 如果没有轮播图或只有一张，则不切换
-            if (slidesCount <= 1) return;
-            
-            // 如果是无限循环模式
-            if (isInfiniteMode()) {
-                prevSlideInfinite();
-            } else {
-                currentBannerIndex = (currentBannerIndex - 1 + slidesCount) % slidesCount;
-                goToSlide(currentBannerIndex);
-            }
-        }
-
-        // 切换到指定轮播图
-        function goToSlide(index) {
-            currentBannerIndex = index;
-            
-            // 确保过渡效果已启用
-            DOM.bannerWrapper.style.transition = 'transform 0.5s ease';
-            DOM.bannerWrapper.style.transform = `translateX(-${index * 100}%)`;
-            
-            // 更新指示点状态
-            const dots = DOM.bannerDots.querySelectorAll('.banner-dot');
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === index);
-            });
-            
-            // 重置自动轮播计时器
-            startBannerInterval();
+            updateDots();
         }
         
         // 无限循环下一张
         function nextSlideInfinite() {
-            if (isTransitioning) return;
-            
-            const slidesCount = getBannerSlidesCount();
-            if (slidesCount <= 1) return;
-            
-            isTransitioning = true;
-            currentBannerIndex++;
-            
-            DOM.bannerWrapper.style.transform = `translateX(-${currentBannerIndex * 100}%)`;
-            
-            // 检查是否到达克隆的第一张图片
-            if (currentBannerIndex === slidesCount + 1) {
-                setTimeout(() => {
-                    DOM.bannerWrapper.style.transition = 'none';
-                    currentBannerIndex = 1; // 跳回真实的第一张
-                    DOM.bannerWrapper.style.transform = `translateX(-100%)`;
-                    setTimeout(() => {
-                        DOM.bannerWrapper.style.transition = 'transform 0.5s ease';
-                        isTransitioning = false;
-                    }, 50);
-                }, 500);
-                realIndex = 0;
-            } else {
-                setTimeout(() => {
-                    isTransitioning = false;
-                }, 500);
-                realIndex = (realIndex + 1) % slidesCount;
-            }
-            
-            updateDots();
+            handleInfiniteSlide(1);
         }
         
         // 无限循环上一张
         function prevSlideInfinite() {
-            if (isTransitioning) return;
-            
-            const slidesCount = getBannerSlidesCount();
-            if (slidesCount <= 1) return;
-            
-            isTransitioning = true;
-            currentBannerIndex--;
-            
-            DOM.bannerWrapper.style.transform = `translateX(-${currentBannerIndex * 100}%)`;
-            
-            // 检查是否到达克隆的最后一张图片
-            if (currentBannerIndex === 0) {
-                setTimeout(() => {
-                    DOM.bannerWrapper.style.transition = 'none';
-                    currentBannerIndex = slidesCount; // 跳回真实的最后一张
-                    DOM.bannerWrapper.style.transform = `translateX(-${slidesCount * 100}%)`;
-                    setTimeout(() => {
-                        DOM.bannerWrapper.style.transition = 'transform 0.5s ease';
-                        isTransitioning = false;
-                    }, 50);
-                }, 500);
-                realIndex = slidesCount - 1;
-            } else {
-                setTimeout(() => {
-                    isTransitioning = false;
-                }, 500);
-                realIndex = (realIndex - 1 + slidesCount) % slidesCount;
-            }
-            
-            updateDots();
+            handleInfiniteSlide(-1);
         }
         
         // 跳转到指定slide（无限循环版本）
@@ -4616,17 +4485,17 @@
         }
         
         // 更新指示点
-        function updateDots() {
+        function updateDots(activeIndex = realIndex) {
             const dots = DOM.bannerDots.querySelectorAll('.banner-dot');
             dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === realIndex);
+                dot.classList.toggle('active', i === activeIndex);
             });
         }
 
         // 初始化筛选选项
         function initializeFilterOptions() {
             // 清空现有选项，避免重复创建
-            DOM.filterOptions.innerHTML = '';
+            Utils.dom.clear(DOM.filterOptions);
             
             // 收集所有唯一的标签
             const allTags = new Set();
@@ -4636,26 +4505,25 @@
                 }
             });
             
-            // 创建"全部"选项
-            const allOption = document.createElement('div');
-            allOption.className = 'filter-option active';
-            allOption.textContent = '全部';
-            allOption.dataset.value = 'all';
-            allOption.addEventListener('click', function() {
-                applyFilter(this);
-            });
-            DOM.filterOptions.appendChild(allOption);
-            
-            // 创建其他标签选项
-            Array.from(allTags).sort().forEach(tag => {
-                const option = document.createElement('div');
-                option.className = 'filter-option';
-                option.textContent = tag;
-                option.dataset.value = tag;
+            // 创建筛选选项的通用函数
+            const createFilterOption = (text, value, isActive = false) => {
+                const option = Utils.dom.create('div', {
+                    className: `filter-option${isActive ? ' active' : ''}`,
+                    textContent: text,
+                    'data-value': value
+                });
                 option.addEventListener('click', function() {
                     applyFilter(this);
                 });
-                DOM.filterOptions.appendChild(option);
+                return option;
+            };
+            
+            // 创建"全部"选项
+            DOM.filterOptions.appendChild(createFilterOption('全部', 'all', true));
+            
+            // 创建其他标签选项
+            Array.from(allTags).sort().forEach(tag => {
+                DOM.filterOptions.appendChild(createFilterOption(tag, tag));
             });
         }
         
@@ -4673,14 +4541,10 @@
             
             // 渲染筛选结果
             renderPlugins();
-            
-            // 关闭筛选弹窗
-            DOM.filterModal.classList.remove('show');
         }
 
         // 渲染插件列表
         function renderPlugins() {
-            // 获取搜索关键词
             const searchTerm = DOM.searchInput.value.toLowerCase().trim();
             
             // 过滤并排序插件
@@ -4706,25 +4570,26 @@
             });
             
             // 清空插件网格
-            DOM.pluginsGrid.innerHTML = '';
+            Utils.dom.clear(DOM.pluginsGrid);
             
             // 如果没有结果
             if (filteredPlugins.length === 0) {
-                DOM.pluginsGrid.innerHTML = `<div class="no-results">没有找到匹配的插件</div>`;
+                const noResults = Utils.dom.create('div', {
+                    className: 'no-results',
+                    textContent: '没有找到匹配的插件'
+                });
+                DOM.pluginsGrid.appendChild(noResults);
                 return;
             }
             
             // 渲染插件卡片
             filteredPlugins.forEach(plugin => {
-                const card = document.createElement('div');
-                card.className = 'plugin-card';
+                const card = Utils.dom.create('div', {
+                    className: 'plugin-card'
+                });
                 
-                // 处理描述中的换行符
-                const formattedDesc = plugin.desc.replace(/\\n/g, '\n');
-                
-                // 格式化日期，增加时分秒显示
-                const dateObj = new Date(plugin.date);
-                const formattedDate = `更新于 ${dateObj.getFullYear()}-${(dateObj.getMonth() + 1).toString().padStart(2, '0')}-${dateObj.getDate().toString().padStart(2, '0')} ${dateObj.getHours().toString().padStart(2, '0')}:${dateObj.getMinutes().toString().padStart(2, '0')}:${dateObj.getSeconds().toString().padStart(2, '0')}`;
+                const formattedDesc = Utils.format.description(plugin.desc);
+                const formattedDate = `更新于 ${Utils.format.date(plugin.date)}`;
                 
                 card.innerHTML = `
                     <div class="plugin-header">
@@ -4761,146 +4626,331 @@
             });
         }
 
-        // 添加事件监听器
-        function addEventListeners() {
-            // 轮播图控制
-            DOM.bannerPrev.addEventListener('click', () => {
-                if (isInfiniteMode()) {
-                    prevSlideInfinite();
-                } else {
-                    prevSlide();
-                }
-            });
-            DOM.bannerNext.addEventListener('click', () => {
-                if (isInfiniteMode()) {
-                    nextSlideInfinite();
-                } else {
-                    nextSlide();
-                }
-            });
-            
-            // 搜索功能
-            DOM.searchInput.addEventListener('input', function() {
-                renderPlugins();
-            });
-            
-            // 处理搜索框键盘事件
-            DOM.searchInput.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.keyCode === 13) {
+        // 事件管理器
+        const EventManager = {
+            // 事件配置映射
+            eventMap: [
+                // 轮播图控制事件
+                { element: 'bannerPrev', event: 'click', handler: () => BannerController.prev() },
+                { element: 'bannerNext', event: 'click', handler: () => BannerController.next() },
+                
+                // 搜索框事件
+                { element: 'searchInput', event: 'input', handler: () => renderPlugins() },
+                { element: 'searchInput', event: 'keydown', handler: (e) => {
+                    if (e.key === 'Enter' || e.keyCode === 13) {
+                        e.preventDefault();
+                        DOM.searchInput.blur();
+                    }
+                }},
+                { element: 'searchInput', event: 'focus', handler: function(e) {
+                    // 防止iOS缩放
+                    document.body.style.fontSize = '16px';
+                    document.documentElement.style.touchAction = 'pan-x pan-y';
+                    
+                    // 设置光标位置到末尾
+                    setTimeout(() => {
+                        if (document.activeElement === this) {
+                            const length = this.value.length;
+                            this.setSelectionRange(length, length);
+                        }
+                    }, 10);
+                }},
+                { element: 'searchInput', event: 'click', handler: function(e) {
+                    const clickX = e.offsetX || e.layerX;
+                    const paddingLeft = 38;
+                    
+                    // 点击搜索图标区域时，光标移到开头
+                    if (clickX <= paddingLeft) {
+                        setTimeout(() => {
+                            this.setSelectionRange(0, 0);
+                        }, 0);
+                    }
+                }},
+                { element: 'searchInput', event: 'blur', handler: () => {
+                    // 恢复默认样式
+                    document.body.style.fontSize = '';
+                    document.documentElement.style.touchAction = '';
+                }},
+                { element: 'searchInput', event: 'dblclick', handler: (e) => {
                     e.preventDefault();
-                    DOM.searchInput.blur();
-                }
-            });
+                    e.stopPropagation();
+                    return false;
+                }},
+                
+                // 筛选功能事件
+                { element: 'filterButton', event: 'click', handler: () => EventManager.handlers.filter.open() },
+                { element: 'filterClose', event: 'click', handler: () => EventManager.handlers.filter.close() },
+                { element: 'filterModal', event: 'click', handler: (e) => EventManager.handlers.filter.modalClick(e) },
+                { element: 'filterModal', event: 'touchend', handler: (e) => EventManager.handlers.filter.modalClick(e) }
+            ],
             
-            // 防止iOS设备上搜索框聚焦时页面缩放
-            DOM.searchInput.addEventListener('focus', function(e) {
-                document.body.style.fontSize = '16px';
-                document.documentElement.style.touchAction = 'pan-x pan-y';
-            });
-            
-            DOM.searchInput.addEventListener('blur', function() {
-                document.body.style.fontSize = '';
-                document.documentElement.style.touchAction = '';
-            });
-            
-            // 阻止搜索框上的双击事件
-            DOM.searchInput.addEventListener('dblclick', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                return false;
-            });
-            
-            // 筛选功能
-            DOM.filterButton.addEventListener('click', () => {
-                DOM.filterModal.classList.add('show');
-            });
-            
-            DOM.filterClose.addEventListener('click', () => {
-                DOM.filterModal.classList.remove('show');
-            });
-            
-            // 点击弹窗外部关闭弹窗
-            DOM.filterModal.addEventListener('click', (e) => {
-                if (e.target === DOM.filterModal) {
-                    DOM.filterModal.classList.remove('show');
-                }
-            });
-        }
+            // 筛选功能处理器
+            handlers: {
+                filter: {
+                    // 禁用页面滚动的通用函数
+                    disablePageScroll(scrollY) {
+                        Utils.style.disablePageScroll(scrollY);
+                        
+                        const modalContent = Utils.dom.get('.filter-modal-content', DOM.filterModal);
+                        if (modalContent) {
+                            modalContent.style.touchAction = 'pan-y';
+                        }
+                    },
+                    
+                    enablePageScroll(scrollY) {
+                        Utils.style.enablePageScroll(scrollY);
+                        
+                        const modalContent = Utils.dom.get('.filter-modal-content', DOM.filterModal);
+                        if (modalContent) {
+                            modalContent.style.touchAction = '';
+                        }
+                    },
+                    
+                    open: () => {
+                        // 记录当前滚动位置
+                        const scrollY = window.scrollY;
+                        
+                        // 显示弹窗
+                        DOM.filterModal.style.display = 'flex';
+                        
+                        // 禁止页面滚动
+                        EventManager.handlers.filter.disablePageScroll(scrollY);
+                        
+                        // 阻止触摸滚动事件
+                        document.addEventListener('touchstart', EventManager.handlers.filter.preventScroll, { passive: false });
+                        document.addEventListener('touchmove', EventManager.handlers.filter.preventScroll, { passive: false });
+                        document.addEventListener('wheel', EventManager.handlers.filter.preventScroll, { passive: false });
+                        
 
-        // 页面加载完成后获取数据并初始化
-        document.addEventListener('DOMContentLoaded', function() {
-          // 设置初始占位内容
-            // 设置公告栏初始状态 - 只显示喇叭图标，不显示文字
-            announcementText.textContent = "";
-            // 设置初始透明度为0，为后续淡入做准备
-            announcementText.style.opacity = 0;
-            
-            // 设置默认轮播图占位
-            if (bannerWrapper.innerHTML === '') {
-                // 创建一个占位轮播图，使其在整个加载过程中保持可见
-                const placeholderSlide = document.createElement('div');
-                placeholderSlide.className = 'banner-slide loading-placeholder';
-                placeholderSlide.style.backgroundColor = '#f0f0f0';
-                
-                // 根据设备宽度设置不同的高度
-                const deviceWidth = window.innerWidth;
-                if (deviceWidth <= 480) {
-                    placeholderSlide.style.minHeight = '120px';
-                } else if (deviceWidth <= 768) {
-                    placeholderSlide.style.minHeight = '150px';
-                } else {
-                    placeholderSlide.style.minHeight = '180px';
-                }
-                
-                // 添加加载中指示器
-                const loadingIndicator = document.createElement('div');
-                loadingIndicator.className = 'loading-indicator';
-                loadingIndicator.innerHTML = '加载中...';
-                loadingIndicator.style.position = 'absolute';
-                loadingIndicator.style.top = '50%';
-                loadingIndicator.style.left = '50%';
-                loadingIndicator.style.transform = 'translate(-50%, -50%)';
-                loadingIndicator.style.color = '#999';
-                loadingIndicator.style.fontSize = '14px';
-                placeholderSlide.appendChild(loadingIndicator);
-                
-                DOM.bannerWrapper.appendChild(placeholderSlide);
-                
-                // 为占位轮播图也初始化触摸滑动功能（虽然单张图片不会响应滑动）
-                initializeTouchSwipe();
-                
-                // 创建一个占位点
-                const placeholderDot = document.createElement('div');
-                placeholderDot.className = 'banner-dot active';
-                DOM.bannerDots.appendChild(placeholderDot);
-            }
-            
-            // 显示加载中提示
-            DOM.pluginsGrid.innerHTML = `<div class="no-results">数据加载中...</div>`;
-            
-            // 获取数据
-            fetchData();
-            
-            // 确保视口设置正确（移动设备缩放控制已在统一的触摸事件处理中实现）
-            const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-            const isIOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-            
-            if (isMobileDevice) {
-                const metaViewport = document.querySelector('meta[name="viewport"]');
-                
-                // 确保视口设置包含禁用缩放
-                if (metaViewport && !metaViewport.content.includes('user-scalable=no')) {
-                    if (isIOSDevice) {
-                        metaViewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
-                    } else {
-                        metaViewport.content = 'width=device-width, initial-scale=1.0, user-scalable=no';
+                        
+                        // 存储滚动位置供恢复使用
+                        DOM.filterModal.dataset.scrollY = scrollY;
+                        
+                        // 添加ESC键关闭功能
+                        document.addEventListener('keydown', EventManager.handlers.filter.handleKeydown);
+                    },
+                    close: () => {
+                        // 获取存储的滚动位置
+                        const scrollY = DOM.filterModal.dataset.scrollY;
+                        
+                        // 隐藏弹窗
+                        DOM.filterModal.style.display = 'none';
+                        
+                        // 恢复页面滚动
+                        EventManager.handlers.filter.enablePageScroll(scrollY);
+                        
+                        // 移除事件监听器
+                        document.removeEventListener('touchstart', EventManager.handlers.filter.preventScroll, { passive: false });
+                        document.removeEventListener('touchmove', EventManager.handlers.filter.preventScroll, { passive: false });
+                        document.removeEventListener('wheel', EventManager.handlers.filter.preventScroll, { passive: false });
+                        document.removeEventListener('keydown', EventManager.handlers.filter.handleKeydown);
+                        
+
+                    },
+                    modalClick: (e) => {
+                        e.stopPropagation();
+                        
+                        const target = e.target || (e.touches && e.touches[0] ? document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY) : null);
+                        
+                        if (target && !target.closest('.filter-modal-content')) {
+                            EventManager.handlers.filter.close();
+                        }
+                    },
+                    preventScroll: (e) => {
+                        if (!e.target.closest('.filter-modal-content')) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            return false;
+                        }
+                        
+                        if (e.type === 'touchstart' || e.type === 'touchmove') {
+                            const modalContent = e.target.closest('.filter-modal-content');
+                            if (modalContent && modalContent.scrollTop <= 0) {
+                                if (e.type === 'touchmove' && e.touches && e.touches.length > 0) {
+                                    const touch = e.touches[0];
+                                    const startY = modalContent.dataset.startY || touch.clientY;
+                                    if (touch.clientY > startY) {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        return false;
+                                    }
+                                }
+                                if (e.type === 'touchstart') {
+                                    modalContent.dataset.startY = e.touches[0].clientY;
+                                }
+                            }
+                        }
+                    },
+                    // 处理键盘事件
+                    handleKeydown: (e) => {
+                        if (e.key === 'Escape' || e.keyCode === 27) {
+                            EventManager.handlers.filter.close();
+                        }
                     }
                 }
+            },
+            
+            // 绑定所有事件监听器
+            bindAll() {
+                this.eventMap.forEach(({ element, event, handler }) => {
+                    DOM[element]?.addEventListener(event, handler);
+                });
+            },
+            
+            unbindAll() {
+                this.eventMap.forEach(({ element, event, handler }) => {
+                    DOM[element]?.removeEventListener(event, handler);
+                });
             }
+        };
+        
+        function addEventListeners() {
+            EventManager.bindAll();
+        }
+
+        const AppInitializer = {
+            phases: {
+                preload: [
+                    'setupViewport',
+                    'setupAnnouncement', 
+                    'createBannerPlaceholder',
+                    'showLoadingState'
+                ],
+                main: [
+                    'setTitle',
+                    'initializeAnnouncement',
+                    'initializeBanner',
+                    'initializeFilterOptions',
+                    'renderPlugins',
+                    'bindEvents',
+                    'handleIOSKeyboard'
+                ]
+            },
+            
+            async preloadInit() {
+                for (const method of this.phases.preload) {
+                    await this[method]();
+                }
+            },
+            
+            async mainInit() {
+                for (const method of this.phases.main) {
+                    await this[method]();
+                }
+            },
+            
+            setupViewport() {
+                const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                const isIOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+                
+                if (isMobileDevice) {
+                    const metaViewport = document.querySelector('meta[name="viewport"]');
+                    if (metaViewport && !metaViewport.content.includes('user-scalable=no')) {
+                        const content = isIOSDevice 
+                            ? 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
+                            : 'width=device-width, initial-scale=1.0, user-scalable=no';
+                        metaViewport.content = content;
+                    }
+                }
+            },
+            
+            setupAnnouncement() {
+                Utils.dom.clear(DOM.announcementText);
+                DOM.announcementText.style.opacity = 0;
+            },
+            
+            createBannerPlaceholder() {
+                if (DOM.bannerWrapper.innerHTML !== '') return;
+                
+                const placeholderSlide = Utils.dom.create('div', {
+                    className: 'banner-slide loading-placeholder',
+                    style: {
+                        backgroundColor: 'var(--loading-bg)',
+                        minHeight: this.getResponsiveHeight()
+                    }
+                });
+                
+                const loadingIndicator = Utils.dom.create('div', {
+                    className: 'loading-indicator',
+                    textContent: '加载中...',
+                    style: {
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        color: '#999',
+                        fontSize: '14px'
+                    }
+                });
+                
+                placeholderSlide.appendChild(loadingIndicator);
+                DOM.bannerWrapper.appendChild(placeholderSlide);
+                
+
+                BannerController.initializeTouchSwipe();
+                
+                // 创建占位点
+                const placeholderDot = Utils.dom.create('div', {
+                    className: 'banner-dot active'
+                });
+                DOM.bannerDots.appendChild(placeholderDot);
+            },
+            
+            showLoadingState() {
+                Utils.dom.clear(DOM.pluginsGrid);
+                const loadingElement = Utils.dom.create('div', {
+                    className: 'no-results',
+                    textContent: '数据加载中...'
+                });
+                DOM.pluginsGrid.appendChild(loadingElement);
+            },
+            
+            getResponsiveHeight() {
+                const deviceWidth = window.innerWidth;
+                return deviceWidth <= 480 ? '120px' : deviceWidth <= 768 ? '150px' : '180px';
+            },
+            
+            setTitle() {
+                if (pluginsData?.name) {
+                    document.title = pluginsData.name;
+                }
+            },
+            
+            initializeAnnouncement() {
+                return initializeAnnouncement();
+            },
+            
+            async initializeBanner() {
+                return await initializeBanner();
+            },
+            
+            initializeFilterOptions() {
+                return initializeFilterOptions();
+            },
+            
+            renderPlugins() {
+                return renderPlugins();
+            },
+            
+            bindEvents() {
+                return addEventListeners();
+            },
+            
+
+            
+            // 处理iOS键盘
+            handleIOSKeyboard() {
+                return handleIOSKeyboard();
+            }
+        };
+        
+        document.addEventListener('DOMContentLoaded', async function() {
+            await AppInitializer.preloadInit();
+            
+            await DataManager.fetchData();
         });
     </script>
     
-    <!-- 页面底部版权信息 -->
     <footer class="footer">
         <div class="container">
             <p class="copyright">Copyright © 2025 iKelee. All rights reserved. Made with ❤️</p>
@@ -4911,16 +4961,13 @@
         </div>
     </footer>
     
-    <!-- Service Worker Registration -->
     <script>
-        // PWA Service Worker 注册 - 基于ETag的缓存机制
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', async function() {
                 try {
                     const registration = await navigator.serviceWorker.register('./sw.js');
                     console.log('ServiceWorker registration successful with scope: ', registration.scope);
                     
-                    // 监听Service Worker更新
                     registration.addEventListener('updatefound', () => {
                         const newWorker = registration.installing;
                         console.log('New Service Worker found, installing...');
@@ -4928,15 +4975,12 @@
                         newWorker.addEventListener('statechange', () => {
                             if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                                 console.log('New Service Worker installed, ready to activate');
-                                // 可选：显示更新提示给用户
-                                // showUpdateAvailableNotification();
+
                             }
                         });
                     });
                     
-                    // 监听Service Worker控制变化
                     navigator.serviceWorker.addEventListener('controllerchange', () => {
-                        // 只有在已经有控制器的情况下才刷新页面，避免首次安装时的刷新
                         if (navigator.serviceWorker.controller) {
                             console.log('Service Worker controller changed, reloading page...');
                             window.location.reload();
@@ -4949,7 +4993,6 @@
             });
         }
         
-        // PWA 安装提示
         let deferredPrompt;
         const installButton = document.createElement('button');
         installButton.textContent = '安装应用';
@@ -4994,8 +5037,6 @@
             deferredPrompt = null;
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'979d27586de70447',t:'MTc1Njk4NTQxNA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border: none; visibility: hidden;"></iframe><script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;dfbd81885f1a4669ab89408833054799&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
-
-
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97e6750c1aa484cf',t:'MTc1Nzc1NDA1Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border: none; visibility: hidden;"></iframe><script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;dfbd81885f1a4669ab89408833054799&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
 
 <button style="position: fixed; bottom: 20px; right: 20px; background-color: var(--accent-color); color: white; border: none; border-radius: 25px; padding: 12px 20px; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: rgba(0, 122, 255, 0.3) 0px 4px 12px; z-index: 1000; display: block; transition: 0.3s;">安装应用</button></body></html>

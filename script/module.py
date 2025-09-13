@@ -255,6 +255,13 @@ def process_file(
             )
 
 
+def process_biliuniverse(url: str, dst_dir: str):
+    content = get_url_text_content(url)
+    content = modify_content_common(content, "sgmodule")
+    module_name = url.split("/")[-1]
+    save_content(content, os.path.join(dst_dir, module_name))
+
+
 ###############################################################################
 #
 # main
@@ -274,6 +281,13 @@ if __name__ == "__main__":
                 categoty="iKeLee",
             )
         if file_ext == "sgmodule":
+            for url in [
+                "https://github.com/BiliUniverse/Enhanced/releases/latest/download/BiliBili.Enhanced.sgmodule",
+                "https://github.com/BiliUniverse/Global/releases/latest/download/BiliBili.Global.sgmodule",
+                "https://github.com/BiliUniverse/Redirect/releases/latest/download/BiliBili.Redirect.sgmodule",
+                "https://github.com/BiliUniverse/ADBlock/releases/latest/download/BiliBili.ADBlock.sgmodule",
+            ]:
+                process_biliuniverse(url, dst_dir)
             with open(
                 os.path.join(dst_dir, "Node_detection_tool.sgmodule"),
                 mode="w",
