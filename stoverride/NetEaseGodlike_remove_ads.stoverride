@@ -1,7 +1,7 @@
 name: |-
   网易大神去广告
 desc: |-
-  移除开屏广告，精简我的页面。
+  移除开屏广告，精简大量冗余的配置文件，精简我的页面。
 author: |-
   可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
 icon: |-
@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://hub.kelee.one
 date: |-
-  2025-05-13 15:17:08
+  2025-09-18 01:42:22
 
 http:
 
@@ -29,7 +29,15 @@ http:
     - >-
       ^https:\/\/god\.gameyw\.netease\.com\/v\d\/ad - reject
 
-  body-rewrite:
-    - >-
-      ^https:\/\/app-conf\.ds\.163\.com\/v1\/app\/base\/conf\/static\/start-config\? response-replace-regex \{"os":"all","weight":50\.0,"hidden":false,"name":"游戏"\},\{"os":"all","weight":50\.0,"hidden":false,"name":"频道"\}, null
+  script:
+    - match: ^https:\/\/app-conf\.ds\.163\.com\/v1\/app\/base\/conf\/static\/start-config\?os=ios
+      name: "网易大神去广告_14"
+      type: response
+      require-body: true
+      timeout: 10
+
+script-providers:
+  "网易大神去广告_14":
+    url: https://kelee.one/Resource/JavaScript/NetEaseGodlike/NetEaseGodlike_remove_ads.js
+    interval: 86400
 
