@@ -1,0 +1,77 @@
+name: |-
+  阅友去广告
+desc: |-
+  移除开屏广告、弹窗广告和阅读页面广告，移除底栏福利按钮。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Yueyou.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id1066723192
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://hub.kelee.one
+date: |-
+  2025-05-13 15:17:08
+
+rules:
+  - DOMAIN,ads.reader.yueyouxs.com,REJECT
+
+http:
+
+  mitm:
+    - "goway.reader.yueyouxs.com"
+
+  body-rewrite:
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","isShowDLPopup"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","isShowGame"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","touTiaoShowDlPopup"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","offLineDownload","WatchVideoBtnDesc"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","readVipFirstCfg"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","readVipNormalCfg"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","notifyAd"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","hotStartSplashTime"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","hotStartReqSwitch"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","isShowBFTab"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","popReqDelayTime"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","benefitCfg"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","chestTask"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","hotStartAd"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","activeTagList"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","secondOrderCfg"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","secondOrderList"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","blockedWordsCfg"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","aaReportListCfg"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","pddAdSwitch"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","isShowShelfAuthPopup"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq delpaths([["data","firstPopUpAmount"]])
+    - >-
+      ^https:\/\/goway\.reader\.yueyouxs\.com\/assemble\/app\/basic\/getAppInfo\? response-jq if (getpath(["data"]) | has("isAdClosed")) then (setpath(["data","isAdClosed"]; true)) else . end
+

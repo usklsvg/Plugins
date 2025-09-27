@@ -6,7 +6,7 @@
 #!openUrl=https://apps.apple.com/app/id570610859
 #!tag=去广告
 #!homepage=https://hub.kelee.one
-#!date=2025-09-18 21:52:29
+#!date=2025-09-27 00:39:45
 #!arguments=removePinnedArticles:false,removeAllBanners:false
 
 [URL Rewrite]
@@ -14,7 +14,7 @@
 ^https?:\/\/dat\.ruanmei\.com\/ithome\/money\/acd\.json$ - reject
 
 [Script]
-IT之家去广告 = type=http-response, pattern=^https:\/\/napi\.ithome\.com\/api\/(news\/indexv2\/iphone\/910$|topmenu\/getfeeds\?), script-path=https://kelee.one/Resource/JavaScript/IThome/IThome_remove_ads.js, requires-body=true, argument="[{{{removeAllBanners}}},{{{removePinnedArticles}}}]", script-update-interval=-1
+IT之家去广告 = type=http-response, pattern=^https:\/\/napi\.ithome\.com\/api\/(news\/indexv2\/iphone\/\d+$|topmenu\/getfeeds\?), script-path=https://kelee.one/Resource/JavaScript/IThome/IThome_remove_ads.js, requires-body=true, argument="[{{{removeAllBanners}}},{{{removePinnedArticles}}}]", script-update-interval=-1
 
 [MITM]
 hostname = %APPEND% napi.ithome.com, api.zuihuimai.com, dat.ruanmei.com
