@@ -1,0 +1,46 @@
+name: |-
+  胖乖生活去广告
+desc: |-
+  移除开屏广告、横幅轮播图、网格广告、信息流广告、浮窗广告，精简我的页面。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/PangguaiLife.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id1597902801
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://hub.kelee.one
+date: |-
+  2025-09-15 21:51:48
+
+http:
+
+  mitm:
+    - "userapi.qiekj.com"
+
+  url-rewrite:
+    - >-
+      ^https:\/\/userapi\.qiekj\.com\/slot\/get$ - reject-dict
+    - >-
+      ^https:\/\/userapi\.qiekj\.com\/appTitle\/get$ - reject-dict
+    - >-
+      ^https:\/\/userapi\.qiekj\.com\/integralRecord\/integralDailStatistics$ - reject-dict
+    - >-
+      ^https:\/\/userapi\.qiekj\.com\/local-life\/category$ - reject-dict
+    - >-
+      ^https:\/\/userapi\.qiekj\.com\/integralGoods\/queryIntegralGoodsPage$ - reject-dict
+    - >-
+      ^https:\/\/userapi\.qiekj\.com\/task\/list$ - reject-dict
+
+  body-rewrite:
+    - >-
+      ^https:\/\/userapi\.qiekj\.com\/local-life\/tab-order$ response-jq if (getpath([]) | has("data")) then (setpath(["data"]; [])) else . end
+    - >-
+      ^https:\/\/userapi\.qiekj\.com\/integralGoods\/queryIntegralGoodsCategoryList$ response-jq if (getpath([]) | has("data")) then (setpath(["data"]; [])) else . end
+

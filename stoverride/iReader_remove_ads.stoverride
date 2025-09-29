@@ -1,0 +1,50 @@
+name: |-
+  掌阅去广告
+desc: |-
+  移除开屏广告、悬浮广告、弹窗广告、朗读音色广告及我的页面广告，移除各页面的横幅轮播图。
+author: |-
+  可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/iReader.png
+category: |-
+  iKeLee
+openUrl: |-
+  https://apps.apple.com/app/id463150061
+tag: |-
+  去广告
+loon_version: |-
+  3.2.4(787)
+homepage: |-
+  https://hub.kelee.one
+date: |-
+  2025-09-28 00:31:22
+
+rules:
+  - DOMAIN,saad.ms.zhangyue.net,REJECT
+
+http:
+
+  mitm:
+    - "webboot.zhangyue.com"
+    - "ih2.ireader.com"
+
+  url-rewrite:
+    - >-
+      ^https:\/\/(webboot\.zhangyue\.com|ih2\.ireader\.com)\/zyapi\/bookstore\/ad\/ - reject-dict
+    - >-
+      ^https:\/\/(webboot\.zhangyue\.com|ih2\.ireader\.com)\/bookstore\/ad\/ - reject-dict
+    - >-
+      ^https:\/\/(webboot\.zhangyue\.com|ih2\.ireader\.com)\/zybk\/api\/pop\/index\? - reject-dict
+    - >-
+      ^https:\/\/(webboot\.zhangyue\.com|ih2\.ireader\.com)\/zyapi\/bookstore\/user\/mytab\? - reject-dict
+    - >-
+      ^https:\/\/(webboot\.zhangyue\.com|ih2\.ireader\.com)\/zyboot\/activity\/mytab\? - reject-dict
+    - >-
+      https:\/\/(webboot\.zhangyue\.com|ih2\.ireader\.com)\/zyam\/app\/app\.php\? - reject-dict
+
+  body-rewrite:
+    - >-
+      ^https:\/\/(webboot\.zhangyue\.com|ih2\.ireader\.com)\/zybook4\/iphone\/u\/p\/api\.php\? response-jq delpaths([["Splash"]])
+    - >-
+      ^https:\/\/(webboot\.zhangyue\.com|ih2\.ireader\.com)\/bookstore\/read\/visual\/channel\/list\? response-jq .body.list |= map(select(.id | contains("ad_") | not))
+
