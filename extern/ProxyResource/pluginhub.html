@@ -181,12 +181,15 @@
             display: flex;
             transition: transform 0.5s ease;
             min-height: 120px;
+            width: 100%;
         }
 
         .banner-slide {
             min-width: 100%;
+            width: 100%;
             position: relative;
             flex-shrink: 0;
+            flex-grow: 0;
         }
 
         .banner-slide img {
@@ -292,6 +295,34 @@
         @media (max-width: 768px) {
             .banner-prev, .banner-next {
                 display: none;
+            }
+        }
+
+        /* 平板设备轮播图优化 */
+        @media (min-width: 481px) and (max-width: 1024px) {
+            .banner-container {
+                overflow: hidden;
+                position: relative;
+            }
+            
+            .banner-wrapper {
+                display: flex;
+                width: 100%;
+                transition: transform 0.5s ease;
+            }
+            
+            .banner-slide {
+                min-width: 100%;
+                width: 100%;
+                flex-shrink: 0;
+                flex-grow: 0;
+                position: relative;
+            }
+            
+            .banner-slide img {
+                width: 100%;
+                height: auto;
+                display: block;
             }
         }
 
@@ -944,8 +975,8 @@
     <div class="container">
         <!-- 轮播图 -->
         <div class="banner-container" style="display: block;">
-            <div class="banner-wrapper" id="bannerWrapper" style="transition: transform 0.5s; transform: translateX(-100%);"><div class="banner-slide"><a attributes="[object Object]"><img alt="Loon" src="IMG/Banner/Loon_ad.png" style=""></a></div><div class="banner-slide"><a attributes="[object Object]"><img alt="PluginHub" src="IMG/Banner/PluginHub.png" style=""></a></div><div class="banner-slide"><a attributes="[object Object]"><img alt="Loon" src="IMG/Banner/Loon_ad.png" style=""></a></div><div class="banner-slide"><a attributes="[object Object]"><img alt="PluginHub" src="IMG/Banner/PluginHub.png" style=""></a></div></div>
-            <div class="banner-dots" id="bannerDots"><div class="banner-dot active"></div><div class="banner-dot "></div></div>
+            <div class="banner-wrapper" id="bannerWrapper" style="transform: translateX(0%);"><div class="banner-slide"><a attributes="[object Object]"><img alt="chumen_ad" src="IMG/Banner/chumen_ad.jpg" style=""></a></div></div>
+            <div class="banner-dots" id="bannerDots"><div class="banner-dot active"></div></div>
             <div class="banner-prev" id="bannerPrev">❮</div>
             <div class="banner-next" id="bannerNext">❯</div>
         </div>
@@ -953,7 +984,7 @@
         <!-- 公告横幅 -->
         <div class="announcement">
             <div class="announcement-icon">📢</div>
-            <div class="announcement-text" id="announcementText" style="opacity: 1; cursor: pointer;"><span class="announcement-text-content" style="transform: translateX(0px); transition-duration: 0ms;">本站内容由可莉个人维护，与Loon官方无关。</span></div>
+            <div class="announcement-text" id="announcementText" style="opacity: 1; cursor: pointer;"><span class="announcement-text-content" style="transform: translateX(0px); transition-duration: 0ms;">所有插件均为Loon专用，不建议其他工具转换使用。</span></div>
         </div>
 
         <!-- 搜索和筛选 -->
@@ -988,9 +1019,9 @@
                             <div class="plugin-name">广告平台拦截器</div>
                         </div>
                     </div>
-                    <div class="plugin-description">此插件是所有去广告插件的基础，只针对广告平台处理。你依然需要安装其他去广告插件来搭配使用，并确保此插件始终排序在顶部。<br><br>支持拦截腾讯、字节跳动、快手、百度、邑盟、倍孜、艾狄墨搏、袤博、极光、个推、友盟、阿里、超级汇川、优比客思、秒针、网易、美团、小米、京东、天目、讯飞、泛连、锐讯灵通、聚次方、美数、嗨量、维快网络、变现猫、章鱼、分秒、泰之菩、翼信、快易、数萤技术、方麟、益起、上量优选、新义互联、腾云天下、布里奇、塔酷、丽声、推啊、旺脉、新度博望、新多广告、快易科技、封狐信息、互裕科技、旺脉信息、佳量动力、享点科技、游昆信息、小川科技、Google、SupersonicAds、APPSAD、Adjust、Sigmob、TradPlus、Fancy、MedPro、AppLovin、Unity3D、Tapjoy、Liftoff、Vungle等广告平台的广告请求，更适合iOS平台的应用。</div>
+                    <div class="plugin-description">此插件是所有去广告插件的基础，只针对广告平台处理。你依然需要安装其他去广告插件来搭配使用，并确保此插件始终排序在顶部。<br><br>支持拦截腾讯、字节跳动、快手、百度、邑盟、倍孜、艾狄墨搏、袤博、极光、个推、友盟、阿里、超级汇川、优比客思、秒针、网易、美团、小米、京东、天目、讯飞、泛连、锐讯灵通、聚次方、美数、嗨量、维快网络、变现猫、章鱼、分秒、泰之菩、翼信、快易、数萤技术、方麟、益起、上量优选、新义互联、腾云天下、布里奇、塔酷、丽声、推啊、旺脉、新度博望、新多广告、快易科技、封狐信息、互裕科技、旺脉信息、佳量动力、享点科技、游昆信息、小川科技、Google、SupersonicAds、APPSAD、Adjust、Sigmob、TradPlus、Fancy、MedPro、AppLovin、Unity3D、Tapjoy、Liftoff、Vungle、Moloco、Smadex、Tapad、Appier、InMobi、AppsFlyer、AppLovin、Moloco、RayJump、RixEngine等广告平台的广告请求，更适合iOS平台的应用。</div>
                     <div class="plugin-footer"></div>
-                    <div class="plugin-date">更新于 2025-09-27 01:25:37</div>
+                    <div class="plugin-date">更新于 2025-10-09 12:38:02</div>
                     <a href="loon://import?plugin=https://kelee.one/Tool/Loon/Lpx/BlockAdvertisers.lpx" class="plugin-install">安装</a>
                 </div><div class="plugin-card">
                     <div class="plugin-header">
@@ -1183,7 +1214,7 @@
                             <div class="plugin-name">Foodie去广告</div>
                         </div>
                     </div>
-                    <div class="plugin-description">移除开屏广告和弹窗广告。</div>
+                    <div class="plugin-description">移除开屏广告和弹窗广告</div>
                     <div class="plugin-footer"></div>
                     <div class="plugin-date">更新于 2025-09-28 00:17:10</div>
                     <a href="loon://import?plugin=https://kelee.one/Tool/Loon/Lpx/Foodie_remove_ads.lpx" class="plugin-install">安装</a>
@@ -1395,6 +1426,19 @@
                     <div class="plugin-footer"></div>
                     <div class="plugin-date">更新于 2025-05-13 15:17:08</div>
                     <a href="loon://import?plugin=https://kelee.one/Tool/Loon/Lpx/Sub-Store.lpx" class="plugin-install">安装</a>
+                </div><div class="plugin-card">
+                    <div class="plugin-header">
+                        <div class="plugin-icon">
+                            <img data-src="https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/TeraBox.png" alt="TeraBox去广告" class="lazy-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60' width='60' height='60'%3E%3Crect width='60' height='60' fill='%23f0f0f0' rx='14'/%3E%3C/svg%3E">
+                        </div>
+                        <div class="plugin-info">
+                            <div class="plugin-name">TeraBox去广告</div>
+                        </div>
+                    </div>
+                    <div class="plugin-description">移除开屏广告、应用内悬浮窗、弹窗广告及横幅广告。</div>
+                    <div class="plugin-footer"></div>
+                    <div class="plugin-date">更新于 2025-10-09 12:38:19</div>
+                    <a href="loon://import?plugin=https://kelee.one/Tool/Loon/Lpx/TeraBox_remove_ads.lpx" class="plugin-install">安装</a>
                 </div><div class="plugin-card">
                     <div class="plugin-header">
                         <div class="plugin-icon">
@@ -2854,6 +2898,19 @@
                 </div><div class="plugin-card">
                     <div class="plugin-header">
                         <div class="plugin-icon">
+                            <img data-src="https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Weimai.png" alt="微脉圈去广告" class="lazy-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60' width='60' height='60'%3E%3Crect width='60' height='60' fill='%23f0f0f0' rx='14'/%3E%3C/svg%3E">
+                        </div>
+                        <div class="plugin-info">
+                            <div class="plugin-name">微脉圈去广告</div>
+                        </div>
+                    </div>
+                    <div class="plugin-description">移除开屏广告、聊天页横幅提示及发现页面的横幅广告。</div>
+                    <div class="plugin-footer"></div>
+                    <div class="plugin-date">更新于 2025-05-13 15:17:08</div>
+                    <a href="loon://import?plugin=https://kelee.one/Tool/Loon/Lpx/Weimai_remove_ads.lpx" class="plugin-install">安装</a>
+                </div><div class="plugin-card">
+                    <div class="plugin-header">
+                        <div class="plugin-icon">
                             <img data-src="https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Weixin.png" alt="微信公众号去广告" class="lazy-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60' width='60' height='60'%3E%3Crect width='60' height='60' fill='%23f0f0f0' rx='14'/%3E%3C/svg%3E">
                         </div>
                         <div class="plugin-info">
@@ -2888,7 +2945,7 @@
                     </div>
                     <div class="plugin-description">收录常用小程序的去广告，作者署名在插件内。</div>
                     <div class="plugin-footer"></div>
-                    <div class="plugin-date">更新于 2025-07-06 22:36:18</div>
+                    <div class="plugin-date">更新于 2025-10-02 21:29:46</div>
                     <a href="loon://import?plugin=https://kelee.one/Tool/Loon/Lpx/WexinMiniPrograms_Remove_ads.lpx" class="plugin-install">安装</a>
                 </div><div class="plugin-card">
                     <div class="plugin-header">
@@ -3226,7 +3283,7 @@
                     </div>
                     <div class="plugin-description">移除各部分广告，移除知乎安全中心跳转，建议卸载知乎重新安装。如遇安全中心页面移除失败的，请积极反馈。</div>
                     <div class="plugin-footer"></div>
-                    <div class="plugin-date">更新于 2025-05-13 15:17:08</div>
+                    <div class="plugin-date">更新于 2025-09-30 05:09:40</div>
                     <a href="loon://import?plugin=https://kelee.one/Tool/Loon/Lpx/Zhihu_remove_ads.lpx" class="plugin-install">安装</a>
                 </div><div class="plugin-card">
                     <div class="plugin-header">
@@ -4172,6 +4229,26 @@
                 }
             });
             
+            // 添加点击事件处理，确保在所有模式下都能正确跳转
+            link.addEventListener('click', function(e) {
+                // 检查是否在PWA模式下运行
+                const isPWAMode = window.matchMedia('(display-mode: standalone)').matches ||
+                    window.navigator.standalone === true ||
+                    window.location.search.includes('pwa=true');
+                
+                if (banner.url) {
+                    e.preventDefault();
+                    
+                    if (isPWAMode) {
+                        // 在PWA模式下，使用window.open在外部浏览器中打开链接
+                        window.open(banner.url, '_blank');
+                    } else {
+                        // 在非PWA模式下，也使用window.open确保链接能够正确打开
+                        window.open(banner.url, '_blank');
+                    }
+                }
+            });
+            
             const img = Utils.dom.create('img');
             img.alt = banner.name;
             
@@ -4403,10 +4480,17 @@
                         if (this.getSlidesCount() <= 1) return;
                         
                         const diffX = endX - startX;
-                        const translateX = -currentBannerIndex * 100 + (diffX / DOM.bannerWrapper.offsetWidth * 100);
+                        // 确保使用容器的实际宽度进行计算，避免在不同设备上出现偏差
+                        const containerWidth = DOM.bannerContainer.offsetWidth || DOM.bannerWrapper.offsetWidth;
+                        const translateX = -currentBannerIndex * 100 + (diffX / containerWidth * 100);
+                        
+                        // 限制滑动范围，防止显示多张图片
+                        const maxTranslateX = 0;
+                        const minTranslateX = -(this.getSlidesCount() - 1) * 100;
+                        const clampedTranslateX = Math.max(minTranslateX, Math.min(maxTranslateX, translateX));
                         
                         DOM.bannerWrapper.style.transition = 'none';
-                        DOM.bannerWrapper.style.transform = `translateX(${translateX}%)`;
+                        DOM.bannerWrapper.style.transform = `translateX(${clampedTranslateX}%)`;
                         
                         if (e.target.closest('.banner-container')) {
                             e.preventDefault();
@@ -5090,5 +5174,7 @@
         });
     </script>
 <script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;dfbd81885f1a4669ab89408833054799&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98692597bcef75b4',t:'MTc1OTEyNDQzNw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border: none; visibility: hidden;"></iframe>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98bc965c6d535dfb',t:'MTc1OTk5OTM3NA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border: none; visibility: hidden;"></iframe>
+
+
 <button style="position: fixed; bottom: 20px; right: 20px; background-color: var(--accent-color); color: white; border: none; border-radius: 25px; padding: 12px 20px; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: rgba(0, 122, 255, 0.3) 0px 4px 12px; z-index: 1000; display: block; transition: 0.3s;">安装应用</button></body></html>
