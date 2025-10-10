@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://hub.kelee.one
 date: |-
-  2025-09-27 00:39:45
+  2025-10-09 22:32:05
 
 http:
 
@@ -28,20 +28,18 @@ http:
 
   url-rewrite:
     - >-
-      ^https?:\/\/api\.zuihuimai\.com\/static\/.*\/hongbao - reject
-    - >-
       ^https?:\/\/dat\.ruanmei\.com\/ithome\/money\/acd\.json$ - reject
 
   script:
     - match: ^https:\/\/napi\.ithome\.com\/api\/(news\/indexv2\/iphone\/\d+$|topmenu\/getfeeds\?)
-      name: "IT之家去广告_18"
+      name: "IT之家去广告_17"
       type: response
       require-body: true
       argument: |-
         [ false, false]
 
 script-providers:
-  "IT之家去广告_18":
+  "IT之家去广告_17":
     url: https://kelee.one/Resource/JavaScript/IThome/IThome_remove_ads.js
     interval: 86400
 
