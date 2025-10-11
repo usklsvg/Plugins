@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://hub.kelee.one
 date: |-
-  2025-09-28 00:31:22
+  2025-10-11 08:34:06
 
 rules:
   - DOMAIN,saad.ms.zhangyue.net,REJECT

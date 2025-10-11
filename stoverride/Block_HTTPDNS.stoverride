@@ -260,6 +260,8 @@ http:
     - >-
       ^https?:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/http\/urlConfig\.do$ - reject-dict
     - >-
+      ^https?:\/\/amdc\.alipay\.com\/query - reject-dict
+    - >-
       ^https?:\/\/cdn\.wup\.huya\.com\/monitor\/monitor\.jsp - reject
     - >-
       ^https:\/\/msglb\.91160\.com\/msg\/outer\/broker\/get$ - reject-dict

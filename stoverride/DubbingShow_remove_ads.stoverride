@@ -36,12 +36,12 @@ http:
 
   script:
     - match: ^https:\/\/iosapi\.peiyinxiu\.com\/Api\/Film\/GetConfigValue
-      name: "移除首页底部弹窗_18"
+      name: "移除首页底部弹窗_17"
       type: response
       require-body: true
 
 script-providers:
-  "移除首页底部弹窗_18":
+  "移除首页底部弹窗_17":
     url: https://kelee.one/Resource/JavaScript/DubbingShow/DubbingShow_remove_ads.js
     interval: 86400
 
