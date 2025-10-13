@@ -570,6 +570,31 @@ def create_dns_plugin():
         f.write(content_plugin)
 
 
+def make_readme_lpx(dst_dir: str):
+    info_list = []
+    for filename in sorted(os.listdir(dst_dir)):
+        if not filename.endswith(".lpx"):
+            continue
+        with open(os.path.join(dst_dir, filename), mode="r", encoding="utf-8") as f:
+            lines = f.readlines()
+        info = {"name": "", "desc": "", "filename": filename}
+        for line in lines:
+            if line.startswith("#!name"):
+                info["name"] = line[line.find("=") + 1 :].strip()
+            elif line.startswith("#!desc"):
+                info["desc"] = line[line.find("=") + 1 :].strip().replace("\\n", "<br>")
+            elif not line.startswith("#!"):
+                break
+        info_list.append(info)
+
+    content = "# 插件列表\n\n| name | desc |\n| -- | -- |\n"
+    for info in info_list:
+        content += f"| [{info["name"]}](https://raw.githubusercontent.com/usklsvg/Plugins/refs/heads/main/plugin/{info["filename"]}) | {info["desc"]} |\n"
+
+    with open(os.path.join(dst_dir, "README.md"), mode="w", encoding="utf-8") as f:
+        f.write(content)
+
+
 if __name__ == "__main__":
     recreate_path(extern_script_dir)
     recreate_path(extern_jq_dir)
@@ -579,3 +604,5 @@ if __name__ == "__main__":
     for filename in filenames:
         process_file(filename)
     create_dns_plugin()
+
+    make_readme_lpx(plugin_dir)
