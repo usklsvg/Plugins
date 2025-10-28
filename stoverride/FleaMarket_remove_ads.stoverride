@@ -17,7 +17,7 @@ loon_version: |-
 homepage: |-
   https://hub.kelee.one
 date: |-
-  2025-09-03 01:29:26
+  2025-10-28 17:47:12
 
 rules:
   - AND,((URL-REGEX,"^http:\/\/.+\/amdc\/mobileDispatch"),(USER-AGENT,"%E9%97%B2%E9%B1%BC*")),REJECT
@@ -69,6 +69,8 @@ http:
       ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlehome\.home\.circle\.list\/ response-jq .data.circleList[].showInfo.titleImage |= (.lightUrl="" | .url="" | del(.width, .height))
     - >-
       ^https:\/\/g-acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlemtopsearch\.search\/ response-jq .data.resultList |= map(if .data.item.main.exContent.dislikeFeedback.clickParam.args.bizType == "ad" then empty else . end)
+    - >-
+      ^https:\/\/g-acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlemtopsearch\.search\/ response-jq delpaths([["data","resultPrefixBar"]])
     - >-
       ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlemtopsearch\.search\.discover\/ response-jq .data.resultList |= map(select(.type != "MarketHotSpot"))
     - >-
