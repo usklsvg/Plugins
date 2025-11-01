@@ -255,7 +255,7 @@ def process_file(
             )
 
 
-def process_biliuniverse(url: str, dst_dir: str):
+def process_VirgilClyne(url: str, dst_dir: str):
     content = get_url_text_content(url)
     content = modify_content_common(content, "sgmodule")
     module_name = url.split("/")[-1]
@@ -286,8 +286,9 @@ if __name__ == "__main__":
                 "https://github.com/BiliUniverse/Global/releases/latest/download/BiliBili.Global.sgmodule",
                 "https://github.com/BiliUniverse/Redirect/releases/latest/download/BiliBili.Redirect.sgmodule",
                 "https://github.com/BiliUniverse/ADBlock/releases/latest/download/BiliBili.ADBlock.sgmodule",
+                "https://github.com/NSRingo/WeatherKit/releases/latest/download/iRingo.WeatherKit.sgmodule",
             ]:
-                process_biliuniverse(url, dst_dir)
+                process_VirgilClyne(url, dst_dir)
             with open(
                 os.path.join(dst_dir, "Node_detection_tool.sgmodule"),
                 mode="w",
